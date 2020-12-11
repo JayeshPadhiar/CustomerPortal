@@ -1,11 +1,12 @@
-div.expander {
-  margin: 10px;
+div.expander-component {
+  padding: 5px;
 }
 
 .accordion .mat-expansion-panel {
   border: 1px solid lightgray;
   box-shadow: none;
   border-radius: 6px;
+  margin: 12px;
 }
 
 .accordion .mat-expansion-panel:focus-within {
@@ -15,7 +16,7 @@ div.expander {
 }
 
 .accordion .mat-expansion-panel-header {
-  padding: 20px;
+  padding: 15px;
 }
 
 .accordion .mat-expansion-panel-header-title {
@@ -26,9 +27,15 @@ div.expander {
   color: inherit;
 }
 
-.accordion-content {
+div.accordion-content{
   color: black;
 }
+
+.butt {
+  border: 1px solid #e96a60;
+  color: #e96a60;
+}
+
 
 h2 {
   font-weight: 400;
@@ -41,12 +48,20 @@ h3 {
 }
 
 h4 {
-  font-weight: 200;
+  font-weight: 400;
   font-size: 15px;
-  color: gray;
+}
+
+h5 {
+  font-weight: 400;
+  font-size: 12px;
 }
 
 a {
   color: #e96a60;
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

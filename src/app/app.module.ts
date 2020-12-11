@@ -3,11 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
-import { CPortalComponent } from './c-portal/c-portal.component';
-
 import {MatIconModule} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatButtonModule} from '@angular/material/button';
+
+
+import { AppComponent } from './app.component';
+import { CPortalComponent } from './c-portal/c-portal.component';
 import { CustomizeExpComponent } from './customize-exp/customize-exp.component';
 import { OrchMessComponent } from './orch-mess/orch-mess.component';
 import { SetControlComponent } from './set-control/set-control.component';
@@ -28,6 +30,7 @@ import { ManageUnexComponent } from './manage-unex/manage-unex.component';
     BrowserAnimationsModule,
 
     MatIconModule,
+    MatButtonModule,
     MatExpansionModule,
   ],
   providers: [],

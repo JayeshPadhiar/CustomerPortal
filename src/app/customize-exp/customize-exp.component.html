@@ -1,43 +1,37 @@
-<div>
+<div class="expander-component">
   <h3>Customize the experience</h3>
-  <div class="expander">
-    <mat-accordion class="accordion" #xyz>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title> Style Your Customer Portal </mat-panel-title>
-        </mat-expansion-panel-header>
+  <mat-accordion class="accordion" #xyz>
 
-        <div class="accordion-content">
-          <p>Hello world !</p>
-          <p>This is a body inside the expandable</p>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Style Your Customer Portal </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="accordion-content"></div>
+    </mat-expansion-panel>
 
-  <div class="expander">
-    <mat-accordion class="accordion">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Setup your tracking page domain</mat-panel-title>
-        </mat-expansion-panel-header>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Setup your tracking page domain</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="accordion-content">
+        <h4>Add your domain</h4>
+        <h5 style="color: gray;">
+          By default, customers will be directed to https://acme.eshopbox.com
+          when accessing the customer portal. To change, add a domain.
+          <a>Learn More</a>
+        </h5>
+        <button mat-stroked-button class="butt">+Add domain</button>
+      </div>
+    </mat-expansion-panel>
 
-        <div class="accordion-content"></div>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
-
-  <div class="expander">
-    <mat-accordion class="accordion">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title
-            >Give relavant links to your customers</mat-panel-title
-          >
-        </mat-expansion-panel-header>
-
-        <div class="accordion-content"></div>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Give relavant links to your customers</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="accordion-content">
+        <h4>Website URL</h4>
+      </div>
+    </mat-expansion-panel>
+    
+  </mat-accordion>
 </div>
