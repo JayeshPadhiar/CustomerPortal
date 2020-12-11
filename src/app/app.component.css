@@ -1,0 +1,52 @@
+div.expander {
+  margin: 10px;
+}
+
+.accordion .mat-expansion-panel {
+  border: 1px solid lightgray;
+  box-shadow: none;
+  border-radius: 6px;
+}
+
+.accordion .mat-expansion-panel:focus-within {
+  color: #e96a60;
+  border: 1px solid #e96a60;
+  box-shadow: 1px 1px 6px lightgray;
+}
+
+.accordion .mat-expansion-panel-header {
+  padding: 20px;
+}
+
+.accordion .mat-expansion-panel-header-title {
+  color: inherit;
+}
+
+.accordion .mat-expansion-indicator {
+  color: inherit;
+}
+
+.accordion-content {
+  color: black;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 30px;
+}
+
+h3 {
+  font-weight: 350;
+  font-size: 20px;
+}
+
+h4 {
+  font-weight: 200;
+  font-size: 15px;
+  color: gray;
+}
+
+a {
+  color: #e96a60;
+  text-decoration: none;
+}
