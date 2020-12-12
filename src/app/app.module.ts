@@ -4,8 +4,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatIconModule} from '@angular/material/icon';
-import {MatExpansionModule} from '@angular/material/expansion';
+import {MatInputModule} from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
+
+
+import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
+
 
 
 import { AppComponent } from './app.component';
@@ -30,10 +42,22 @@ import { ManageUnexComponent } from './manage-unex/manage-unex.component';
     BrowserAnimationsModule,
 
     MatIconModule,
+    MatInputModule,
+    MatRadioModule,
     MatButtonModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatCheckboxModule,
     MatExpansionModule,
+    MatFormFieldModule,
+    MatSlideToggleModule,
+
+    NgxMatColorPickerModule
+    
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,14 +6,209 @@
         <mat-panel-title>Manage your cancellation policy</mat-panel-title>
       </mat-expansion-panel-header>
 
-      <div class="accordion-content"></div>
+      <div class="accordion-content">
+        <div>
+          <h4>
+            Customers are able to cancel their order before its marked
+            <br />"ready to ship"
+          </h4>
+          <mat-slide-toggle>On</mat-slide-toggle>
+
+          <div>
+            <h4>Cancellation Reasons</h4>
+            <p>
+              Customers can select one reason from the list when submitting a
+              cancellation request
+            </p>
+            <div></div>
+            <br />
+
+            <h4>Refund policy on cancellation</h4>
+            <p>
+              How do you refund customers for cancelling their prepaid order
+            </p>
+
+            <div>
+              <mat-radio-group>
+                <mat-radio-button class="radio-button">
+                  Customers get a refund in their bank account
+                </mat-radio-button>
+
+                <div>
+                  <span>
+                    <ul>
+                      <li>
+                        <mat-checkbox>
+                          <p>
+                            customers to receive a refund to their original
+                            payment method
+                          </p>
+                        </mat-checkbox>
+                      </li>
+                      <li>
+                        <mat-checkbox>
+                          <p>
+                            Allow customers to receive a refund to their desired
+                            bank account
+                          </p>
+                        </mat-checkbox>
+                      </li>
+                    </ul>
+                  </span>
+                </div>
+
+                <mat-radio-button class="radio-button">
+                  Customers get a refund as store credits
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <div style="margin-top: 25px">
+            <button mat-button>Save</button>
+            <button mat-button style="color: black; border-color: lightgrey">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>Manage your return policy</mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="accordion-content"></div>
+      <div class="accordion-content">
+        <div>
+          <h4>
+            Customers will be able to return their purchases as per the return
+            window set by you
+          </h4>
+          <mat-slide-toggle>On</mat-slide-toggle>
+          <br />
+
+          <div>
+            <h5>
+              Enter the number of days until when you want to allow returns on
+              your product
+            </h5>
+            <mat-form-field
+              style="width: 3rem; margin-right: 10px"
+              appearance="outline"
+            >
+              <input
+                matInput
+                style="text-align: center"
+                placeholder="Days"
+                value="5"
+              />
+            </mat-form-field>
+            Days after order is delivered
+            <p style="margin: 0">
+              Your customers won't be able to place a return after this time
+              period.
+            </p>
+            <br />
+
+            <h4>Exclude Certain Products</h4>
+            <p>Do not allow customers to return specific products</p>
+            <mat-slide-toggle>On</mat-slide-toggle>
+            <br />
+
+            <div>
+              <p>
+                Product must match
+                <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button value="1">Option 1</mat-radio-button>
+                  <mat-radio-button value="2">Option 2</mat-radio-button>
+                </mat-radio-group>
+              </p>
+
+              <div>
+
+                <div>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Favorite food</mat-label>
+                    <mat-select>
+                      <mat-option >
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <button
+                  mat-flat-button
+                  style="border: none; margin: 0; padding: 0"
+                >
+                  + Add another condition
+                </button>
+              </div>
+            </div>
+
+            <br /><br />
+
+            <div>
+              <h4>Return reasons</h4>
+              <p>
+                Customers can select one reason from the list when submitting a
+                return request
+              </p>
+              <br />
+              <div>
+                <button
+                  mat-flat-button
+                  style="border: none; margin-bottom: 20px; padding: 0"
+                >
+                  + Add reason
+                </button>
+              </div>
+            </div>
+
+
+
+            <div>
+              <h4>Resolution policy for returns</h4>
+              <p>Give your customers a resolution for returning the order</p>
+
+
+
+    
+            </div>
+
+            <div>
+              <h4>Refund policy for returns</h4>
+              <h5>Allow refund against COD orders</h5>
+              <p>
+                By enabling this option, your customers can enter their bank account details to receive a refund
+              </p>
+              <mat-slide-toggle>On</mat-slide-toggle>
+            </div>
+
+
+            <div>
+              <h5>Allow refund against prepaid orders</h5>
+              <mat-slide-toggle>On</mat-slide-toggle>
+            </div>
+
+
+          </div>
+
+
+          <div style="margin-top: 25px">
+            <button mat-button>Save</button>
+            <button mat-button style="color: black; border-color: lightgrey">
+              Cancel
+            </button>
+          </div>
+
+
+
+
+
+
+          
+        </div>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

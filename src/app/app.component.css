@@ -1,12 +1,47 @@
+h2 {
+  font-weight: 400;
+}
+
+h3 {
+  font-weight: 350;
+}
+
+h4 {
+  font-weight: 400;
+}
+
+h5 {
+  font-weight: 400;
+}
+
+a {
+  color: #e96a60;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+button {
+  color: #e96a60;
+  border: 1px solid #e96a60;
+  border-color: #e96a60;
+}
+
+
 div.expander-component {
   padding: 5px;
 }
+
+
 
 .accordion .mat-expansion-panel {
   border: 1px solid lightgray;
   box-shadow: none;
   border-radius: 6px;
-  margin: 12px;
+  margin: 12px 0px;
 }
 
 .accordion .mat-expansion-panel:focus-within {
@@ -16,7 +51,7 @@ div.expander-component {
 }
 
 .accordion .mat-expansion-panel-header {
-  padding: 15px;
+  padding: 15px 25px;
 }
 
 .accordion .mat-expansion-panel-header-title {
@@ -27,41 +62,53 @@ div.expander-component {
   color: inherit;
 }
 
+
+
+
 div.accordion-content{
   color: black;
 }
 
-.butt {
-  border: 1px solid #e96a60;
-  color: #e96a60;
+.accordion-content p {
+  color: gray;
+  margin-top: 5px;
+}
+
+.accordion-content h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.accordion-content h5 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.accordion-content button {
+  margin-right: 10px;
+  padding: 0px 20px;
+}
+
+.accordion-content .mat-icon {
+  margin: 4px;
+  color: gray;
+}
+
+.accordion-content .mat-expansion-panel-header {
+  padding: 0px 15px;
+}
+
+.accordion-content .mat-slide-toggle {
+  margin: 10px auto;
+}
+
+.accordion-content .mat-radio-button {
+  margin:0px 10px;
 }
 
 
-h2 {
-  font-weight: 400;
-  font-size: 30px;
-}
-
-h3 {
-  font-weight: 350;
-  font-size: 20px;
-}
-
-h4 {
-  font-weight: 400;
-  font-size: 15px;
-}
-
-h5 {
-  font-weight: 400;
-  font-size: 12px;
-}
-
-a {
-  color: #e96a60;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
+.form-container {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  color: gray;
 }

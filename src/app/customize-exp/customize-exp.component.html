@@ -1,12 +1,66 @@
 <div class="expander-component">
   <h3>Customize the experience</h3>
-  <mat-accordion class="accordion" #xyz>
 
+  <mat-accordion class="accordion">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title> Style Your Customer Portal </mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="accordion-content"></div>
+      <div class="accordion-content">
+        <div>
+          <div>
+            <h4>Upload your brand logo</h4>
+            <p>Add a PNG, JPG or GIF. Your image may scale upto 154px X 24px</p>
+            <button mat-button>Upload logo</button>
+            <div></div>
+          </div>
+
+          <br />
+          <br />
+
+          <div>
+            <h4>Upload your favicon</h4>
+            <p>The optimal size for creating a favicon is 16x16 pixels</p>
+            <button mat-button>Upload Favicon</button>
+            <div></div>
+          </div>
+
+          <br />
+          <br />
+
+          <div>
+            <h4>Background Color</h4>
+            <p>Used behind your team profile and other backgroungs</p>
+
+            <mat-form-field>
+              <input matInput [ngxMatColorPicker]="bg" />
+              <ngx-mat-color-toggle matSuffix [for]="bg"></ngx-mat-color-toggle>
+              <ngx-mat-color-picker #bg></ngx-mat-color-picker>
+            </mat-form-field>
+
+            <div></div>
+          </div>
+
+          <br />
+          <br />
+
+          <div>
+            <h4>Action Color</h4>
+            <p>Used in your action buttons</p>
+
+            <mat-form-field>
+              <input matInput [ngxMatColorPicker]="picker" />
+              <ngx-mat-color-toggle
+                matSuffix
+                [for]="picker"
+              ></ngx-mat-color-toggle>
+              <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+            </mat-form-field>
+
+            <div></div>
+          </div>
+        </div>
+      </div>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -14,13 +68,23 @@
         <mat-panel-title>Setup your tracking page domain</mat-panel-title>
       </mat-expansion-panel-header>
       <div class="accordion-content">
-        <h4>Add your domain</h4>
-        <h5 style="color: gray;">
-          By default, customers will be directed to https://acme.eshopbox.com
-          when accessing the customer portal. To change, add a domain.
-          <a>Learn More</a>
-        </h5>
-        <button mat-stroked-button class="butt">+Add domain</button>
+        <div>
+          <h4>
+            Add your domain
+            <mat-icon
+              inline="true"
+              matTooltip="Rather than registering a new domain name, you can create a subdomain using the domain you already own"
+              matTooltipPosition="after"
+              >info
+            </mat-icon>
+          </h4>
+          <p>
+            By default, customers will be directed to https://acme.eshopbox.com
+            when accessing the customer portal. To change, add a domain.
+            <a>Learn More</a>
+          </p>
+          <button mat-button>+ Add domain</button>
+        </div>
       </div>
     </mat-expansion-panel>
 
@@ -29,9 +93,111 @@
         <mat-panel-title>Give relavant links to your customers</mat-panel-title>
       </mat-expansion-panel-header>
       <div class="accordion-content">
-        <h4>Website URL</h4>
+        <div>
+          <h4>Website URL</h4>
+          <p>Direct customers to your website from the customer portal</p>
+
+          <div class="form-container">
+          <mat-form-field floatLabel="never">
+            <input matInput placeholder="https://acme.com" />
+          </mat-form-field>
+          </div>
+
+          <div></div>
+
+          <h4>Support</h4>
+          <p>Provide help and support to your customers at every step</p>
+
+          <div class="form-container">
+            <mat-label>
+              Support URL
+              <mat-icon
+                inline="true"
+                matTooltip="Include the Help page or FAQ page of your website"
+                matTooltipPosition="after"
+              >
+                info
+              </mat-icon>
+            </mat-label>
+            <br />
+            <mat-form-field floatLabel="never">
+              <input matInput placeholder="acme.com/help" />
+            </mat-form-field>
+          </div>
+
+          <div>
+            <table cellspacing="0">
+              <tr>
+                <td>
+                  <div class="form-container">
+                    <mat-label>
+                      Support email
+                    </mat-label>
+                    <br />
+                    <mat-form-field floatLabel="never">
+                      <input matInput />
+                    </mat-form-field>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-container">
+                    <mat-label>
+                      Support phone number
+                    </mat-label>
+                    <br />
+                    <mat-form-field floatLabel="never">
+                      <input matInput />
+                    </mat-form-field>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div></div>
+
+          <div>
+            <h4>Add footer links</h4>
+            <p>
+              Allow customers to access important links of your website
+              throughthe footer section
+            </p>
+
+            <div>
+              <table cellspacing="0">
+                <tr>
+                  <td>
+                  <div class="form-container">
+                    <mat-form-field  floatLabel="never">
+                      <input matInput placeholder="Link name" />
+                    </mat-form-field>
+                    </div>
+                  </td>
+                  <td>
+                  <div class="form-container">
+                    <mat-form-field floatLabel="never">
+                      <input matInput placeholder="acme.com/return" />
+                    </mat-form-field>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <button mat-flat-button style="border: none; margin: 0; padding: 0">
+              + Add links
+            </button>
+            <p>Max. 3 links</p>
+
+            <div>
+              <button mat-button>Save</button>
+              <button mat-button style="color: black; border-color: lightgrey">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </mat-expansion-panel>
-    
   </mat-accordion>
 </div>

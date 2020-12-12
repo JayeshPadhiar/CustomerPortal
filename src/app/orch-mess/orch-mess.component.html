@@ -7,14 +7,89 @@
           Define your communication channel with customers
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="accordion-content"></div>
+      <div class="accordion-content">
+        <div>
+          <h4>Email Sender Name</h4>
+          <p>Your customers will receive email from this sender name</p>
+          
+          <div class="form-container">
+          <mat-form-field floatLabel="never">
+            <input matInput placeholder="Acme" />
+          </mat-form-field>
+          </div>
+
+          <div></div>
+
+          <h4>Send-from email address</h4>
+          <p>Your customers will receive email from this email address</p>
+
+          <div class="form-container">
+          <mat-form-field floatLabel="never">
+            <input matInput placeholder="care@acme.com" />
+          </mat-form-field>
+          </div>
+
+          <div></div>
+
+          <h4>SMS sender name</h4>
+          <p>Your customers will receive SMS from this sender name</p>
+
+          <h3>ESHOPB</h3>
+          <p>Want to customize the sender code? <a>Learn More</a></p>
+
+          <div>
+            <button mat-button>Save</button>
+            <button mat-button style="color: black; border-color: lightgrey">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>Manage your customer notifications</mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="accordion-content"></div>
+      <div class="accordion-content">
+        <div>
+          <p>
+            You can choose to send notifications to customers via Email and SMS
+          </p>
+          <mat-accordion class="accordion">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Orders</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="accordion-content"></div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Returns</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="accordion-content"></div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Returns</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="accordion-content"></div>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <div>
+            <button mat-button>Save</button>
+            <button mat-button style="color: black; border-color: lightgrey">
+              Cancel
+            </button>
+          </div>
+
+          
+        </div>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
