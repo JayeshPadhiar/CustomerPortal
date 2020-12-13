@@ -1,16 +1,36 @@
-<div class="maindiv">
-  <h2>Configure your Customer Portal</h2>
-  <h4 style="color: gray; margin: 10px 0px;">Delight your customers with Amazon-like post purchase experience.</h4>
+<div class="c-portal">
+  <div>
+    <div class="portal-div">
+      <h2>Configure your Customer Portal</h2>
+      <h4 style="color: gray; margin: 10px 0px">
+        Delight your customers with Amazon-like post purchase experience.
+      </h4>
+      <a href="#">Learn More</a>
 
-  <a href="#">Learn More</a>
+      <div style="padding: 10px"></div>
+      <div>
+        <app-customize-exp></app-customize-exp>
+        <app-orch-mess></app-orch-mess>
+        <app-set-control></app-set-control>
+        <app-manage-unex></app-manage-unex>
+      </div>
+    </div>
 
-  <div style="padding: 10px"></div>
-  <app-customize-exp></app-customize-exp>
-
-  <app-orch-mess></app-orch-mess>
-
-  <app-set-control></app-set-control>
-
-  <app-manage-unex></app-manage-unex>
-
+    <div class="mobile-div">
+      <div>
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+          <mat-button-toggle>Mobile</mat-button-toggle>
+          <mat-button-toggle>Desktop</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      <app-mobile></app-mobile>
+      <div>
+        <mat-button-toggle-group style="transform: translate(-50%, 20%);">
+          <mat-button-toggle>&lt;</mat-button-toggle>
+          <span style="margin: 10px;"></span>
+          <mat-button-toggle>&gt;</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+  </div>
 </div>

@@ -13,6 +13,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 
 
 
@@ -26,6 +28,7 @@ import { CustomizeExpComponent } from './customize-exp/customize-exp.component';
 import { OrchMessComponent } from './orch-mess/orch-mess.component';
 import { SetControlComponent } from './set-control/set-control.component';
 import { ManageUnexComponent } from './manage-unex/manage-unex.component';
+import { MobileComponent } from './mobile/mobile.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { ManageUnexComponent } from './manage-unex/manage-unex.component';
     CustomizeExpComponent,
     OrchMessComponent,
     SetControlComponent,
-    ManageUnexComponent
+    ManageUnexComponent,
+    MobileComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import { ManageUnexComponent } from './manage-unex/manage-unex.component';
     MatExpansionModule,
     MatFormFieldModule,
     MatSlideToggleModule,
-
+    MatButtonToggleModule,
+    
     NgxMatColorPickerModule
     
   ],
