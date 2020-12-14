@@ -20,9 +20,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 
-import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
-
-
 
 import { AppComponent } from './app.component';
 import { CPortalComponent } from './c-portal/c-portal.component';
@@ -43,7 +40,7 @@ import { MobileComponent } from './mobile/mobile.component';
     MobileComponent
   ],
   imports: [
-    
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -60,13 +57,10 @@ import { MobileComponent } from './mobile/mobile.component';
     MatExpansionModule,
     MatFormFieldModule,
     MatSlideToggleModule,
-    MatButtonToggleModule,
-    
-    NgxMatColorPickerModule
+    MatButtonToggleModule,    
     
   ],
   providers: [
-    { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
   ],
   bootstrap: [AppComponent]
 })

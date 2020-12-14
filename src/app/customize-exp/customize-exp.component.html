@@ -37,6 +37,8 @@
             </div>
           </div>
 
+
+
           <br />
           <br />
 
@@ -75,9 +77,7 @@
             <p>Used behind your team profile and other backgroungs</p>
 
             <mat-form-field appearance="outline">
-              <input matInput [ngxMatColorPicker]="bg" />
-              <ngx-mat-color-toggle matSuffix [for]="bg"></ngx-mat-color-toggle>
-              <ngx-mat-color-picker #bg></ngx-mat-color-picker>
+              <input matInput type="color" [(ngModel)]="appStyle.background_color"/>
             </mat-form-field>
 
             <div class="preview-container">
@@ -111,12 +111,7 @@
             <p>Used in your action buttons</p>
 
             <mat-form-field appearance="outline">
-              <input matInput [ngxMatColorPicker]="picker" />
-              <ngx-mat-color-toggle
-                matSuffix
-                [for]="picker"
-              ></ngx-mat-color-toggle>
-              <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+              <input matInput type="color" [(ngModel)]="appStyle.action_color"/>
             </mat-form-field>
 
             <div
