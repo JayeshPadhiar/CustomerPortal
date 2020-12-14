@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Input, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-mobile',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mobile.component.css']
 })
 export class MobileComponent implements OnInit {
+
+  @Input() appStyle;
 
   constructor() { }
 

@@ -1,7 +1,73 @@
-<div class="mobile-container">
-  <div style="height: 100%;">
-    <div class="title"></div>
-    <div class="body"></div>  
+<div class="mobile-container" [style.background-color]="appStyle.background_color">
+  <div style="height: 100%">
+    <div class="header">
+      <div
+        style="
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <img src="../../assets/img/acme.png" alt="ACME" />
+      </div>
+    </div>
+
+    <div class="body">
+      <div style="margin: 25px">
+        <p>&lt; Item Details</p>
+      </div>
+      <mat-divider></mat-divider>
+      <div>
+        <mat-vertical-stepper linear="true" #stepper>
+          <mat-step>
+            <form>
+              <ng-template matStepLabel>Fill out your name</ng-template>
+              <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  placeholder="Last name, First name"
+                  formControlName="firstCtrl"
+                  required
+                />
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <form>
+              <ng-template matStepLabel>Fill out your address</ng-template>
+              <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input
+                  matInput
+                  formControlName="secondCtrl"
+                  placeholder="Ex. 1 Main St, New York, NY"
+                  required
+                />
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <p>You are now done.</p>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+      </div>
+    </div>
+
     <div class="footer"></div>
   </div>
 </div>

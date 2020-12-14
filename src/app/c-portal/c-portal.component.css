@@ -18,6 +18,8 @@ div.mobile-div {
 }
 
 .mobile-div .mat-button-toggle-group {
+  border: 2px solid red;
+  border-radius: 10px;
   left: 50%;
   transform: translate(-50%, -20%);
 }

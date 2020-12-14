@@ -9,7 +9,7 @@
 
       <div style="padding: 10px"></div>
       <div>
-        <app-customize-exp></app-customize-exp>
+        <app-customize-exp [(appStyle)]="appStyle"></app-customize-exp>
         <app-orch-mess></app-orch-mess>
         <app-set-control></app-set-control>
         <app-manage-unex></app-manage-unex>
@@ -18,12 +18,12 @@
 
     <div class="mobile-div">
       <div>
-        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle-group>
           <mat-button-toggle>Mobile</mat-button-toggle>
           <mat-button-toggle>Desktop</mat-button-toggle>
         </mat-button-toggle-group>
       </div>
-      <app-mobile></app-mobile>
+      <app-mobile [appStyle]="appStyle"></app-mobile>
       <div>
         <mat-button-toggle-group style="transform: translate(-50%, 20%);">
           <mat-button-toggle>&lt;</mat-button-toggle>

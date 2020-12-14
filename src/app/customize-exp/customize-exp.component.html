@@ -15,8 +15,21 @@
 
             <div class="preview-container">
               <div class="preview-div">
-                <div class="preview-div-header">
-                  <h1 style="margin-left: 20px">acme</h1>
+                <div
+                  class="preview-div-header"
+                  [style.background-color]="appStyle.background_color"
+                >
+                  <div
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <img src="../../assets/img/acme.png" alt="ACME" />
+                  </div>
                 </div>
 
                 <div class="preview-div-body"></div>
@@ -47,7 +60,7 @@
                       <span class="dot" style="background: #fdd800"></span>
                       <span class="dot" style="background: #5ac05a"></span>
                     </div>
-                    <div>Hello</div>
+                    <div><img alt="ACME" /></div>
                   </div>
                 </div>
               </div>
@@ -69,8 +82,21 @@
 
             <div class="preview-container">
               <div class="preview-div">
-                <div class="preview-div-header">
-                  <h1 style="margin-left: 20px">acme</h1>
+                <div
+                  class="preview-div-header"
+                  [style.background-color]="appStyle.background_color"
+                >
+                  <div
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <img src="../../assets/img/acme.png" alt="ACME" />
+                  </div>
                 </div>
                 <div class="preview-div-body"></div>
               </div>
@@ -83,8 +109,8 @@
           <div>
             <h4>Action Color</h4>
             <p>Used in your action buttons</p>
-              
-              <mat-form-field appearance="outline">
+
+            <mat-form-field appearance="outline">
               <input matInput [ngxMatColorPicker]="picker" />
               <ngx-mat-color-toggle
                 matSuffix
@@ -95,9 +121,27 @@
 
             <div
               class="preview-container"
-
-              style=" display: flex; align-items: center; justify-content: center;">
-              <button mat-flat-button>BUTTON</button>
+              [style.background-color]="appStyle.background_color"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <button
+                [style.background-color]="appStyle.action_color"
+                style="
+                  color: #e7e7e7;
+                  border-radius: 10px;
+                  border: none;
+                  margin: 0;
+                  width: 70%;
+                  height: 55%;
+                "
+                mat-flat-button
+              >
+                BUTTON
+              </button>
             </div>
           </div>
 

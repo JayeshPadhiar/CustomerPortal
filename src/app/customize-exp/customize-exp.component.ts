@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-customize-exp',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customize-exp.component.css', '../app.component.css']
 })
 export class CustomizeExpComponent implements OnInit {
+
+  @Input() appStyle;
 
   constructor() { }
 
