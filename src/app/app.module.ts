@@ -1,25 +1,22 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSelectModule} from '@angular/material/select';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-
-
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { AppComponent } from './app.component';
 import { CPortalComponent } from './c-portal/c-portal.component';
@@ -37,12 +34,12 @@ import { MobileComponent } from './mobile/mobile.component';
     OrchMessComponent,
     SetControlComponent,
     ManageUnexComponent,
-    MobileComponent
+    MobileComponent,
   ],
   imports: [
-    FormsModule,
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
 
     MatIconModule,
@@ -57,11 +54,9 @@ import { MobileComponent } from './mobile/mobile.component';
     MatExpansionModule,
     MatFormFieldModule,
     MatSlideToggleModule,
-    MatButtonToggleModule,    
-    
+    MatButtonToggleModule,
   ],
-  providers: [
-  ],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

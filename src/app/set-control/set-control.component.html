@@ -3,7 +3,10 @@
   <mat-accordion class="accordion">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>Manage your cancellation policy</mat-panel-title>
+        <mat-panel-title>
+          <mat-icon svgIcon="mycp"></mat-icon>
+          <div style="margin: auto 0">Manage your cancellation policy</div>
+        </mat-panel-title>
       </mat-expansion-panel-header>
 
       <div class="accordion-content">
@@ -15,13 +18,14 @@
           <mat-slide-toggle>On</mat-slide-toggle>
 
           <div>
-            <h4>Cancellation Reasons
+            <h4>
+              Cancellation Reasons
               <mat-icon
-              inline="true"
-              matTooltip="Info"
-              matTooltipPosition="after"
-              >info
-            </mat-icon>
+                inline="true"
+                matTooltip="Info"
+                matTooltipPosition="after"
+                >info
+              </mat-icon>
             </h4>
             <p>
               Customers can select one reason from the list when submitting a
@@ -83,7 +87,10 @@
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>Manage your return policy</mat-panel-title>
+        <mat-panel-title>
+          <mat-icon svgIcon="myrp"></mat-icon>
+          <div style="margin: auto 0">Manage your return policy</div>
+        </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="accordion-content">
         <div>
@@ -132,13 +139,11 @@
               </p>
 
               <div>
-
                 <div>
                   <mat-form-field appearance="fill">
                     <mat-label>Favorite food</mat-label>
                     <mat-select>
-                      <mat-option >
-                      </mat-option>
+                      <mat-option> </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
@@ -155,13 +160,14 @@
             <br /><br />
 
             <div>
-              <h4>Return reasons
+              <h4>
+                Return reasons
                 <mat-icon
-              inline="true"
-              matTooltip="Info"
-              matTooltipPosition="after"
-              >info
-            </mat-icon>
+                  inline="true"
+                  matTooltip="Info"
+                  matTooltipPosition="after"
+                  >info
+                </mat-icon>
               </h4>
               <p>
                 Customers can select one reason from the list when submitting a
@@ -178,35 +184,26 @@
               </div>
             </div>
 
-
-
             <div>
               <h4>Resolution policy for returns</h4>
               <p>Give your customers a resolution for returning the order</p>
-
-
-
-    
             </div>
 
             <div>
               <h4>Refund policy for returns</h4>
               <h5>Allow refund against COD orders</h5>
               <p>
-                By enabling this option, your customers can enter their bank account details to receive a refund
+                By enabling this option, your customers can enter their bank
+                account details to receive a refund
               </p>
               <mat-slide-toggle>On</mat-slide-toggle>
             </div>
-
 
             <div>
               <h5>Allow refund against prepaid orders</h5>
               <mat-slide-toggle>On</mat-slide-toggle>
             </div>
-
-
           </div>
-
 
           <div style="margin-top: 25px">
             <button mat-button>Save</button>
@@ -214,13 +211,6 @@
               Cancel
             </button>
           </div>
-
-
-
-
-
-
-          
         </div>
       </div>
     </mat-expansion-panel>

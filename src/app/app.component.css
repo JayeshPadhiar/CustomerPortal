@@ -48,6 +48,8 @@ div.expander-component {
   margin: 12px 0px;
 }
 
+
+
 .accordion .mat-expansion-panel:focus-within {
   color: #e96a60;
   border: 1px solid #e96a60;
@@ -56,6 +58,12 @@ div.expander-component {
 
 .accordion .mat-expansion-panel-header {
   padding: 15px 25px;
+}
+
+.mat-icon {
+  margin-right: 25px;
+  height: 34px;
+  width: 34px;
 }
 
 .accordion .mat-expansion-panel-header-title {
@@ -90,10 +98,6 @@ div.accordion-content {
   padding: 0px 20px;
 }
 
-.accordion-content .mat-icon {
-  margin: 4px;
-  color: gray;
-}
 
 .accordion-content .mat-expansion-panel-header {
   padding: 0px 15px;
