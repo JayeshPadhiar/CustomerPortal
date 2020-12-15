@@ -308,7 +308,7 @@
           </div>
 
           <div class="preview-container">
-            <div class="preview-div" style="top: 0; right: 0">
+            <div class="preview-div" [style.background-color]="appStyle.background_color" style="top: 0; right: 0">
               <div
                 class="preview-div-body"
                 style="
@@ -366,21 +366,20 @@
             </table>
           </div>
 
-          <div class="preview-container">
-              <div
-                class="preview-div-body"
-                style="
-                  width: 75%;
-                  height: 75%;
-                  bottom: 0;
-                  left: 0;
-                  border-radius: 0;
-                  border-top-right-radius: 10px;
-                "
-              ></div>
+          <div class="preview-container" [style.background-color]="appStyle.background_color">
+            <div
+              class="preview-div-body"
+              style="
+                width: 75%;
+                height: 75%;
+                bottom: 0;
+                left: 0;
+                border-radius: 0;
+                border-top-right-radius: 10px;
+              "
+            ></div>
           </div>
 
-         
           <div>
             <h4>
               Add footer links

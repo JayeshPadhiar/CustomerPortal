@@ -27,7 +27,7 @@
           </div>
 
           <div></div>
-          <div class="preview-container">
+          <div class="preview-container" [style.background-color]="appStyle.background_color">
           </div>
 
           <h4>Send-from email address
@@ -46,13 +46,18 @@
           </mat-form-field>
           </div>
 
-          <div class="preview-container">
-            <div class="preview-div">
-              <div class="preview-div-header">
-                <h1 style="margin-left: 20px">acme</h1>
-              </div>
-              <div class="preview-div-body"></div>
-            </div>
+          <div class="preview-container" [style.background-color]="appStyle.background_color">
+            <div
+              class="preview-div-body"
+              style="
+                width: 85%;
+                height: 75%;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+                border-top-left-radius: 10px;
+              "
+            ></div>
           </div>
 
           <h4>SMS sender name</h4>
