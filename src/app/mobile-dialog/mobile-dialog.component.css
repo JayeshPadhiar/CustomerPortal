@@ -1,13 +1,34 @@
-.modal-preview-container {
-    width: 100px;
-    height: 100px;
-    background-color: blue;
+mat-dialog-content {
+    padding: 0px 10px;
+    overflow:inherit;
 }
 
-.mat-dialog-content {
-    width: 200px;
-    height: 200px;
+.modal-preview {
+    height: 100vh;
+    width: 100%;
+    background-color: #dadeff;
+}
+
+.notif-body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #14B6AC;
+    height: 46px;
+    width: 100%;
+    color: white;
+}
+
+.main-body {
+
+    
+}
+
+.mobile-screens {
+    display: inline-block;
+    height: 100%;
+}
+
+.desktop-screen {
+    display: inline-block;
 }

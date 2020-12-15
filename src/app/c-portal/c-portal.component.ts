@@ -16,18 +16,16 @@ export class CPortalComponent implements OnInit {
   constructor(private dialog: MatDialog,) { }
 
   appStyle: Object = {
-    background_color: "orange",
-    action_color: "blue",
+    background_color: "#e7e7e7",
+    action_color: "cadetblue",
     test: "test",
     logosrc: "../../assets/img/acme.png",
     faviconsrc: ""
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(MobileDialogComponent,{
-    });
+      this.dialog.open(MobileDialogComponent, {panelClass:'mobile-dialog'});
   }
-
 
   ngOnInit(): void {
   }

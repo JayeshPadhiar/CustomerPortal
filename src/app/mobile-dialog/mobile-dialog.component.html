@@ -1,21 +1,20 @@
-<div >
-    <div style="width: 100%;">
-        <h2 mat-dialog-title>
-            Preview
-            <mat-icon style="float: right;">close</mat-icon>
-        </h2>
+<h2 mat-dialog-title style="width: 100%">
+  <mat-icon style="float: right">close</mat-icon>
+  Install Angular
+</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography">
+  <div class="modal-preview">
+    <div class="notif-body">
+      <p style="text-align: center;">Hello World !</p>
     </div>
-    <mat-divider></mat-divider>
 
-  <mat-dialog-content>
-    <div class="modal-preview-container">
-        <div></div>
+    <div class="main-body">
+      
     </div>
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
-      Install
-    </button>
-  </mat-dialog-actions>
-</div>
+  </div>
+</mat-dialog-content>
+<!--mat-dialog-actions style="bottom: 0" align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions-->
