@@ -108,6 +108,26 @@ div.accordion-content {
   margin: 0px 10px;
 }
 
+.accordion-content .connected-indicator {
+  color: #0ca347;
+  margin-left: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 12px;
+  background: #e5f9ed;
+  border-radius: 13px;
+}
+
+.accordion-content .tracking-page-info {
+
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 16px;
+}
+
 .preview-container {
   position: relative;
   margin: 20px 0px;
@@ -188,12 +208,11 @@ div.accordion-content {
   width: 13px;
 }
 :host ::ng-deep .mat-radio-outer-circle {
-  border: 1px solid #BBBBBB !important;
+  border: 1px solid #bbbbbb !important;
   height: 13px;
   width: 13px;
 }
 :host ::ng-deep .mat-radio-inner-circle {
-
   border-color: black;
   background-color: #e96a60 !important;
 

@@ -6,7 +6,7 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="sycp"></mat-icon>
-          <div style="margin: auto 0;">Style Your Customer Portal</div>
+          <div style="margin: auto 0">Style Your Customer Portal</div>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="accordion-content">
@@ -15,10 +15,17 @@
             <h4>Upload your brand logo</h4>
             <p>Add a PNG, JPG or GIF. Your image may scale upto 154px X 24px</p>
             <div>
-              <button mat-button (click)="logoInput.click()">Upload logo</button>
-              <input hidden (change)="selectIcon($event, 'logosrc')" #logoInput type="file">
+              <button mat-button (click)="logoInput.click()">
+                Upload logo
+              </button>
+              <input
+                hidden
+                (change)="selectIcon($event, 'logosrc')"
+                #logoInput
+                type="file"
+              />
             </div>
-              
+
             <div class="preview-container">
               <div class="preview-div">
                 <div
@@ -49,8 +56,15 @@
           <div>
             <h4>Upload your favicon</h4>
             <p>The optimal size for creating a favicon is 16x16 pixels</p>
-            <button mat-button (click)="faviconInput.click()">Upload Favicon</button>
-            <input hidden (change)="selectIcon($event, 'faviconsrc')" #faviconInput type="file">
+            <button mat-button (click)="faviconInput.click()">
+              Upload Favicon
+            </button>
+            <input
+              hidden
+              (change)="selectIcon($event, 'faviconsrc')"
+              #faviconInput
+              type="file"
+            />
             <div>
               <div class="preview-container">
                 <div
@@ -82,7 +96,11 @@
             <p>Used behind your team profile and other backgroungs</p>
 
             <mat-form-field appearance="outline">
-              <input matInput type="color" (input)="changeColor($event.target.value, 'background_color')" />
+              <input
+                matInput
+                type="color"
+                (input)="changeColor($event.target.value, 'background_color')"
+              />
             </mat-form-field>
 
             <div class="preview-container">
@@ -116,7 +134,11 @@
             <p>Used in your action buttons</p>
 
             <mat-form-field appearance="outline">
-              <input matInput type="color" (input)="changeColor($event.target.value, 'action_color')"/>
+              <input
+                matInput
+                type="color"
+                (input)="changeColor($event.target.value, 'action_color')"
+              />
             </mat-form-field>
 
             <div
@@ -159,7 +181,7 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="sytpd"></mat-icon>
-          <div style="margin: auto 0;">Setup your tracking page domain</div>
+          <div style="margin: auto 0">Setup your tracking page domain</div>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="accordion-content">
@@ -180,6 +202,88 @@
           </p>
           <button mat-button>+ Add domain</button>
         </div>
+        <br />
+        <div>
+          <div style="align-items: center; display: flex">
+            <mat-icon
+              style="
+                margin-right: 8px;
+                width: 18px;
+                height: 18px;
+                display: inline-block;
+              "
+              svgIcon="globeicon"
+            ></mat-icon>
+            <div
+              style="
+                margin: auto 0;
+                font-size: 14px;
+                line-height: 17px;
+                color: #333333;
+                float: left;
+              "
+            >
+              https://track.blackberrys.com
+            </div>
+            <div class="connected-indicator">Connected</div>
+            <mat-icon
+              style="
+                margin-left: 12px;
+                width: 18px;
+                height: 16px;
+                display: inline-block;
+              "
+              svgIcon="trashicon"
+            ></mat-icon>
+          </div>
+
+          <br />
+
+          <div class="tracking-page-info">
+            <p>
+              Visit the admin console of your domain registrar panel (the
+              website you purchased your domain from) and create a CNAME Record
+              with the details below.
+            </p>
+            <br />
+
+            <table style="width: 50%">
+              <tr
+                style="
+                  text-align: left;
+                  font-size: 10px;
+                  line-height: 12px;
+                  color: #808080;
+                "
+              >
+                <th>Type</th>
+                <th>Name</th>
+                <th>Value</th>
+              </tr>
+              <tr
+                style="
+                  text-align: left;
+                  font-size: 10px;
+                  line-height: 12px;
+                  color: #808080;
+                "
+              >
+                <td>CNAME</td>
+                <td>acme.domainkey.eshopbox.com</td>
+                <td>Acme</td>
+              </tr>
+            </table>
+          </div>
+
+          <br />
+
+          <div>
+            <button mat-button>Save</button>
+            <button mat-button style="color: black; border-color: lightgrey">
+              Cancel
+            </button>
+          </div>
+        </div>
       </div>
     </mat-expansion-panel>
 
@@ -187,7 +291,9 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="grltyc"></mat-icon>
-          <div style="margin: auto 0;">Give relavant links to your customers</div>
+          <div style="margin: auto 0">
+            Give relavant links to your customers
+          </div>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="accordion-content">
@@ -201,7 +307,19 @@
             </mat-form-field>
           </div>
 
-          <div></div>
+          <div class="preview-container">
+            <div class="preview-div" style="top: 0; right: 0">
+              <div
+                class="preview-div-body"
+                style="
+                  top: 0;
+                  right: 0;
+                  border-radius: 0;
+                  border-bottom-left-radius: 10px;
+                "
+              ></div>
+            </div>
+          </div>
 
           <h4>Support</h4>
           <p>Provide help and support to your customers at every step</p>
@@ -248,8 +366,21 @@
             </table>
           </div>
 
-          <div></div>
+          <div class="preview-container">
+              <div
+                class="preview-div-body"
+                style="
+                  width: 75%;
+                  height: 75%;
+                  bottom: 0;
+                  left: 0;
+                  border-radius: 0;
+                  border-top-right-radius: 10px;
+                "
+              ></div>
+          </div>
 
+         
           <div>
             <h4>
               Add footer links
