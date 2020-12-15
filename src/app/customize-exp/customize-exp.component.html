@@ -16,7 +16,7 @@
             <p>Add a PNG, JPG or GIF. Your image may scale upto 154px X 24px</p>
             <div>
               <button mat-button (click)="logoInput.click()">Upload logo</button>
-              <input hidden (change)="selectLogo($event)" #logoInput type="file">
+              <input hidden (change)="selectIcon($event, 'logosrc')" #logoInput type="file">
             </div>
               
             <div class="preview-container">
@@ -50,7 +50,7 @@
             <h4>Upload your favicon</h4>
             <p>The optimal size for creating a favicon is 16x16 pixels</p>
             <button mat-button (click)="faviconInput.click()">Upload Favicon</button>
-            <input hidden (change)="selectFavicon($event)" #faviconInput type="file">
+            <input hidden (change)="selectIcon($event, 'faviconsrc')" #faviconInput type="file">
             <div>
               <div class="preview-container" style="border: 4px solid #e7e7e7">
                 <div

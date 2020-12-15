@@ -14,12 +14,12 @@ export class CustomizeExpComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectLogo(event) {
+  selectIcon(event, icontype) {
     if(event.target.files){
       var reader = new FileReader()
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
-        this.appStyle["logosrc"] = event.target.result;
+        this.appStyle[icontype] = event.target.result;
       }
     }
 
