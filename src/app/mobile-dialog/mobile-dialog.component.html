@@ -1,0 +1,21 @@
+<div >
+    <div style="width: 100%;">
+        <h2 mat-dialog-title>
+            Preview
+            <mat-icon style="float: right;">close</mat-icon>
+        </h2>
+    </div>
+    <mat-divider></mat-divider>
+
+  <mat-dialog-content>
+    <div class="modal-preview-container">
+        <div></div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
+      Install
+    </button>
+  </mat-dialog-actions>
+</div>

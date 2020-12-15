@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -25,6 +26,7 @@ import { OrchMessComponent } from './orch-mess/orch-mess.component';
 import { SetControlComponent } from './set-control/set-control.component';
 import { ManageUnexComponent } from './manage-unex/manage-unex.component';
 import { MobileComponent } from './mobile/mobile.component';
+import { MobileDialogComponent } from './mobile-dialog/mobile-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { MobileComponent } from './mobile/mobile.component';
     SetControlComponent,
     ManageUnexComponent,
     MobileComponent,
+    MobileDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { MobileComponent } from './mobile/mobile.component';
     MatInputModule,
     MatRadioModule,
     MatButtonModule,
+    MatDialogModule,
     MatSelectModule,
     MatDividerModule,
     MatStepperModule,

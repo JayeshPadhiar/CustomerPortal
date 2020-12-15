@@ -14,8 +14,11 @@
           <div>
             <h4>Upload your brand logo</h4>
             <p>Add a PNG, JPG or GIF. Your image may scale upto 154px X 24px</p>
-            <button mat-button>Upload logo</button>
-
+            <div>
+              <button mat-button (click)="logoInput.click()">Upload logo</button>
+              <input hidden (change)="selectLogo($event)" #logoInput type="file">
+            </div>
+              
             <div class="preview-container">
               <div class="preview-div">
                 <div
@@ -31,7 +34,7 @@
                       justify-content: center;
                     "
                   >
-                    <img src="../../assets/img/acme.png" alt="ACME" />
+                    <img [src]="appStyle.logosrc" alt="ACME" />
                   </div>
                 </div>
 
@@ -46,7 +49,8 @@
           <div>
             <h4>Upload your favicon</h4>
             <p>The optimal size for creating a favicon is 16x16 pixels</p>
-            <button mat-button>Upload Favicon</button>
+            <button mat-button (click)="faviconInput.click()">Upload Favicon</button>
+            <input hidden (change)="selectFavicon($event)" #faviconInput type="file">
             <div>
               <div class="preview-container" style="border: 4px solid #e7e7e7">
                 <div
@@ -63,7 +67,7 @@
                       <span class="dot" style="background: #fdd800"></span>
                       <span class="dot" style="background: #5ac05a"></span>
                     </div>
-                    <div><img alt="ACME" /></div>
+                    <div><img [src]="appStyle.faviconsrc" alt="ACME" /></div>
                   </div>
                 </div>
               </div>
@@ -78,7 +82,7 @@
             <p>Used behind your team profile and other backgroungs</p>
 
             <mat-form-field appearance="outline">
-              <input matInput type="color" />
+              <input matInput type="color" (input)="changeColor($event.target.value, 'background_color')" />
             </mat-form-field>
 
             <div class="preview-container">
@@ -96,7 +100,7 @@
                       justify-content: center;
                     "
                   >
-                    <img src="../../assets/img/acme.png" alt="ACME" />
+                    <img [src]="appStyle.logosrc" alt="ACME" />
                   </div>
                 </div>
                 <div class="preview-div-body"></div>
@@ -112,7 +116,7 @@
             <p>Used in your action buttons</p>
 
             <mat-form-field appearance="outline">
-              <input matInput type="color" />
+              <input matInput type="color" (input)="changeColor($event.target.value, 'action_color')"/>
             </mat-form-field>
 
             <div
