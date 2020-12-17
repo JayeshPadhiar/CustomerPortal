@@ -27,6 +27,7 @@ import { SetControlComponent } from './set-control/set-control.component';
 import { ManageUnexComponent } from './manage-unex/manage-unex.component';
 import { MobileComponent } from './mobile/mobile.component';
 import { MobileDialogComponent } from './mobile-dialog/mobile-dialog.component';
+import { AddDomainComponent } from './add-domain/add-domain.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MobileDialogComponent } from './mobile-dialog/mobile-dialog.component';
     ManageUnexComponent,
     MobileComponent,
     MobileDialogComponent,
+    AddDomainComponent,
   ],
   imports: [
     BrowserModule,

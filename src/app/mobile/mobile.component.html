@@ -1,5 +1,12 @@
-<div class="mobile-container" [style.background-color]="appStyle.background_color">
+<div
+  class="mobile-container"
+  [style.background-color]="appStyle.background_color"
+>
   <div style="height: 100%">
+    <div class="mobile-notif" [style.background-color]="appStyle.notif_color">
+      <p>Your message will be displayed here</p>
+    </div>
+
     <div class="header">
       <div
         style="
@@ -15,59 +22,168 @@
     </div>
 
     <div class="body">
-      <div style="margin: 25px">
-        <p>&lt; Item Details</p>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: left;
+          margin: 25px;
+        "
+      >
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        <div
+          style="
+            margin-left: 16px;
+            font-family: Work Sans;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+
+            color: #828282;
+          "
+        >
+          Item Details
+        </div>
       </div>
+
       <mat-divider></mat-divider>
+
       <div>
-        <mat-vertical-stepper linear="true" #stepper>
-          <mat-step>
-            <form>
-              <ng-template matStepLabel>Fill out your name</ng-template>
-              <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input
-                  matInput
-                  placeholder="Last name, First name"
-                  formControlName="firstCtrl"
-                  required
-                />
-              </mat-form-field>
-              <div>
-                <button mat-button matStepperNext>Next</button>
+        <mat-vertical-stepper class="mobile-stepper" linear="true" #stepper>
+          <ng-template matStepperIcon="edit">
+            <mat-icon></mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="home">
+            <mat-icon>home</mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="form">
+            <mat-icon>format_align_center</mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="last">
+            <mat-icon>done_all</mat-icon>
+          </ng-template>
+
+          <ng-template matStepperIcon="home">
+            <mat-icon>home</mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="form">
+            <mat-icon>format_align_center</mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="last">
+            <mat-icon>done_all</mat-icon>
+          </ng-template>
+
+          <mat-step state="edit">
+            <ng-template matStepLabel>
+              <div class="mobile-stepper-title">Shipping Soon</div>
+              <div class="mobile-stepper-title-desc">
+                Arriving by Sat, 24 Oct
               </div>
-            </form>
-          </mat-step>
-          <mat-step>
-            <form>
-              <ng-template matStepLabel>Fill out your address</ng-template>
-              <mat-form-field>
-                <mat-label>Address</mat-label>
-                <input
-                  matInput
-                  formControlName="secondCtrl"
-                  placeholder="Ex. 1 Main St, New York, NY"
-                  required
-                />
-              </mat-form-field>
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-              </div>
-            </form>
-          </mat-step>
-          <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
-            <p>You are now done.</p>
+            </ng-template>
             <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button (click)="stepper.reset()">Reset</button>
+              <div
+                style="
+                  margin: 10px 0;
+                  display: flex;
+                  align-items: center;
+                  width: 100%;
+                  background: #f6f6f6;
+                  border-radius: 4px;
+                "
+              >
+                <img
+                  style="margin: 5px"
+                  src="../../assets/img/shippingImg.png"
+                />
+                <div class="mobile-content" style="display: inline-block">
+                  Regular Fit Navy Shirt
+                </div>
+              </div>
+
+              <div class="mobile-content" style="display: block">
+                <p>
+                  Your item is ready to be shipped by our courier partner. You
+                  will be notified as soon as it is dispatched.
+                </p>
+              </div>
+
+              <button [style.background-color]="appStyle.action_color" class="mobile-button" mat-flat-button>
+                Cancel Order
+              </button>
             </div>
+          </mat-step>
+
+          <mat-step state="edit">
+            <ng-template matStepLabel>
+              <div class="mobile-stepper-title">In transit</div>
+              <div class="mobile-stepper-title-desc">
+                Arriving by Sat, 24 Oct
+              </div>
+            </ng-template>
+            <div>
+              <div
+                style="
+                  margin: 10px 0px;
+                  display: flex;
+                  align-items: center;
+                  width: 100%;
+                  background: #f6f6f6;
+                  border-radius: 4px;
+                "
+              >
+                <img
+                  style="margin: 5px"
+                  src="../../assets/img/shippingImg.png"
+                />
+                <div class="mobile-content" style="display: inline-block">
+                  Regular Fit Navy Shirt
+                </div>
+              </div>
+
+              <div class="mobile-content" style="display: block">
+                <p>
+                  Your item has been picked up by our courier partner. You will
+                  be notified as soon as it is out for delivery
+                </p>
+                <p>
+                  Your order has been shipped by Bluedart logistics with
+                  tracking number #xxxxxxx
+                </p>
+                <div class="note">
+                  <p>
+                    Note: Expected delivery date is delayed. We will keep you
+                    updated!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </mat-step>
+
+          <mat-step state="last">
+            <ng-template matStepLabel>Delivered</ng-template>
+            <p>You are now done.</p>
+            <div></div>
           </mat-step>
         </mat-vertical-stepper>
       </div>
     </div>
 
-    <div class="footer"></div>
+    <div class="footer">
+      <div class="mobile-footer-links">
+        <div class="footer-link">whatsapp.com</div>
+        <div class="footer-link">facebook.com</div>
+        <div class="footer-link">instagram.com</div>
+        <div class="footer-link">github.com</div>
+        <div class="footer-link">acme.com</div>
+        <div class="footer-link">9gag.com</div>
+        <div class="footer-link">wikipidia.com</div>
+        
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="mobile-footer-url">Go to &nbsp;<a href="#">acme.com</a></div>
+    </div>
   </div>
 </div>

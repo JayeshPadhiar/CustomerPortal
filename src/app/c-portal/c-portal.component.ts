@@ -17,7 +17,8 @@ export class CPortalComponent implements OnInit {
 
   appStyle: Object = {
     background_color: "#e7e7e7",
-    action_color: "cadetblue",
+    action_color: "#2DDBD1",
+    notif_color: "#14B6AC",
     test: "test",
     logosrc: "../../assets/img/acme.png",
     faviconsrc: ""

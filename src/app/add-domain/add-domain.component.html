@@ -1,0 +1,41 @@
+<h2 mat-dialog-title style="width: 100%">
+  <mat-icon [mat-dialog-close]="true" style="float: right">close</mat-icon>
+  Add Domain
+</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography">
+  <div>
+    <div class="form-container">
+      <mat-form-field style="width: 60%" floatLabel="never">
+        <input matInput placeholder="https://acme.com" />
+      </mat-form-field>
+      <div>
+        <p
+          style="
+            font-family: Lato;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 14px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.5px;
+
+            color: #808080;
+          "
+        >
+          For example: https:/track.acme.com
+        </p>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions style="bottom: 0">
+  <button
+    style="color: #e96a60; border: 1px solid #e96a60; border-color: #e96a60"
+    mat-button
+    mat-dialog-close
+  >
+    Save
+  </button>
+</mat-dialog-actions>

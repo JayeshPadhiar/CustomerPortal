@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {AddDomainComponent} from '../add-domain/add-domain.component'
+
 @Component({
   selector: 'app-customize-exp',
   templateUrl: './customize-exp.component.html',
@@ -9,7 +12,7 @@ export class CustomizeExpComponent implements OnInit {
 
   @Input() appStyle;
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -40,5 +43,9 @@ export class CustomizeExpComponent implements OnInit {
     console.log(this.appStyle[prop])
     console.log(color)
   }
+
+  addDomain() {
+    this.dialog.open(AddDomainComponent, {panelClass:'add-domain-dialog'});
+}
 
 }

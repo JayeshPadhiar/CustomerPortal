@@ -81,7 +81,13 @@
                       <span class="dot" style="background: #fdd800"></span>
                       <span class="dot" style="background: #5ac05a"></span>
                     </div>
-                    <div><img [src]="appStyle.faviconsrc" alt="ACME" /></div>
+                    <div>
+                      <img
+                        style="margin: 5px"
+                        [src]="appStyle.faviconsrc"
+                        alt="ACME"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -93,15 +99,16 @@
 
           <div>
             <h4>Background Color</h4>
-            <p>Used behind your team profile and other backgroungs</p>
+            <p>Used behind your team profile and other backgrounds</p>
 
-            <mat-form-field appearance="outline">
+            <div class="color-picker-container">
               <input
-                matInput
+                class="color-picker"
                 type="color"
                 (input)="changeColor($event.target.value, 'background_color')"
               />
-            </mat-form-field>
+              <input type="text" />
+            </div>
 
             <div class="preview-container">
               <div class="preview-div">
@@ -133,13 +140,14 @@
             <h4>Action Color</h4>
             <p>Used in your action buttons</p>
 
-            <mat-form-field appearance="outline">
+            <div class="color-picker-container">
               <input
-                matInput
+                class="color-picker"
                 type="color"
                 (input)="changeColor($event.target.value, 'action_color')"
               />
-            </mat-form-field>
+              <input type="text" />
+            </div>
 
             <div
               class="preview-container"
@@ -200,7 +208,7 @@
             when accessing the customer portal. To change, add a domain.
             <a>Learn More</a>
           </p>
-          <button mat-button>+ Add domain</button>
+          <button (click)="addDomain()" mat-button>+ Add domain</button>
         </div>
         <br />
         <div>
@@ -308,7 +316,11 @@
           </div>
 
           <div class="preview-container">
-            <div class="preview-div" [style.background-color]="appStyle.background_color" style="top: 0; right: 0">
+            <div
+              class="preview-div"
+              [style.background-color]="appStyle.background_color"
+              style="top: 0; right: 0"
+            >
               <div
                 class="preview-div-body"
                 style="
@@ -366,7 +378,10 @@
             </table>
           </div>
 
-          <div class="preview-container" [style.background-color]="appStyle.background_color">
+          <div
+            class="preview-container"
+            [style.background-color]="appStyle.background_color"
+          >
             <div
               class="preview-div-body"
               style="

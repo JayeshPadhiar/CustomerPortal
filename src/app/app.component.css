@@ -120,12 +120,44 @@ div.accordion-content {
 }
 
 .accordion-content .tracking-page-info {
-
   background: #ffffff;
   border: 1px solid #e7e7e7;
   box-sizing: border-box;
   border-radius: 4px;
   padding: 16px;
+}
+
+.color-picker-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  background: #ffffff;
+  border: 1px solid #cfc9c9;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.color-picker-container .color-picker {
+  width: 25px;
+  height: 25px;
+  outline: none;
+  border-radius: 3px;
+  border: none;
+  margin-right: 10px;
+}
+
+.color-picker-container input {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: #334433;
+  border: none;
+  outline: none;
+  padding: 5px;
 }
 
 .preview-container {
@@ -163,6 +195,16 @@ div.accordion-content {
   position: absolute;
   bottom: 0;
   border-top-left-radius: 6px;
+}
+
+.preview-container .preview-div-notif {
+  height: 40%;
+  width: 100%;
+  background-color: black;
+  bottom: top;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .preview-container .preview-tab-container {
@@ -224,4 +266,29 @@ div.accordion-content {
   width: 20px; /*double of your required circle radius*/
   left: calc(50% - 10px); /*'10px'-same as your required circle radius*/
   top: calc(50% - 10px); /*'10px'-same as your required circle radius*/
+}
+
+:host ::ng-deep .mat-checkbox .mat-checkbox-frame {
+  background: #ffffff;
+  border: 1px solid #fa5c5d;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+:host ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  margin-top: 1px;
+  margin-left: 1px;
+  width: 18px;
+  height: 18px;
+
+  background: #ffffff;
+  border: 1px solid #fa5c5d;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #fa5c5d;
 }

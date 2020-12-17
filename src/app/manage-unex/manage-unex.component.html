@@ -28,7 +28,23 @@
               </mat-form-field>
             </div>
 
-            <div class="preview-container" style="width: 80%"></div>
+            <div class="preview-container" style="width: 80%; padding: 10px 10px 0;">
+              <div style="height: 100%;" [style.background-color]="appStyle.background_color">
+                <div class="preview-div-notif" [style.background-color]="appStyle.notif_color"></div>
+                
+              </div>
+            </div>
+
+            <h4>Background Color</h4>
+            <p>Customixe the snackbar backgroung color</p>
+
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                type="color"
+                (input)="changeNotifColor($event.target.value, 'notif_color')"
+              />
+            </mat-form-field>
 
             <div>
               <button mat-button>Save</button>

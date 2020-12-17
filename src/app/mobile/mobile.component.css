@@ -25,21 +25,19 @@ div.mobile-container {
   box-shadow: 1px 1px 10px black;
   margin: 0 auto;
   overflow: auto;
+
+  border: 1px solid #f6f6f6;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
 }
 
 .mobile-container .header {
   overflow: hidden;
   top: 0;
   width: 100%;
-  height: 18%;
-  background-color:inherit;
-}
-
-img {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 70%;
-  max-height: 60%;
+  height: 16%;
+  background-color: inherit;
 }
 
 .mobile-container .body {
@@ -48,12 +46,124 @@ img {
   width: 100%;
   height: max-content;
   height: max-content;
-
   background-color: #fefefe;
 }
 
-.mobile-container .footer {
+.body .note {
   width: 100%;
-  height: 12%;
+  font-family: Work Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 145%;
+  letter-spacing: 0.02em;
+  color: #4f4f4f;
+  text-align: center;
+  background: #f6f6f6;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-notif {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 46px;
+  left: 0px;
+  top: 0px;
+  background: #14b6ac;
+  text-align: center;
+  color: #ffffff;
+}
+
+.mobile-container .footer {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   background-color: inherit;
+}
+
+.mobile-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-between;
+}
+
+.footer-link {
+  margin: 20px;
+  font-family: Work Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #828282;
+}
+
+.mobile-footer-url {
+  bottom: 0;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: Work Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #828282;
+}
+
+.mobile-stepper-title {
+  font-family: Work Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 160%;
+  color: #828282;
+}
+
+.mobile-stepper-title-desc {
+  display: block;
+  font-family: Work Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 145%;
+  letter-spacing: 0.02em;
+  color: #828282;
+}
+
+.mobile-content {
+  font-family: Work Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 145%;
+  letter-spacing: 0.02em;
+  color: #828282;
+}
+
+.mobile-button {
+  justify-items: center;
+  justify-self: center;
+  justify-content: center;
+  color: #ffffff;
+  margin: auto;
+  width: 80%;
+  background-color: #2ddbd1;
+  background: #2ddbd1;
+  box-shadow: 0px 4px 8px rgba(45, 219, 209, 0.18),
+    0px 0px 2px rgba(45, 219, 209, 0.12), 0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+}
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 70%;
+  max-height: 60%;
 }
