@@ -13,6 +13,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 export class MobileComponent implements OnInit {
 
   @Input() appStyle;
+  @Input() footerLinks;
 
   constructor() { }
 

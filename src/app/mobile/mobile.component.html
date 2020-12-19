@@ -171,14 +171,7 @@
 
     <div class="footer">
       <div class="mobile-footer-links">
-        <div class="footer-link">whatsapp.com</div>
-        <div class="footer-link">facebook.com</div>
-        <div class="footer-link">instagram.com</div>
-        <div class="footer-link">github.com</div>
-        <div class="footer-link">acme.com</div>
-        <div class="footer-link">9gag.com</div>
-        <div class="footer-link">wikipidia.com</div>
-        
+        <div *ngFor="let link of footerLinks" class="footer-link">{{link.name}}</div>
       </div>
 
       <mat-divider></mat-divider>

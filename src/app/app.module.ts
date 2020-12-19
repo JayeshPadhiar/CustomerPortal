@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -28,6 +29,7 @@ import { ManageUnexComponent } from './manage-unex/manage-unex.component';
 import { MobileComponent } from './mobile/mobile.component';
 import { MobileDialogComponent } from './mobile-dialog/mobile-dialog.component';
 import { AddDomainComponent } from './add-domain/add-domain.component';
+import { NotifModalComponent } from './notif-modal/notif-modal.component';
 
 @NgModule({
   declarations: [
@@ -40,11 +42,14 @@ import { AddDomainComponent } from './add-domain/add-domain.component';
     MobileComponent,
     MobileDialogComponent,
     AddDomainComponent,
+    NotifModalComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
 
     MatIconModule,

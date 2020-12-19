@@ -17,7 +17,13 @@
             Notify your customers with important updates when they access the
             portal
           </h4>
-          <mat-slide-toggle>On</mat-slide-toggle>
+
+          <br />
+          <label class="switch">
+            <input type="checkbox" id="togBtn" />
+            <div class="slider round"></div>
+          </label>
+          <br />
 
           <div>
             <h4>Message</h4>
@@ -28,23 +34,33 @@
               </mat-form-field>
             </div>
 
-            <div class="preview-container" style="width: 80%; padding: 10px 10px 0;">
-              <div style="height: 100%;" [style.background-color]="appStyle.background_color">
-                <div class="preview-div-notif" [style.background-color]="appStyle.notif_color"></div>
-                
+            <div
+              class="preview-container"
+              style="width: 80%; padding: 10px 10px 0"
+            >
+              <div
+                style="height: 100%"
+                [style.background-color]="appStyle.background_color"
+              >
+                <div
+                  class="preview-div-notif"
+                  [style.background-color]="appStyle.notif_color"
+                ></div>
               </div>
             </div>
 
             <h4>Background Color</h4>
-            <p>Customixe the snackbar backgroung color</p>
+            <p>Customize the snackbar background color</p>
 
-            <mat-form-field appearance="outline">
+            <div class="color-picker-container">
               <input
-                matInput
+                class="color-picker"
                 type="color"
+                [value]="appStyle.notif_color"
                 (input)="changeNotifColor($event.target.value, 'notif_color')"
               />
-            </mat-form-field>
+              <input [(ngModel)]="appStyle.notif_color" type="text" />
+            </div>
 
             <div>
               <button mat-button>Save</button>
@@ -72,7 +88,14 @@
 
       <div class="accordion-content">
         <div>
-          <mat-slide-toggle>On</mat-slide-toggle>
+          <br />
+
+          <label class="switch">
+            <input type="checkbox" id="togBtn" />
+            <div class="slider round"></div>
+          </label>
+
+          <br />
 
           <div>
             <h4>Message</h4>

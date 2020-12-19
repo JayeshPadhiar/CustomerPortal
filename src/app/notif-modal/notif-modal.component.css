@@ -1,0 +1,109 @@
+mat-dialog-content {
+  margin: auto;
+  max-height: 100%;
+  height: 100%;
+  padding: 10px;
+  overflow: auto;
+  background-color: #f5f5f5;
+}
+
+.notif-modal-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 90%;
+  overflow: auto;
+  background-color: #f5f5f5;
+}
+
+.notif-modal-preview .logo {
+  margin: 38px 36px;
+}
+
+.email-div {
+  height: 80%;
+  width: 60%;
+  background-color: white;
+  display: none;
+}
+
+.mobile-div {
+  display: block;
+  width: 346px;
+  height: 643px;
+  background-color: white;
+  box-shadow: 0px 0px 10px gray;
+}
+
+.sms-container {
+  padding: 15px;
+  display: table-row;
+  height: auto;
+}
+
+.icon {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.sms-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  box-shadow: 0 2px 2px #e7e7e7;
+}
+
+.circle-container {
+  display: table-cell;
+  margin: 10px;
+  vertical-align: bottom;
+}
+
+.circle {
+  margin-right: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #e7e7e7;
+  vertical-align: bottom;
+}
+
+.sms {
+  padding: 20px;
+  background-color: #e7e7e7;
+  border-radius: 15px;
+  display: table-cell;
+}
+
+.title {
+  font-size: 36px;
+  line-height: 40px;
+  letter-spacing: -0.5px;
+  color: #333333;
+}
+
+.email-container {
+  margin: 0 36px;
+}
+
+.email {
+  font-family: Graphik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 28px;
+  color: #555555;
+}
+
+.track-button {
+  text-align: center;
+  background: #231f20;
+  height: 60px;
+  width: 100%;
+  margin: 36px;
+  bottom: 0;
+  border-radius: 4px;
+  color: #ffffff;
+}

@@ -81,9 +81,9 @@
                       <span class="dot" style="background: #fdd800"></span>
                       <span class="dot" style="background: #5ac05a"></span>
                     </div>
-                    <div>
+                    <div class="tab-div">
                       <img
-                        style="margin: 5px"
+                        style="margin: 2px"
                         [src]="appStyle.faviconsrc"
                         alt="ACME"
                       />
@@ -105,9 +105,10 @@
               <input
                 class="color-picker"
                 type="color"
+                [value]="appStyle.background_color"
                 (input)="changeColor($event.target.value, 'background_color')"
               />
-              <input type="text" />
+              <input [(ngModel)]="appStyle.background_color" type="text" />
             </div>
 
             <div class="preview-container">
@@ -144,9 +145,10 @@
               <input
                 class="color-picker"
                 type="color"
+                [value]="appStyle.action_color"
                 (input)="changeColor($event.target.value, 'action_color')"
               />
-              <input type="text" />
+              <input [(ngModel)]="appStyle.action_color" type="text" />
             </div>
 
             <div
@@ -311,7 +313,7 @@
 
           <div class="form-container">
             <mat-form-field floatLabel="never">
-              <input matInput placeholder="https://acme.com" />
+              <input id="webUrl" matInput placeholder="https://acme.com" />
             </mat-form-field>
           </div>
 
@@ -330,6 +332,17 @@
                   border-bottom-left-radius: 10px;
                 "
               ></div>
+              <div
+                style="
+                  padding-bottom: 10%;
+                  display: flex;
+                  align-items: flex-end;
+                  justify-content: center;
+                  height: 100%;
+                "
+              >
+                <h4>Go to <a href="#"></a></h4>
+              </div>
             </div>
           </div>
 
@@ -385,6 +398,8 @@
             <div
               class="preview-div-body"
               style="
+                padding-right: 10px;
+                padding-top: 10px;
                 width: 75%;
                 height: 75%;
                 bottom: 0;
@@ -392,7 +407,19 @@
                 border-radius: 0;
                 border-top-right-radius: 10px;
               "
-            ></div>
+            >
+              <h4
+                style="
+                  margin-top: 20%;
+                  margin-right: 20%;
+                  float: right;
+                  top: 0;
+                  right: 0;
+                "
+              >
+                Help ?
+              </h4>
+            </div>
           </div>
 
           <div>
@@ -407,34 +434,39 @@
             </h4>
             <p>
               Allow customers to access important links of your website
-              throughthe footer section
+              through the footer section
             </p>
 
-            <div>
-              <table cellspacing="0">
-                <tr>
+            <table class="table-container">
+              <tbody>
+                <tr *ngFor="let footerLink of footerLinks; let i=index;">
                   <td>
                     <div class="form-container">
-                      <mat-form-field floatLabel="never">
-                        <input matInput placeholder="Link name" />
+                      <mat-form-field floatLabel="never" style="margin: 0 10px">
+                        <input [(ngModel)]="footerLinks[i].name" matInput placeholder="Link name" />
                       </mat-form-field>
                     </div>
                   </td>
                   <td>
                     <div class="form-container">
-                      <mat-form-field floatLabel="never">
-                        <input matInput placeholder="acme.com/return" />
+                      <mat-form-field floatLabel="never" style="margin: 0 10px">
+                        <input [(ngModel)]="footerLinks[i].url" matInput placeholder="https://" />
                       </mat-form-field>
                     </div>
+                  </td>
+                  <td>
+                    <mat-icon (click)="deleteRow(i)" svgIcon="deletebin"></mat-icon>
                   </td>
                 </tr>
-              </table>
-            </div>
+                <tr>
+                  <button (click)="addRow()" mat-flat-button style="border: none; margin: 0; padding: 0">
+                    + Add links
+                  </button>
+                  <p>Max. 3 links</p>
+                </tr>
+              </tbody>
+            </table>
 
-            <button mat-flat-button style="border: none; margin: 0; padding: 0">
-              + Add links
-            </button>
-            <p>Max. 3 links</p>
 
             <div>
               <button mat-button>Save</button>

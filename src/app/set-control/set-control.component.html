@@ -15,7 +15,16 @@
             Customers are able to cancel their order before its marked
             <br />"ready to ship"
           </h4>
-          <mat-slide-toggle>On</mat-slide-toggle>
+          <!--mat-slide-toggle>On</mat-slide-toggle-->
+
+          <br />
+
+          <label class="switch">
+            <input type="checkbox" id="togBtn" />
+            <div class="slider round"></div>
+          </label>
+
+          <br />
 
           <div>
             <h4>
@@ -31,7 +40,31 @@
               Customers can select one reason from the list when submitting a
               cancellation request
             </p>
-            <div></div>
+            <div>
+              <table class="table-container">
+                <tbody>
+                  <tr *ngFor="let creason of creasons; let i=index;">
+                    <td>
+                      <div class="form-container">
+                        <mat-form-field floatLabel="never" style="margin: 0 10px">
+                          <input [(ngModel)]="creasons[i].reason" matInput placeholder="Reason" />
+                        </mat-form-field>
+                      </div>
+                    </td>
+                    
+                    <td>
+                      <mat-icon (click)="deleteRow(creasons, i)" svgIcon="deletebin"></mat-icon>
+                    </td>
+                  </tr>
+                  <tr>
+                    <button (click)="addReason(creasons)" mat-flat-button style="border: none; margin: 0; padding: 0">
+                      + Add reason
+                    </button>
+                    <p>Max. 3 reasons</p>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <br />
 
             <h4>Refund policy on cancellation</h4>
@@ -98,7 +131,12 @@
             Customers will be able to return their purchases as per the return
             window set by you
           </h4>
-          <mat-slide-toggle>On</mat-slide-toggle>
+
+          <label class="switch">
+            <input type="checkbox" id="togBtn" />
+            <div class="slider round"></div>
+          </label>
+
           <br />
 
           <div>
@@ -126,7 +164,14 @@
 
             <h4>Exclude Certain Products</h4>
             <p>Do not allow customers to return specific products</p>
-            <mat-slide-toggle>On</mat-slide-toggle>
+
+            <br />
+
+            <label class="switch">
+              <input type="checkbox" id="togBtn" />
+              <div class="slider round"></div>
+            </label>
+
             <br />
 
             <div>
@@ -139,21 +184,50 @@
               </p>
 
               <div>
-                <div>
-                  <mat-form-field appearance="fill">
-                    <mat-label>Favorite food</mat-label>
-                    <mat-select>
-                      <mat-option> </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
+                <table class="table-container">
+                  <tbody>
+                    <tr *ngFor="let excon of exconditions; let i=index;">
+                      <td>
+                        <mat-form-field appearance="fill">
+                          <mat-label>Favorite food</mat-label>
+                          <mat-select [(ngModel)]="exconditions[i].option">
+                            <mat-option> </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </td>
 
-                <button
-                  mat-flat-button
-                  style="border: none; margin: 0; padding: 0"
-                >
-                  + Add another condition
-                </button>
+                      <td>
+                        <mat-form-field appearance="fill">
+                          <mat-label>Favorite food</mat-label>
+                          <mat-select [(ngModel)]="exconditions[i].condition">
+                            <mat-option> </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </td>
+
+                      <td>
+                        <mat-form-field appearance="fill">
+                          <mat-label>Favorite food</mat-label>
+                          <mat-select [(ngModel)]="exconditions[i].value">
+                            <mat-option> </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </td>
+                      
+                      <td>
+                        <mat-icon (click)="deleteRow(exconditions, i)" svgIcon="deletebin"></mat-icon>
+                      </td>
+                    </tr>
+                    <tr>
+                      <button (click)="addCondition()" mat-flat-button style="border: none; margin: 0; padding: 0">
+                        + Add reason
+                      </button>
+                      <p>Max. 3 reasons</p>
+                    </tr>
+                  </tbody>
+                </table>
+
+               
               </div>
             </div>
 
@@ -175,12 +249,29 @@
               </p>
               <br />
               <div>
-                <button
-                  mat-flat-button
-                  style="border: none; margin-bottom: 20px; padding: 0"
-                >
-                  + Add reason
-                </button>
+                <table class="table-container">
+                  <tbody>
+                    <tr *ngFor="let rreason of rreasons; let i=index;">
+                      <td>
+                        <div class="form-container">
+                          <mat-form-field floatLabel="never" style="margin: 0 10px">
+                            <input [(ngModel)]="rreasons[i].reason" matInput placeholder="Reason" />
+                          </mat-form-field>
+                        </div>
+                      </td>
+                      
+                      <td>
+                        <mat-icon (click)="deleteRow(rreasons, i)" svgIcon="deletebin"></mat-icon>
+                      </td>
+                    </tr>
+                    <tr>
+                      <button (click)="addReason(rreasons)" mat-flat-button style="border: none; margin: 0; padding: 0">
+                        + Add reason
+                      </button>
+                      <p>Max. 3 reasons</p>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
@@ -196,12 +287,26 @@
                 By enabling this option, your customers can enter their bank
                 account details to receive a refund
               </p>
-              <mat-slide-toggle>On</mat-slide-toggle>
+              <br />
+
+              <label class="switch">
+                <input type="checkbox" id="togBtn" />
+                <div class="slider round"></div>
+              </label>
+
+              <br />
             </div>
 
             <div>
               <h5>Allow refund against prepaid orders</h5>
-              <mat-slide-toggle>On</mat-slide-toggle>
+              <br />
+
+              <label class="switch">
+                <input type="checkbox" id="togBtn" />
+                <div class="slider round"></div>
+              </label>
+
+              <br />
             </div>
           </div>
 

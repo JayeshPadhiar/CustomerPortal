@@ -5,12 +5,15 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="dyccwc"></mat-icon>
-          <div style="margin: auto 0;">Define your communication channel with customers</div>
+          <div style="margin: auto 0">
+            Define your communication channel with customers
+          </div>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="accordion-content">
         <div>
-          <h4>Email Sender Name
+          <h4>
+            Email Sender Name
             <mat-icon
               inline="true"
               matTooltip="Use a sender name which is easily recognisable by your customers"
@@ -19,18 +22,21 @@
             </mat-icon>
           </h4>
           <p>Your customers will receive email from this sender name</p>
-          
+
           <div class="form-container">
-          <mat-form-field floatLabel="never">
-            <input matInput placeholder="Acme" />
-          </mat-form-field>
+            <mat-form-field floatLabel="never">
+              <input matInput placeholder="Acme" />
+            </mat-form-field>
           </div>
 
           <div></div>
-          <div class="preview-container" [style.background-color]="appStyle.background_color">
-          </div>
+          <div
+            class="preview-container"
+            [style.background-color]="appStyle.background_color"
+          ></div>
 
-          <h4>Send-from email address
+          <h4>
+            Send-from email address
             <mat-icon
               inline="true"
               matTooltip="Use an email address which is setup to receive incoming emails"
@@ -41,12 +47,15 @@
           <p>Your customers will receive email from this email address</p>
 
           <div class="form-container">
-          <mat-form-field floatLabel="never">
-            <input matInput placeholder="care@acme.com" />
-          </mat-form-field>
+            <mat-form-field floatLabel="never">
+              <input matInput placeholder="care@acme.com" />
+            </mat-form-field>
           </div>
 
-          <div class="preview-container" [style.background-color]="appStyle.background_color">
+          <div
+            class="preview-container"
+            [style.background-color]="appStyle.background_color"
+          >
             <div
               class="preview-div-body"
               style="
@@ -80,8 +89,7 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="mycn"></mat-icon>
-          <div style="margin: auto 0;">Manage your customer notifications</div>
-        
+          <div style="margin: auto 0">Manage your customer notifications</div>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="accordion-content">
@@ -95,21 +103,90 @@
                 <mat-panel-title>Orders</mat-panel-title>
               </mat-expansion-panel-header>
 
-              <div class="accordion-content"></div>
+              <div class="accordion-content">
+                <table class="table-container">
+                  <tbody>
+                    <tr *ngFor="let notif of orderNotifs; let i = index">
+                      <td>
+                        <div>
+                          <p>{{orderNotifs[i].condition}}</p>
+                        </div>
+                      </td>
+                      
+                      <td>
+                        <mat-icon
+                          (click)="showDialog()"
+                          svgIcon="deletebin"
+                        ></mat-icon>
+                      </td>
+
+                      <td></td>
+
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </mat-expansion-panel>
 
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title>Returns</mat-panel-title>
               </mat-expansion-panel-header>
-              <div class="accordion-content"></div>
+              <div class="accordion-content">
+                <table class="table-container">
+                  <tbody>
+                    <tr *ngFor="let notif of returnNotifs; let i = index">
+                      <td>
+                        <div>
+                          <p>{{returnNotifs[i].condition}}</p>
+                        </div>
+                      </td>
+                      
+                      <td>
+                        <mat-icon
+                          (click)="showDialog()"
+                          svgIcon="deletebin"
+                        ></mat-icon>
+                      </td>
+
+                      <td></td>
+
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </mat-expansion-panel>
 
             <mat-expansion-panel>
               <mat-expansion-panel-header>
-                <mat-panel-title>Returns</mat-panel-title>
+                <mat-panel-title>Refunds</mat-panel-title>
               </mat-expansion-panel-header>
-              <div class="accordion-content"></div>
+              <div class="accordion-content">
+                <table class="table-container">
+                  <tbody>
+                    <tr *ngFor="let notif of refundNotifs; let i = index">
+                      <td>
+                        <div>
+                          <p>{{refundNotifs[i].condition}}</p>
+                        </div>
+                      </td>
+                      
+                      <td>
+                        <mat-icon
+                          (click)="showDialog()"
+                          svgIcon="deletebin"
+                        ></mat-icon>
+                      </td>
+
+                      <td></td>
+
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </mat-expansion-panel>
           </mat-accordion>
 
@@ -119,8 +196,6 @@
               Cancel
             </button>
           </div>
-
-          
         </div>
       </div>
     </mat-expansion-panel>

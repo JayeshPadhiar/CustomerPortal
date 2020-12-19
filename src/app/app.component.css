@@ -127,6 +127,17 @@ div.accordion-content {
   padding: 16px;
 }
 
+
+.accordion-content .table-container .form-container {
+  margin: auto;
+}
+
+.accordion-content .table-container .mat-icon {
+  width: 18px;
+  height: 16px;
+  display: table-cell;
+}
+
 .color-picker-container {
   display: flex;
   align-items: center;
@@ -145,6 +156,7 @@ div.accordion-content {
   border-radius: 3px;
   border: none;
   margin-right: 10px;
+  background-color: transparent;
 }
 
 .color-picker-container input {
@@ -211,8 +223,6 @@ div.accordion-content {
   border-top-left-radius: 5px;
   background-color: #e7e7e7;
   width: 100%;
-  height: 100%;
-  background-color: inherit;
   position: absolute;
   top: 0;
 }
@@ -237,12 +247,78 @@ div.accordion-content {
 
 .preview-container .tab-div {
   background-color: white;
+  height: 50px;
+  display: inline;
 }
 
 .form-container {
   margin-right: 20px;
   margin-bottom: 20px;
   color: gray;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 20px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #bcbbbb;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 59px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2ab934;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(25px);
+}
+
+.slider:after {
+  content: "OFF";
+  color: white;
+  display: block;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 68%;
+  font-size: 9px;
+  font-family: Verdana, sans-serif;
+}
+
+input:checked + .slider:after {
+  content: "ON";
+  left: 35%;
 }
 
 :host ::ng-deep .mat-radio-container {

@@ -13,9 +13,13 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.mobile-dialog {
+.mobile-dialog, .notif-modal {
   width: 100%;
   height: 90%;
+}
+
+.add-domain-dialog {
+  width: 40%;
 }
 
 .mobile-dialog .mat-dialog-container {
@@ -34,9 +38,20 @@ body {
   max-height: inherit;
 }
 
-
-.add-domain-dialog {
-  width: 40%;
+.notif-modal .mat-dialog-container {
+  background-color: #F5F5F5;;
+  display: block;
+  padding: 24px 24px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: auto;
+  overflow-y: hidden;
+  outline: 0;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  max-height: inherit;
 }
 
 .add-domain-dialog .mat-dialog-container {

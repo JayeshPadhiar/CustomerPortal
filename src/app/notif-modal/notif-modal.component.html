@@ -1,0 +1,92 @@
+<div
+  style="
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  "
+>
+  <h2 style="margin: auto 0" mat-dialog-title>Preview</h2>
+
+  <mat-button-toggle-group>
+    <mat-button-toggle>Email</mat-button-toggle>
+    <mat-button-toggle>SMS</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <mat-icon [mat-dialog-close]="true">close</mat-icon>
+</div>
+<mat-dialog-content class="mat-typography">
+  <div class="notif-modal-preview">
+    <div class="email-div">
+      <div>
+        <img class="logo" width="50px" height="15px" [src]="data.logosrc" />
+      </div>
+      <div class="email-container">
+        <div>
+          <h1 class="title">Your order is picked up!</h1>
+        </div>
+        <div>
+          <p class="email">
+            Hello, <br /><br />
+            A new recall consignment is created to remove the sellable inventory
+            from Eshopbox fulfillment center. You'll be notified once Eshopbox
+            starts processing the consignment. The recall consignment is
+            expected to be ready for handover by Saturday 18 Sep 2021.
+          </p>
+        </div>
+      </div>
+      <div
+        style="
+          display: flex;
+          align-self: flex-end;
+          align-items: flex-end;
+          bottom: 0px;
+          justify-content: center;
+          vertical-align: bottom;
+        "
+      >
+        <button class="track-button">Track your Order</button>
+      </div>
+    </div>
+
+    <div class="mobile-div">
+      <div
+        style="
+          background: url('../../assets/img/mobiletop.png');
+          width: 100%;
+          height: 4%;
+        "
+      ></div>
+
+      <div class="sms-header">
+        <mat-icon style="margin: 0 10px;">arrow_back</mat-icon>
+        <h1 style="padding: 0; margin: 0; display: inline-block;">ESHOPB</h1>
+        <mat-icon style="margin: 0 10px; margin-left: auto;">search</mat-icon>
+        <mat-icon style="margin: 0 10px;">more_vert</mat-icon>
+      </div>
+
+      <div style="margin: 30px 0 0; display: block; width: 100%; text-align: center; color: gray;">Today, 1:00 PM</div>
+      <div style="display: flex; width: 100%">
+        <div class="sms-container">
+          <div class="circle-container">
+            <div class="circle"></div>
+          </div>
+          <div class="sms">
+            <p>
+              A new recall consignment is created to remove the sellable
+              inventory from Eshopbox fulfillment center. You'll be notified
+              once Eshopbox starts processing the consignment. The recall
+              consignment is expected to be ready for handover by Saturday 18
+              Sep 2021.
+            </p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<!--mat-dialog-actions style="bottom: 0" align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+  </mat-dialog-actions-->
