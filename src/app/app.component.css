@@ -15,7 +15,7 @@ h5 {
 }
 
 a {
-  color: #e96a60;
+  color: #FA5C5D;
   text-decoration: none;
 }
 
@@ -32,9 +32,9 @@ img {
 }
 
 button {
-  color: #e96a60;
-  border: 1px solid #e96a60;
-  border-color: #e96a60;
+  color: #FA5C5D;
+  border: 1px solid #FA5C5D;
+  border-color: #FA5C5D;
 }
 
 div.expander-component {
@@ -46,12 +46,18 @@ div.expander-component {
   box-shadow: none;
   border-radius: 6px;
   margin: 12px 0px;
+  fill: #343434;
+  stroke: #343434;
+  stroke-width: 0.9;
 }
 
 .accordion .mat-expansion-panel:focus-within {
-  color: #e96a60;
-  border: 1px solid #e96a60;
+  color: #FA5C5D;
+  border: 1px solid #FA5C5D;
   box-shadow: 1px 1px 6px lightgray;
+  fill: #FA5C5D;
+  stroke: #FA5C5D;
+  stroke-width: 0.9;
 }
 
 .accordion .mat-expansion-panel-header {
@@ -62,6 +68,14 @@ div.expander-component {
   margin-right: 25px;
   height: 34px;
   width: 34px;
+}
+
+.iconn {
+  margin-right: 25px;
+  height: 34px;
+  width: 34px;
+  fill: inherit;
+  stroke: inherit;
 }
 
 .accordion .mat-expansion-panel-header-title {
@@ -127,6 +141,9 @@ div.accordion-content {
   padding: 16px;
 }
 
+.accordion-content .table-container {
+  width: 100%;
+}
 
 .accordion-content .table-container .form-container {
   margin: auto;
@@ -278,7 +295,7 @@ div.accordion-content {
   background-color: #bcbbbb;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  border-radius: 59px;
+  border-radius: 60px;
 }
 
 .slider:before {
@@ -332,7 +349,7 @@ input:checked + .slider:after {
 }
 :host ::ng-deep .mat-radio-inner-circle {
   border-color: black;
-  background-color: #e96a60 !important;
+  background-color: #FA5C5D !important;
 
   height: 13px;
   width: 13px;
@@ -342,6 +359,11 @@ input:checked + .slider:after {
   width: 20px; /*double of your required circle radius*/
   left: calc(50% - 10px); /*'10px'-same as your required circle radius*/
   top: calc(50% - 10px); /*'10px'-same as your required circle radius*/
+}
+
+:host ::ng-deep .mat-checkbox {
+  align-items: center;
+  justify-content: center;
 }
 
 :host ::ng-deep .mat-checkbox .mat-checkbox-frame {

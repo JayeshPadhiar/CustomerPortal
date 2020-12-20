@@ -2,192 +2,228 @@
   <h3>Customize the experience</h3>
 
   <mat-accordion class="accordion">
-    <mat-expansion-panel>
+    <mat-expansion-panel
+      (opened)="expansions.styleExp = true"
+      (closed)="expansions.styleExp = false"
+      [expanded]="expansions.styleExp"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon svgIcon="sycp"></mat-icon>
+          <mat-icon class="iconn" svgIcon="sycp"></mat-icon>
           <div style="margin: auto 0">Style Your Customer Portal</div>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="accordion-content">
-        <div>
+        <form
+          novalidate
+          [formGroup]="styleFormGroup"
+          (ngSubmit)="onSubmit(styleFormGroup)"
+        >
           <div>
-            <h4>Upload your brand logo</h4>
-            <p>Add a PNG, JPG or GIF. Your image may scale upto 154px X 24px</p>
             <div>
-              <button mat-button (click)="logoInput.click()">
-                Upload logo
+              <h4>Upload your brand logo</h4>
+              <p>
+                Add a PNG, JPG or GIF. Your image may scale upto 154px X 24px
+              </p>
+              <div>
+                <button type="button" mat-button (click)="logoInput.click()">
+                  Upload logo
+                </button>
+                <input
+                  formControlName="logosrc"
+                  hidden
+                  (change)="selectIcon($event, 'logosrc')"
+                  #logoInput
+                  type="file"
+                />
+              </div>
+
+              <div class="preview-container">
+                <div class="preview-div">
+                  <div
+                    class="preview-div-header"
+                    [style.background-color]="appStyle.background_color"
+                  >
+                    <div
+                      style="
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                      "
+                    >
+                      <img [src]="appStyle.logosrc" alt="ACME" />
+                    </div>
+                  </div>
+
+                  <div class="preview-div-body"></div>
+                </div>
+              </div>
+            </div>
+
+            <br />
+            <br />
+
+            <div>
+              <h4>Upload your favicon</h4>
+              <p>The optimal size for creating a favicon is 16x16 pixels</p>
+              <button type="button" mat-button (click)="faviconInput.click()">
+                Upload Favicon
               </button>
               <input
+                formControlName="faviconsrc"
                 hidden
-                (change)="selectIcon($event, 'logosrc')"
-                #logoInput
+                (change)="selectIcon($event, 'faviconsrc')"
+                #faviconInput
                 type="file"
               />
-            </div>
-
-            <div class="preview-container">
-              <div class="preview-div">
-                <div
-                  class="preview-div-header"
-                  [style.background-color]="appStyle.background_color"
-                >
+              <div>
+                <div class="preview-container">
                   <div
+                    class="preview-div"
                     style="
-                      width: 100%;
-                      height: 100%;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
+                      background-color: white;
+                      border-top-left-radius: 5px;
+                      box-shadow: -1px -1px 20px #e7e7e8;
                     "
                   >
-                    <img [src]="appStyle.logosrc" alt="ACME" />
+                    <div class="preview-tab-container">
+                      <div class="dot-container">
+                        <span class="dot" style="background: #ed594a"></span>
+                        <span class="dot" style="background: #fdd800"></span>
+                        <span class="dot" style="background: #5ac05a"></span>
+                      </div>
+                      <div class="tab-div">
+                        <img
+                          style="margin: 2px"
+                          [src]="appStyle.faviconsrc"
+                          alt="ACME"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                <div class="preview-div-body"></div>
               </div>
             </div>
-          </div>
 
-          <br />
-          <br />
+            <br />
+            <br />
 
-          <div>
-            <h4>Upload your favicon</h4>
-            <p>The optimal size for creating a favicon is 16x16 pixels</p>
-            <button mat-button (click)="faviconInput.click()">
-              Upload Favicon
-            </button>
-            <input
-              hidden
-              (change)="selectIcon($event, 'faviconsrc')"
-              #faviconInput
-              type="file"
-            />
             <div>
+              <h4>Background Color</h4>
+              <p>Used behind your team profile and other backgrounds</p>
+
+              <div class="color-picker-container">
+                <input
+                  class="color-picker"
+                  formControlName="backgroundcolor"
+                  type="color"
+                  [value]="appStyle.background_color"
+                  (input)="changeColor($event.target.value, 'background_color')"
+                />
+                <input
+                  formControlName="backgroundcolor"
+                  [value]="appStyle.background_color"
+                  (input)="changeColor($event.target.value, 'background_color')"
+                  type="text"
+                />
+              </div>
+
               <div class="preview-container">
-                <div
-                  class="preview-div"
-                  style="
-                    background-color: white;
-                    border-top-left-radius: 5px;
-                    box-shadow: -1px -1px 20px #e7e7e8;
-                  "
-                >
-                  <div class="preview-tab-container">
-                    <div class="dot-container">
-                      <span class="dot" style="background: #ed594a"></span>
-                      <span class="dot" style="background: #fdd800"></span>
-                      <span class="dot" style="background: #5ac05a"></span>
-                    </div>
-                    <div class="tab-div">
-                      <img
-                        style="margin: 2px"
-                        [src]="appStyle.faviconsrc"
-                        alt="ACME"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <br />
-          <br />
-
-          <div>
-            <h4>Background Color</h4>
-            <p>Used behind your team profile and other backgrounds</p>
-
-            <div class="color-picker-container">
-              <input
-                class="color-picker"
-                type="color"
-                [value]="appStyle.background_color"
-                (input)="changeColor($event.target.value, 'background_color')"
-              />
-              <input [(ngModel)]="appStyle.background_color" type="text" />
-            </div>
-
-            <div class="preview-container">
-              <div class="preview-div">
-                <div
-                  class="preview-div-header"
-                  [style.background-color]="appStyle.background_color"
-                >
+                <div class="preview-div">
                   <div
-                    style="
-                      width: 100%;
-                      height: 100%;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                    "
+                    class="preview-div-header"
+                    [style.background-color]="appStyle.background_color"
                   >
-                    <img [src]="appStyle.logosrc" alt="ACME" />
+                    <div
+                      style="
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                      "
+                    >
+                      <img [src]="appStyle.logosrc" alt="ACME" />
+                    </div>
                   </div>
+                  <div class="preview-div-body"></div>
                 </div>
-                <div class="preview-div-body"></div>
               </div>
             </div>
-          </div>
 
-          <br />
-          <br />
+            <br />
+            <br />
 
-          <div>
-            <h4>Action Color</h4>
-            <p>Used in your action buttons</p>
+            <div>
+              <h4>Action Color</h4>
+              <p>Used in your action buttons</p>
 
-            <div class="color-picker-container">
-              <input
-                class="color-picker"
-                type="color"
-                [value]="appStyle.action_color"
-                (input)="changeColor($event.target.value, 'action_color')"
-              />
-              <input [(ngModel)]="appStyle.action_color" type="text" />
+              <div class="color-picker-container">
+                <input
+                  formControlName="actioncolor"
+                  class="color-picker"
+                  type="color"
+                  [value]="appStyle.action_color"
+                  (input)="changeColor($event.target.value, 'action_color')"
+                />
+                <input
+                  formControlName="actioncolor"
+                  [value]="appStyle.action_color"
+                  (input)="changeColor($event.target.value, 'action_color')"
+                  type="text"
+                />
+              </div>
+
+              <div
+                class="preview-container"
+                [style.background-color]="appStyle.background_color"
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <button
+                  type="button"
+                  [style.background-color]="appStyle.action_color"
+                  style="
+                    color: #e7e7e7;
+                    border-radius: 10px;
+                    border: none;
+                    margin: 0;
+                    width: 70%;
+                    height: 55%;
+                  "
+                  mat-flat-button
+                >
+                  BUTTON
+                </button>
+              </div>
             </div>
 
-            <div
-              class="preview-container"
-              [style.background-color]="appStyle.background_color"
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              "
-            >
+            <div>
+              <button type="submit" mat-button>Save</button>
               <button
-                [style.background-color]="appStyle.action_color"
-                style="
-                  color: #e7e7e7;
-                  border-radius: 10px;
-                  border: none;
-                  margin: 0;
-                  width: 70%;
-                  height: 55%;
-                "
-                mat-flat-button
+                type="button"
+                (click)="cancel(styleFormGroup, 'styleExp')"
+                mat-button
+                style="color: black; border-color: lightgrey"
               >
-                BUTTON
+                Cancel
               </button>
             </div>
           </div>
-
-          <div>
-            <button mat-button>Save</button>
-            <button mat-button style="color: black; border-color: lightgrey">
-              Cancel
-            </button>
-          </div>
-        </div>
+        </form>
       </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel
+      (opened)="expansions.domainExp = true"
+      (closed)="expansions.domainExp = false"
+      [expanded]="expansions.domainExp"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="sytpd"></mat-icon>
@@ -213,91 +249,130 @@
           <button (click)="addDomain()" mat-button>+ Add domain</button>
         </div>
         <br />
-        <div>
-          <div style="align-items: center; display: flex">
-            <mat-icon
-              style="
-                margin-right: 8px;
-                width: 18px;
-                height: 18px;
-                display: inline-block;
-              "
-              svgIcon="globeicon"
-            ></mat-icon>
-            <div
-              style="
-                margin: auto 0;
-                font-size: 14px;
-                line-height: 17px;
-                color: #333333;
-                float: left;
-              "
-            >
-              https://track.blackberrys.com
+
+        <form
+          novalidate
+          [formGroup]="domainFormGroup"
+          (ngSubmit)="onSubmit(domainFormGroup)"
+        >
+          <div>
+            <div style="align-items: center; display: flex">
+              <mat-icon
+                style="
+                  margin-right: 8px;
+                  width: 18px;
+                  height: 18px;
+                  display: inline-block;
+                "
+                svgIcon="globeicon"
+              ></mat-icon>
+              <div
+                style="
+                  margin: auto 0;
+                  font-size: 14px;
+                  line-height: 17px;
+                  color: #333333;
+                  float: left;
+                "
+              >
+                https://track.blackberrys.com
+              </div>
+              <div class="connected-indicator">Connected</div>
+              <mat-icon
+                style="
+                  margin-left: 12px;
+                  width: 18px;
+                  height: 16px;
+                  display: inline-block;
+                "
+                svgIcon="trashicon"
+              ></mat-icon>
             </div>
-            <div class="connected-indicator">Connected</div>
-            <mat-icon
-              style="
-                margin-left: 12px;
-                width: 18px;
-                height: 16px;
-                display: inline-block;
-              "
-              svgIcon="trashicon"
-            ></mat-icon>
-          </div>
 
-          <br />
-
-          <div class="tracking-page-info">
-            <p>
-              Visit the admin console of your domain registrar panel (the
-              website you purchased your domain from) and create a CNAME Record
-              with the details below.
-            </p>
             <br />
 
-            <table style="width: 50%">
-              <tr
-                style="
-                  text-align: left;
-                  font-size: 10px;
-                  line-height: 12px;
-                  color: #808080;
-                "
-              >
-                <th>Type</th>
-                <th>Name</th>
-                <th>Value</th>
-              </tr>
-              <tr
-                style="
-                  text-align: left;
-                  font-size: 10px;
-                  line-height: 12px;
-                  color: #808080;
-                "
-              >
-                <td>CNAME</td>
-                <td>acme.domainkey.eshopbox.com</td>
-                <td>Acme</td>
-              </tr>
-            </table>
-          </div>
+            <div class="tracking-page-info">
+              <p>
+                Visit the admin console of your domain registrar panel (the
+                website you purchased your domain from) and create a CNAME
+                Record with the details below.
+              </p>
+              <br />
 
-          <br />
+              <table style="width: 50%">
+                <tr
+                  style="
+                    text-align: left;
+                    font-size: 10px;
+                    line-height: 12px;
+                    color: #808080;
+                  "
+                >
+                  <th>Type</th>
+                  <th>Name</th>
+                  <th>Value</th>
+                </tr>
+                <tr
+                  style="
+                    text-align: left;
+                    font-size: 10px;
+                    line-height: 12px;
+                    color: #808080;
+                  "
+                >
+                  <td>CNAME</td>
+                  <td>acme.domainkey.eshopbox.com</td>
+                  <td>Acme</td>
+                </tr>
+              </table>
+            </div>
 
-          <div>
-            <button mat-button>Save</button>
-            <button mat-button style="color: black; border-color: lightgrey">
-              Cancel
-            </button>
+            <br />
+
+            <div>
+              <button type="submit" mat-button>Save</button>
+              <button
+                type="button"
+                (click)="cancel(domainFormGroup, 'domainExp')"
+                mat-button
+                style="color: black; border-color: lightgrey"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    <mat-expansion-panel
+      (opened)="expansions.linksExp = true"
+      (closed)="expansions.linksExp = false"
+      [expanded]="expansions.linksExp"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="grltyc"></mat-icon>
@@ -307,175 +382,225 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="accordion-content">
-        <div>
-          <h4>Website URL</h4>
-          <p>Direct customers to your website from the customer portal</p>
+        <form
+          novalidate
+          [formGroup]="linksFormGroup"
+          (ngSubmit)="onSubmit(linksFormGroup)"
+        >
+          <div>
+            <h4>Website URL</h4>
+            <p>Direct customers to your website from the customer portal</p>
 
-          <div class="form-container">
-            <mat-form-field floatLabel="never">
-              <input id="webUrl" matInput placeholder="https://acme.com" />
-            </mat-form-field>
-          </div>
+            <div class="form-container">
+              <mat-form-field floatLabel="never">
+                <input
+                matInput
+                placeholder="https://acme.com"
+                formControlName="weburl"
+                />
+              </mat-form-field>
+            </div>
 
-          <div class="preview-container">
+            <div class="preview-container">
+              <div
+                class="preview-div"
+                [style.background-color]="appStyle.background_color"
+                style="top: 0; right: 0"
+              >
+                <div
+                  class="preview-div-body"
+                  style="
+                    top: 0;
+                    right: 0;
+                    border-radius: 0;
+                    border-bottom-left-radius: 10px;
+                  "
+                ></div>
+                <div
+                  style="
+                    padding-bottom: 10%;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: center;
+                    height: 100%;
+                  "
+                >
+                  <h4>Go to <a href="#"></a></h4>
+                </div>
+              </div>
+            </div>
+
+            <h4>Support</h4>
+            <p>Provide help and support to your customers at every step</p>
+
+            <div class="form-container">
+              <mat-label>
+                Support URL
+                <mat-icon
+                  inline="true"
+                  matTooltip="Include the Help page or FAQ page of your website"
+                  matTooltipPosition="after"
+                >
+                  info
+                </mat-icon>
+              </mat-label>
+              <br />
+              <mat-form-field floatLabel="never">
+                <input
+                  formControlName="supporturl"
+                  matInput
+                  placeholder="acme.com/help"
+                />
+              </mat-form-field>
+            </div>
+
+            <div>
+              <table cellspacing="0">
+                <tr>
+                  <td>
+                    <div class="form-container">
+                      <mat-label> Support email </mat-label>
+                      <br />
+                      <mat-form-field floatLabel="never">
+                        <input formControlName="supportemail" matInput />
+                      </mat-form-field>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-container">
+                      <mat-label> Support phone number </mat-label>
+                      <br />
+                      <mat-form-field floatLabel="never">
+                        <input formControlName="supportphone" matInput />
+                      </mat-form-field>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
             <div
-              class="preview-div"
+              class="preview-container"
               [style.background-color]="appStyle.background_color"
-              style="top: 0; right: 0"
             >
               <div
                 class="preview-div-body"
                 style="
-                  top: 0;
-                  right: 0;
+                  padding-right: 10px;
+                  padding-top: 10px;
+                  width: 75%;
+                  height: 75%;
+                  bottom: 0;
+                  left: 0;
                   border-radius: 0;
-                  border-bottom-left-radius: 10px;
-                "
-              ></div>
-              <div
-                style="
-                  padding-bottom: 10%;
-                  display: flex;
-                  align-items: flex-end;
-                  justify-content: center;
-                  height: 100%;
+                  border-top-right-radius: 10px;
                 "
               >
-                <h4>Go to <a href="#"></a></h4>
+                <h4
+                  style="
+                    margin-top: 20%;
+                    margin-right: 20%;
+                    float: right;
+                    top: 0;
+                    right: 0;
+                  "
+                >
+                  Help ?
+                </h4>
               </div>
             </div>
-          </div>
-
-          <h4>Support</h4>
-          <p>Provide help and support to your customers at every step</p>
-
-          <div class="form-container">
-            <mat-label>
-              Support URL
-              <mat-icon
-                inline="true"
-                matTooltip="Include the Help page or FAQ page of your website"
-                matTooltipPosition="after"
-              >
-                info
-              </mat-icon>
-            </mat-label>
-            <br />
-            <mat-form-field floatLabel="never">
-              <input matInput placeholder="acme.com/help" />
-            </mat-form-field>
-          </div>
-
-          <div>
-            <table cellspacing="0">
-              <tr>
-                <td>
-                  <div class="form-container">
-                    <mat-label> Support email </mat-label>
-                    <br />
-                    <mat-form-field floatLabel="never">
-                      <input matInput />
-                    </mat-form-field>
-                  </div>
-                </td>
-                <td>
-                  <div class="form-container">
-                    <mat-label> Support phone number </mat-label>
-                    <br />
-                    <mat-form-field floatLabel="never">
-                      <input matInput />
-                    </mat-form-field>
-                  </div>
-                </td>
-              </tr>
-            </table>
-          </div>
-
-          <div
-            class="preview-container"
-            [style.background-color]="appStyle.background_color"
-          >
-            <div
-              class="preview-div-body"
-              style="
-                padding-right: 10px;
-                padding-top: 10px;
-                width: 75%;
-                height: 75%;
-                bottom: 0;
-                left: 0;
-                border-radius: 0;
-                border-top-right-radius: 10px;
-              "
-            >
-              <h4
-                style="
-                  margin-top: 20%;
-                  margin-right: 20%;
-                  float: right;
-                  top: 0;
-                  right: 0;
-                "
-              >
-                Help ?
-              </h4>
-            </div>
-          </div>
-
-          <div>
-            <h4>
-              Add footer links
-              <mat-icon
-                inline="true"
-                matTooltip="Include your Terms page, Shipping policy, Return policy, Privacy page and more"
-                matTooltipPosition="after"
-                >info
-              </mat-icon>
-            </h4>
-            <p>
-              Allow customers to access important links of your website
-              through the footer section
-            </p>
-
-            <table class="table-container">
-              <tbody>
-                <tr *ngFor="let footerLink of footerLinks; let i=index;">
-                  <td>
-                    <div class="form-container">
-                      <mat-form-field floatLabel="never" style="margin: 0 10px">
-                        <input [(ngModel)]="footerLinks[i].name" matInput placeholder="Link name" />
-                      </mat-form-field>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-container">
-                      <mat-form-field floatLabel="never" style="margin: 0 10px">
-                        <input [(ngModel)]="footerLinks[i].url" matInput placeholder="https://" />
-                      </mat-form-field>
-                    </div>
-                  </td>
-                  <td>
-                    <mat-icon (click)="deleteRow(i)" svgIcon="deletebin"></mat-icon>
-                  </td>
-                </tr>
-                <tr>
-                  <button (click)="addRow()" mat-flat-button style="border: none; margin: 0; padding: 0">
-                    + Add links
-                  </button>
-                  <p>Max. 3 links</p>
-                </tr>
-              </tbody>
-            </table>
-
 
             <div>
-              <button mat-button>Save</button>
-              <button mat-button style="color: black; border-color: lightgrey">
+              <h4>
+                Add footer links
+                <mat-icon
+                  inline="true"
+                  matTooltip="Include your Terms page, Shipping policy, Return policy, Privacy page and more"
+                  matTooltipPosition="after"
+                  >info
+                </mat-icon>
+              </h4>
+              <p>
+                Allow customers to access important links of your website
+                through the footer section
+              </p>
+
+              <table class="table-container">
+                <tbody>
+                  <tr *ngFor="let footerLink of footerLinks; let i = index">
+                    <td>
+                      <div class="form-container">
+                        <mat-form-field
+                          floatLabel="never"
+                          style="margin: 0 10px"
+                        >
+                          <input
+                            (input)="
+                              changeColor(
+                                $event.target.value,
+                                'background_color'
+                              )
+                            "
+                            matInput
+                            placeholder="Link name"
+                          />
+                        </mat-form-field>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-container">
+                        <mat-form-field
+                          floatLabel="never"
+                          style="margin: 0 10px"
+                        >
+                          <input
+                            (input)="
+                              changeColor(
+                                $event.target.value,
+                                'background_color'
+                              )
+                            "
+                            matInput
+                            placeholder="https://"
+                          />
+                        </mat-form-field>
+                      </div>
+                    </td>
+                    <td>
+                      <mat-icon
+                        (click)="deleteRow(i)"
+                        svgIcon="deletebin"
+                      ></mat-icon>
+                    </td>
+                  </tr>
+                  <tr>
+                    <button
+                      type="button"
+                      (click)="addRow()"
+                      mat-flat-button
+                      style="border: none; margin: 0; padding: 0"
+                    >
+                      + Add links
+                    </button>
+                    <p>Max. 3 links</p>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <div>
+              <button type="submit" mat-button>Save</button>
+              <button
+                type="button"
+                (click)="cancel(linksFormGroup, 'linksExp')"
+                mat-button
+                style="color: black; border-color: lightgrey"
+              >
                 Cancel
               </button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </mat-expansion-panel>
   </mat-accordion>

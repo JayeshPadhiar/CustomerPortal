@@ -25,7 +25,6 @@ mat-dialog-content {
   height: 80%;
   width: 60%;
   background-color: white;
-  display: none;
 }
 
 .mobile-div {
@@ -34,17 +33,19 @@ mat-dialog-content {
   height: 643px;
   background-color: white;
   box-shadow: 0px 0px 10px gray;
+  display: none;
+}
+
+.mobile-top {
+  background: url("../../assets/img/mobiletop.png");
+  width: 100%;
+  height: 4%;
 }
 
 .sms-container {
   padding: 15px;
   display: table-row;
   height: auto;
-}
-
-.icon {
-  display: inline-block;
-  margin-left: 10px;
 }
 
 .sms-header {

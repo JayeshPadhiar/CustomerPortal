@@ -22,6 +22,10 @@ body {
   width: 40%;
 }
 
+.confirm-dialog {
+  width: 40%;
+}
+
 .mobile-dialog .mat-dialog-container {
   background-color: white;
   display: block;

@@ -18,8 +18,27 @@ div.mobile-div {
 }
 
 .mobile-div .mat-button-toggle-group {
-  border: 2px solid red;
-  border-radius: 10px;
+  border-radius: 4px;
   left: 50%;
   transform: translate(-50%, -20%);
+}
+
+.mobile-div .mat-button-toggle-group .mat-button-toggle:first-of-type {
+  border-radius: 4px 0px 0px 4px;
+}
+
+.mobile-div .mat-button-toggle-group .mat-button-toggle:last-of-type {
+  border-radius: 0px 4px 4px 0px;
+}
+
+
+.mobile-div .mat-button-toggle-group .mat-button-toggle:active, .mat-button-toggle:focus-within {
+  background: #ffffff;
+  border: 1px solid #fa5c5d;
+  box-sizing: border-box;
+  flex: none;
+  order: 0;
+  align-self: center;
+  flex-grow: 0;
+  margin: 0px 0px;
 }

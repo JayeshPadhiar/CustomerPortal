@@ -1,9 +1,25 @@
 import { Inject } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
-import {NotifData} from './orch-mess.model'
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { NotifData } from './orch-mess.model';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 
-import {NotifModalComponent} from './../notif-modal/notif-modal.component'
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+
+import {
+  ReactiveFormsModule,
+  FormsModule,
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
+
+
+import { NotifModalComponent } from './../notif-modal/notif-modal.component';
 
 import { Notification } from './orch-mess.model';
 
@@ -13,7 +29,6 @@ import { Notification } from './orch-mess.model';
   styleUrls: ['./orch-mess.component.css', '../app.component.css'],
 })
 export class OrchMessComponent implements OnInit {
-  @Input() appStyle;
 
   orderNotifs: Array<Notification> = [
     {
@@ -133,7 +148,7 @@ export class OrchMessComponent implements OnInit {
     },
     {
       condition:
-        'When the return is cancelled due to multiple failed pickup attempts',
+      'When the return is cancelled due to multiple failed pickup attempts',
       sms: '',
       email: '',
       smschk: true,
@@ -149,15 +164,95 @@ export class OrchMessComponent implements OnInit {
       emailchk: true,
     },
   ];
+  
+  
+  @Input() appStyle;
+
+  
+
+  expansions = {
+    defineChannel: false,
+    custNotifs: false,
+  }
+
+  channelFormGroup: FormGroup;
+  emailsender: FormControl;
+  emailaddr: FormControl;
+
+  createFormControls = () => {
+    this.emailsender = new FormControl('');
+    this.emailaddr = new FormControl('');
+  }
+
+  createFormGroups = () => {
+    this.channelFormGroup = new FormGroup({
+      emailsender: this.emailsender,
+      emailaddr: this.emailaddr
+    })
+  }
+
+  checkIfDirty(form: FormGroup) {
+    if (form.dirty) {
+      console.log('Form was changed');
+      return true;
+    } else {
+      console.log('Form was not changed');
+      return false;
+    }
+  }
+
+  onSubmit(form: FormGroup) {
+    if (form.valid) {
+      console.log(form.value);
+      console.log('Form Submitted!');
+      this.resetForm(form);
+    }
+  }
+
+  cancel(form: FormGroup, exp) {
+    if (this.checkIfDirty(form)) {
+      this.confirmDiscard(form, exp);
+    } else {
+      console.log("collapsing")
+      this.expansions[exp] = false;
+      
+    }
+  }
+  
+  confirmDiscard(form: FormGroup, exp) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      panelClass: 'confirm-dialog',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+
+      if (result) {
+        this.resetForm(form);
+        this.expansions[exp] = false;
+      } else {
+        this.expansions[exp] = true;
+      }
+    });
+  }
+
+  resetForm(form: FormGroup) {
+    form.reset();
+  }
+
 
   constructor(private dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.createFormControls();
+    this.createFormGroups();
+  }
 
   showDialog() {
     this.dialog.open(NotifModalComponent, {
       panelClass: 'notif-modal',
-      data: { logosrc: this.appStyle.logosrc},
+      data: { logosrc: this.appStyle.logosrc },
     });
   }
 }

@@ -1,0 +1,53 @@
+<h2 mat-dialog-title style="width: 100%">
+  <mat-icon [mat-dialog-close]="true" style="float: right">close</mat-icon>
+  Add Domain
+</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography">
+  <div style="margin: 25px 0px">
+    <p
+      style="
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.5px;
+
+        color: #808080;
+      "
+    >
+      You have unsaved changes. Do you want to discard them?
+    </p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+  (click)="cancel()"
+    style="
+      background: #ffffff;
+      border: 1px solid #cfc9c9;
+      box-sizing: border-box;
+      border-radius: 4px;
+    "
+    mat-button
+    mat-dialog-close
+  >
+    Cancel
+  </button>
+  <button
+  (click)="discard()"
+
+    style="
+      float: right;
+      color: #e96a60;
+      border: 1px solid #e96a60;
+      border-color: #e96a60;
+    "
+    mat-button
+    mat-dialog-close
+  >
+    Discard
+  </button>
+</mat-dialog-actions>

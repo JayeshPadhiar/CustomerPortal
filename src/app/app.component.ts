@@ -19,7 +19,7 @@ export class AppComponent {
   }
 
   public registerIcons(): void {
-    this.loadIcons(["learnmore", "globeicon", "trashicon", "danoycp", "dyccwc", "etas", "grltyc", "mycn", "mycp", "myrp", "scam", "sycp", "sytpd", "deletebin"], '../assets/svg');
+    this.loadIcons(["eyecon", "learnmore", "globeicon", "trashicon", "danoycp", "dyccwc", "etas", "grltyc", "mycn", "mycp", "myrp", "scam", "sycp", "sytpd", "deletebin"], '../assets/svg');
   }
 
   private loadIcons(iconKeys: string[], iconUrl: string): void {

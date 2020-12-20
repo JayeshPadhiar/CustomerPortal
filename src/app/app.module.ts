@@ -30,6 +30,7 @@ import { MobileComponent } from './mobile/mobile.component';
 import { MobileDialogComponent } from './mobile-dialog/mobile-dialog.component';
 import { AddDomainComponent } from './add-domain/add-domain.component';
 import { NotifModalComponent } from './notif-modal/notif-modal.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { NotifModalComponent } from './notif-modal/notif-modal.component';
     MobileDialogComponent,
     AddDomainComponent,
     NotifModalComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     FormsModule,

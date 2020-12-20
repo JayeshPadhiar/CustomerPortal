@@ -1,7 +1,9 @@
 <div class="expander-component">
   <h3>Orchestrate your customer messages</h3>
   <mat-accordion class="accordion">
-    <mat-expansion-panel>
+    <mat-expansion-panel (opened)="expansions.defineChannel = true"
+    (closed)="expansions.defineChannel = false"
+    [expanded]="expansions.defineChannel">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="dyccwc"></mat-icon>
@@ -11,6 +13,11 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="accordion-content">
+        <form
+          novalidate
+          [formGroup]="channelFormGroup"
+          (ngSubmit)="onSubmit(channelFormGroup)"
+        >
         <div>
           <h4>
             Email Sender Name
@@ -25,7 +32,7 @@
 
           <div class="form-container">
             <mat-form-field floatLabel="never">
-              <input matInput placeholder="Acme" />
+              <input formControlName="emailsender" matInput placeholder="Acme" />
             </mat-form-field>
           </div>
 
@@ -48,7 +55,7 @@
 
           <div class="form-container">
             <mat-form-field floatLabel="never">
-              <input matInput placeholder="care@acme.com" />
+              <input matInput formControlName="emailaddr" placeholder="care@acme.com" />
             </mat-form-field>
           </div>
 
@@ -76,12 +83,13 @@
           <p>Want to customize the sender code? <a>Learn More</a></p>
 
           <div>
-            <button mat-button>Save</button>
-            <button mat-button style="color: black; border-color: lightgrey">
+            <button type="submit" mat-button>Save</button>
+            <button mat-button type="button" (click)="cancel(channelFormGroup, 'defineChannel')" style="color: black; border-color: lightgrey">
               Cancel
             </button>
           </div>
         </div>
+        </form>
       </div>
     </mat-expansion-panel>
 
@@ -109,20 +117,30 @@
                     <tr *ngFor="let notif of orderNotifs; let i = index">
                       <td>
                         <div>
-                          <p>{{orderNotifs[i].condition}}</p>
+                          <p>{{ orderNotifs[i].condition }}</p>
                         </div>
                       </td>
-                      
+
                       <td>
-                        <mat-icon
-                          (click)="showDialog()"
-                          svgIcon="deletebin"
-                        ></mat-icon>
+                        <div style="display: flex; align-items: center">
+                          <mat-icon
+                            (click)="showDialog()"
+                            svgIcon="eyecon"
+                          ></mat-icon>
+                        </div>
                       </td>
 
-                      <td></td>
+                      <td>
+                        <mat-checkbox>
+                          <p style="margin: 0">Email</p>
+                        </mat-checkbox>
+                      </td>
 
-                      <td></td>
+                      <td>
+                        <mat-checkbox>
+                          <p style="margin: 0">SMS</p>
+                        </mat-checkbox>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -139,20 +157,30 @@
                     <tr *ngFor="let notif of returnNotifs; let i = index">
                       <td>
                         <div>
-                          <p>{{returnNotifs[i].condition}}</p>
+                          <p>{{ returnNotifs[i].condition }}</p>
                         </div>
                       </td>
-                      
+
                       <td>
-                        <mat-icon
-                          (click)="showDialog()"
-                          svgIcon="deletebin"
-                        ></mat-icon>
+                        <div style="display: flex; align-items: center">
+                          <mat-icon
+                            (click)="showDialog()"
+                            svgIcon="eyecon"
+                          ></mat-icon>
+                        </div>
                       </td>
 
-                      <td></td>
+                      <td>
+                        <mat-checkbox>
+                          <p style="margin: 0">Email</p>
+                        </mat-checkbox>
+                      </td>
 
-                      <td></td>
+                      <td>
+                        <mat-checkbox>
+                          <p style="margin: 0">SMS</p>
+                        </mat-checkbox>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -169,20 +197,30 @@
                     <tr *ngFor="let notif of refundNotifs; let i = index">
                       <td>
                         <div>
-                          <p>{{refundNotifs[i].condition}}</p>
+                          <p>{{ refundNotifs[i].condition }}</p>
                         </div>
                       </td>
-                      
+
                       <td>
-                        <mat-icon
-                          (click)="showDialog()"
-                          svgIcon="deletebin"
-                        ></mat-icon>
+                        <div style="display: flex; align-items: center">
+                          <mat-icon
+                            (click)="showDialog()"
+                            svgIcon="eyecon"
+                          ></mat-icon>
+                        </div>
                       </td>
 
-                      <td></td>
+                      <td>
+                        <mat-checkbox>
+                          <p style="margin: 0">Email</p>
+                        </mat-checkbox>
+                      </td>
 
-                      <td></td>
+                      <td>
+                        <mat-checkbox>
+                          <p style="margin: 0">SMS</p>
+                        </mat-checkbox>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
