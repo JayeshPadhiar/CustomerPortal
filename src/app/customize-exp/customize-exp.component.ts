@@ -1,21 +1,12 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
+import { AppStyle } from '../c-portal/cportal.model';
 import { AddDomainComponent } from '../add-domain/add-domain.component';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import {
-  MatDialogRef,
-  MatDialog,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
-
-import {
-  ReactiveFormsModule,
-  FormsModule,
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { MobileComponent } from '../mobile/mobile.component';
 
 @Component({
   selector: 'app-customize-exp',
@@ -23,7 +14,9 @@ import {
   styleUrls: ['./customize-exp.component.css', '../app.component.css'],
 })
 export class CustomizeExpComponent implements OnInit {
-  @Input() appStyle;
+  appStyle: AppStyle;
+  originalAppStyle: AppStyle;
+
   @Input() footerLinks;
 
   expansions = {
@@ -46,15 +39,39 @@ export class CustomizeExpComponent implements OnInit {
   supporturl: FormControl;
   supportemail: FormControl;
   supportphone: FormControl;
-  footers: FormControl;
+  footers: FormArray;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private backendService: CustomerPortalBackendService
+  ) {}
+
+  ngOnInit(): void {
+    //this.footerLinks.push(this.link);
+    this.backendService
+      .getAppStyle()
+      .subscribe((style) => (this.appStyle = style));
+
+    this.originalAppStyle = Object.assign({}, this.appStyle);
+
+    this.createFormControls();
+    this.createFormGroups();
+    //console.log(this.footers)
+    //console.log(this.linksFormGroup.value)
+    //console.log(this.footers.value);
+    //console.log(this.footerLinks);
+
+    console.log(this.appStyle);
+    console.log(this.originalAppStyle);
+  }
 
   createFormControls = () => {
     this.logosrc = new FormControl('');
     this.faviconsrc = new FormControl('');
-    this.backgroundcolor = new FormControl(this.appStyle.background_color);
-    this.actioncolor = new FormControl(this.appStyle.action_color);
+    this.backgroundcolor = new FormControl(
+      this.originalAppStyle.backgroundcolor
+    );
+    this.actioncolor = new FormControl(this.originalAppStyle.actioncolor);
 
     this.domain = new FormControl('');
 
@@ -62,7 +79,7 @@ export class CustomizeExpComponent implements OnInit {
     this.supporturl = new FormControl('');
     this.supportemail = new FormControl('');
     this.supportphone = new FormControl('');
-    this.footers = new FormControl(this.footerLinks);
+    this.footers = new FormArray([this.newFooter()]);
   };
 
   createFormGroups = () => {
@@ -86,7 +103,26 @@ export class CustomizeExpComponent implements OnInit {
     });
   };
 
-  checkIfDirty(form: FormGroup) {
+  selectIcon(icontype, event) {
+    if (window.FileReader) {
+      var file = event.target.files[0];
+      var reader = new FileReader();
+      if (file && file.type.match('image.*')) {
+        reader.readAsDataURL(file);
+      } else {
+        console.log('Choose correct file');
+      }
+      reader.onloadend = (event) => {
+        this.backendService.changeStyle(icontype, event.target.result);
+      };
+    }
+  }
+
+  changeColor(color, prop) {
+    this.backendService.changeStyle(prop, color);
+  }
+
+  dirty(form: FormGroup) {
     if (form.dirty) {
       console.log('Form was changed');
       return true;
@@ -100,83 +136,99 @@ export class CustomizeExpComponent implements OnInit {
     if (form.valid) {
       console.log(form.value);
       console.log('Form Submitted!');
-      this.resetForm(form);
+      //this.resetForm(form);
     }
   }
 
-  cancel(form: FormGroup, exp) {
-    if (this.checkIfDirty(form)) {
-      this.confirmDiscard(form, exp);
+  cancelStyle() {
+    if (this.dirty(this.styleFormGroup)) {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        panelClass: 'confirm-dialog',
+        data: {},
+      });
+
+      dialogRef.afterClosed().subscribe((result: Boolean) => {
+        if (result) {
+          console.log('baba re baba');
+
+          this.styleFormGroup.reset({
+            backgroundcolor: this.originalAppStyle.backgroundcolor,
+            actioncolor: this.originalAppStyle.actioncolor,
+          });
+          this.backendService.setStyle(this.originalAppStyle);
+
+          console.log(this.styleFormGroup);
+        }
+      });
     } else {
       console.log('collapsing');
-      this.expansions[exp] = false;
+      this.expansions['styleExp'] = false;
     }
   }
 
-  confirmDiscard(form: FormGroup, exp) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      panelClass: 'confirm-dialog',
-      data: {},
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-
-      if (result) {
-        this.resetForm(form);
-        this.expansions[exp] = false;
-      } else {
-        this.expansions[exp] = true;
-      }
+  newFooter(): FormGroup {
+    return new FormGroup({
+      name: new FormControl(''),
+      url: new FormControl(''),
     });
   }
 
-  resetForm(form: FormGroup) {
-    form.reset();
-  }
+  addFooter() {
+    this.footers.push(this.newFooter());
+    this.footerLinks.push(this.footers.value[this.footers.value.length - 1]);
 
-  selectIcon(event, icontype) {
-    if (event.target.files) {
-      var reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (event: any) => {
-        this.appStyle[icontype] = event.target.result;
-      };
-    }
-  }
-
-  changeColor(color, prop) {
-    this.appStyle[prop] = color;
-  }
-
-  addDomain() {
-    this.dialog.open(AddDomainComponent, { panelClass: 'add-domain-dialog' });
-  }
-
-  link: any = {};
-  ngOnInit(): void {
-    this.footerLinks.push(this.link);
-
-    this.createFormControls();
-    this.createFormGroups();
-
-    console.log(this.footers)
-  }
-
-  addRow() {
-    this.link = { name: '', url: '' };
-    this.footerLinks.push(this.link);
+    console.log(this.footers.value);
     console.log(this.footerLinks);
+  }
+
+  removeFooter(index) {
+    this.footers.removeAt(index);
+    this.footerLinks.splice(index, 1);
+
+    /*if (this.footerLinks.length == 1) {
+      this.footerLinks.splice(index, 1);
+      this.removeFooter(index)
+      return true;
+    } else {
+      this.footerLinks.splice(index, 1);
+      this.removeFooter(index)
+      return true;
+    }*/
+  }
+
+  get getFooterLinks() {
+    return this.linksFormGroup.get('footers') as FormArray;
+  }
+
+  /*addRow() {
+    this.footerLinks = [...this.footers.value]
+    //console.log(this.footerLinks);
+
+    //this.footerLinks = this.footers.value.slice();
+    this.addFooter();
+
+    //console.log(this.footers.value[length]);
+    console.log(this.footers.value);
+    console.log(this.footerLinks)
+    
     return true;
   }
 
   deleteRow(index) {
     if (this.footerLinks.length == 1) {
       this.footerLinks.splice(index, 1);
+      this.removeFooter(index)
       return true;
     } else {
       this.footerLinks.splice(index, 1);
+      this.removeFooter(index)
       return true;
     }
+  }*/
+
+  link: any = { name: '', url: '' };
+
+  addDomain() {
+    this.dialog.open(AddDomainComponent, { panelClass: 'add-domain-dialog' });
   }
 }

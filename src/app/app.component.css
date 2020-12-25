@@ -114,6 +114,21 @@ div.accordion-content {
   padding: 0px 15px;
 }
 
+
+.accordion .mat-expansion-panel-header-description {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.accordion .mat-expansion-panel-header-description .indicator {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  float: right;
+  right: 0;
+}
+
 .accordion-content .mat-slide-toggle {
   margin: 10px auto;
 }
@@ -142,7 +157,7 @@ div.accordion-content {
 }
 
 .accordion-content .table-container {
-  width: 100%;
+  width: fit-content;
 }
 
 .accordion-content .table-container .form-container {

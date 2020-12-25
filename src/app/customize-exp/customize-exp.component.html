@@ -6,12 +6,20 @@
       (opened)="expansions.styleExp = true"
       (closed)="expansions.styleExp = false"
       [expanded]="expansions.styleExp"
+      hideToggle
+      #panel
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon class="iconn" svgIcon="sycp"></mat-icon>
           <div style="margin: auto 0">Style Your Customer Portal</div>
         </mat-panel-title>
+        <mat-panel-description>
+          <div class="indicator">
+            <mat-icon *ngIf="!panel.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="panel.expanded">keyboard_arrow_down</mat-icon>
+          </div>
+        </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content">
         <form
@@ -32,7 +40,7 @@
                 <input
                   formControlName="logosrc"
                   hidden
-                  (change)="selectIcon($event, 'logosrc')"
+                  (change)="selectIcon('logosrc', $event)"
                   #logoInput
                   type="file"
                 />
@@ -42,7 +50,7 @@
                 <div class="preview-div">
                   <div
                     class="preview-div-header"
-                    [style.background-color]="appStyle.background_color"
+                    [style.background-color]="appStyle.backgroundcolor"
                   >
                     <div
                       style="
@@ -74,7 +82,7 @@
               <input
                 formControlName="faviconsrc"
                 hidden
-                (change)="selectIcon($event, 'faviconsrc')"
+                (change)="selectIcon('faviconsrc', $event)"
                 #faviconInput
                 type="file"
               />
@@ -119,13 +127,13 @@
                   class="color-picker"
                   formControlName="backgroundcolor"
                   type="color"
-                  [value]="appStyle.background_color"
-                  (input)="changeColor($event.target.value, 'background_color')"
+                  [value]="appStyle.backgroundcolor"
+                  (input)="changeColor($event.target.value, 'backgroundcolor')"
                 />
                 <input
                   formControlName="backgroundcolor"
-                  [value]="appStyle.background_color"
-                  (input)="changeColor($event.target.value, 'background_color')"
+                  [value]="appStyle.backgroundcolor"
+                  (input)="changeColor($event.target.value, 'backgroundcolor')"
                   type="text"
                 />
               </div>
@@ -134,7 +142,7 @@
                 <div class="preview-div">
                   <div
                     class="preview-div-header"
-                    [style.background-color]="appStyle.background_color"
+                    [style.background-color]="appStyle.backgroundcolor"
                   >
                     <div
                       style="
@@ -165,20 +173,20 @@
                   formControlName="actioncolor"
                   class="color-picker"
                   type="color"
-                  [value]="appStyle.action_color"
-                  (input)="changeColor($event.target.value, 'action_color')"
+                  [value]="appStyle.actioncolor"
+                  (input)="changeColor($event.target.value, 'actioncolor')"
                 />
                 <input
                   formControlName="actioncolor"
-                  [value]="appStyle.action_color"
-                  (input)="changeColor($event.target.value, 'action_color')"
+                  [value]="appStyle.actioncolor"
+                  (input)="changeColor($event.target.value, 'actioncolor')"
                   type="text"
                 />
               </div>
 
               <div
                 class="preview-container"
-                [style.background-color]="appStyle.background_color"
+                [style.background-color]="appStyle.backgroundcolor"
                 style="
                   display: flex;
                   align-items: center;
@@ -187,7 +195,7 @@
               >
                 <button
                   type="button"
-                  [style.background-color]="appStyle.action_color"
+                  [style.background-color]="appStyle.actioncolor"
                   style="
                     color: #e7e7e7;
                     border-radius: 10px;
@@ -207,7 +215,7 @@
               <button type="submit" mat-button>Save</button>
               <button
                 type="button"
-                (click)="cancel(styleFormGroup, 'styleExp')"
+                (click)="cancelStyle()"
                 mat-button
                 style="color: black; border-color: lightgrey"
               >
@@ -219,7 +227,13 @@
       </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel
+
+  <pre>{{appStyle | json}}</pre>
+  <br>
+  <pre>{{originalAppStyle | json}}</pre>
+
+
+    <!--mat-expansion-panel
       (opened)="expansions.domainExp = true"
       (closed)="expansions.domainExp = false"
       [expanded]="expansions.domainExp"
@@ -345,29 +359,6 @@
       </div>
     </mat-expansion-panel>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
     <mat-expansion-panel
       (opened)="expansions.linksExp = true"
       (closed)="expansions.linksExp = false"
@@ -394,9 +385,9 @@
             <div class="form-container">
               <mat-form-field floatLabel="never">
                 <input
-                matInput
-                placeholder="https://acme.com"
-                formControlName="weburl"
+                  matInput
+                  placeholder="https://acme.com"
+                  formControlName="weburl"
                 />
               </mat-form-field>
             </div>
@@ -525,58 +516,54 @@
                 through the footer section
               </p>
 
-              <table class="table-container">
+              <table formArrayName="footers" class="table-container">
                 <tbody>
-                  <tr *ngFor="let footerLink of footerLinks; let i = index">
-                    <td>
-                      <div class="form-container">
-                        <mat-form-field
-                          floatLabel="never"
-                          style="margin: 0 10px"
-                        >
-                          <input
-                            (input)="
-                              changeColor(
-                                $event.target.value,
-                                'background_color'
-                              )
-                            "
-                            matInput
-                            placeholder="Link name"
-                          />
-                        </mat-form-field>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="form-container">
-                        <mat-form-field
-                          floatLabel="never"
-                          style="margin: 0 10px"
-                        >
-                          <input
-                            (input)="
-                              changeColor(
-                                $event.target.value,
-                                'background_color'
-                              )
-                            "
-                            matInput
-                            placeholder="https://"
-                          />
-                        </mat-form-field>
-                      </div>
-                    </td>
-                    <td>
-                      <mat-icon
-                        (click)="deleteRow(i)"
-                        svgIcon="deletebin"
-                      ></mat-icon>
-                    </td>
+                  <tr *ngFor="let footer of getFooterLinks.controls; let i = index">
+                    <div [formGroupName]="i">
+                      <td>
+                        <div class="form-container">
+                          <mat-form-field
+                            floatLabel="never"
+                            style="margin: 0 10px"
+                          >
+                            <input
+                              
+
+                              formControlName="name"
+                              matInput
+                              placeholder="Link name"
+                            />
+                          </mat-form-field>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-container">
+                          <mat-form-field
+                            floatLabel="never"
+                            style="margin: 0 10px"
+                          >
+                            <input
+                              
+                              formControlName="url"
+                              matInput
+                              placeholder="https://"
+                            />
+                          </mat-form-field>
+                        </div>
+                      </td>
+                      <td>
+                        <mat-icon
+                        style="margin: 3px;"
+                          (click)="removeFooter(i)"
+                          svgIcon="deletebin"
+                        ></mat-icon>
+                      </td>
+                    </div>
                   </tr>
                   <tr>
                     <button
                       type="button"
-                      (click)="addRow()"
+                      (click)="addFooter()"
                       mat-flat-button
                       style="border: none; margin: 0; padding: 0"
                     >
@@ -586,7 +573,6 @@
                   </tr>
                 </tbody>
               </table>
-
             </div>
             <div>
               <button type="submit" mat-button>Save</button>
@@ -602,6 +588,6 @@
           </div>
         </form>
       </div>
-    </mat-expansion-panel>
+    </mat-expansion-panel-->
   </mat-accordion>
 </div>

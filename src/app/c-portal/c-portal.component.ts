@@ -1,15 +1,11 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
-import { MobileDialogComponent } from '../mobile-dialog/mobile-dialog.component';
-import {NotifModalComponent} from './../notif-modal/notif-modal.component'
-
-
-import {
-  MatDialogRef,
-  MatDialog,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
 
 import { AppStyle, Link } from './cportal.model';
+import { MobileDialogComponent } from '../mobile-dialog/mobile-dialog.component';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
+import { NotifModalComponent } from './../notif-modal/notif-modal.component';
+
 
 @Component({
   selector: 'app-c-portal',
@@ -19,26 +15,26 @@ import { AppStyle, Link } from './cportal.model';
 export class CPortalComponent implements OnInit {
   panelOpenState = false;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private backendService: CustomerPortalBackendService
+  ) {}
 
-  appStyle: AppStyle = {
-    background_color: '#e7e7e7',
-    action_color: '#2DDBD1',
-    notif_color: '#14B6AC',
-    test: 'test',
-    logosrc: '../../assets/img/acme.png',
-    faviconsrc: '',
-  };
+  appStyle: AppStyle;
 
   footerLinks: Array<Link> = [];
 
   openDialog() {
     //this.dialog.open(MobileDialogComponent, { panelClass: 'mobile-dialog' });
-    this.dialog.open(NotifModalComponent, {
+    /*this.dialog.open(NotifModalComponent, {
       panelClass: 'notif-modal',
-      data: { logosrc: this.appStyle.logosrc},
-    });
+      data: { logosrc: this.appStyle.logosrc },
+    });*/
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.backendService
+      .getAppStyle()
+      .subscribe((appStyle) => (this.appStyle = appStyle));
+  }
 }

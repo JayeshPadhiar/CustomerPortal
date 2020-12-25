@@ -40,11 +40,11 @@
             >
               <div
                 style="height: 100%"
-                [style.background-color]="appStyle.background_color"
+                [style.background-color]="appStyle.backgroundcolor"
               >
                 <div
                   class="preview-div-notif"
-                  [style.background-color]="appStyle.notif_color"
+                  [style.background-color]="appStyle.notifcolor"
                 ></div>
               </div>
             </div>
@@ -56,10 +56,10 @@
               <input
                 class="color-picker"
                 type="color"
-                [value]="appStyle.notif_color"
-                (input)="changeNotifColor($event.target.value, 'notif_color')"
+                [value]="appStyle.notifcolor"
+                (input)="changeNotifColor($event.target.value, 'notifcolor')"
               />
-              <input [(ngModel)]="appStyle.notif_color" type="text" />
+              <input [(ngModel)]="appStyle.notifcolor" type="text" />
             </div>
 
             <div>

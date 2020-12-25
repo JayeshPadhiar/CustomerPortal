@@ -1,10 +1,9 @@
 export interface AppStyle {
-    background_color: String,
-    action_color: String,
-    notif_color: String,
-    test: String,
     logosrc: String,
     faviconsrc: String
+    backgroundcolor: String,
+    actioncolor: String,
+    notifcolor: String,
 }
 
 export interface Link {

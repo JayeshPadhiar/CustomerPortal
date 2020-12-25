@@ -32,6 +32,8 @@ import { AddDomainComponent } from './add-domain/add-domain.component';
 import { NotifModalComponent } from './notif-modal/notif-modal.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
+import { CustomerPortalBackendService } from './customer-portal-backend.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +71,7 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     MatSlideToggleModule,
     MatButtonToggleModule,
   ],
-  providers: [],
+  providers: [CustomerPortalBackendService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

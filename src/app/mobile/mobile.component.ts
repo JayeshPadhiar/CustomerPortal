@@ -1,5 +1,7 @@
 import {Input, Component, OnInit } from '@angular/core';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
+import { AppStyle } from '../c-portal/cportal.model';
 
 
 @Component({
@@ -12,12 +14,13 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 })
 export class MobileComponent implements OnInit {
 
-  @Input() appStyle;
+  appStyle: AppStyle;
   @Input() footerLinks;
 
-  constructor() { }
+  constructor(private backendService: CustomerPortalBackendService) { }
 
   ngOnInit(): void {
+    this.backendService.getAppStyle().subscribe(style => this.appStyle = style)
   }
 
 }

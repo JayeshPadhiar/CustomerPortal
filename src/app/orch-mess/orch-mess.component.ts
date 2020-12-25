@@ -22,6 +22,8 @@ import {
 import { NotifModalComponent } from './../notif-modal/notif-modal.component';
 
 import { Notification } from './orch-mess.model';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
+import { AppStyle } from '../c-portal/cportal.model';
 
 @Component({
   selector: 'app-orch-mess',
@@ -166,8 +168,7 @@ export class OrchMessComponent implements OnInit {
   ];
   
   
-  @Input() appStyle;
-
+  appStyle: AppStyle;
   
 
   expansions = {
@@ -242,9 +243,12 @@ export class OrchMessComponent implements OnInit {
   }
 
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private backendService: CustomerPortalBackendService) {}
 
   ngOnInit(): void {
+
+    this.backendService.getAppStyle().subscribe(style => this.appStyle = style)
+
     this.createFormControls();
     this.createFormGroups();
   }

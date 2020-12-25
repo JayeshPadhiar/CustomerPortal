@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AppStyle } from '../c-portal/cportal.model';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 
 @Component({
   selector: 'app-manage-unex',
@@ -7,11 +9,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ManageUnexComponent implements OnInit {
 
-  @Input() appStyle;
+  appStyle: AppStyle;
 
-  constructor() { }
+  constructor(private backendService: CustomerPortalBackendService) { }
 
   ngOnInit(): void {
+    this.backendService.getAppStyle().subscribe(style => this.appStyle = style)
   }
 
   changeNotifColor(color, prop) {
