@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-domain',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddDomainComponent implements OnInit {
 
-  constructor() { }
+  domain: String;
 
-  ngOnInit(): void {
+  constructor(
+    public dialogRef: MatDialogRef<AddDomainComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
+
+  ngOnInit() {}
+
+  save(): void {
+    this.dialogRef.close(this.domain);
   }
-
 }

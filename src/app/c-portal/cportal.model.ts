@@ -6,7 +6,15 @@ export interface AppStyle {
     notifcolor: String,
 }
 
-export interface Link {
+export interface FooterLink {
     name: String,
     url: String
+}
+
+export interface Links {
+    weburl: String,
+    supporturl: String,
+    supportemail: String,
+    supportphone: String,
+    footers: Array<FooterLink>,
 }

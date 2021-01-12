@@ -1,5 +1,5 @@
 <h2 mat-dialog-title style="width: 100%">
-  <mat-icon [mat-dialog-close]="true" style="float: right">close</mat-icon>
+  <mat-icon mat-dialog-close style="float: right">close</mat-icon>
   Add Domain
 </h2>
 <mat-divider></mat-divider>
@@ -7,7 +7,7 @@
   <div>
     <div class="form-container">
       <mat-form-field style="width: 60%" floatLabel="never">
-        <input matInput placeholder="https://acme.com" />
+        <input [(ngModel)]="domain" matInput placeholder="https://acme.com" />
       </mat-form-field>
       <div>
         <p
@@ -35,6 +35,7 @@
     style="color: #e96a60; border: 1px solid #e96a60; border-color: #e96a60"
     mat-button
     mat-dialog-close
+    (click)="save()"
   >
     Save
   </button>

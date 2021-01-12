@@ -1,10 +1,10 @@
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 
-import { AppStyle, Link } from './cportal.model';
-import { MobileDialogComponent } from '../mobile-dialog/mobile-dialog.component';
-import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 import { NotifModalComponent } from './../notif-modal/notif-modal.component';
+import { MobileDialogComponent } from '../mobile-dialog/mobile-dialog.component';
+import { AppStyle, FooterLink, Links } from './cportal.model';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 
 
 @Component({
@@ -20,10 +20,6 @@ export class CPortalComponent implements OnInit {
     private backendService: CustomerPortalBackendService
   ) {}
 
-  appStyle: AppStyle;
-
-  footerLinks: Array<Link> = [];
-
   openDialog() {
     //this.dialog.open(MobileDialogComponent, { panelClass: 'mobile-dialog' });
     /*this.dialog.open(NotifModalComponent, {
@@ -33,8 +29,6 @@ export class CPortalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.backendService
-      .getAppStyle()
-      .subscribe((appStyle) => (this.appStyle = appStyle));
+    
   }
 }

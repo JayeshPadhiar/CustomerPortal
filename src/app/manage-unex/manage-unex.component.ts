@@ -11,6 +11,11 @@ export class ManageUnexComponent implements OnInit {
 
   appStyle: AppStyle;
 
+  expansions = {
+    displayNotice: false,
+    showMessage: false,
+  }
+
   constructor(private backendService: CustomerPortalBackendService) { }
 
   ngOnInit(): void {

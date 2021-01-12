@@ -17,6 +17,11 @@ export class SetControlComponent implements OnInit {
   reason: any = {};
   excon: any = {};
 
+  expansions = {
+    cancelPolicy: false,
+    returnPolicy: false,
+  }
+
   ngOnInit(): void {
     this.reason = { reason: ''};
     this.excon = {option: '', condition: '', value: 0}

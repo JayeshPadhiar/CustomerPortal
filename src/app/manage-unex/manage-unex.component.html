@@ -1,7 +1,12 @@
 <div class="expander-component">
   <h3>Manage the unexpected</h3>
   <mat-accordion class="accordion">
-    <mat-expansion-panel>
+    <mat-expansion-panel
+    (opened)="expansions.displayNotice = true"
+      (closed)="expansions.displayNotice = false"
+      [expanded]="expansions.displayNotice"
+      hideToggle
+      #displayNotice>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="danoycp"></mat-icon>
@@ -9,6 +14,12 @@
             Display a notice on your customer portal
           </div>
         </mat-panel-title>
+        <mat-panel-description>
+          <div class="indicator">
+            <mat-icon *ngIf="!displayNotice.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="displayNotice.expanded">keyboard_arrow_down</mat-icon>
+          </div>
+        </mat-panel-description>
       </mat-expansion-panel-header>
 
       <div class="accordion-content">
@@ -20,12 +31,12 @@
 
           <br />
           <label class="switch">
-            <input type="checkbox" id="togBtn" />
+            <input (change)="togBtn1" #togBtn1 type="checkbox" id="togBtn" />
             <div class="slider round"></div>
           </label>
           <br />
 
-          <div>
+          <div *ngIf="togBtn1.checked">
             <h4>Message</h4>
 
             <div class="form-container">
@@ -75,7 +86,11 @@
       </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel (opened)="expansions.showMessage = true"
+    (closed)="expansions.showMessage = false"
+    [expanded]="expansions.showMessage"
+    hideToggle
+    #showMessage>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="scam"></mat-icon>
@@ -84,6 +99,12 @@
             pickup
           </div>
         </mat-panel-title>
+        <mat-panel-description>
+          <div class="indicator">
+            <mat-icon *ngIf="!showMessage.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="showMessage.expanded">keyboard_arrow_down</mat-icon>
+          </div>
+        </mat-panel-description>
       </mat-expansion-panel-header>
 
       <div class="accordion-content">
@@ -91,13 +112,13 @@
           <br />
 
           <label class="switch">
-            <input type="checkbox" id="togBtn" />
+            <input (change)="togBtn2" #togBtn2 type="checkbox" id="togBtn2" />
             <div class="slider round"></div>
           </label>
 
           <br />
 
-          <div>
+          <div *ngIf="togBtn2.checked">
             <h4>Message</h4>
 
             <div class="form-container">
@@ -126,12 +147,18 @@
 
   <h3>Connect your customer portal with Apps</h3>
   <mat-accordion class="accordion">
-    <mat-expansion-panel>
+    <mat-expansion-panel #appStore hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="etas"></mat-icon>
           <div style="margin: auto 0">Explore the App Store -></div>
         </mat-panel-title>
+        <mat-panel-description>
+          <div class="indicator">
+            <mat-icon *ngIf="!appStore.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="appStore.expanded">keyboard_arrow_down</mat-icon>
+          </div>
+        </mat-panel-description>
       </mat-expansion-panel-header>
 
       <div class="accordion-content"></div>

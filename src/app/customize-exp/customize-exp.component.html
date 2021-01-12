@@ -7,7 +7,7 @@
       (closed)="expansions.styleExp = false"
       [expanded]="expansions.styleExp"
       hideToggle
-      #panel
+      #stylePanel
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -16,8 +16,8 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!panel.expanded">keyboard_arrow_right</mat-icon>
-            <mat-icon *ngIf="panel.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="!stylePanel.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="stylePanel.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -228,24 +228,30 @@
     </mat-expansion-panel>
 
 
-  <pre>{{appStyle | json}}</pre>
-  <br>
-  <pre>{{originalAppStyle | json}}</pre>
 
 
-    <!--mat-expansion-panel
+    <mat-expansion-panel
       (opened)="expansions.domainExp = true"
       (closed)="expansions.domainExp = false"
       [expanded]="expansions.domainExp"
+      hideToggle
+      #domainPanel
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="sytpd"></mat-icon>
           <div style="margin: auto 0">Setup your tracking page domain</div>
         </mat-panel-title>
+        <mat-panel-description>
+          <div class="indicator">
+            <mat-icon *ngIf="!domainPanel.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="domainPanel.expanded">keyboard_arrow_down</mat-icon>
+          </div>
+        </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content">
-        <div>
+
+        <div #addDomainDiv *ngIf="!domain.value">
           <h4>
             Add your domain
             <mat-icon
@@ -262,14 +268,15 @@
           </p>
           <button (click)="addDomain()" mat-button>+ Add domain</button>
         </div>
+
         <br />
 
-        <form
-          novalidate
-          [formGroup]="domainFormGroup"
-          (ngSubmit)="onSubmit(domainFormGroup)"
-        >
-          <div>
+        <div #domainDiv *ngIf="domain.value">
+          <form
+            novalidate
+            [formGroup]="domainFormGroup"
+            (ngSubmit)="onSubmit(domainFormGroup)"
+          >
             <div style="align-items: center; display: flex">
               <mat-icon
                 style="
@@ -289,10 +296,12 @@
                   float: left;
                 "
               >
-                https://track.blackberrys.com
+                {{domain.value}}
               </div>
               <div class="connected-indicator">Connected</div>
+
               <mat-icon
+              (click)="domain.value = ''"
                 style="
                   margin-left: 12px;
                   width: 18px;
@@ -347,15 +356,14 @@
               <button type="submit" mat-button>Save</button>
               <button
                 type="button"
-                (click)="cancel(domainFormGroup, 'domainExp')"
                 mat-button
                 style="color: black; border-color: lightgrey"
               >
                 Cancel
               </button>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </mat-expansion-panel>
 
@@ -363,6 +371,8 @@
       (opened)="expansions.linksExp = true"
       (closed)="expansions.linksExp = false"
       [expanded]="expansions.linksExp"
+      #linksPanel
+      hideToggle
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -371,6 +381,14 @@
             Give relavant links to your customers
           </div>
         </mat-panel-title>
+        <mat-panel-description>
+          <div class="indicator">
+            <mat-icon *ngIf="!linksPanel.expanded"
+              >keyboard_arrow_right</mat-icon
+            >
+            <mat-icon *ngIf="linksPanel.expanded">keyboard_arrow_down</mat-icon>
+          </div>
+        </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content">
         <form
@@ -388,6 +406,7 @@
                   matInput
                   placeholder="https://acme.com"
                   formControlName="weburl"
+                  (input)="changeLink('weburl', $event.target.value)"
                 />
               </mat-form-field>
             </div>
@@ -395,7 +414,7 @@
             <div class="preview-container">
               <div
                 class="preview-div"
-                [style.background-color]="appStyle.background_color"
+                [style.background-color]="appStyle.backgroundcolor"
                 style="top: 0; right: 0"
               >
                 <div
@@ -416,7 +435,7 @@
                     height: 100%;
                   "
                 >
-                  <h4>Go to <a href="#"></a></h4>
+                  <h4>Go to <a href="#">{{links.weburl}}</a></h4>
                 </div>
               </div>
             </div>
@@ -441,6 +460,7 @@
                   formControlName="supporturl"
                   matInput
                   placeholder="acme.com/help"
+                  (input)="changeLink('supporturl', $event.target.value)"
                 />
               </mat-form-field>
             </div>
@@ -453,7 +473,11 @@
                       <mat-label> Support email </mat-label>
                       <br />
                       <mat-form-field floatLabel="never">
-                        <input formControlName="supportemail" matInput />
+                        <input
+                          (input)="changeLink('supportemail', $event.target.value)"
+                          formControlName="supportemail"
+                          matInput
+                        />
                       </mat-form-field>
                     </div>
                   </td>
@@ -462,7 +486,11 @@
                       <mat-label> Support phone number </mat-label>
                       <br />
                       <mat-form-field floatLabel="never">
-                        <input formControlName="supportphone" matInput />
+                        <input
+                          (input)="changeLink('supportphone', $event.target.value)"
+                          formControlName="supportphone"
+                          matInput
+                        />
                       </mat-form-field>
                     </div>
                   </td>
@@ -472,7 +500,7 @@
 
             <div
               class="preview-container"
-              [style.background-color]="appStyle.background_color"
+              [style.background-color]="appStyle.backgroundcolor"
             >
               <div
                 class="preview-div-body"
@@ -518,7 +546,12 @@
 
               <table formArrayName="footers" class="table-container">
                 <tbody>
-                  <tr *ngFor="let footer of getFooterLinks.controls; let i = index">
+                  <tr
+                    *ngFor="
+                      let footer of getFooterLinks.controls;
+                      let i = index
+                    "
+                  >
                     <div [formGroupName]="i">
                       <td>
                         <div class="form-container">
@@ -527,9 +560,9 @@
                             style="margin: 0 10px"
                           >
                             <input
-                              
 
                               formControlName="name"
+                              (input)="links.footers[i].name = $event.target.value"
                               matInput
                               placeholder="Link name"
                             />
@@ -543,8 +576,8 @@
                             style="margin: 0 10px"
                           >
                             <input
-                              
                               formControlName="url"
+                              (input)="links.footers[i].url = $event.target.value"
                               matInput
                               placeholder="https://"
                             />
@@ -553,7 +586,7 @@
                       </td>
                       <td>
                         <mat-icon
-                        style="margin: 3px;"
+                          style="margin: 3px"
                           (click)="removeFooter(i)"
                           svgIcon="deletebin"
                         ></mat-icon>
@@ -566,6 +599,8 @@
                       (click)="addFooter()"
                       mat-flat-button
                       style="border: none; margin: 0; padding: 0"
+                      #addLinksButton
+                      *ngIf="links.footers.length < 3"
                     >
                       + Add links
                     </button>
@@ -578,7 +613,6 @@
               <button type="submit" mat-button>Save</button>
               <button
                 type="button"
-                (click)="cancel(linksFormGroup, 'linksExp')"
                 mat-button
                 style="color: black; border-color: lightgrey"
               >
@@ -588,6 +622,9 @@
           </div>
         </form>
       </div>
-    </mat-expansion-panel-->
+    </mat-expansion-panel>
   </mat-accordion>
+  <!--pre>{{links | json}}</pre>
+  <pre>{{footers.value | json}}</pre>
+  <pre>{{links.footers.length}}</pre-->
 </div>

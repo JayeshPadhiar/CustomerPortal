@@ -1,9 +1,13 @@
 <div class="expander-component">
   <h3>Orchestrate your customer messages</h3>
   <mat-accordion class="accordion">
-    <mat-expansion-panel (opened)="expansions.defineChannel = true"
-    (closed)="expansions.defineChannel = false"
-    [expanded]="expansions.defineChannel">
+    <mat-expansion-panel
+      (opened)="expansions.defineChannel = true"
+      (closed)="expansions.defineChannel = false"
+      [expanded]="expansions.defineChannel"
+      hideToggle
+      #defineChannel
+    >
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="dyccwc"></mat-icon>
@@ -11,6 +15,13 @@
             Define your communication channel with customers
           </div>
         </mat-panel-title>
+        <mat-panel-description>
+          <div class="indicator">
+            <mat-icon *ngIf="!defineChannel.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="defineChannel.expanded">keyboard_arrow_down</mat-icon>
+          </div>
+        </mat-panel-description>
+        
       </mat-expansion-panel-header>
       <div class="accordion-content">
         <form
@@ -18,87 +29,111 @@
           [formGroup]="channelFormGroup"
           (ngSubmit)="onSubmit(channelFormGroup)"
         >
-        <div>
-          <h4>
-            Email Sender Name
-            <mat-icon
-              inline="true"
-              matTooltip="Use a sender name which is easily recognisable by your customers"
-              matTooltipPosition="after"
-              >info
-            </mat-icon>
-          </h4>
-          <p>Your customers will receive email from this sender name</p>
-
-          <div class="form-container">
-            <mat-form-field floatLabel="never">
-              <input formControlName="emailsender" matInput placeholder="Acme" />
-            </mat-form-field>
-          </div>
-
-          <div></div>
-          <div
-            class="preview-container"
-            [style.background-color]="appStyle.backgroundcolor"
-          ></div>
-
-          <h4>
-            Send-from email address
-            <mat-icon
-              inline="true"
-              matTooltip="Use an email address which is setup to receive incoming emails"
-              matTooltipPosition="after"
-              >info
-            </mat-icon>
-          </h4>
-          <p>Your customers will receive email from this email address</p>
-
-          <div class="form-container">
-            <mat-form-field floatLabel="never">
-              <input matInput formControlName="emailaddr" placeholder="care@acme.com" />
-            </mat-form-field>
-          </div>
-
-          <div
-            class="preview-container"
-            [style.background-color]="appStyle.backgroundcolor"
-          >
-            <div
-              class="preview-div-body"
-              style="
-                width: 85%;
-                height: 75%;
-                bottom: 0;
-                right: 0;
-                border-radius: 0;
-                border-top-left-radius: 10px;
-              "
-            ></div>
-          </div>
-
-          <h4>SMS sender name</h4>
-          <p>Your customers will receive SMS from this sender name</p>
-
-          <h3>ESHOPB</h3>
-          <p>Want to customize the sender code? <a>Learn More</a></p>
-
           <div>
-            <button type="submit" mat-button>Save</button>
-            <button mat-button type="button" (click)="cancel(channelFormGroup, 'defineChannel')" style="color: black; border-color: lightgrey">
-              Cancel
-            </button>
+            <h4>
+              Email Sender Name
+              <mat-icon
+                inline="true"
+                matTooltip="Use a sender name which is easily recognisable by your customers"
+                matTooltipPosition="after"
+                >info
+              </mat-icon>
+            </h4>
+            <p>Your customers will receive email from this sender name</p>
+
+            <div class="form-container">
+              <mat-form-field floatLabel="never">
+                <input
+                  formControlName="emailsender"
+                  matInput
+                  placeholder="Acme"
+                />
+              </mat-form-field>
+            </div>
+
+            <div></div>
+            <div
+              class="preview-container"
+              [style.background-color]="appStyle.backgroundcolor"
+            ></div>
+
+            <h4>
+              Send-from email address
+              <mat-icon
+                inline="true"
+                matTooltip="Use an email address which is setup to receive incoming emails"
+                matTooltipPosition="after"
+                >info
+              </mat-icon>
+            </h4>
+            <p>Your customers will receive email from this email address</p>
+
+            <div class="form-container">
+              <mat-form-field floatLabel="never">
+                <input
+                  matInput
+                  formControlName="emailaddr"
+                  placeholder="care@acme.com"
+                />
+              </mat-form-field>
+            </div>
+
+            <div
+              class="preview-container"
+              [style.background-color]="appStyle.backgroundcolor"
+            >
+              <div
+                class="preview-div-body"
+                style="
+                  width: 85%;
+                  height: 75%;
+                  bottom: 0;
+                  right: 0;
+                  border-radius: 0;
+                  border-top-left-radius: 10px;
+                "
+              ></div>
+            </div>
+
+            <h4>SMS sender name</h4>
+            <p>Your customers will receive SMS from this sender name</p>
+
+            <h3>ESHOPB</h3>
+            <p>Want to customize the sender code? <a>Learn More</a></p>
+
+            <div>
+              <button type="submit" mat-button>Save</button>
+              <button
+                mat-button
+                type="button"
+                (click)="cancel(channelFormGroup, 'defineChannel')"
+                style="color: black; border-color: lightgrey"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-        </div>
         </form>
       </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel
+    (opened)="expansions.custNotifs = true"
+      (closed)="expansions.custNotifs = false"
+      [expanded]="expansions.custNotifs"
+      hideToggle
+      #custNotifs>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="mycn"></mat-icon>
           <div style="margin: auto 0">Manage your customer notifications</div>
         </mat-panel-title>
+        <mat-panel-description>
+          <div class="indicator">
+            <mat-icon *ngIf="!custNotifs.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="custNotifs.expanded">keyboard_arrow_down</mat-icon>
+          </div>
+        </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content">
         <div>
@@ -230,7 +265,11 @@
 
           <div>
             <button mat-button>Save</button>
-            <button mat-button style="color: black; border-color: lightgrey">
+            <button
+              mat-button
+              (click)="cancel(channelFormGroup, expansions.defineChannel)"
+              style="color: black; border-color: lightgrey"
+            >
               Cancel
             </button>
           </div>
@@ -238,4 +277,6 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
+
+  <!--pre>{{ channelFormGroup.value | json }}</pre-->
 </div>

@@ -171,12 +171,12 @@
 
     <div class="footer">
       <div class="mobile-footer-links">
-        <div *ngFor="let link of footerLinks" class="footer-link">{{link.name}}</div>
+        <div *ngFor="let link of links.footers" class="footer-link">{{link.name}}</div>
       </div>
 
       <mat-divider></mat-divider>
 
-      <div class="mobile-footer-url">Go to &nbsp;<a href="#">acme.com</a></div>
+      <div class="mobile-footer-url">Go to &nbsp;<a href="#">{{links.weburl}}</a></div>
     </div>
   </div>
 </div>

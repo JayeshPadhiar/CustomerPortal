@@ -1,12 +1,23 @@
 <div class="expander-component">
   <h3>Set your controls</h3>
   <mat-accordion class="accordion">
-    <mat-expansion-panel>
+    <mat-expansion-panel
+    (opened)="expansions.cancelPolicy = true"
+      (closed)="expansions.cancelPolicy = false"
+      [expanded]="expansions.cancelPolicy"
+      hideToggle
+      #cancelPolicy>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="mycp"></mat-icon>
           <div style="margin: auto 0">Manage your cancellation policy</div>
         </mat-panel-title>
+        <mat-panel-description>
+          <div class="indicator">
+            <mat-icon *ngIf="!cancelPolicy.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="cancelPolicy.expanded">keyboard_arrow_down</mat-icon>
+          </div>
+        </mat-panel-description>
       </mat-expansion-panel-header>
 
       <div class="accordion-content">
@@ -20,13 +31,13 @@
           <br />
 
           <label class="switch">
-            <input type="checkbox" id="togBtn" />
+            <input (change)="togBtn" type="checkbox" #togBtn id="togBtn" />
             <div class="slider round"></div>
           </label>
 
           <br />
 
-          <div>
+          <div *ngIf="togBtn.checked">
             <h4>
               Cancellation Reasons
               <mat-icon
@@ -118,12 +129,23 @@
       </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel
+    (opened)="expansions.returnPolicy = true"
+      (closed)="expansions.returnPolicy = false"
+      [expanded]="expansions.returnPolicy"
+      hideToggle
+      #returnPolicy>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon svgIcon="myrp"></mat-icon>
           <div style="margin: auto 0">Manage your return policy</div>
         </mat-panel-title>
+        <mat-panel-description>
+          <div class="indicator">
+            <mat-icon *ngIf="!returnPolicy.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="returnPolicy.expanded">keyboard_arrow_down</mat-icon>
+          </div>
+        </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content">
         <div>
@@ -133,13 +155,13 @@
           </h4>
 
           <label class="switch">
-            <input type="checkbox" id="togBtn" />
+            <input (change)="togBtn2" #togBtn2 type="checkbox"/>
             <div class="slider round"></div>
           </label>
 
           <br />
 
-          <div>
+          <div *ngIf="togBtn2.checked">
             <h5>
               Enter the number of days until when you want to allow returns on
               your product
@@ -168,13 +190,13 @@
             <br />
 
             <label class="switch">
-              <input type="checkbox" id="togBtn" />
+              <input (change)="togBtn3" #togBtn3 type="checkbox"/>
               <div class="slider round"></div>
             </label>
 
             <br />
 
-            <div>
+            <div *ngIf="togBtn3.checked">
               <p>
                 Product must match
                 <mat-radio-group class="rad" aria-label="Select an option">
@@ -189,7 +211,7 @@
                     <tr *ngFor="let excon of exconditions; let i=index;">
                       <td>
                         <mat-form-field appearance="fill">
-                          <mat-label>Favorite food</mat-label>
+                          <mat-label>Condition</mat-label>
                           <mat-select [(ngModel)]="exconditions[i].option">
                             <mat-option> </mat-option>
                           </mat-select>
@@ -198,7 +220,7 @@
 
                       <td>
                         <mat-form-field appearance="fill">
-                          <mat-label>Favorite food</mat-label>
+                          <mat-label>Condition</mat-label>
                           <mat-select [(ngModel)]="exconditions[i].condition">
                             <mat-option> </mat-option>
                           </mat-select>
@@ -207,7 +229,7 @@
 
                       <td>
                         <mat-form-field appearance="fill">
-                          <mat-label>Favorite food</mat-label>
+                          <mat-label>Condition</mat-label>
                           <mat-select [(ngModel)]="exconditions[i].value">
                             <mat-option> </mat-option>
                           </mat-select>

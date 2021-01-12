@@ -1,12 +1,13 @@
 import { MatDialog } from '@angular/material/dialog';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
-import { AppStyle } from '../c-portal/cportal.model';
+import { AppStyle, FooterLink, Links } from '../c-portal/cportal.model';
 import { AddDomainComponent } from '../add-domain/add-domain.component';
 import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MobileComponent } from '../mobile/mobile.component';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-customize-exp',
@@ -17,7 +18,11 @@ export class CustomizeExpComponent implements OnInit {
   appStyle: AppStyle;
   originalAppStyle: AppStyle;
 
-  @Input() footerLinks;
+  links: Links;
+  originalLinks: Links;
+
+  //footerLinks: Array<FooterLink>;
+  //footerLinks: Array<FooterLink>;
 
   expansions = {
     styleExp: false,
@@ -48,21 +53,25 @@ export class CustomizeExpComponent implements OnInit {
 
   ngOnInit(): void {
     //this.footerLinks.push(this.link);
-    this.backendService
-      .getAppStyle()
-      .subscribe((style) => (this.appStyle = style));
 
+    this.backendService.appStyle$
+      .asObservable()
+      .subscribe((style) => (this.appStyle = style));
     this.originalAppStyle = Object.assign({}, this.appStyle);
+
+
+    this.backendService.links$.asObservable().subscribe(links => this.links = links);
+    this.originalLinks = Object.assign({}, this.links);
 
     this.createFormControls();
     this.createFormGroups();
-    //console.log(this.footers)
-    //console.log(this.linksFormGroup.value)
-    //console.log(this.footers.value);
-    //console.log(this.footerLinks);
 
-    console.log(this.appStyle);
-    console.log(this.originalAppStyle);
+    /*if(this.domain.value){
+      console.log('Domain available: ' + this.domain.value)
+      this.addDomainDiv.nativeElement.style.display = 'none'
+    }else{
+      console.log('Domain not available' + this.domain.value)
+    }*/
   }
 
   createFormControls = () => {
@@ -73,7 +82,7 @@ export class CustomizeExpComponent implements OnInit {
     );
     this.actioncolor = new FormControl(this.originalAppStyle.actioncolor);
 
-    this.domain = new FormControl('');
+    this.domain = new FormControl('www.google.com');
 
     this.weburl = new FormControl('');
     this.supporturl = new FormControl('');
@@ -113,13 +122,98 @@ export class CustomizeExpComponent implements OnInit {
         console.log('Choose correct file');
       }
       reader.onloadend = (event) => {
-        this.backendService.changeStyle(icontype, event.target.result);
+        //this.backendService.changeStyle(icontype, event.target.result);
+        this.backendService.appStyle$.next({
+          ...this.appStyle,
+          [icontype]: event.target.result,
+        });
       };
     }
   }
 
   changeColor(color, prop) {
-    this.backendService.changeStyle(prop, color);
+    //this.backendService.changeStyle(prop, color);
+    this.backendService.appStyle$.next({ ...this.appStyle, [prop]: color });
+  }
+
+  cancelStyle() {
+    if (this.dirty(this.styleFormGroup)) {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        panelClass: 'confirm-dialog',
+        data: {},
+      });
+
+      dialogRef.afterClosed().subscribe((result: Boolean) => {
+        if (result) {
+          console.log('baba re baba');
+
+          this.styleFormGroup.reset({
+            backgroundcolor: this.originalAppStyle.backgroundcolor,
+            actioncolor: this.originalAppStyle.actioncolor,
+          });
+
+          //this.backendService.setStyle(this.originalAppStyle);
+          this.backendService.appStyle$.next(this.originalAppStyle);
+
+          console.log(this.styleFormGroup);
+          console.log('collapsing after discarding');
+          this.expansions['styleExp'] = false;
+        }
+      });
+    } else {
+      console.log('collapsing');
+      this.expansions['styleExp'] = false;
+    }
+  }
+
+  addDomain() {
+    const dialogRef = this.dialog.open(AddDomainComponent, {
+      panelClass: 'add-domain-dialog',
+    });
+
+    dialogRef.afterClosed().subscribe((domain: String) => {
+      if (domain) {
+        console.log(domain);
+        this.domainFormGroup.patchValue({ domain: domain });
+      } else {
+        console.log('no domain added');
+      }
+    });
+  }
+
+  changeLink(type, val) {
+    this.backendService.links$.next({ ...this.links, [type]: val });
+  }
+  
+  newFooter(): FormGroup {
+    return new FormGroup({
+      name: new FormControl(''),
+      url: new FormControl(''),
+    });
+  }
+
+  addFooter() {
+    this.footers.push(this.newFooter());
+    this.links.footers.push({name:'', url:''});
+  }
+
+  removeFooter(index) {
+    this.footers.removeAt(index);
+    this.links.footers.splice(index, 1);
+
+    /*if (this.footerLinks.length == 1) {
+      this.footerLinks.splice(index, 1);
+      this.removeFooter(index)
+      return true;
+    } else {
+      this.footerLinks.splice(index, 1);
+      this.removeFooter(index)
+      return true;
+    }*/
+  }
+
+  get getFooterLinks() {
+    return this.linksFormGroup.get('footers') as FormArray;
   }
 
   dirty(form: FormGroup) {
@@ -138,66 +232,6 @@ export class CustomizeExpComponent implements OnInit {
       console.log('Form Submitted!');
       //this.resetForm(form);
     }
-  }
-
-  cancelStyle() {
-    if (this.dirty(this.styleFormGroup)) {
-      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-        panelClass: 'confirm-dialog',
-        data: {},
-      });
-
-      dialogRef.afterClosed().subscribe((result: Boolean) => {
-        if (result) {
-          console.log('baba re baba');
-
-          this.styleFormGroup.reset({
-            backgroundcolor: this.originalAppStyle.backgroundcolor,
-            actioncolor: this.originalAppStyle.actioncolor,
-          });
-          this.backendService.setStyle(this.originalAppStyle);
-
-          console.log(this.styleFormGroup);
-        }
-      });
-    } else {
-      console.log('collapsing');
-      this.expansions['styleExp'] = false;
-    }
-  }
-
-  newFooter(): FormGroup {
-    return new FormGroup({
-      name: new FormControl(''),
-      url: new FormControl(''),
-    });
-  }
-
-  addFooter() {
-    this.footers.push(this.newFooter());
-    this.footerLinks.push(this.footers.value[this.footers.value.length - 1]);
-
-    console.log(this.footers.value);
-    console.log(this.footerLinks);
-  }
-
-  removeFooter(index) {
-    this.footers.removeAt(index);
-    this.footerLinks.splice(index, 1);
-
-    /*if (this.footerLinks.length == 1) {
-      this.footerLinks.splice(index, 1);
-      this.removeFooter(index)
-      return true;
-    } else {
-      this.footerLinks.splice(index, 1);
-      this.removeFooter(index)
-      return true;
-    }*/
-  }
-
-  get getFooterLinks() {
-    return this.linksFormGroup.get('footers') as FormArray;
   }
 
   /*addRow() {
@@ -226,9 +260,5 @@ export class CustomizeExpComponent implements OnInit {
     }
   }*/
 
-  link: any = { name: '', url: '' };
-
-  addDomain() {
-    this.dialog.open(AddDomainComponent, { panelClass: 'add-domain-dialog' });
-  }
+  //link: any = { name: '', url: '' };
 }
