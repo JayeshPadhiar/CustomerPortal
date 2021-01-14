@@ -59,8 +59,9 @@ export class CustomizeExpComponent implements OnInit {
       .subscribe((style) => (this.appStyle = style));
     this.originalAppStyle = Object.assign({}, this.appStyle);
 
-
-    this.backendService.links$.asObservable().subscribe(links => this.links = links);
+    this.backendService.links$
+      .asObservable()
+      .subscribe((links) => (this.links = links));
     this.originalLinks = Object.assign({}, this.links);
 
     this.createFormControls();
@@ -84,7 +85,7 @@ export class CustomizeExpComponent implements OnInit {
 
     this.domain = new FormControl('www.google.com');
 
-    this.weburl = new FormControl('');
+    this.weburl = new FormControl('https://');
     this.supporturl = new FormControl('');
     this.supportemail = new FormControl('');
     this.supportphone = new FormControl('');
@@ -122,13 +123,21 @@ export class CustomizeExpComponent implements OnInit {
         console.log('Choose correct file');
       }
       reader.onloadend = (event) => {
-        //this.backendService.changeStyle(icontype, event.target.result);
         this.backendService.appStyle$.next({
           ...this.appStyle,
           [icontype]: event.target.result,
         });
       };
     }
+  }
+
+  cancelIconSelect(icontype) {
+    this.styleFormGroup.controls[icontype].reset();
+    //this.backendService.setStyle(this.originalAppStyle);
+    this.backendService.appStyle$.next({
+      ...this.appStyle,
+      [icontype]: this.originalAppStyle[icontype],
+    });
   }
 
   changeColor(color, prop) {
@@ -184,17 +193,17 @@ export class CustomizeExpComponent implements OnInit {
   changeLink(type, val) {
     this.backendService.links$.next({ ...this.links, [type]: val });
   }
-  
+
   newFooter(): FormGroup {
     return new FormGroup({
       name: new FormControl(''),
-      url: new FormControl(''),
+      url: new FormControl('https://'),
     });
   }
 
   addFooter() {
     this.footers.push(this.newFooter());
-    this.links.footers.push({name:'', url:''});
+    this.links.footers.push({ name: '', url: '' });
   }
 
   removeFooter(index) {

@@ -16,7 +16,9 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!stylePanel.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="!stylePanel.expanded"
+              >keyboard_arrow_right</mat-icon
+            >
             <mat-icon *ngIf="stylePanel.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
@@ -33,17 +35,43 @@
               <p>
                 Add a PNG, JPG or GIF. Your image may scale upto 154px X 24px
               </p>
-              <div>
+              <div #logoInputDiv *ngIf="(appStyle.logosrc === originalAppStyle.logosrc)">
                 <button type="button" mat-button (click)="logoInput.click()">
                   Upload logo
                 </button>
                 <input
                   formControlName="logosrc"
                   hidden
-                  (change)="selectIcon('logosrc', $event)"
+                  (input)="selectIcon('logosrc', $event)"
                   #logoInput
                   type="file"
                 />
+              </div>
+
+              <div *ngIf="!(appStyle.logosrc === originalAppStyle.logosrc)" class="logo-picker-div">
+                <div
+                  class="logo-picker-image"
+                  [style.background-color]="appStyle.backgroundcolor"
+                >
+                  <img
+                    class="logo-picker-image"
+                    [src]="appStyle.logosrc"
+                    alt="ACME"
+                  />
+                </div>
+
+                <div>
+                  <mat-icon
+                  (click)="cancelIconSelect('logosrc')"
+                    style="
+                      margin: 0;
+                      margin-left: 20px;
+                      height: 10px;
+                      width: 10px;
+                    "
+                    svgIcon="crossbutton"
+                  ></mat-icon>
+                </div>
               </div>
 
               <div class="preview-container">
@@ -61,7 +89,7 @@
                         justify-content: center;
                       "
                     >
-                      <img [src]="appStyle.logosrc" alt="ACME" />
+                      <img class="image" [src]="appStyle.logosrc" alt="ACME" />
                     </div>
                   </div>
 
@@ -76,16 +104,50 @@
             <div>
               <h4>Upload your favicon</h4>
               <p>The optimal size for creating a favicon is 16x16 pixels</p>
-              <button type="button" mat-button (click)="faviconInput.click()">
-                Upload Favicon
-              </button>
-              <input
+
+              <div *ngIf="(appStyle.faviconsrc === originalAppStyle.faviconsrc)">
+                <button type="button" mat-button (click)="faviconInput.click()">
+                  Upload Favicon
+                </button>
+                <input
                 formControlName="faviconsrc"
                 hidden
                 (change)="selectIcon('faviconsrc', $event)"
                 #faviconInput
                 type="file"
-              />
+                />
+              </div>
+
+
+              <div *ngIf="!(appStyle.faviconsrc === originalAppStyle.faviconsrc)" class="logo-picker-div">
+                <div
+                  class="logo-picker-image"
+                  [style.background-color]="appStyle.backgroundcolor"
+                >
+                  <img
+                    class="logo-picker-image"
+                    [src]="appStyle.faviconsrc"
+                    alt="ACME"
+                  />
+                </div>
+
+                <div>
+                  <mat-icon
+                  (click)="cancelIconSelect('faviconsrc')"
+                    style="
+                      margin: 0;
+                      margin-left: 20px;
+                      height: 10px;
+                      width: 10px;
+                    "
+                    svgIcon="crossbutton"
+                  ></mat-icon>
+                </div>
+              </div>
+
+
+
+
               <div>
                 <div class="preview-container">
                   <div
@@ -103,7 +165,7 @@
                         <span class="dot" style="background: #5ac05a"></span>
                       </div>
                       <div class="tab-div">
-                        <img
+                        <img class="image"
                           style="margin: 2px"
                           [src]="appStyle.faviconsrc"
                           alt="ACME"
@@ -153,7 +215,7 @@
                         justify-content: center;
                       "
                     >
-                      <img [src]="appStyle.logosrc" alt="ACME" />
+                      <img class="image" [src]="appStyle.logosrc" alt="ACME" />
                     </div>
                   </div>
                   <div class="preview-div-body"></div>
@@ -227,9 +289,6 @@
       </div>
     </mat-expansion-panel>
 
-
-
-
     <mat-expansion-panel
       (opened)="expansions.domainExp = true"
       (closed)="expansions.domainExp = false"
@@ -244,13 +303,16 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!domainPanel.expanded">keyboard_arrow_right</mat-icon>
-            <mat-icon *ngIf="domainPanel.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="!domainPanel.expanded"
+              >keyboard_arrow_right</mat-icon
+            >
+            <mat-icon *ngIf="domainPanel.expanded"
+              >keyboard_arrow_down</mat-icon
+            >
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content">
-
         <div #addDomainDiv *ngIf="!domain.value">
           <h4>
             Add your domain
@@ -296,12 +358,12 @@
                   float: left;
                 "
               >
-                {{domain.value}}
+                {{ domain.value }}
               </div>
               <div class="connected-indicator">Connected</div>
 
               <mat-icon
-              (click)="domain.value = ''"
+                (click)="domain.value = ''"
                 style="
                   margin-left: 12px;
                   width: 18px;
@@ -403,6 +465,7 @@
             <div class="form-container">
               <mat-form-field floatLabel="never">
                 <input
+                style="width: 100%;"
                   matInput
                   placeholder="https://acme.com"
                   formControlName="weburl"
@@ -435,7 +498,9 @@
                     height: 100%;
                   "
                 >
-                  <h4>Go to <a href="#">{{links.weburl}}</a></h4>
+                  <h4>
+                    Go to <a href="#">{{ links.weburl }}</a>
+                  </h4>
                 </div>
               </div>
             </div>
@@ -474,7 +539,9 @@
                       <br />
                       <mat-form-field floatLabel="never">
                         <input
-                          (input)="changeLink('supportemail', $event.target.value)"
+                          (input)="
+                            changeLink('supportemail', $event.target.value)
+                          "
                           formControlName="supportemail"
                           matInput
                         />
@@ -487,7 +554,9 @@
                       <br />
                       <mat-form-field floatLabel="never">
                         <input
-                          (input)="changeLink('supportphone', $event.target.value)"
+                          (input)="
+                            changeLink('supportphone', $event.target.value)
+                          "
                           formControlName="supportphone"
                           matInput
                         />
@@ -560,9 +629,10 @@
                             style="margin: 0 10px"
                           >
                             <input
-
                               formControlName="name"
-                              (input)="links.footers[i].name = $event.target.value"
+                              (input)="
+                                links.footers[i].name = $event.target.value
+                              "
                               matInput
                               placeholder="Link name"
                             />
@@ -577,7 +647,9 @@
                           >
                             <input
                               formControlName="url"
-                              (input)="links.footers[i].url = $event.target.value"
+                              (input)="
+                                links.footers[i].url = $event.target.value
+                              "
                               matInput
                               placeholder="https://"
                             />

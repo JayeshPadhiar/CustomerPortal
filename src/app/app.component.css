@@ -15,7 +15,7 @@ h5 {
 }
 
 a {
-  color: #FA5C5D;
+  color: #fa5c5d;
   text-decoration: none;
 }
 
@@ -23,7 +23,7 @@ a:hover {
   text-decoration: underline;
 }
 
-img {
+.image {
   position: absolute;
   margin-left: auto;
   margin-right: auto;
@@ -32,9 +32,9 @@ img {
 }
 
 button {
-  color: #FA5C5D;
-  border: 1px solid #FA5C5D;
-  border-color: #FA5C5D;
+  color: #fa5c5d;
+  border: 1px solid #fa5c5d;
+  border-color: #fa5c5d;
 }
 
 div.expander-component {
@@ -52,11 +52,11 @@ div.expander-component {
 }
 
 .accordion .mat-expansion-panel:focus-within {
-  color: #FA5C5D;
-  border: 1px solid #FA5C5D;
+  color: #fa5c5d;
+  border: 1px solid #fa5c5d;
   box-shadow: 1px 1px 6px lightgray;
-  fill: #FA5C5D;
-  stroke: #FA5C5D;
+  fill: #fa5c5d;
+  stroke: #fa5c5d;
   stroke-width: 0.9;
 }
 
@@ -114,7 +114,6 @@ div.accordion-content {
   padding: 0px 15px;
 }
 
-
 .accordion .mat-expansion-panel-header-description {
   display: flex;
   justify-content: right;
@@ -128,6 +127,67 @@ div.accordion-content {
   float: right;
   right: 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.accordion-content .logo-picker-div {
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 37px;
+  width: max-content;
+
+  background: #ffffff;
+  border: 1px solid #c8c8c8;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.accordion-content .logo-picker-div img.logo-picker-image {
+  display: flex;
+  padding: 4px;
+  align-items: center;
+  max-width: 154px;
+  max-height: 24px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .accordion-content .mat-slide-toggle {
   margin: 10px auto;
@@ -211,11 +271,15 @@ div.accordion-content {
   background-color: gainsboro;
   height: 100px;
   width: 200px;
+  width: max-content;
+  min-width: 200px;
 }
 
 .preview-container .preview-div {
   height: 80px;
   width: 180px;
+  width: max-content;
+  min-width: 180px;
   background-color: #e7e7e7;
   position: absolute;
   bottom: 0;
@@ -364,7 +428,7 @@ input:checked + .slider:after {
 }
 :host ::ng-deep .mat-radio-inner-circle {
   border-color: black;
-  background-color: #FA5C5D !important;
+  background-color: #fa5c5d !important;
 
   height: 13px;
   width: 13px;
