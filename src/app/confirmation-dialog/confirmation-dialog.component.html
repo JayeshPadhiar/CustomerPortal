@@ -1,6 +1,6 @@
 <h2 mat-dialog-title style="width: 100%">
   <mat-icon mat-dialog-close style="float: right">close</mat-icon>
-  Add Domain
+  Unsaved Changes
 </h2>
 <mat-divider></mat-divider>
 <mat-dialog-content class="mat-typography">
@@ -24,7 +24,7 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button
-  (click)="cancel()"
+    (click)="cancel()"
     style="
       background: #ffffff;
       border: 1px solid #cfc9c9;
@@ -36,18 +36,7 @@
   >
     Cancel
   </button>
-  <button
-  (click)="discard()"
-
-    style="
-      float: right;
-      color: #e96a60;
-      border: 1px solid #e96a60;
-      border-color: #e96a60;
-    "
-    mat-button
-    mat-dialog-close
-  >
+  <button (click)="discard()" class="save-button" mat-button mat-dialog-close>
     Discard
   </button>
 </mat-dialog-actions>

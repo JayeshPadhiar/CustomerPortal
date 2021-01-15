@@ -28,7 +28,7 @@ export class CustomerPortalBackendService {
 
   constructor() {
     this.appStyle$.next({
-      backgroundcolor: '#e7e7e7',
+      backgroundcolor: '#f6f6f6',
       actioncolor: '#2DDBD1',
       notifcolor: '#14B6AC',
       logosrc: '../../assets/img/logo.png',

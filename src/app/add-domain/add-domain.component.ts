@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class AddDomainComponent implements OnInit {
 
-  domain: String;
+  domain: String = "https://";
 
   constructor(
     public dialogRef: MatDialogRef<AddDomainComponent>,

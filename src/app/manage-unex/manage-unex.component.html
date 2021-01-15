@@ -1,5 +1,5 @@
 <div class="expander-component">
-  <h3>Manage the unexpected</h3>
+  <h3 class="component-name">Manage the unexpected</h3>
   <mat-accordion class="accordion">
     <mat-expansion-panel
     (opened)="expansions.displayNotice = true"
@@ -9,15 +9,15 @@
       #displayNotice>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon svgIcon="danoycp"></mat-icon>
-          <div style="margin: auto 0">
+          <mat-icon class="exp-icon" svgIcon="danoycp"></mat-icon>
+          <div class="exp-title">
             Display a notice on your customer portal
           </div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!displayNotice.expanded">keyboard_arrow_right</mat-icon>
-            <mat-icon *ngIf="displayNotice.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="!displayNotice.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="displayNotice.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -37,10 +37,10 @@
           <br />
 
           <div *ngIf="togBtn1.checked">
-            <h4>Message</h4>
+            <h4 class="topic">Message</h4>
 
             <div class="form-container">
-              <mat-form-field floatLabel="never" style="margin-top: 10px">
+              <mat-form-field floatLabel="never" style="margin-top: 10px; width: 100%;">
                 <input matInput placeholder="Your messase will be" />
               </mat-form-field>
             </div>
@@ -60,7 +60,7 @@
               </div>
             </div>
 
-            <h4>Background Color</h4>
+            <h4 class="topic">Background Color</h4>
             <p>Customize the snackbar background color</p>
 
             <div class="color-picker-container">
@@ -74,8 +74,8 @@
             </div>
 
             <div>
-              <button mat-button>Save</button>
-              <button mat-button style="color: black; border-color: lightgrey">
+              <button class="save-button" mat-button>Save</button>
+              <button mat-button>
                 Cancel
               </button>
             </div>
@@ -93,16 +93,16 @@
     #showMessage>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon svgIcon="scam"></mat-icon>
-          <div style="margin: auto 0">
+          <mat-icon class="exp-icon" svgIcon="scam"></mat-icon>
+          <div class="exp-title">
             Show customers a message when there is a delay in delivery or a
             pickup
           </div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!showMessage.expanded">keyboard_arrow_right</mat-icon>
-            <mat-icon *ngIf="showMessage.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="!showMessage.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="showMessage.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -119,10 +119,10 @@
           <br />
 
           <div *ngIf="togBtn2.checked">
-            <h4>Message</h4>
+            <h4 class="topic">Message</h4>
 
             <div class="form-container">
-              <mat-form-field floatLabel="never" style="margin-top: 10px">
+              <mat-form-field style="width: 100%;" floatLabel="never" style="margin-top: 10px; width: 100%;">
                 <input matInput placeholder="Your messase will be" />
               </mat-form-field>
             </div>
@@ -130,8 +130,8 @@
             <div class="preview-container" style="width: 80%"></div>
 
             <div>
-              <button mat-button>Save</button>
-              <button mat-button style="color: black; border-color: lightgrey">
+              <button class="save-button" mat-button>Save</button>
+              <button mat-button>
                 Cancel
               </button>
             </div>
@@ -145,18 +145,18 @@
 
   <div style="padding: 10px"></div>
 
-  <h3>Connect your customer portal with Apps</h3>
+  <h3 class="component-name">Connect your customer portal with Apps</h3>
   <mat-accordion class="accordion">
     <mat-expansion-panel #appStore hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon svgIcon="etas"></mat-icon>
-          <div style="margin: auto 0">Explore the App Store -></div>
+          <mat-icon class="exp-icon" svgIcon="etas"></mat-icon>
+          <div class="exp-title">Explore the App Store -></div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!appStore.expanded">keyboard_arrow_right</mat-icon>
-            <mat-icon *ngIf="appStore.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="!appStore.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="appStore.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>

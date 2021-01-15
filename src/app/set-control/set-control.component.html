@@ -1,5 +1,5 @@
 <div class="expander-component">
-  <h3>Set your controls</h3>
+  <h3 class="component-name">Set your controls</h3>
   <mat-accordion class="accordion">
     <mat-expansion-panel
     (opened)="expansions.cancelPolicy = true"
@@ -9,20 +9,20 @@
       #cancelPolicy>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon svgIcon="mycp"></mat-icon>
-          <div style="margin: auto 0">Manage your cancellation policy</div>
+          <mat-icon class="exp-icon" svgIcon="mycp"></mat-icon>
+          <div class="exp-title">Manage your cancellation policy</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!cancelPolicy.expanded">keyboard_arrow_right</mat-icon>
-            <mat-icon *ngIf="cancelPolicy.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="!cancelPolicy.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="cancelPolicy.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
       <div class="accordion-content">
         <div>
-          <h4>
+          <h4 class="topic">
             Customers are able to cancel their order before its marked
             <br />"ready to ship"
           </h4>
@@ -38,16 +38,18 @@
           <br />
 
           <div *ngIf="togBtn.checked">
-            <h4>
+            <h4 class="topic">
               Cancellation Reasons
               <mat-icon
+              svgIcon="infoicon"
+            class="tooltipicon"
                 inline="true"
                 matTooltip="Info"
                 matTooltipPosition="after"
-                >info
+                >
               </mat-icon>
             </h4>
-            <p>
+            <p class="description">
               Customers can select one reason from the list when submitting a
               cancellation request
             </p>
@@ -78,8 +80,8 @@
             </div>
             <br />
 
-            <h4>Refund policy on cancellation</h4>
-            <p>
+            <h4 class="topic">Refund policy on cancellation</h4>
+            <p class="description">
               How do you refund customers for cancelling their prepaid order
             </p>
 
@@ -120,8 +122,8 @@
           </div>
 
           <div style="margin-top: 25px">
-            <button mat-button>Save</button>
-            <button mat-button style="color: black; border-color: lightgrey">
+            <button class="save-button" mat-button>Save</button>
+            <button mat-button>
               Cancel
             </button>
           </div>
@@ -137,19 +139,19 @@
       #returnPolicy>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon svgIcon="myrp"></mat-icon>
-          <div style="margin: auto 0">Manage your return policy</div>
+          <mat-icon class="exp-icon" svgIcon="myrp"></mat-icon>
+          <div class="exp-title">Manage your return policy</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!returnPolicy.expanded">keyboard_arrow_right</mat-icon>
-            <mat-icon *ngIf="returnPolicy.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="!returnPolicy.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="returnPolicy.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content">
         <div>
-          <h4>
+          <h4 class="topic">
             Customers will be able to return their purchases as per the return
             window set by you
           </h4>
@@ -184,8 +186,8 @@
             </p>
             <br />
 
-            <h4>Exclude Certain Products</h4>
-            <p>Do not allow customers to return specific products</p>
+            <h4 class="topic">Exclude Certain Products</h4>
+            <p class="description">Do not allow customers to return specific products</p>
 
             <br />
 
@@ -256,16 +258,18 @@
             <br /><br />
 
             <div>
-              <h4>
+              <h4 class="topic">
                 Return reasons
                 <mat-icon
+                svgIcon="infoicon"
+            class="tooltipicon"
                   inline="true"
                   matTooltip="Info"
                   matTooltipPosition="after"
-                  >info
+                  >
                 </mat-icon>
               </h4>
-              <p>
+              <p class="description">
                 Customers can select one reason from the list when submitting a
                 return request
               </p>
@@ -298,14 +302,14 @@
             </div>
 
             <div>
-              <h4>Resolution policy for returns</h4>
-              <p>Give your customers a resolution for returning the order</p>
+              <h4 class="topic">Resolution policy for returns</h4>
+              <p class="description">Give your customers a resolution for returning the order</p>
             </div>
 
             <div>
-              <h4>Refund policy for returns</h4>
-              <h5>Allow refund against COD orders</h5>
-              <p>
+              <h4 class="topic">Refund policy for returns</h4>
+              <h5 class="sub-topic">Allow refund against COD orders</h5>
+              <p class="description">
                 By enabling this option, your customers can enter their bank
                 account details to receive a refund
               </p>
@@ -320,7 +324,7 @@
             </div>
 
             <div>
-              <h5>Allow refund against prepaid orders</h5>
+              <h5 class="sub-topic">Allow refund against prepaid orders</h5>
               <br />
 
               <label class="switch">
@@ -333,8 +337,8 @@
           </div>
 
           <div style="margin-top: 25px">
-            <button mat-button>Save</button>
-            <button mat-button style="color: black; border-color: lightgrey">
+            <button class="save-button" mat-button>Save</button>
+            <button mat-button>
               Cancel
             </button>
           </div>

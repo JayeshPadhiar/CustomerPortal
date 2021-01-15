@@ -1,17 +1,93 @@
 h2 {
-  font-weight: 400;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+  color: #333333;
 }
 
 h3 {
   font-weight: 350;
 }
 
+h3.component-name {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 1px;
+  color: #343434;
+}
+
 h4 {
-  font-weight: 400;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+  color: #808080;
+}
+
+h4.topic {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: #333333;
+}
+
+.label {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  color: #666666;
+}
+
+.sub-topic {
+  position: absolute;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  color: #343434;
 }
 
 h5 {
   font-weight: 400;
+}
+
+a.learn-more {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.8px;
+  color: #fa5c5d;
 }
 
 a {
@@ -32,9 +108,19 @@ a:hover {
 }
 
 button {
-  color: #fa5c5d;
-  border: 1px solid #fa5c5d;
-  border-color: #fa5c5d;
+  color: #343434;
+  background: #ffffff;
+  border: 1px solid #cfc9c9;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+button.save-button {
+  color: #f30e0f;
+  background: #fef0f1;
+  border: 1px solid #f30e0f;
+  box-sizing: border-box;
+  border-radius: 4px;
 }
 
 div.expander-component {
@@ -53,15 +139,21 @@ div.expander-component {
 
 .accordion .mat-expansion-panel:focus-within {
   color: #fa5c5d;
-  border: 1px solid #fa5c5d;
-  box-shadow: 1px 1px 6px lightgray;
   fill: #fa5c5d;
   stroke: #fa5c5d;
   stroke-width: 0.9;
+
+  background: #ffffff;
+  border: 1px solid rgba(250, 92, 93, 0.7);
+  box-sizing: border-box;
+  box-shadow: 2px 4px 7px rgba(237, 32, 40, 0.09);
+  border-radius: 6px;
 }
 
 .accordion .mat-expansion-panel-header {
-  padding: 15px 25px;
+  height: 83px;
+  box-sizing: border-box;
+  padding-left: 0;
 }
 
 .mat-icon {
@@ -70,16 +162,34 @@ div.expander-component {
   width: 34px;
 }
 
-.iconn {
-  margin-right: 25px;
+.tooltipicon {
+  height: 14px;
+  width: 14px;
+  margin: 0;
+  stroke: white;
+  margin-left: 6px;
+  background-color: white;
+}
+
+.exp-icon {
+  margin: 23px 26px;
   height: 34px;
   width: 34px;
   fill: inherit;
   stroke: inherit;
 }
 
-.accordion .mat-expansion-panel-header-title {
+.accordion .mat-expansion-panel-header-title,
+.exp-title {
+  margin: auto 0;
   color: inherit;
+
+  font-family: Lato;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 1px;
+  font-size: large;
 }
 
 .accordion .mat-expansion-indicator {
@@ -87,12 +197,26 @@ div.expander-component {
 }
 
 div.accordion-content {
+  margin: 0 auto;
+  width: 85%;
   color: black;
 }
 
 .accordion-content p {
   color: gray;
   margin-top: 5px;
+}
+
+.accordion-content p.description {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+
+  letter-spacing: 1px;
+
+  color: #999999;
 }
 
 .accordion-content h4 {
@@ -118,6 +242,7 @@ div.accordion-content {
   display: flex;
   justify-content: right;
   align-items: center;
+  margin-left: 5px;
 }
 
 .accordion .mat-expansion-panel-header-description .indicator {
@@ -127,26 +252,6 @@ div.accordion-content {
   float: right;
   right: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .accordion-content .logo-picker-div {
   padding: 4px;
@@ -170,31 +275,16 @@ div.accordion-content {
   max-height: 24px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .accordion-content .mat-slide-toggle {
   margin: 10px auto;
 }
 
 .accordion-content .mat-radio-button {
   margin: 0px 10px;
+}
+
+.accordion-content .mat-form-field {
+  width: 100%;
 }
 
 .accordion-content .connected-indicator {
@@ -239,16 +329,7 @@ div.accordion-content {
   border: 1px solid #cfc9c9;
   padding: 10px;
   border-radius: 4px;
-}
-
-.color-picker-container .color-picker {
-  width: 25px;
-  height: 25px;
-  outline: none;
-  border-radius: 3px;
-  border: none;
-  margin-right: 10px;
-  background-color: transparent;
+  height: 34px;
 }
 
 .color-picker-container input {
@@ -261,7 +342,31 @@ div.accordion-content {
   color: #334433;
   border: none;
   outline: none;
-  padding: 5px;
+  padding: 0 5px;
+}
+
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  width: 25px;
+  height: 25px;
+  border: transparent;
+  border-radius: 3px;
+}
+
+.color-picker-container .color-picker {
+  width: 25px;
+  height: 25px;
+  outline: none;
+  border-radius: 3px;
+  margin-right: 10px;
+  background-color: transparent;
+  padding: 0;
 }
 
 .preview-container {
@@ -468,4 +573,32 @@ input:checked + .slider:after {
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
   background-color: #fa5c5d;
+}
+
+::ng-deep .mat-form-field-label {
+  /*change color of label*/
+  color: #999999 !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #343434 !important;
+}
+
+::ng-deep .mat-form-field-placeholder {
+  color: #999999 !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-placeholder {
+  color: #999999 !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: #c4c4c4 !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #4a90e2 !important;
 }

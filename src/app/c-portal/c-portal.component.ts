@@ -21,7 +21,7 @@ export class CPortalComponent implements OnInit {
   ) {}
 
   openDialog() {
-    //this.dialog.open(MobileDialogComponent, { panelClass: 'mobile-dialog' });
+    this.dialog.open(MobileDialogComponent, { panelClass: 'mobile-dialog' });
     /*this.dialog.open(NotifModalComponent, {
       panelClass: 'notif-modal',
       data: { logosrc: this.appStyle.logosrc },

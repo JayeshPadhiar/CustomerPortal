@@ -1,5 +1,5 @@
 <div class="expander-component">
-  <h3>Orchestrate your customer messages</h3>
+  <h3 class="component-name">Orchestrate your customer messages</h3>
   <mat-accordion class="accordion">
     <mat-expansion-panel
       (opened)="expansions.defineChannel = true"
@@ -10,15 +10,15 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon svgIcon="dyccwc"></mat-icon>
-          <div style="margin: auto 0">
+          <mat-icon class="exp-icon" svgIcon="dyccwc"></mat-icon>
+          <div class="exp-title">
             Define your communication channel with customers
           </div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!defineChannel.expanded">keyboard_arrow_right</mat-icon>
-            <mat-icon *ngIf="defineChannel.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="!defineChannel.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="defineChannel.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
         
@@ -30,19 +30,21 @@
           (ngSubmit)="onSubmit(channelFormGroup)"
         >
           <div>
-            <h4>
+            <h4 class="topic">
               Email Sender Name
               <mat-icon
+              svgIcon="infoicon"
+            class="tooltipicon"
                 inline="true"
                 matTooltip="Use a sender name which is easily recognisable by your customers"
                 matTooltipPosition="after"
-                >info
+                >
               </mat-icon>
             </h4>
-            <p>Your customers will receive email from this sender name</p>
+            <p class="description">Your customers will receive email from this sender name</p>
 
             <div class="form-container">
-              <mat-form-field floatLabel="never">
+              <mat-form-field style="width: 100%;" floatLabel="never">
                 <input
                   formControlName="emailsender"
                   matInput
@@ -57,19 +59,21 @@
               [style.background-color]="appStyle.backgroundcolor"
             ></div>
 
-            <h4>
+            <h4 class="topic">
               Send-from email address
               <mat-icon
+              svgIcon="infoicon"
+            class="tooltipicon"
                 inline="true"
                 matTooltip="Use an email address which is setup to receive incoming emails"
                 matTooltipPosition="after"
-                >info
+                >
               </mat-icon>
             </h4>
-            <p>Your customers will receive email from this email address</p>
+            <p class="description">Your customers will receive email from this email address</p>
 
             <div class="form-container">
-              <mat-form-field floatLabel="never">
+              <mat-form-field style="width: 100%;" floatLabel="never">
                 <input
                   matInput
                   formControlName="emailaddr"
@@ -95,19 +99,18 @@
               ></div>
             </div>
 
-            <h4>SMS sender name</h4>
-            <p>Your customers will receive SMS from this sender name</p>
+            <h4 class="topic">SMS sender name</h4>
+            <p class="description">Your customers will receive SMS from this sender name</p>
 
             <h3>ESHOPB</h3>
             <p>Want to customize the sender code? <a>Learn More</a></p>
 
             <div>
-              <button type="submit" mat-button>Save</button>
+              <button class="save-button" type="submit" mat-button>Save</button>
               <button
                 mat-button
                 type="button"
                 (click)="cancel(channelFormGroup, 'defineChannel')"
-                style="color: black; border-color: lightgrey"
               >
                 Cancel
               </button>
@@ -125,25 +128,31 @@
       #custNotifs>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon svgIcon="mycn"></mat-icon>
-          <div style="margin: auto 0">Manage your customer notifications</div>
+          <mat-icon class="exp-icon" svgIcon="mycn"></mat-icon>
+          <div class="exp-title">Manage your customer notifications</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!custNotifs.expanded">keyboard_arrow_right</mat-icon>
-            <mat-icon *ngIf="custNotifs.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="!custNotifs.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="custNotifs.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content">
         <div>
-          <p>
+          <p class="description" style="font-size: 14px;">
             You can choose to send notifications to customers via Email and SMS
           </p>
           <mat-accordion class="accordion">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
+            <mat-expansion-panel hideToggle #orders>
+              <mat-expansion-panel-header style="height: 49px;">
                 <mat-panel-title>Orders</mat-panel-title>
+                <mat-panel-description>
+                  <div class="indicator">
+                    <mat-icon style="height: fit-content; margin-right: 20px;" *ngIf="!orders.expanded">keyboard_arrow_right</mat-icon>
+                    <mat-icon style="height: fit-content; margin-right: 20px;" *ngIf="orders.expanded">keyboard_arrow_down</mat-icon>
+                  </div>
+                </mat-panel-description>
               </mat-expansion-panel-header>
 
               <div class="accordion-content">
@@ -182,9 +191,15 @@
               </div>
             </mat-expansion-panel>
 
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
+            <mat-expansion-panel hideToggle #returns>
+              <mat-expansion-panel-header style="height: 49px;">
                 <mat-panel-title>Returns</mat-panel-title>
+                <mat-panel-description>
+                  <div class="indicator">
+                    <mat-icon style="height: fit-content; margin-right: 20px;" *ngIf="!returns.expanded">keyboard_arrow_right</mat-icon>
+                    <mat-icon style="height: fit-content; margin-right: 20px;" *ngIf="returns.expanded">keyboard_arrow_down</mat-icon>
+                  </div>
+                </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="accordion-content">
                 <table class="table-container">
@@ -222,9 +237,15 @@
               </div>
             </mat-expansion-panel>
 
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
+            <mat-expansion-panel hideToggle #refunds>
+              <mat-expansion-panel-header style="height: 49px;">
                 <mat-panel-title>Refunds</mat-panel-title>
+                <mat-panel-description>
+                  <div class="indicator">
+                    <mat-icon style="height: fit-content; margin-right: 20px;" *ngIf="!refunds.expanded">keyboard_arrow_right</mat-icon>
+                    <mat-icon style="height: fit-content; margin-right: 20px;" *ngIf="refunds.expanded">keyboard_arrow_down</mat-icon>
+                  </div>
+                </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="accordion-content">
                 <table class="table-container">
@@ -264,11 +285,10 @@
           </mat-accordion>
 
           <div>
-            <button mat-button>Save</button>
+            <button class="save-button" mat-button>Save</button>
             <button
               mat-button
               (click)="cancel(channelFormGroup, expansions.defineChannel)"
-              style="color: black; border-color: lightgrey"
             >
               Cancel
             </button>

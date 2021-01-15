@@ -2,7 +2,15 @@
   class="mobile-container"
   [style.background-color]="appStyle.backgroundcolor"
 >
-  <div style="height: 100%">
+  <div
+    style="
+      border: 3px solid #e7e7e7;
+      box-sizing: border-box;
+      box-shadow: 0px 34px 64px -10px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      height: 100%;
+    "
+  >
     <div class="mobile-notif" [style.background-color]="appStyle.notifcolor">
       <p>Your message will be displayed here</p>
     </div>
@@ -32,24 +40,20 @@
       >
         <mat-icon>keyboard_arrow_left</mat-icon>
         <div
-          style="
-            margin-left: 16px;
-            font-family: Work Sans;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 19px;
-
-            color: #828282;
-          "
+          class="xtitle"
         >
           Item Details
         </div>
       </div>
 
-      <mat-divider></mat-divider>
-
-      <div>
+      <div
+        style="
+          background: #ffffff;
+          border: 1px solid #e0e0e0;
+          box-sizing: border-box;
+          border-radius: 10px;
+        "
+      >
         <mat-vertical-stepper class="mobile-stepper" linear="true" #stepper>
           <ng-template matStepperIcon="edit">
             <mat-icon></mat-icon>
@@ -108,7 +112,11 @@
                 </p>
               </div>
 
-              <button [style.background-color]="appStyle.actioncolor" class="mobile-button" mat-flat-button>
+              <button
+                [style.background-color]="appStyle.actioncolor"
+                class="mobile-button"
+                mat-flat-button
+              >
                 Cancel Order
               </button>
             </div>
@@ -169,12 +177,34 @@
       </div>
     </div>
 
+    <!--div
+      class="body"
+      style="
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        box-sizing: border-box;
+        border-radius: 10px;
+      "
+    >
+      <div style="margin: 27px 20px">
+        <div class="xtitle">Order Summary</div>
+        <div class="pre-title" style="margin: 14px 0 16px;">
+          You purchased <b>2 items</b> in order <b>BB3648390</b> on <b>2 Oct, 2020</b> for <b>INR 1995</b>
+          via <b>Cash on Delivery</b>
+        </div>
+      </div>
+    </div-->
+
     <div class="footer">
       <div *ngIf="links.footers.length > 0" class="mobile-footer-links">
-        <div *ngFor="let link of links.footers" class="footer-link">{{link.name}}</div>
+        <div *ngFor="let link of links.footers" class="footer-link">
+          {{ link.name }}
+        </div>
       </div>
 
-      <div *ngIf="links.weburl" class="mobile-footer-url">Go to &nbsp;<a href="#">{{links.weburl}}</a></div>
+      <div *ngIf="links.weburl" class="mobile-footer-url">
+        Go to &nbsp;<a href="#">{{ links.weburl }}</a>
+      </div>
     </div>
   </div>
 </div>

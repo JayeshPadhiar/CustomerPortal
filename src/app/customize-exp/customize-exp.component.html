@@ -1,5 +1,5 @@
 <div class="expander-component">
-  <h3>Customize the experience</h3>
+  <h3 class="component-name">Customize the experience</h3>
 
   <mat-accordion class="accordion">
     <mat-expansion-panel
@@ -11,15 +11,15 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon class="iconn" svgIcon="sycp"></mat-icon>
-          <div style="margin: auto 0">Style Your Customer Portal</div>
+          <mat-icon class="exp-icon" svgIcon="sycp"></mat-icon>
+          <div class="exp-title">Style Your Customer Portal</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!stylePanel.expanded"
+            <mat-icon style="height: fit-content;" *ngIf="!stylePanel.expanded"
               >keyboard_arrow_right</mat-icon
             >
-            <mat-icon *ngIf="stylePanel.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="stylePanel.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -31,8 +31,8 @@
         >
           <div>
             <div>
-              <h4>Upload your brand logo</h4>
-              <p>
+              <h4 class="topic">Upload your brand logo</h4>
+              <p class="description">
                 Add a PNG, JPG or GIF. Your image may scale upto 154px X 24px
               </p>
               <div #logoInputDiv *ngIf="(appStyle.logosrc === originalAppStyle.logosrc)">
@@ -102,8 +102,8 @@
             <br />
 
             <div>
-              <h4>Upload your favicon</h4>
-              <p>The optimal size for creating a favicon is 16x16 pixels</p>
+              <h4 class="topic">Upload your favicon</h4>
+              <p class="description">The optimal size for creating a favicon is 16x16 pixels</p>
 
               <div *ngIf="(appStyle.faviconsrc === originalAppStyle.faviconsrc)">
                 <button type="button" mat-button (click)="faviconInput.click()">
@@ -181,8 +181,8 @@
             <br />
 
             <div>
-              <h4>Background Color</h4>
-              <p>Used behind your team profile and other backgrounds</p>
+              <h4 class="topic">Background Color</h4>
+              <p class="description">Used behind your team profile and other backgrounds</p>
 
               <div class="color-picker-container">
                 <input
@@ -227,8 +227,8 @@
             <br />
 
             <div>
-              <h4>Action Color</h4>
-              <p>Used in your action buttons</p>
+              <h4 class="topic">Action Color</h4>
+              <p class="description">Used in your action buttons</p>
 
               <div class="color-picker-container">
                 <input
@@ -274,12 +274,11 @@
             </div>
 
             <div>
-              <button type="submit" mat-button>Save</button>
+              <button class="save-button" type="submit" mat-button>Save</button>
               <button
                 type="button"
                 (click)="cancelStyle()"
                 mat-button
-                style="color: black; border-color: lightgrey"
               >
                 Cancel
               </button>
@@ -298,15 +297,15 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon svgIcon="sytpd"></mat-icon>
-          <div style="margin: auto 0">Setup your tracking page domain</div>
+          <mat-icon class="exp-icon" svgIcon="sytpd"></mat-icon>
+          <div class="exp-title">Setup your tracking page domain</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!domainPanel.expanded"
+            <mat-icon style="height: fit-content;" *ngIf="!domainPanel.expanded"
               >keyboard_arrow_right</mat-icon
             >
-            <mat-icon *ngIf="domainPanel.expanded"
+            <mat-icon style="height: fit-content;" *ngIf="domainPanel.expanded"
               >keyboard_arrow_down</mat-icon
             >
           </div>
@@ -314,21 +313,23 @@
       </mat-expansion-panel-header>
       <div class="accordion-content">
         <div #addDomainDiv *ngIf="!domain.value">
-          <h4>
+          <h4 class="topic">
             Add your domain
             <mat-icon
+            svgIcon="infoicon"
+            class="tooltipicon"
               inline="true"
               matTooltip="Rather than registering a new domain name, you can create a subdomain using the domain you already own"
               matTooltipPosition="after"
-              >info
+              >
             </mat-icon>
           </h4>
-          <p>
+          <p class="description">
             By default, customers will be directed to https://acme.eshopbox.com
             when accessing the customer portal. To change, add a domain.
             <a>Learn More</a>
           </p>
-          <button (click)="addDomain()" mat-button>+ Add domain</button>
+          <button class="save-button" style="margin-top: 12px;" (click)="addDomain()" mat-button>+ Add domain</button>
         </div>
 
         <br />
@@ -415,11 +416,10 @@
             <br />
 
             <div>
-              <button type="submit" mat-button>Save</button>
+              <button class="save-button" type="submit" mat-button>Save</button>
               <button
                 type="button"
                 mat-button
-                style="color: black; border-color: lightgrey"
               >
                 Cancel
               </button>
@@ -438,17 +438,17 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon svgIcon="grltyc"></mat-icon>
-          <div style="margin: auto 0">
+          <mat-icon class="exp-icon" svgIcon="grltyc"></mat-icon>
+          <div class="exp-title">
             Give relavant links to your customers
           </div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon *ngIf="!linksPanel.expanded"
+            <mat-icon style="height: fit-content;" *ngIf="!linksPanel.expanded"
               >keyboard_arrow_right</mat-icon
             >
-            <mat-icon *ngIf="linksPanel.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon style="height: fit-content;" *ngIf="linksPanel.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -459,11 +459,11 @@
           (ngSubmit)="onSubmit(linksFormGroup)"
         >
           <div>
-            <h4>Website URL</h4>
-            <p>Direct customers to your website from the customer portal</p>
+            <h4 class="topic">Website URL</h4>
+            <p class="description">Direct customers to your website from the customer portal</p>
 
             <div class="form-container">
-              <mat-form-field floatLabel="never">
+              <mat-form-field style="width: 100%;" floatLabel="never">
                 <input
                 style="width: 100%;"
                   matInput
@@ -505,23 +505,26 @@
               </div>
             </div>
 
-            <h4>Support</h4>
-            <p>Provide help and support to your customers at every step</p>
+            <h4 class="topic">Support</h4>
+            <p class="description">Provide help and support to your customers at every step</p>
 
             <div class="form-container">
-              <mat-label>
+              <mat-label class="label">
                 Support URL
                 <mat-icon
+                svgIcon="infoicon"
+            class="tooltipicon"
                   inline="true"
                   matTooltip="Include the Help page or FAQ page of your website"
                   matTooltipPosition="after"
                 >
-                  info
+                  
                 </mat-icon>
               </mat-label>
               <br />
-              <mat-form-field floatLabel="never">
+              <mat-form-field style="width: 100%;" floatLabel="never">
                 <input
+                style="width: 100%;"
                   formControlName="supporturl"
                   matInput
                   placeholder="acme.com/help"
@@ -531,11 +534,11 @@
             </div>
 
             <div>
-              <table cellspacing="0">
+              <table style="width: 100%;" cellspacing="0">
                 <tr>
                   <td>
                     <div class="form-container">
-                      <mat-label> Support email </mat-label>
+                      <mat-label class="label"> Support email </mat-label>
                       <br />
                       <mat-form-field floatLabel="never">
                         <input
@@ -550,7 +553,7 @@
                   </td>
                   <td>
                     <div class="form-container">
-                      <mat-label> Support phone number </mat-label>
+                      <mat-label class="label"> Support phone number </mat-label>
                       <br />
                       <mat-form-field floatLabel="never">
                         <input
@@ -599,16 +602,18 @@
             </div>
 
             <div>
-              <h4>
+              <h4 class="topic">
                 Add footer links
                 <mat-icon
+                svgIcon="infoicon"
+            class="tooltipicon"
                   inline="true"
                   matTooltip="Include your Terms page, Shipping policy, Return policy, Privacy page and more"
                   matTooltipPosition="after"
-                  >info
+                  >
                 </mat-icon>
               </h4>
-              <p>
+              <p class="description">
                 Allow customers to access important links of your website
                 through the footer section
               </p>
@@ -626,7 +631,7 @@
                         <div class="form-container">
                           <mat-form-field
                             floatLabel="never"
-                            style="margin: 0 10px"
+                            style="margin: 0"
                           >
                             <input
                               formControlName="name"
@@ -670,7 +675,7 @@
                       type="button"
                       (click)="addFooter()"
                       mat-flat-button
-                      style="border: none; margin: 0; padding: 0"
+                      style="color: #FA5C5D; border: none; margin: 0; padding: 0"
                       #addLinksButton
                       *ngIf="links.footers.length < 3"
                     >
@@ -682,11 +687,10 @@
               </table>
             </div>
             <div>
-              <button type="submit" mat-button>Save</button>
+              <button class="save-button" type="submit" mat-button>Save</button>
               <button
                 type="button"
                 mat-button
-                style="color: black; border-color: lightgrey"
               >
                 Cancel
               </button>
