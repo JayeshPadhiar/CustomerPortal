@@ -471,6 +471,7 @@
                   formControlName="weburl"
                   (input)="changeLink('weburl', $event.target.value)"
                 />
+                <mat-error *ngIf="weburl.invalid">{{validateError(weburl)}}</mat-error>
               </mat-form-field>
             </div>
 
@@ -499,7 +500,7 @@
                   "
                 >
                   <h4>
-                    Go to <a href="#">{{ links.weburl }}</a>
+                    Go to <a href="#"> {{ links.weburl }}</a>
                   </h4>
                 </div>
               </div>
@@ -530,6 +531,8 @@
                   placeholder="acme.com/help"
                   (input)="changeLink('supporturl', $event.target.value)"
                 />
+                <mat-error *ngIf="supporturl.invalid">{{validateError(supporturl)}}</mat-error>
+
               </mat-form-field>
             </div>
 
@@ -548,6 +551,7 @@
                           formControlName="supportemail"
                           matInput
                         />
+                        <mat-error *ngIf="supportemail.invalid">{{validateError(supportemail)}}</mat-error>
                       </mat-form-field>
                     </div>
                   </td>
@@ -563,6 +567,7 @@
                           formControlName="supportphone"
                           matInput
                         />
+                        <mat-error *ngIf="supportphone.invalid">{{validateError(supportphone)}}</mat-error>
                       </mat-form-field>
                     </div>
                   </td>
@@ -658,6 +663,7 @@
                               matInput
                               placeholder="https://"
                             />
+                            
                           </mat-form-field>
                         </div>
                       </td>
@@ -700,7 +706,7 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-  <!--pre>{{links | json}}</pre>
+  <pre>{{links | json}}</pre>
   <pre>{{footers.value | json}}</pre>
-  <pre>{{links.footers.length}}</pre-->
+  <pre>{{links.footers.length}}</pre>
 </div>

@@ -2,18 +2,10 @@
   class="mobile-container"
   [style.background-color]="appStyle.backgroundcolor"
 >
-  <div
-    style="
-      border: 3px solid #e7e7e7;
-      box-sizing: border-box;
-      box-shadow: 0px 34px 64px -10px rgba(0, 0, 0, 0.1);
-      border-radius: 4px;
-      height: 100%;
-    "
-  >
-    <div class="mobile-notif" [style.background-color]="appStyle.notifcolor">
+  <div>
+    <!--div class="mobile-notif" [style.background-color]="appStyle.notifcolor">
       <p>Your message will be displayed here</p>
-    </div>
+    </div-->
 
     <div class="header">
       <div
@@ -29,20 +21,36 @@
       </div>
     </div>
 
-    <div class="body">
+    <div *ngIf="!productListView" class="body" #productDetails>
       <div
         style="
           display: flex;
           align-items: center;
           justify-content: left;
-          margin: 25px;
+          height: 70px;
         "
       >
-        <mat-icon>keyboard_arrow_left</mat-icon>
-        <div
-          class="xtitle"
+        <mat-icon
+          style="color: #828282; margin: 30px 16px 30px 32px"
+          (click)="productListView = true"
+          >keyboard_arrow_left</mat-icon
         >
-          Item Details
+        <div class="xtitle">Item Details</div>
+        <div
+          style="
+            width: 54px;
+            height: 23px;
+            margin-left: auto;
+            margin-right: 32px;
+            font-family: 'Work Sans', sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 145%;
+            color: #bdbdbd;
+          "
+        >
+          Help?
         </div>
       </div>
 
@@ -177,23 +185,115 @@
       </div>
     </div>
 
-    <!--div
+    <div
+      *ngIf="productListView"
+      #productList
       class="body"
       style="
         background: #ffffff;
         border: 1px solid #e0e0e0;
         box-sizing: border-box;
         border-radius: 10px;
+        padding: 27px 20px 0px 30px;
       "
     >
-      <div style="margin: 27px 20px">
+      <div>
         <div class="xtitle">Order Summary</div>
-        <div class="pre-title" style="margin: 14px 0 16px;">
-          You purchased <b>2 items</b> in order <b>BB3648390</b> on <b>2 Oct, 2020</b> for <b>INR 1995</b>
-          via <b>Cash on Delivery</b>
+        <div class="pre-title" style="margin: 14px 0 16px">
+          You purchased <b>2 items</b> in order <b>BB3648390</b> on
+          <b>2 Oct, 2020</b> for <b>INR 1995</b> via <b>Cash on Delivery</b>
+        </div>
+
+        <div
+          style="
+            font-weight: 600;
+            font-size: 10px;
+            line-height: 12px;
+            letter-spacing: 0.02em;
+            color: #bdbdbd;
+          "
+        >
+          ITEMS IN THIS ORDER
+        </div>
+
+        <div>
+          <div (click)="productListView = false" class="item-list-container">
+            <img
+              class="product-img"
+              style="margin: 0 5px"
+              src="../../assets/img/shippingImg.png"
+            />
+            <div class="mobile-content" style="display: inline-block">
+              Regular Fit Navy Shirt
+            </div>
+
+            <div class="arrow">
+              <mat-icon style="height: fit-content"
+                >keyboard_arrow_right</mat-icon
+              >
+            </div>
+          </div>
+
+          <div class="item-list-container">
+            <img
+              class="product-img"
+              style="margin: 0 5px"
+              src="../../assets/img/shippingImg2.png"
+            />
+            <div class="mobile-content" style="display: inline-block">
+              Regular Fit Navy Shirt
+            </div>
+
+            <div class="arrow">
+              <mat-icon style="height: fit-content"
+                >keyboard_arrow_right</mat-icon
+              >
+            </div>
+          </div>
+
+          <div class="item-list-container">
+            <img
+              class="product-img"
+              style="margin: 0 5px"
+              src="../../assets/img/shippingImg3.png"
+            />
+            <div class="mobile-content" style="display: inline-block">
+              Regular Fit Navy Shirt
+            </div>
+
+            <div class="arrow">
+              <mat-icon style="height: fit-content"
+                >keyboard_arrow_right</mat-icon
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="xtitle" style="margin: 28px 0 16px">Delivery Details</div>
+
+        <div
+          style="
+            font-family: 'Work Sans', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 10px;
+            line-height: 12px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: #828282;
+          "
+        >
+          Deepak Khetan
+        </div>
+
+        <div class="pre-title" style="margin: 14px 0 16px">
+          +91 9999900000 | deepak.khetan@gmail.com
+        </div>
+        <div class="pre-title" style="font-weight: normal; margin: 14px 0 16px">
+          G 55, G block, South city II, Sector 50, Gurgaon Gurugram - 122018
         </div>
       </div>
-    </div-->
+    </div>
 
     <div class="footer">
       <div *ngIf="links.footers.length > 0" class="mobile-footer-links">

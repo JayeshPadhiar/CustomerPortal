@@ -1,6 +1,6 @@
 import { MatDialog } from '@angular/material/dialog';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { AppStyle, FooterLink, Links } from '../c-portal/cportal.model';
 import { AddDomainComponent } from '../add-domain/add-domain.component';
@@ -20,6 +20,9 @@ export class CustomizeExpComponent implements OnInit {
 
   links: Links;
   originalLinks: Links;
+
+  urlpattern = /((?:(http|https|Http|Https|rtsp|Rtsp):\/\/(?:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,64}(?:\:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,25})?\@)?)?((?:(?:[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-zA-Z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-fA-F0-9]{2}))*)?(?:\b|$)/gi;
+  phonepattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
   //footerLinks: Array<FooterLink>;
   //footerLinks: Array<FooterLink>;
@@ -83,12 +86,27 @@ export class CustomizeExpComponent implements OnInit {
     );
     this.actioncolor = new FormControl(this.originalAppStyle.actioncolor);
 
-    this.domain = new FormControl('www.google.com');
+    this.domain = new FormControl('www.google.com', [
+      Validators.required,
+      Validators.pattern(this.urlpattern),
+    ]);
 
-    this.weburl = new FormControl('https://');
-    this.supporturl = new FormControl('');
-    this.supportemail = new FormControl('');
-    this.supportphone = new FormControl('');
+    this.weburl = new FormControl('https://', [
+      Validators.required,
+      Validators.pattern(this.urlpattern),
+    ]);
+    this.supporturl = new FormControl('', [
+      Validators.required,
+      Validators.pattern(this.urlpattern),
+    ]);
+    this.supportemail = new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]);
+    this.supportphone = new FormControl('', [
+      Validators.required,
+      Validators.pattern(this.phonepattern),
+    ]);
     this.footers = new FormArray([this.newFooter()]);
   };
 
@@ -196,8 +214,13 @@ export class CustomizeExpComponent implements OnInit {
 
   newFooter(): FormGroup {
     return new FormGroup({
-      name: new FormControl(''),
-      url: new FormControl('https://'),
+      name: new FormControl('', [Validators.required]),
+      url: new FormControl('https://', [
+        Validators.required,
+        Validators.pattern(
+          /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+        ),
+      ]),
     });
   }
 
@@ -240,6 +263,16 @@ export class CustomizeExpComponent implements OnInit {
       console.log(form.value);
       console.log('Form Submitted!');
       //this.resetForm(form);
+    }
+  }
+
+  validateError(field: FormControl) {
+    if (field.hasError('required')) {
+      return 'This field should not be empty';
+    } else if (field.hasError('email')) {
+      return 'Enter a valid email';
+    } else {
+      return 'Enter a valid value';
     }
   }
 

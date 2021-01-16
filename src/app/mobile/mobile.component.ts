@@ -17,12 +17,13 @@ export class MobileComponent implements OnInit {
   appStyle: AppStyle;
   links: Links;
 
+  productListView: boolean = false;
+
   constructor(private backendService: CustomerPortalBackendService) { }
 
   ngOnInit(): void {
     this.backendService.getAppStyle().subscribe(style => this.appStyle = style)
     this.backendService.getLinks().subscribe(links => this.links = links)
   }
-
 
 }
