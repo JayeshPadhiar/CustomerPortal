@@ -10,8 +10,8 @@ export class SetControlComponent implements OnInit {
 
   constructor() { }
 
-  creasons: Array<Reason> = [];
-  rreasons: Array<Reason> = [];
+  creasons: Array<Reason> = [{reason: 'Delivery is delayed'}, {reason: 'Order placed by mistake'}, {reason: 'Expected delivery time is too long'}, {reason: 'Item Price/Shippingcost is too high'}, {reason: 'Bought it from somewhere else'} ];
+  rreasons: Array<Reason> = [{reason: 'Item no longer wanted'}, {reason: 'Quality issue'}, {reason: 'Size fit issue'}, {reason: 'Received a different item'}, {reason: 'Item damaged on arrival'}, {reason: 'Item missing'}];
   exconditions: Array<ExcludeCondition> = [];
 
   reason: any = {};

@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
@@ -33,6 +35,7 @@ import { NotifModalComponent } from './notif-modal/notif-modal.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 import { CustomerPortalBackendService } from './customer-portal-backend.service';
+import { CPortalInterceptor } from './cportal.interceptor';
 
 @NgModule({
   declarations: [
@@ -71,7 +74,11 @@ import { CustomerPortalBackendService } from './customer-portal-backend.service'
     MatSlideToggleModule,
     MatButtonToggleModule,
   ],
-  providers: [CustomerPortalBackendService],
+  providers: [CustomerPortalBackendService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: CPortalInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

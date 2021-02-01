@@ -55,7 +55,6 @@ h4.topic {
   display: flex;
   align-items: center;
   letter-spacing: 0.5px;
-
   color: #666666;
 }
 
@@ -65,12 +64,9 @@ h4.topic {
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
-  /* identical to box height */
-
   display: flex;
   align-items: center;
   letter-spacing: 0.5px;
-
   color: #343434;
 }
 
@@ -162,6 +158,14 @@ div.expander-component {
   width: 34px;
 }
 
+.mat-icon.eyecon {
+  width: 10px;
+  height: 10px;
+  fill: #343434;
+  stroke: #343434;
+  stroke-width: 0;
+}
+
 .tooltipicon {
   height: 14px;
   width: 14px;
@@ -183,7 +187,6 @@ div.expander-component {
 .exp-title {
   margin: auto 0;
   color: inherit;
-
   font-family: Lato;
   font-style: normal;
   font-size: 16px;
@@ -213,9 +216,7 @@ div.accordion-content {
   font-weight: normal;
   font-size: 12px;
   line-height: 20px;
-
   letter-spacing: 1px;
-
   color: #999999;
 }
 
@@ -307,7 +308,7 @@ div.accordion-content {
 }
 
 .accordion-content .table-container {
-  width: fit-content;
+  width: 100%;
 }
 
 .accordion-content .table-container .form-container {
@@ -318,6 +319,10 @@ div.accordion-content {
   width: 18px;
   height: 16px;
   display: table-cell;
+}
+
+td {
+  vertical-align: middle;
 }
 
 .color-picker-container {
@@ -376,13 +381,13 @@ input[type="color"]::-webkit-color-swatch {
   background-color: gainsboro;
   height: 100px;
   width: 200px;
-  width: max-content;
   min-width: 200px;
+  width: max-content;
 }
 
 .preview-container .preview-div {
   height: 80px;
-  width: 180px;
+  min-width: 180px;
   width: max-content;
   min-width: 180px;
   background-color: #e7e7e7;
@@ -418,6 +423,7 @@ input[type="color"]::-webkit-color-swatch {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
 }
 
 .preview-container .preview-tab-container {
@@ -477,9 +483,9 @@ input[type="color"]::-webkit-color-swatch {
   right: 0;
   bottom: 0;
   background-color: #bcbbbb;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 60px;
+  -webkit-transition: 0.4s;
 }
 
 .slider:before {
@@ -490,9 +496,9 @@ input[type="color"]::-webkit-color-swatch {
   left: 3px;
   bottom: 3px;
   background-color: white;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 50%;
+  -webkit-transition: 0.4s;
 }
 
 input:checked + .slider {
@@ -500,9 +506,9 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
+  transform: translateX(25px);
   -webkit-transform: translateX(20px);
   -ms-transform: translateX(20px);
-  transform: translateX(25px);
 }
 
 .slider:after {
@@ -539,10 +545,10 @@ input:checked + .slider:after {
   width: 13px;
 }
 :host ::ng-deep .mat-radio-button .mat-radio-ripple {
-  height: 20px; /*double of your required circle radius*/
-  width: 20px; /*double of your required circle radius*/
-  left: calc(50% - 10px); /*'10px'-same as your required circle radius*/
-  top: calc(50% - 10px); /*'10px'-same as your required circle radius*/
+  height: 20px; 
+  width: 20px; 
+  left: calc(50% - 10px);
+  top: calc(50% - 10px);
 }
 
 :host ::ng-deep .mat-checkbox {
@@ -557,13 +563,16 @@ input:checked + .slider:after {
   border-radius: 4px;
 }
 
+::ng-deep.mat-checkbox-layout .mat-checkbox-label {
+  vertical-align: middle;
+}
+
 :host ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
 .mat-checkbox-checked.mat-accent .mat-checkbox-background {
   margin-top: 1px;
   margin-left: 1px;
   width: 18px;
   height: 18px;
-
   background: #ffffff;
   border: 1px solid #fa5c5d;
   box-sizing: border-box;
@@ -572,7 +581,14 @@ input:checked + .slider:after {
 
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-  background-color: #fa5c5d;
+  background: #ffffff;
+  border: 1px solid #fa5c5d;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+::ng-deep .mat-checkbox-checkmark-path {
+  stroke: #fa5c5d !important;
 }
 
 ::ng-deep .mat-form-field-label {
@@ -601,4 +617,9 @@ input:checked + .slider:after {
 ::ng-deep.mat-form-field-ripple {
   /*change color of underline when focused*/
   background-color: #4a90e2 !important;
+}
+
+
+::ng-deep.mat-form-field-infix {
+  border: none;
 }

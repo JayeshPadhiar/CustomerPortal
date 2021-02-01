@@ -10,6 +10,7 @@ import { CustomerPortalBackendService } from '../customer-portal-backend.service
 export class ManageUnexComponent implements OnInit {
 
   appStyle: AppStyle;
+  notif: object;
 
   expansions = {
     displayNotice: false,
@@ -20,6 +21,7 @@ export class ManageUnexComponent implements OnInit {
 
   ngOnInit(): void {
     this.backendService.getAppStyle().subscribe(style => this.appStyle = style)
+    this.backendService.notif$.subscribe(result => this.notif = result)
   }
 
   changeNotifColor(color, prop) {

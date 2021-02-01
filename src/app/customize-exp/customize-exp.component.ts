@@ -51,7 +51,7 @@ export class CustomizeExpComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private backendService: CustomerPortalBackendService
+    public backendService: CustomerPortalBackendService
   ) {}
 
   ngOnInit(): void {
@@ -59,32 +59,23 @@ export class CustomizeExpComponent implements OnInit {
 
     this.backendService.appStyle$
       .asObservable()
-      .subscribe((style) => (this.appStyle = style));
+      .subscribe((style) => (this.appStyle = Object.assign({}, style)));
     this.originalAppStyle = Object.assign({}, this.appStyle);
 
     this.backendService.links$
       .asObservable()
-      .subscribe((links) => (this.links = links));
+      .subscribe((links) => (this.links = Object.assign({}, links)));
     this.originalLinks = Object.assign({}, this.links);
 
     this.createFormControls();
     this.createFormGroups();
-
-    /*if(this.domain.value){
-      console.log('Domain available: ' + this.domain.value)
-      this.addDomainDiv.nativeElement.style.display = 'none'
-    }else{
-      console.log('Domain not available' + this.domain.value)
-    }*/
   }
 
   createFormControls = () => {
     this.logosrc = new FormControl('');
     this.faviconsrc = new FormControl('');
-    this.backgroundcolor = new FormControl(
-      this.originalAppStyle.backgroundcolor
-    );
-    this.actioncolor = new FormControl(this.originalAppStyle.actioncolor);
+    this.backgroundcolor = new FormControl(this.appStyle.backgroundcolor);
+    this.actioncolor = new FormControl(this.appStyle.actioncolor);
 
     this.domain = new FormControl('www.google.com', [
       Validators.required,
@@ -107,7 +98,7 @@ export class CustomizeExpComponent implements OnInit {
       Validators.required,
       Validators.pattern(this.phonepattern),
     ]);
-    this.footers = new FormArray([this.newFooter()]);
+    this.footers = new FormArray([]);
   };
 
   createFormGroups = () => {
@@ -151,7 +142,6 @@ export class CustomizeExpComponent implements OnInit {
 
   cancelIconSelect(icontype) {
     this.styleFormGroup.controls[icontype].reset();
-    //this.backendService.setStyle(this.originalAppStyle);
     this.backendService.appStyle$.next({
       ...this.appStyle,
       [icontype]: this.originalAppStyle[icontype],
@@ -173,6 +163,8 @@ export class CustomizeExpComponent implements OnInit {
       dialogRef.afterClosed().subscribe((result: Boolean) => {
         if (result) {
           console.log('baba re baba');
+
+          this.backendService.assignInterfaces();
 
           this.styleFormGroup.reset({
             backgroundcolor: this.originalAppStyle.backgroundcolor,

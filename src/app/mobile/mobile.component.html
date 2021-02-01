@@ -3,9 +3,9 @@
   [style.background-color]="appStyle.backgroundcolor"
 >
   <div>
-    <!--div class="mobile-notif" [style.background-color]="appStyle.notifcolor">
-      <p>Your message will be displayed here</p>
-    </div-->
+    <div *ngIf="notif['show']" class="mobile-notif" [style.background-color]="appStyle.notifcolor">
+      <p>{{notif.message}}</p>
+    </div>
 
     <div class="header">
       <div

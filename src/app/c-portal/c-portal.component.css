@@ -2,6 +2,7 @@ div.c-portal {
   margin: auto;
   width: 80%;
   padding: 20px;
+  justify-content: space-between;
 }
 
 div.portal-div {
@@ -10,35 +11,58 @@ div.portal-div {
 }
 
 div.mobile-div {
-  width: 25%;
+  width: fit-content;
   height: 85%;
   position: fixed;
   display: inline-block;
-  margin: 4% 4%;
+  margin: 0;
+  margin: 4%;
+  margin-top: 138px;
 }
 
 .mobile-div .mat-button-toggle-group {
   border-radius: 4px;
   left: 50%;
   transform: translate(-50%, -20%);
+  min-height: 35px;
+  height: 38px;
+  margin-bottom: 14px;
 }
 
 .mobile-div .mat-button-toggle-group .mat-button-toggle:first-of-type {
   border-radius: 4px 0px 0px 4px;
+  min-height: 35px;
+  height: 36px;
 }
 
 .mobile-div .mat-button-toggle-group .mat-button-toggle:last-of-type {
   border-radius: 0px 4px 4px 0px;
+  min-height: 35px;
+  height: 36px;
 }
 
-
-.mobile-div .mat-button-toggle-group .mat-button-toggle:active, .mat-button-toggle:focus-within {
+.mobile-div .mat-button-toggle-group .mat-button-toggle:active,
+.mat-button-toggle:focus-within {
   background: #ffffff;
   border: 1px solid #fa5c5d;
+  color: #fa5c5d;
   box-sizing: border-box;
   flex: none;
   order: 0;
   align-self: center;
   flex-grow: 0;
   margin: 0px 0px;
+
+  min-height: 35px;
+  height: 36px;
+}
+
+.mobile-div .mat-button-toggle-checked {
+  border: 1px solid #fa5c5d;
+  color: #fa5c5d;
+  background-color: #ffffff;
+}
+
+::ng-deep.mobile-div .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  line-height: 35px;
 }

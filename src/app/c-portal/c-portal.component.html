@@ -1,42 +1,39 @@
 <div class="c-portal">
-  <div>
-    <div class="portal-div">
-      <h2 style="margin-bottom: 8px;">Configure your Customer Portal</h2>
-      <h4 style="margin: 0; margin-bottom: 12px;">
-        Delight your customers with Amazon-like post purchase experience.
-      </h4>
-      <a class="learn-more" href="#"
-        ><mat-icon
-          style="width: 13px;
+  <div class="portal-div">
+    <h2 style="margin-bottom: 8px">Configure your Customer Portal</h2>
+    <h4 style="margin: 0; margin-bottom: 12px">
+      Delight your customers with Amazon-like post purchase experience.
+    </h4>
+    <a class="learn-more" href="#"
+      ><mat-icon
+        style="
+          width: 13px;
           height: 11.44px;
           left: 284px;
           top: 108px;
-          margin: 0 6px 2px 0;"
-          svgIcon="learnmore"
-        ></mat-icon>
-        Learn More</a
-      >
+          margin: 0 6px 2px 0;
+        "
+        svgIcon="learnmore"
+      ></mat-icon>
+      Learn More</a
+    >
 
-      <div style="padding: 10px"></div>
-      <div>
-        <app-customize-exp></app-customize-exp>
-        <app-orch-mess></app-orch-mess>
-        <app-set-control></app-set-control>
-        <app-manage-unex></app-manage-unex>
-      </div>
+    <div style="padding: 10px"></div>
+    <div>
+      <app-customize-exp></app-customize-exp>
+      <!--app-orch-mess></app-orch-mess>
+      <app-set-control></app-set-control>
+      <app-manage-unex></app-manage-unex-->
     </div>
+  </div>
 
-    <div class="mobile-div">
-      <div>
-        <mat-button-toggle-group>
-          <mat-button-toggle>Mobile</mat-button-toggle>
-          <mat-button-toggle (click)="openDialog()">Desktop</mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
-      
-      <div>
-        <app-mobile></app-mobile>
-      </div>
+  <div class="mobile-div">
+    <mat-button-toggle-group>
+      <mat-button-toggle checked="true">Mobile</mat-button-toggle>
+      <mat-button-toggle (click)="openDialog()">Desktop</mat-button-toggle>
+    </mat-button-toggle-group>
+    <div>
+      <app-mobile></app-mobile>
     </div>
   </div>
 </div>

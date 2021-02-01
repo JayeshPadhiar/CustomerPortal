@@ -17,6 +17,8 @@ export class MobileComponent implements OnInit {
   appStyle: AppStyle;
   links: Links;
 
+  notif: object;
+
   productListView: boolean = false;
 
   constructor(private backendService: CustomerPortalBackendService) { }
@@ -24,6 +26,7 @@ export class MobileComponent implements OnInit {
   ngOnInit(): void {
     this.backendService.getAppStyle().subscribe(style => this.appStyle = style)
     this.backendService.getLinks().subscribe(links => this.links = links)
+    this.backendService.notif$.subscribe(result => this.notif = result)
   }
 
 }

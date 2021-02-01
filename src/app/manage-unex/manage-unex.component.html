@@ -31,7 +31,7 @@
 
           <br />
           <label class="switch">
-            <input (change)="togBtn1" #togBtn1 type="checkbox" id="togBtn" />
+            <input (change)="togBtn1" (input)="notif['show'] = togBtn1.checked" #togBtn1 type="checkbox" id="togBtn" />
             <div class="slider round"></div>
           </label>
           <br />
@@ -41,7 +41,7 @@
 
             <div class="form-container">
               <mat-form-field floatLabel="never" style="margin-top: 10px; width: 100%;">
-                <input matInput placeholder="Your messase will be" />
+                <input (input)="notif['message'] = notifInput.value" #notifInput matInput placeholder="Your messase will be" />
               </mat-form-field>
             </div>
 
@@ -56,7 +56,7 @@
                 <div
                   class="preview-div-notif"
                   [style.background-color]="appStyle.notifcolor"
-                ></div>
+                >{{notif.message}}</div>
               </div>
             </div>
 
@@ -73,7 +73,7 @@
               <input [(ngModel)]="appStyle.notifcolor" type="text" />
             </div>
 
-            <div>
+            <div *ngIf="false">
               <button class="save-button" mat-button>Save</button>
               <button mat-button>
                 Cancel
@@ -81,7 +81,11 @@
             </div>
           </div>
 
-          <button mat-button>Close</button>
+          <div>
+            <br>
+            <br>
+            <button class="save-button" mat-button>Close</button>
+          </div>
         </div>
       </div>
     </mat-expansion-panel>
@@ -109,10 +113,9 @@
 
       <div class="accordion-content">
         <div>
-          <br />
 
           <label class="switch">
-            <input (change)="togBtn2" #togBtn2 type="checkbox" id="togBtn2" />
+            <input checked="true" (change)="togBtn2" #togBtn2 type="checkbox" id="togBtn2" />
             <div class="slider round"></div>
           </label>
 
@@ -129,7 +132,7 @@
 
             <div class="preview-container" style="width: 80%"></div>
 
-            <div>
+            <div *ngIf="false">
               <button class="save-button" mat-button>Save</button>
               <button mat-button>
                 Cancel
@@ -137,7 +140,11 @@
             </div>
           </div>
 
-          <button mat-button>Close</button>
+          <div>
+            <br>
+            <br>
+            <button class="save-button" mat-button>Close</button>
+          </div>
         </div>
       </div>
     </mat-expansion-panel>
