@@ -1,9 +1,9 @@
 <div
   class="mobile-container"
-  [style.background-color]="appStyle.backgroundcolor"
+  [style.background-color]="appStyle.backgroundColor"
 >
   <div>
-    <div *ngIf="notif['show']" class="mobile-notif" [style.background-color]="appStyle.notifcolor">
+    <div *ngIf="notif['show']" class="mobile-notif" [style.background-color]="appStyle.noticeBackgroundColor">
       <p>{{notif.message}}</p>
     </div>
 
@@ -17,7 +17,7 @@
           justify-content: center;
         "
       >
-        <img [src]="appStyle.logosrc" alt="ACME" />
+        <img [src]="appStyle.brandLogoUrl" alt="ACME" />
       </div>
     </div>
 
@@ -121,7 +121,7 @@
               </div>
 
               <button
-                [style.background-color]="appStyle.actioncolor"
+                [style.background-color]="appStyle.actionColor"
                 class="mobile-button"
                 mat-flat-button
               >
@@ -302,8 +302,8 @@
         </div>
       </div>
 
-      <div *ngIf="links.weburl" class="mobile-footer-url">
-        Go to &nbsp;<a href="#">{{ links.weburl }}</a>
+      <div *ngIf="links.websiteUrl" class="mobile-footer-url">
+        Go to &nbsp;<a href="#">{{ links.websiteUrl }}</a>
       </div>
     </div>
   </div>

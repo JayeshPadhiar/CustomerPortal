@@ -1,9 +1,9 @@
 export interface AppStyle {
-    logosrc: String,
-    faviconsrc: String
-    backgroundcolor: String,
-    actioncolor: String,
-    notifcolor: String,
+    brandLogoUrl: String,
+    faviconUrl: String
+    backgroundColor: String,
+    actionColor: String,
+    noticeBackgroundColor: String,
 }
 
 export interface FooterLink {
@@ -12,9 +12,9 @@ export interface FooterLink {
 }
 
 export interface Links {
-    weburl: String,
-    supporturl: String,
-    supportemail: String,
-    supportphone: String,
+    websiteUrl: String,
+    supportUrl: String,
+    supportEmail: String,
+    supportPhone: String,
     footers: Array<FooterLink>,
 }

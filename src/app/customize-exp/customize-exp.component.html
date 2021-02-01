@@ -39,38 +39,38 @@
               </p>
               <div
                 #logoInputDiv
-                *ngIf="appStyle.logosrc === originalAppStyle.logosrc"
+                *ngIf="appStyle.brandLogoUrl === originalAppStyle.brandLogoUrl"
               >
                 <button type="button" mat-button (click)="logoInput.click()">
                   Upload logo
                 </button>
                 <input
-                  formControlName="logosrc"
+                  formControlName="brandLogoUrl"
                   hidden
-                  (input)="selectIcon('logosrc', $event)"
+                  (input)="selectIcon('brandLogoUrl', $event)"
                   #logoInput
                   type="file"
                 />
               </div>
 
               <div
-                *ngIf="!(appStyle.logosrc === originalAppStyle.logosrc)"
+                *ngIf="!(appStyle.brandLogoUrl === originalAppStyle.brandLogoUrl)"
                 class="logo-picker-div"
               >
                 <div
                   class="logo-picker-image"
-                  [style.background-color]="appStyle.backgroundcolor"
+                  [style.background-color]="appStyle.backgroundColor"
                 >
                   <img
                     class="logo-picker-image"
-                    [src]="appStyle.logosrc"
+                    [src]="appStyle.brandLogoUrl"
                     alt="ACME"
                   />
                 </div>
 
                 <div>
                   <mat-icon
-                    (click)="cancelIconSelect('logosrc')"
+                    (click)="cancelIconSelect('brandLogoUrl')"
                     style="
                       margin: 0;
                       margin-left: 20px;
@@ -86,7 +86,7 @@
                 <div class="preview-div">
                   <div
                     class="preview-div-header"
-                    [style.background-color]="appStyle.backgroundcolor"
+                    [style.background-color]="appStyle.backgroundColor"
                   >
                     <div
                       style="
@@ -97,7 +97,7 @@
                         justify-content: center;
                       "
                     >
-                      <img class="image" [src]="appStyle.logosrc" alt="ACME" />
+                      <img class="image" [src]="appStyle.brandLogoUrl" alt="ACME" />
                     </div>
                   </div>
 
@@ -115,37 +115,37 @@
                 The optimal size for creating a favicon is 16x16 pixels
               </p>
 
-              <div *ngIf="appStyle.faviconsrc === originalAppStyle.faviconsrc">
+              <div *ngIf="appStyle.faviconUrl === originalAppStyle.faviconUrl">
                 <button type="button" mat-button (click)="faviconInput.click()">
                   Upload Favicon
                 </button>
                 <input
-                  formControlName="faviconsrc"
+                  formControlName="faviconUrl"
                   hidden
-                  (change)="selectIcon('faviconsrc', $event)"
+                  (change)="selectIcon('faviconUrl', $event)"
                   #faviconInput
                   type="file"
                 />
               </div>
 
               <div
-                *ngIf="!(appStyle.faviconsrc === originalAppStyle.faviconsrc)"
+                *ngIf="!(appStyle.faviconUrl === originalAppStyle.faviconUrl)"
                 class="logo-picker-div"
               >
                 <div
                   class="logo-picker-image"
-                  [style.background-color]="appStyle.backgroundcolor"
+                  [style.background-color]="appStyle.backgroundColor"
                 >
                   <img
                     class="logo-picker-image"
-                    [src]="appStyle.faviconsrc"
+                    [src]="appStyle.faviconUrl"
                     alt="ACME"
                   />
                 </div>
 
                 <div>
                   <mat-icon
-                    (click)="cancelIconSelect('faviconsrc')"
+                    (click)="cancelIconSelect('faviconUrl')"
                     style="
                       margin: 0;
                       margin-left: 20px;
@@ -177,7 +177,7 @@
                         <img
                           class="image"
                           style="margin: 2px"
-                          [src]="appStyle.faviconsrc"
+                          [src]="appStyle.faviconUrl"
                           alt="ACME"
                         />
                       </div>
@@ -199,15 +199,15 @@
               <div class="color-picker-container">
                 <input
                   class="color-picker"
-                  formControlName="backgroundcolor"
+                  formControlName="backgroundColor"
                   type="color"
-                  [value]="appStyle.backgroundcolor"
-                  (input)="changeColor($event.target.value, 'backgroundcolor')"
+                  [value]="appStyle.backgroundColor"
+                  (input)="changeColor($event.target.value, 'backgroundColor')"
                 />
                 <input
-                  formControlName="backgroundcolor"
-                  [value]="appStyle.backgroundcolor"
-                  (input)="changeColor($event.target.value, 'backgroundcolor')"
+                  formControlName="backgroundColor"
+                  [value]="appStyle.backgroundColor"
+                  (input)="changeColor($event.target.value, 'backgroundColor')"
                   type="text"
                 />
               </div>
@@ -216,7 +216,7 @@
                 <div class="preview-div">
                   <div
                     class="preview-div-header"
-                    [style.background-color]="appStyle.backgroundcolor"
+                    [style.background-color]="appStyle.backgroundColor"
                   >
                     <div
                       style="
@@ -227,7 +227,7 @@
                         justify-content: center;
                       "
                     >
-                      <img class="image" [src]="appStyle.logosrc" alt="ACME" />
+                      <img class="image" [src]="appStyle.brandLogoUrl" alt="ACME" />
                     </div>
                   </div>
                   <div class="preview-div-body"></div>
@@ -244,23 +244,23 @@
 
               <div class="color-picker-container">
                 <input
-                  formControlName="actioncolor"
+                  formControlName="actionColor"
                   class="color-picker"
                   type="color"
-                  [value]="appStyle.actioncolor"
-                  (input)="changeColor($event.target.value, 'actioncolor')"
+                  [value]="appStyle.actionColor"
+                  (input)="changeColor($event.target.value, 'actionColor')"
                 />
                 <input
-                  formControlName="actioncolor"
-                  [value]="appStyle.actioncolor"
-                  (input)="changeColor($event.target.value, 'actioncolor')"
+                  formControlName="actionColor"
+                  [value]="appStyle.actionColor"
+                  (input)="changeColor($event.target.value, 'actionColor')"
                   type="text"
                 />
               </div>
 
               <div
                 class="preview-container"
-                [style.background-color]="appStyle.backgroundcolor"
+                [style.background-color]="appStyle.backgroundColor"
                 style="
                   display: flex;
                   align-items: center;
@@ -269,7 +269,7 @@
               >
                 <button
                   type="button"
-                  [style.background-color]="appStyle.actioncolor"
+                  [style.background-color]="appStyle.actionColor"
                   style="
                     color: #e7e7e7;
                     border-radius: 10px;
@@ -480,11 +480,11 @@
                   style="width: 100%"
                   matInput
                   placeholder="https://acme.com"
-                  formControlName="weburl"
-                  (input)="changeLink('weburl', $event.target.value)"
+                  formControlName="websiteUrl"
+                  (input)="changeLink('websiteUrl', $event.target.value)"
                 />
-                <mat-error *ngIf="weburl.invalid">{{
-                  validateError(weburl)
+                <mat-error *ngIf="websiteUrl.invalid">{{
+                  validateError(websiteUrl)
                 }}</mat-error>
               </mat-form-field>
             </div>
@@ -492,7 +492,7 @@
             <div class="preview-container" style="overflow: hidden">
               <div
                 class="preview-div"
-                [style.background-color]="appStyle.backgroundcolor"
+                [style.background-color]="appStyle.backgroundColor"
                 style="top: 0; right: 0; width: fit-content; overflow: hidden"
               >
                 <div
@@ -516,7 +516,7 @@
                   "
                 >
                   <h4>
-                    Go to <a href="#"> {{ links.weburl }}</a>
+                    Go to <a href="#"> {{ links.websiteUrl }}</a>
                   </h4>
                 </div>
               </div>
@@ -542,13 +542,13 @@
               <mat-form-field style="width: 80%" floatLabel="never">
                 <input
                   style="width: 100%"
-                  formControlName="supporturl"
+                  formControlName="supportUrl"
                   matInput
                   placeholder="acme.com/help"
-                  (input)="changeLink('supporturl', $event.target.value)"
+                  (input)="changeLink('supportUrl', $event.target.value)"
                 />
-                <mat-error *ngIf="supporturl.invalid">{{
-                  validateError(supporturl)
+                <mat-error *ngIf="supportUrl.invalid">{{
+                  validateError(supportUrl)
                 }}</mat-error>
               </mat-form-field>
             </div>
@@ -562,13 +562,13 @@
                       <mat-form-field floatLabel="never">
                         <input
                           (input)="
-                            changeLink('supportemail', $event.target.value)
+                            changeLink('supportEmail', $event.target.value)
                           "
-                          formControlName="supportemail"
+                          formControlName="supportEmail"
                           matInput
                         />
-                        <mat-error *ngIf="supportemail.invalid">{{
-                          validateError(supportemail)
+                        <mat-error *ngIf="supportEmail.invalid">{{
+                          validateError(supportEmail)
                         }}</mat-error>
                       </mat-form-field>
                     </div>
@@ -581,13 +581,13 @@
                       <mat-form-field floatLabel="never">
                         <input
                           (input)="
-                            changeLink('supportphone', $event.target.value)
+                            changeLink('supportPhone', $event.target.value)
                           "
-                          formControlName="supportphone"
+                          formControlName="supportPhone"
                           matInput
                         />
-                        <mat-error *ngIf="supportphone.invalid">{{
-                          validateError(supportphone)
+                        <mat-error *ngIf="supportPhone.invalid">{{
+                          validateError(supportPhone)
                         }}</mat-error>
                       </mat-form-field>
                     </div>
@@ -598,7 +598,7 @@
 
             <div
               class="preview-container"
-              [style.background-color]="appStyle.backgroundcolor"
+              [style.background-color]="appStyle.backgroundColor"
             >
               <div
                 class="preview-div-body"
@@ -725,7 +725,7 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-  <!--pre>{{links | json}}</pre>
-  <pre>{{footers.value | json}}</pre>
-  <pre>{{links.footers.length}}</pre-->
+  <pre>{{styleFormGroup.value | json}}</pre>
+  <pre>{{appStyle | json}}</pre>
+  <pre>{{links.footers.length}}</pre>
 </div>

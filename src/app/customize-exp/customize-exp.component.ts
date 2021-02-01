@@ -34,19 +34,19 @@ export class CustomizeExpComponent implements OnInit {
   };
 
   styleFormGroup: FormGroup;
-  logosrc: FormControl;
-  faviconsrc: FormControl;
-  backgroundcolor: FormControl;
-  actioncolor: FormControl;
+  brandLogoUrl: FormControl;
+  faviconUrl: FormControl;
+  backgroundColor: FormControl;
+  actionColor: FormControl;
 
   domainFormGroup: FormGroup;
   domain: FormControl;
 
   linksFormGroup: FormGroup;
-  weburl: FormControl;
-  supporturl: FormControl;
-  supportemail: FormControl;
-  supportphone: FormControl;
+  websiteUrl: FormControl;
+  supportUrl: FormControl;
+  supportEmail: FormControl;
+  supportPhone: FormControl;
   footers: FormArray;
 
   constructor(
@@ -72,29 +72,29 @@ export class CustomizeExpComponent implements OnInit {
   }
 
   createFormControls = () => {
-    this.logosrc = new FormControl('');
-    this.faviconsrc = new FormControl('');
-    this.backgroundcolor = new FormControl(this.appStyle.backgroundcolor);
-    this.actioncolor = new FormControl(this.appStyle.actioncolor);
+    this.brandLogoUrl = new FormControl('');
+    this.faviconUrl = new FormControl('');
+    this.backgroundColor = new FormControl(this.appStyle.backgroundColor);
+    this.actionColor = new FormControl(this.appStyle.actionColor);
 
     this.domain = new FormControl('www.google.com', [
       Validators.required,
       Validators.pattern(this.urlpattern),
     ]);
 
-    this.weburl = new FormControl('https://', [
+    this.websiteUrl = new FormControl('https://', [
       Validators.required,
       Validators.pattern(this.urlpattern),
     ]);
-    this.supporturl = new FormControl('', [
+    this.supportUrl = new FormControl('', [
       Validators.required,
       Validators.pattern(this.urlpattern),
     ]);
-    this.supportemail = new FormControl('', [
+    this.supportEmail = new FormControl('', [
       Validators.required,
       Validators.email,
     ]);
-    this.supportphone = new FormControl('', [
+    this.supportPhone = new FormControl('', [
       Validators.required,
       Validators.pattern(this.phonepattern),
     ]);
@@ -103,10 +103,10 @@ export class CustomizeExpComponent implements OnInit {
 
   createFormGroups = () => {
     this.styleFormGroup = new FormGroup({
-      logosrc: this.logosrc,
-      faviconsrc: this.faviconsrc,
-      backgroundcolor: this.backgroundcolor,
-      actioncolor: this.actioncolor,
+      brandLogoUrl: this.brandLogoUrl,
+      faviconUrl: this.faviconUrl,
+      backgroundColor: this.backgroundColor,
+      actionColor: this.actionColor,
     });
 
     this.domainFormGroup = new FormGroup({
@@ -114,10 +114,10 @@ export class CustomizeExpComponent implements OnInit {
     });
 
     this.linksFormGroup = new FormGroup({
-      weburl: this.weburl,
-      supporturl: this.supporturl,
-      supportemail: this.supportemail,
-      supportphone: this.supportphone,
+      websiteUrl: this.websiteUrl,
+      supportUrl: this.supportUrl,
+      supportEmail: this.supportEmail,
+      supportPhone: this.supportPhone,
       footers: this.footers,
     });
   };
@@ -167,8 +167,8 @@ export class CustomizeExpComponent implements OnInit {
           this.backendService.assignInterfaces();
 
           this.styleFormGroup.reset({
-            backgroundcolor: this.originalAppStyle.backgroundcolor,
-            actioncolor: this.originalAppStyle.actioncolor,
+            backgroundColor: this.originalAppStyle.backgroundColor,
+            actionColor: this.originalAppStyle.actionColor,
           });
 
           //this.backendService.setStyle(this.originalAppStyle);

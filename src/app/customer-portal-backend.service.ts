@@ -41,18 +41,18 @@ export class CustomerPortalBackendService {
   );
 
   appStyle$: BehaviorSubject<AppStyle> = new BehaviorSubject({
-    logosrc: this.poeSettings.value['brandLogoUrl'],
-    faviconsrc: '',
-    backgroundcolor: this.poeSettings.value['backgroundColor'],
-    actioncolor: this.poeSettings.value['actionColor'],
-    notifcolor: '#14b6ac',
+    brandLogoUrl: this.poeSettings.value['brandLogoUrl'],
+    faviconUrl: '',
+    backgroundColor: this.poeSettings.value['backgroundColor'],
+    actionColor: this.poeSettings.value['actionColor'],
+    noticeBackgroundColor: '#14b6ac',
   });
 
   links$: BehaviorSubject<Links> = new BehaviorSubject({
-    weburl: '',
-    supporturl: '',
-    supportemail: '',
-    supportphone: '',
+    websiteUrl: '',
+    supportUrl: '',
+    supportEmail: '',
+    supportPhone: '',
     footers: [{ name: '', url: '' }],
   });
 
@@ -71,18 +71,18 @@ export class CustomerPortalBackendService {
 
   assignInterfaces = (poeData = this.poeSettings.value) => {
     this.appStyle$.next({
-      backgroundcolor: poeData['backgroundColor'],
-      actioncolor: poeData['actionColor'],
-      notifcolor: poeData['noticeBackgroundColor'],
-      logosrc: poeData['brandLogoUrl'],
-      faviconsrc: poeData['faviconUrl'],
+      backgroundColor: poeData['backgroundColor'],
+      actionColor: poeData['actionColor'],
+      noticeBackgroundColor: poeData['noticeBackgroundColor'],
+      brandLogoUrl: poeData['brandLogoUrl'],
+      faviconUrl: poeData['faviconUrl'],
     });
 
     this.links$.next({
-      weburl: poeData['websiteUrl'],
-      supporturl: poeData['supportUrl'],
-      supportemail: poeData['supportEmail'],
-      supportphone: poeData['supportPhone'],
+      websiteUrl: poeData['websiteUrl'],
+      supportUrl: poeData['supportUrl'],
+      supportEmail: poeData['supportEmail'],
+      supportPhone: poeData['supportPhone'],
       footers: [],
     });
   };
@@ -97,7 +97,7 @@ export class CustomerPortalBackendService {
 
           //console.log('Default POE\n', this.defaultPoeSettings);
           this.poeSettings.next(data);
-          //console.log('POE Settings\n', this.poeSettings.value);
+          console.log('POE Settings\n', this.poeSettings.value);
 
           this.assignInterfaces(data);
         },

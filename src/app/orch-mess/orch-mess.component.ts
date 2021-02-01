@@ -256,7 +256,7 @@ export class OrchMessComponent implements OnInit {
   showDialog() {
     this.dialog.open(NotifModalComponent, {
       panelClass: 'notif-modal',
-      data: { logosrc: this.appStyle.logosrc },
+      data: { logosrc: this.appStyle['brandLogoUrl'] },
     });
   }
 }

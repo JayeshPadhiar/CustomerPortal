@@ -51,11 +51,11 @@
             >
               <div
                 style="height: 100%"
-                [style.background-color]="appStyle.backgroundcolor"
+                [style.background-color]="appStyle.backgroundColor"
               >
                 <div
                   class="preview-div-notif"
-                  [style.background-color]="appStyle.notifcolor"
+                  [style.background-color]="appStyle.noticeBackgroundColor"
                 >{{notif.message}}</div>
               </div>
             </div>
@@ -67,10 +67,10 @@
               <input
                 class="color-picker"
                 type="color"
-                [value]="appStyle.notifcolor"
-                (input)="changeNotifColor($event.target.value, 'notifcolor')"
+                [value]="appStyle.noticeBackgroundColor"
+                (input)="changeNotifColor($event.target.value, 'noticeBackgroundColor')"
               />
-              <input [(ngModel)]="appStyle.notifcolor" type="text" />
+              <input [(ngModel)]="appStyle.noticeBackgroundColor" type="text" />
             </div>
 
             <div *ngIf="false">
@@ -89,6 +89,9 @@
         </div>
       </div>
     </mat-expansion-panel>
+
+  <pre>{{appStyle | json}}</pre>
+
 
     <mat-expansion-panel (opened)="expansions.showMessage = true"
     (closed)="expansions.showMessage = false"
@@ -171,4 +174,6 @@
       <div class="accordion-content"></div>
     </mat-expansion-panel>
   </mat-accordion>
+
+
 </div>
