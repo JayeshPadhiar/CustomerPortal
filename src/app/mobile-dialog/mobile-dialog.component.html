@@ -1,20 +1,378 @@
-<h2 mat-dialog-title style="width: 100%">
-  <mat-icon [mat-dialog-close]="true" style="float: right">close</mat-icon>
-  Preview
-</h2>
+<div
+  style="
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  "
+>
+  <h2 mat-dialog-title style="margin: 10px">Preview</h2>
+  <mat-icon
+    style="position: relative; align-self: flex-end"
+    [mat-dialog-close]="true"
+    style="margin: 5px"
+    >close</mat-icon
+  >
+</div>
 <mat-divider></mat-divider>
-<mat-dialog-content class="mat-typography">
-  <div class="modal-preview">
-    <div class="notif-body">
-      <p style="margin: 0;">Your message will be displayed here</p>
+<mat-dialog-content
+  class="mat-typography"
+  [style.background-color]="appStyle.backgroundColor"
+>
+  <div
+    class="modal-preview"
+    [style.background-color]="appStyle.backgroundColor"
+  >
+    <div
+      *ngIf="notif['show']"
+      class="notif-body"
+      [style.background-color]="appStyle.noticeBackgroundColor"
+    >
+      <p>{{ notif.message }}</p>
     </div>
 
-    <div class="modal-header">
-      
+    <div>
+      <img style="width: 154px" [src]="appStyle.brandLogoUrl" alt="ACME" />
     </div>
-    
+
     <div class="main-body">
-      hello
+      <div class="order-summary">
+        <div
+          class="mobile-container"
+          style="width: 360px"
+          [style.background-color]="appStyle.backgroundColor"
+        >
+          <div>
+            <div
+              #productList
+              class="body"
+              style="
+                background: #ffffff;
+                border: 1px solid #e0e0e0;
+                box-sizing: border-box;
+                border-radius: 12px;
+                padding: 27px 20px 0px 30px;
+              "
+            >
+              <div>
+                <div class="xtitle" style="margin: 0;">Order Summary</div>
+                <div class="pre-title" style="margin: 14px 0 16px">
+                  You purchased <b>2 items</b> in order <b>BB3648390</b> on
+                  <b>2 Oct, 2020</b> for <b>INR 1995</b> via
+                  <b>Cash on Delivery</b>
+                </div>
+
+                <div
+                  style="
+                    font-weight: 600;
+                    font-size: 10px;
+                    line-height: 12px;
+                    letter-spacing: 0.02em;
+                    color: #bdbdbd;
+                  "
+                >
+                  ITEMS IN THIS ORDER
+                </div>
+
+                <div>
+                  <div
+                    (click)="productListView = false"
+                    class="item-list-container"
+                  >
+                    <img
+                      class="product-img"
+                      style="margin: 0 5px"
+                      src="../../assets/img/shippingImg.png"
+                    />
+                    <div class="mobile-content" style="display: inline-block">
+                      Regular Fit Navy Shirt
+                    </div>
+
+                    <div class="arrow">
+                      <mat-icon style="height: fit-content"
+                        >keyboard_arrow_right</mat-icon
+                      >
+                    </div>
+                  </div>
+
+                  <div class="item-list-container">
+                    <img
+                      class="product-img"
+                      style="margin: 0 5px"
+                      src="../../assets/img/shippingImg2.png"
+                    />
+                    <div class="mobile-content" style="display: inline-block">
+                      Regular Fit Navy Shirt
+                    </div>
+
+                    <div class="arrow">
+                      <mat-icon style="height: fit-content"
+                        >keyboard_arrow_right</mat-icon
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="xtitle" style="margin: 28px 0 16px">
+                  Delivery Details
+                </div>
+
+                <div
+                  style="
+                    font-family: 'Work Sans', sans-serif;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 10px;
+                    line-height: 12px;
+                    letter-spacing: 0.02em;
+                    text-transform: uppercase;
+                    color: #828282;
+                  "
+                >
+                  Deepak Khetan
+                </div>
+
+                <div class="pre-title" style="margin: 14px 0 16px">
+                  +91 9999900000 | deepak.khetan@gmail.com
+                </div>
+                <div
+                  class="pre-title"
+                  style="font-weight: normal; margin: 14px 0 16px"
+                >
+                  G 55, G block, South city II, Sector 50, Gurgaon Gurugram -
+                  122018
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-details">
+        <div
+          class="mobile-container"
+          style="width: 872px"
+          [style.background-color]="appStyle.backgroundColor"
+        >
+          <div>
+            <div class="body" #productDetails>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: left;
+                  height: 70px;
+                "
+              >
+                <div class="xtitle">Item Details</div>
+                <div
+                  style="
+                    width: 54px;
+                    height: 23px;
+                    margin-left: auto;
+                    margin-right: 32px;
+                    font-family: 'Work Sans', sans-serif;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 14px;
+                    line-height: 145%;
+                    color: #bdbdbd;
+                  "
+                >
+                  Help?
+                </div>
+              </div>
+
+              <div
+                style="
+                  background: #ffffff;
+                  border: 1px solid #e0e0e0;
+                  box-sizing: border-box;
+                  border-radius: 12px;
+                  height: 480px;
+                "
+              >
+                <mat-horizontal-stepper class="mobile-stepper" #stepper>
+                  <ng-template matStepperIcon="edit">
+                    <mat-icon>edit</mat-icon>
+                  </ng-template>
+                  <ng-template matStepperIcon="home">
+                    <mat-icon>home</mat-icon>
+                  </ng-template>
+                  <ng-template matStepperIcon="form">
+                    <mat-icon>format_align_center</mat-icon>
+                  </ng-template>
+                  <ng-template matStepperIcon="last">
+                    <mat-icon>done_all</mat-icon>
+                  </ng-template>
+
+                  <ng-template matStepperIcon="home">
+                    <mat-icon>home</mat-icon>
+                  </ng-template>
+                  <ng-template matStepperIcon="form">
+                    <mat-icon>format_align_center</mat-icon>
+                  </ng-template>
+                  <ng-template matStepperIcon="last">
+                    <mat-icon>done_all</mat-icon>
+                  </ng-template>
+
+                  <mat-step state="edit">
+                    <ng-template matStepLabel>
+                      <div class="mobile-stepper-title">Shipping Soon</div>
+                      <div class="mobile-stepper-title-desc">
+                        Arriving by Sat, 24 Oct
+                      </div>
+                    </ng-template>
+                    <div>
+                      <div
+                        style="
+                          margin: 10px 0;
+                          display: flex;
+                          width: 262.71px;
+                          align-items: center;
+                          background: #ffffff;
+                          border-radius: 4px;
+                          border: 1px solid #f6f6f6;
+                        "
+                      >
+                        <img
+                          style="margin: 5px; width: 57.67px; height: 69.15px"
+                          src="../../assets/img/shippingImg.png"
+                        />
+                        <div
+                          class="mobile-content"
+                          style="display: inline-block"
+                        >
+                          Regular Fit Navy Shirt
+                        </div>
+                      </div>
+
+                      <div
+                        class="mobile-content"
+                        style="
+                          display: block;
+                          width: 255.29px;
+                          height: 45px;
+
+                          /* Small */
+
+                          font-family: Work Sans;
+                          font-style: normal;
+                          font-weight: normal;
+                          font-size: 10px;
+                          line-height: 145%;
+                          /* or 15px */
+
+                          letter-spacing: 0.02em;
+
+                          /* Dark Gray */
+
+                          color: #828282;
+                        "
+                      >
+                        <p>
+                          Your item is ready to be shipped by our courier
+                          partner. You will be notified as soon as it is
+                          dispatched.
+                        </p>
+                      </div>
+
+                      <button
+                        [style.background-color]="appStyle.actionColor"
+                        class="mobile-button"
+                        mat-flat-button
+                      >
+                        Cancel Order
+                      </button>
+                    </div>
+                  </mat-step>
+
+                  <mat-step state="edit">
+                    <ng-template matStepLabel>
+                      <div class="mobile-stepper-title">In transit</div>
+                      <div class="mobile-stepper-title-desc">
+                        Arriving by Sat, 24 Oct
+                      </div>
+                    </ng-template>
+                    <div>
+                      <div
+                        style="
+                          margin: 10px 0;
+                          display: flex;
+                          width: 262.71px;
+                          align-items: center;
+                          background: #ffffff;
+                          border-radius: 4px;
+                          border: 1px solid #f6f6f6;
+                        "
+                      >
+                        <img
+                          style="margin: 5px"
+                          src="../../assets/img/shippingImg.png"
+                        />
+                        <div
+                          class="mobile-content"
+                          style="display: inline-block"
+                        >
+                          Regular Fit Navy Shirt
+                        </div>
+                      </div>
+
+                      <div
+                        class="mobile-content"
+                        style="
+                          width: 264px;
+
+                          /* white */
+
+                          background: #ffffff;
+                          /* Lightest Gray */
+
+                          border: 1px solid #f6f6f6;
+                          box-sizing: border-box;
+                          border-radius: 4px;
+                        "
+                      >
+                        <p>
+                          Your item has been picked up by our courier partner.
+                          You will be notified as soon as it is out for delivery
+                        </p>
+                        <p>
+                          Your order has been shipped by Bluedart logistics with
+                          tracking number #xxxxxxx
+                        </p>
+                        <div class="note">
+                          <p>
+                            Note: Expected delivery date is delayed. We will
+                            keep you updated!
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-step>
+
+                  <mat-step state="last">
+                    <ng-template matStepLabel>Delivered</ng-template>
+                    <p>You are now done.</p>
+                    <div></div>
+                  </mat-step>
+                </mat-horizontal-stepper>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div *ngIf="links.footers.length > 0" class="mobile-footer-links">
+        <div *ngIf="links.websiteUrl" class="mobile-footer-url">
+          Go to &nbsp;<a href="#">{{ links.websiteUrl }}</a>
+        </div>
+        <div *ngFor="let link of links.footers" class="footer-link">
+          {{ link.name }}
+        </div>
+      </div>
     </div>
   </div>
 </mat-dialog-content>

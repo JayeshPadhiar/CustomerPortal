@@ -8,6 +8,7 @@ import { CustomerPortalBackendService } from '../customer-portal-backend.service
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MobileComponent } from '../mobile/mobile.component';
 import { style } from '@angular/animations';
+import { resourceUsage } from 'process';
 
 @Component({
   selector: 'app-customize-exp',
@@ -40,7 +41,7 @@ export class CustomizeExpComponent implements OnInit {
   actionColor: FormControl;
 
   domainFormGroup: FormGroup;
-  domain: FormControl;
+  trackingPageDomain: FormControl;
 
   linksFormGroup: FormGroup;
   websiteUrl: FormControl;
@@ -49,22 +50,57 @@ export class CustomizeExpComponent implements OnInit {
   supportPhone: FormControl;
   footers: FormArray;
 
+  poeFetched: boolean;
+  poeSettings : object;
+
   constructor(
     private dialog: MatDialog,
     public backendService: CustomerPortalBackendService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     //this.footerLinks.push(this.link);
 
-    this.backendService.appStyle$
-      .asObservable()
-      .subscribe((style) => (this.appStyle = Object.assign({}, style)));
+    this.initialize();
+
+    this.backendService.poeFetched.subscribe((fetched) => {
+      this.poeFetched = fetched;
+    });
+
+    if (this.backendService.poeFetched.getValue()) {
+
+      console.log('poeSettings already fetched')
+      this.initialize();
+    } else {
+      this.backendService.getPoeSettings().subscribe({
+        next: (data) => {
+          if (data['channelId'] === '0') {
+            console.log('channelID not available. Workspace Settings');
+          } else {
+            console.log('channelId available. Default Channel Settings');
+          }
+          this.backendService.initPoe(data);
+
+          this.initialize();
+        },
+        error: (error) => {
+          console.error('There was an error!\n', error);
+        },
+      });
+    }
+
+    console.log('val ' + this.backendService.poeFetched.value);
+  }
+
+  initialize() {
+    this.backendService.appStyle$.asObservable().subscribe((style) => {
+      this.appStyle = Object.assign({}, style);
+    });
     this.originalAppStyle = Object.assign({}, this.appStyle);
 
-    this.backendService.links$
-      .asObservable()
-      .subscribe((links) => (this.links = Object.assign({}, links)));
+    this.backendService.links$.asObservable().subscribe((links) => {
+      this.links = Object.assign({}, links);
+    });
     this.originalLinks = Object.assign({}, this.links);
 
     this.createFormControls();
@@ -74,27 +110,28 @@ export class CustomizeExpComponent implements OnInit {
   createFormControls = () => {
     this.brandLogoUrl = new FormControl('');
     this.faviconUrl = new FormControl('');
-    this.backgroundColor = new FormControl(this.appStyle.backgroundColor);
-    this.actionColor = new FormControl(this.appStyle.actionColor);
+    this.backgroundColor = new FormControl(this.appStyle['backgroundColor']);
+    this.actionColor = new FormControl(this.appStyle['actionColor']);
 
-    this.domain = new FormControl('www.google.com', [
+    this.trackingPageDomain = new FormControl('www.google.com', [
       Validators.required,
+
       Validators.pattern(this.urlpattern),
     ]);
 
-    this.websiteUrl = new FormControl('https://', [
+    this.websiteUrl = new FormControl(this.links['websiteUrl'], [
       Validators.required,
       Validators.pattern(this.urlpattern),
     ]);
-    this.supportUrl = new FormControl('', [
+    this.supportUrl = new FormControl(this.links['supportUrl'], [
       Validators.required,
       Validators.pattern(this.urlpattern),
     ]);
-    this.supportEmail = new FormControl('', [
+    this.supportEmail = new FormControl(this.links['supportEmail'], [
       Validators.required,
       Validators.email,
     ]);
-    this.supportPhone = new FormControl('', [
+    this.supportPhone = new FormControl(this.links['supportPhone'], [
       Validators.required,
       Validators.pattern(this.phonepattern),
     ]);
@@ -110,7 +147,7 @@ export class CustomizeExpComponent implements OnInit {
     });
 
     this.domainFormGroup = new FormGroup({
-      domain: this.domain,
+      trackingPageDomain: this.trackingPageDomain,
     });
 
     this.linksFormGroup = new FormGroup({
@@ -192,10 +229,11 @@ export class CustomizeExpComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((domain: String) => {
       if (domain) {
-        console.log(domain);
-        this.domainFormGroup.patchValue({ domain: domain });
+        this.trackingPageDomain.patchValue(domain);
+        this.trackingPageDomain.markAsDirty();
+        console.log(this.domainFormGroup);
       } else {
-        console.log('no domain added');
+        console.log('No domain added');
       }
     });
   }

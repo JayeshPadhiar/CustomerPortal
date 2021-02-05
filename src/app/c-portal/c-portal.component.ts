@@ -15,6 +15,8 @@ import { CustomerPortalBackendService } from '../customer-portal-backend.service
 export class CPortalComponent implements OnInit {
   panelOpenState = false;
 
+  poeFetched: boolean;
+
   constructor(
     private dialog: MatDialog,
     private backendService: CustomerPortalBackendService
@@ -29,6 +31,7 @@ export class CPortalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.backendService.poeFetched.asObservable().subscribe(fetched => this.poeFetched = fetched)
     
   }
 }

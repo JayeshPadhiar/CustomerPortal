@@ -24,6 +24,7 @@ import { NotifModalComponent } from './../notif-modal/notif-modal.component';
 import { Notification } from './orch-mess.model';
 import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 import { AppStyle } from '../c-portal/cportal.model';
+//import { settings } from 'cluster';
 
 @Component({
   selector: 'app-orch-mess',
@@ -31,6 +32,9 @@ import { AppStyle } from '../c-portal/cportal.model';
   styleUrls: ['./orch-mess.component.css', '../app.component.css'],
 })
 export class OrchMessComponent implements OnInit {
+
+  poeFetched: boolean = false;
+  poeSettings: object;
 
   orderNotifs: Array<Notification> = [
     {
@@ -177,18 +181,61 @@ export class OrchMessComponent implements OnInit {
   }
 
   channelFormGroup: FormGroup;
-  emailsender: FormControl;
-  emailaddr: FormControl;
+  senderName: FormControl;
+  senderEmail: FormControl;
+  smsSenderName: string;
+
+  ngOnInit(): void {
+
+    this.initialize();
+
+    this.backendService.poeFetched.subscribe((fetched) => {
+      this.poeFetched = fetched;
+    });
+
+    if (this.backendService.poeFetched.getValue()) {
+      this.initialize();
+    } else {
+      this.backendService.getPoeSettings().subscribe({
+        next: (data) => {
+          if (data['channelId'] === '0') {
+            console.log('channelID not available. Workspace Settings');
+          } else {
+            console.log('channelId available. Default Channel Settings');
+          }
+          this.backendService.initPoe(data);
+
+          this.initialize();
+        },
+        error: (error) => {
+          console.error('There was an error!\n', error);
+        },
+      });
+    }
+  }
+
+
+  initialize() {
+
+    this.backendService.getAppStyle().subscribe(style => this.appStyle = style)
+    this.backendService.poeSettings.asObservable().subscribe(settings => this.poeSettings = settings)
+
+    this.createFormControls();
+    this.createFormGroups();
+  }
 
   createFormControls = () => {
-    this.emailsender = new FormControl('');
-    this.emailaddr = new FormControl('');
+    this.senderName = new FormControl(this.poeSettings['senderName']);
+    this.senderEmail = new FormControl(this.poeSettings['senderEmail']);
+
+
+    this.smsSenderName = this.poeSettings['smsSenderName'];
   }
 
   createFormGroups = () => {
     this.channelFormGroup = new FormGroup({
-      emailsender: this.emailsender,
-      emailaddr: this.emailaddr
+      senderName: this.senderName,
+      senderEmail: this.senderEmail
     })
   }
 
@@ -215,8 +262,7 @@ export class OrchMessComponent implements OnInit {
       this.confirmDiscard(form, exp);
     } else {
       console.log("collapsing")
-      this.expansions[exp] = false;
-      
+      this.expansions[exp] = false; 
     }
   }
   
@@ -239,19 +285,13 @@ export class OrchMessComponent implements OnInit {
   }
 
   resetForm(form: FormGroup) {
-    form.reset();
+    form.reset({
+      senderEmail: this.poeSettings['senderEmail'],
+      senderName: this.poeSettings['senderName']
+    });
   }
-
 
   constructor(private dialog: MatDialog, private backendService: CustomerPortalBackendService) {}
-
-  ngOnInit(): void {
-
-    this.backendService.getAppStyle().subscribe(style => this.appStyle = style)
-
-    this.createFormControls();
-    this.createFormGroups();
-  }
 
   showDialog() {
     this.dialog.open(NotifModalComponent, {

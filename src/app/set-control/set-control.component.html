@@ -15,10 +15,10 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon style="height: fit-content" *ngIf="!cancelPolicy.expanded"
+            <mat-icon class="indicator" *ngIf="!cancelPolicy.expanded"
               >keyboard_arrow_right</mat-icon
             >
-            <mat-icon style="height: fit-content" *ngIf="cancelPolicy.expanded"
+            <mat-icon class="indicator-icon-selected" *ngIf="cancelPolicy.expanded"
               >keyboard_arrow_down</mat-icon
             >
           </div>
@@ -27,11 +27,11 @@
 
       <div class="accordion-content">
         <div>
+          <form (ngSubmit)="submit()" [formGroup]="cancellationPolicy">
           <h4 class="topic">
             Customers are able to cancel their order before its marked
             <br />"ready to ship"
           </h4>
-          <!--mat-slide-toggle>On</mat-slide-toggle-->
 
           <br />
 
@@ -65,17 +65,17 @@
               cancellation request
             </p>
             <div>
-              <table class="table-container">
+              <table class="table-container"  formArrayName="cancellationReasons">
                 <tbody>
-                  <tr *ngFor="let creason of creasons; let i = index">
+                  <tr *ngFor="let creason of getReasons.controls; let i = index">
                     <td>
                       <div class="form-container">
                         <mat-form-field
                           floatLabel="never"
-                          style="margin: 0 10px; color: #343434;"
+                          style="margin: 0 10px; color: #343434"
                         >
                           <input
-                            [(ngModel)]="creasons[i].reason"
+                          [formControlName]="i"
                             matInput
                             placeholder="Reason"
                           />
@@ -85,18 +85,29 @@
 
                     <td align="center" valign="center">
                       <mat-icon
-                        (click)="deleteRow(creasons, i)"
+                        (click)="deleteReason(i)"
                         svgIcon="deletebin"
                       ></mat-icon>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: row;
+                          justify-content: space-between;
+                        "
+                      >
                         <button
-                          (click)="addReason(creasons)"
+                          (click)="addReason()"
                           mat-flat-button
-                          style="color: #FA5C5D; border: none; margin: 0; padding: 0"
+                          style="
+                            color: #fa5c5d;
+                            border: none;
+                            margin: 0;
+                            padding: 0;
+                          "
                         >
                           + Add reason
                         </button>
@@ -107,6 +118,7 @@
                 </tbody>
               </table>
             </div>
+
             <br />
 
             <h4 class="topic">Refund policy on cancellation</h4>
@@ -114,15 +126,21 @@
               How do you refund customers for cancelling their prepaid order
             </p>
 
-            <div style="display: flex; flex-direction: column">
-              <mat-checkbox checked="true">
-                <p style="margin: auto 0;">Customers get a refund to their original payment method</p>
+            <div style="display: flex; flex-direction: column" formGroupName="cancellationRefundPolicy">
+              <mat-checkbox formControlName="originalPaymentMode" checked="true">
+                <p style="margin: auto 0">
+                  Customers get a refund to their original payment method
+                </p>
               </mat-checkbox>
-              <mat-checkbox>
-                <p style="margin: auto 0;">Customers get a refund in their desired bank account</p>
+              <mat-checkbox formControlName="bank">
+                <p style="margin: auto 0">
+                  Customers get a refund in their desired bank account
+                </p>
               </mat-checkbox>
-              <mat-checkbox>
-                <p style="margin: auto 0;">Customers get a refund as score credit</p>
+              <mat-checkbox formControlName="storeCredit">
+                <p style="margin: auto 0">
+                  Customers get a refund as score credit
+                </p>
               </mat-checkbox>
             </div>
           </div>
@@ -131,9 +149,12 @@
             <button class="save-button" mat-button>Save</button>
             <button mat-button>Cancel</button>
           </div>
+        </form>
         </div>
       </div>
+
     </mat-expansion-panel>
+    <!--pre>{{cancellationPolicy.value | json}}</pre-->
 
     <mat-expansion-panel
       (opened)="expansions.returnPolicy = true"
@@ -149,16 +170,18 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon style="height: fit-content" *ngIf="!returnPolicy.expanded"
+            <mat-icon class="indicator-icon" *ngIf="!returnPolicy.expanded"
               >keyboard_arrow_right</mat-icon
             >
-            <mat-icon style="height: fit-content" *ngIf="returnPolicy.expanded"
+            <mat-icon class="indicator-icon-selected" *ngIf="returnPolicy.expanded"
               >keyboard_arrow_down</mat-icon
             >
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content">
+
+
         <div>
           <h4 class="topic">
             Customers will be able to return their purchases as per the return
@@ -171,7 +194,7 @@
           </label>
 
           <br />
-          <br/>
+          <br />
 
           <div *ngIf="togBtn2.checked">
             <h5>
@@ -259,7 +282,12 @@
                       <button
                         (click)="addCondition()"
                         mat-flat-button
-                        style="color: #FA5C5D; border: none; margin: 0; padding: 0"
+                        style="
+                          color: #fa5c5d;
+                          border: none;
+                          margin: 0;
+                          padding: 0;
+                        "
                       >
                         + Add reason
                       </button>
@@ -296,7 +324,7 @@
                         <div class="form-container">
                           <mat-form-field
                             floatLabel="never"
-                            style="margin: 0 10px; color: #343434;"
+                            style="margin: 0 10px; color: #343434"
                           >
                             <input
                               [(ngModel)]="rreasons[i].reason"
@@ -316,11 +344,22 @@
                     </tr>
                     <tr>
                       <td>
-                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <div
+                          style="
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                          "
+                        >
                           <button
                             (click)="addReason(rreasons)"
                             mat-flat-button
-                            style="color: #FA5C5D; border: none; margin: 0; padding: 0"
+                            style="
+                              color: #fa5c5d;
+                              border: none;
+                              margin: 0;
+                              padding: 0;
+                            "
                           >
                             + Add reason
                           </button>
@@ -340,22 +379,22 @@
               </p>
               <div style="display: flex; flex-direction: column">
                 <mat-checkbox checked="true">
-                  <p style="margin: auto 0;">Customers can receive a refund</p>
+                  <p style="margin: auto 0">Customers can receive a refund</p>
                 </mat-checkbox>
                 <mat-checkbox>
-                  <p style="margin: auto 0;">Customers can make an exchange</p>
+                  <p style="margin: auto 0">Customers can make an exchange</p>
                 </mat-checkbox>
               </div>
             </div>
 
-            <br/>
+            <br />
             <h4 class="topic">Refund policy for returns</h4>
-            <br/>
-
+            <br />
 
             <div>
               <h5 class="sub-topic">Allow refund against COD orders</h5>
-              <br /> <br>
+              <br />
+              <br />
 
               <label class="switch">
                 <input
@@ -370,19 +409,18 @@
               <div *ngIf="codrefund.checked">
                 <div style="display: flex; flex-direction: column">
                   <mat-checkbox checked="true">
-                    <p style="margin: auto 0;">
+                    <p style="margin: auto 0">
                       Customers can enter their bank account details to receive
                       a refund
                     </p>
                   </mat-checkbox>
                   <mat-checkbox>
-                    <p style="margin: auto 0;">Customers get credit</p>
+                    <p style="margin: auto 0">Customers get credit</p>
                   </mat-checkbox>
                 </div>
               </div>
 
-              <br /><br/>
-
+              <br /><br />
             </div>
 
             <div>
@@ -403,15 +441,17 @@
               <div *ngIf="pprefund.checked">
                 <div style="display: flex; flex-direction: column">
                   <mat-checkbox checked="true">
-                    <p style="margin: auto 0;">
+                    <p style="margin: auto 0">
                       Customers get a refund to their original payment method
                     </p>
                   </mat-checkbox>
                   <mat-checkbox>
-                    <p style="margin: auto 0;">Customers get a refund in their desired bank account</p>
+                    <p style="margin: auto 0">
+                      Customers get a refund in their desired bank account
+                    </p>
                   </mat-checkbox>
                   <mat-checkbox>
-                    <p style="margin: auto 0;">Customers get store credit</p>
+                    <p style="margin: auto 0">Customers get store credit</p>
                   </mat-checkbox>
                 </div>
               </div>

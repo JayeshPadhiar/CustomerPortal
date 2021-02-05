@@ -16,8 +16,8 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon style="height: fit-content;" *ngIf="!displayNotice.expanded">keyboard_arrow_right</mat-icon>
-            <mat-icon style="height: fit-content;" *ngIf="displayNotice.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon class="indicator-icon" *ngIf="!displayNotice.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="displayNotice.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -90,7 +90,7 @@
       </div>
     </mat-expansion-panel>
 
-  <pre>{{appStyle | json}}</pre>
+  <!--pre>{{appStyle | json}}</pre-->
 
 
     <mat-expansion-panel (opened)="expansions.showMessage = true"
@@ -108,8 +108,8 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon style="height: fit-content;" *ngIf="!showMessage.expanded">keyboard_arrow_right</mat-icon>
-            <mat-icon style="height: fit-content;" *ngIf="showMessage.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon class="indicator-icon" *ngIf="!showMessage.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="showMessage.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -165,8 +165,8 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon style="height: fit-content;" *ngIf="!appStore.expanded">keyboard_arrow_right</mat-icon>
-            <mat-icon style="height: fit-content;" *ngIf="appStore.expanded">keyboard_arrow_down</mat-icon>
+            <mat-icon class="indicator-icon" *ngIf="!appStore.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="appStore.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>

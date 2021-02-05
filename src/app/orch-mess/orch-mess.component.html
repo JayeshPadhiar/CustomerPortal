@@ -18,11 +18,11 @@
         <mat-panel-description>
           <div class="indicator">
             <mat-icon
-              style="height: fit-content"
+            class="indicator-icon"
               *ngIf="!defineChannel.expanded"
               >keyboard_arrow_right</mat-icon
             >
-            <mat-icon style="height: fit-content" *ngIf="defineChannel.expanded"
+            <mat-icon class="indicator-icon-selected" *ngIf="defineChannel.expanded"
               >keyboard_arrow_down</mat-icon
             >
           </div>
@@ -55,7 +55,7 @@
                 <input
                   #emailsendername
                   (input)="(emailsendername)"
-                  formControlName="emailsender"
+                  formControlName="senderName"
                   matInput
                   placeholder="Acme"
                 />
@@ -99,10 +99,10 @@
             <div class="form-container">
               <mat-form-field style="width: 100%" floatLabel="never">
                 <input
-                  #emailaddr
-                  (input)="(emailaddr)"
+                  #senderEmail
+                  (input)="(senderEmail)"
                   matInput
-                  formControlName="emailaddr"
+                  formControlName="senderEmail"
                   placeholder="care@acme.com"
                 />
               </mat-form-field>
@@ -125,7 +125,7 @@
                 <div style="color: #999999; flex-direction: column">
                   from: {{ emailsendername.value }} &lt;
                   <div style="display: inline; color: black">
-                    {{ emailaddr.value }}
+                    {{ senderEmail.value }}
                   </div>
                   &gt;
                 </div>
@@ -160,7 +160,7 @@
                   margin-bottom: 4px;
                 "
               >
-                ESHOPB
+                {{smsSenderName}}
               </div>
               <div
                 style="
@@ -213,10 +213,10 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon style="height: fit-content" *ngIf="!custNotifs.expanded"
+            <mat-icon class="indicator-icon"*ngIf="!custNotifs.expanded"
               >keyboard_arrow_right</mat-icon
             >
-            <mat-icon style="height: fit-content" *ngIf="custNotifs.expanded"
+            <mat-icon class="indicator-icon-selected"*ngIf="custNotifs.expanded"
               >keyboard_arrow_down</mat-icon
             >
           </div>

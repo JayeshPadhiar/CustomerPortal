@@ -208,12 +208,15 @@ div.mobile-container {
   color: #828282;
 }
 
-::ng-deep .mat-step-header .mat-step-icon-selected {
-  background-color: gray;
+::ng-deep .mat-step-header .mat-step-icon {
+  background-color: transparent;
+
+  height: 20px;
+  width: 20px;
 }
 
-::ng-deep .mat-step-header .mat-step-icon {
-  background-color: gray;
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: transparent;
 }
 
 .mobile-content {

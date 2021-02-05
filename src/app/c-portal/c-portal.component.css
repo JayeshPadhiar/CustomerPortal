@@ -12,15 +12,25 @@ div.portal-div {
 
 div.mobile-div {
   width: fit-content;
-  height: 85%;
+  height: 80%;
   position: fixed;
   display: inline-block;
   margin: 0;
-  margin: 4%;
-  margin-top: 138px;
+  margin-left: 24px;
+  margin-top: 100px;
+  margin-right: 40px;
+
+  padding: 40px 0;
+
+  overflow: auto;
+
+  scrollbar-width: none; /* Firefox 64 */
+  -ms-overflow-style: none; /* Internet Explorer 11 */
 }
 
 .mobile-div .mat-button-toggle-group {
+
+  background-color: transparent;
   border-radius: 4px;
   left: 50%;
   transform: translate(-50%, -20%);
@@ -33,16 +43,17 @@ div.mobile-div {
   border-radius: 4px 0px 0px 4px;
   min-height: 35px;
   height: 36px;
+  background-color: #ffffff;
 }
 
 .mobile-div .mat-button-toggle-group .mat-button-toggle:last-of-type {
   border-radius: 0px 4px 4px 0px;
   min-height: 35px;
   height: 36px;
+  background-color: transparent;
 }
 
-.mobile-div .mat-button-toggle-group .mat-button-toggle:active,
-.mat-button-toggle:focus-within {
+.mobile-div .mat-button-toggle-group .mat-button-toggle:active {
   background: #ffffff;
   border: 1px solid #fa5c5d;
   color: #fa5c5d;
@@ -65,4 +76,10 @@ div.mobile-div {
 
 ::ng-deep.mobile-div .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
   line-height: 35px;
+}
+
+
+::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
 }

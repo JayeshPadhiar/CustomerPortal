@@ -36,9 +36,8 @@ export class CustomerPortalBackendService {
     returnWindowDays: 30,
   };
 
-  poeSettings: BehaviorSubject<object> = new BehaviorSubject(
-    this.defaultPoeSettings
-  );
+  poeSettings: BehaviorSubject<object> = new BehaviorSubject(this.defaultPoeSettings);
+  poeFetched: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   appStyle$: BehaviorSubject<AppStyle> = new BehaviorSubject({
     brandLogoUrl: this.poeSettings.value['brandLogoUrl'],
@@ -49,7 +48,7 @@ export class CustomerPortalBackendService {
   });
 
   links$: BehaviorSubject<Links> = new BehaviorSubject({
-    websiteUrl: '',
+    websiteUrl: 'https://',
     supportUrl: '',
     supportEmail: '',
     supportPhone: '',
@@ -62,6 +61,7 @@ export class CustomerPortalBackendService {
   });
 
   getAppStyle(): Observable<AppStyle> {
+    //this.getPoeSettings()
     return this.appStyle$.asObservable();
   }
 
@@ -87,28 +87,59 @@ export class CustomerPortalBackendService {
     });
   };
 
-  getPoeSettings = () => {
-    this.httpClient
-      .get<any>(
+  getPoeSettings(): Observable<any> {
+    //return this.httpClient.get('https://montecarlo.auperator.co/customer-portal/api/v1/poe-setting');
+
+    return this.httpClient
+      .get<object>(
         'https://montecarlo.auperator.co/customer-portal/api/v1/poe-setting'
-        )
-        .subscribe({
-          next: (data) => {
+      );
+      /*.subscribe({
+        next: (data) => {
+          if (data['channelId'] === '0') {
+            console.log('channelID not available. Workspace Settings');
+          } else {
+            console.log('channelId available. Default Channel Settings');
+          }
 
-          //console.log('Default POE\n', this.defaultPoeSettings);
-          this.poeSettings.next(data);
           console.log('POE Settings\n', this.poeSettings.value);
-
+          this.poeSettings.next(data);
+          console.log('New POE Settings\n', this.poeSettings.value);
           this.assignInterfaces(data);
+          this.poeFetched.next(true);
+          console.log('POEFetched\n', this.poeFetched.value);
+
         },
         error: (error) => {
           console.error('There was an error!\n', error);
         },
-      });
-  };
+      });*/
+  }
+
+  initPoe(data) {
+        //console.log('POE Settings\n', this.poeSettings.value);
+        this.poeSettings.next(data);
+        console.log('New POE Settings\n', this.poeSettings.value);
+        this.assignInterfaces(data);
+        this.poeFetched.next(true);
+        //console.log('POEFetched\n', this.poeFetched.value);
+  }
 
   constructor(private httpClient: HttpClient) {
-    //console.log('POE Settings\n', this.poeSettings.value);
-    this.getPoeSettings();
+    this.getPoeSettings().subscribe({
+      next: (data) => {
+        //data = JSON.parse(data);
+        if (data['channelId'] === '0') {
+          console.log('channelID not available. Workspace Settings');
+        } else {
+          console.log('channelId available. Default Channel Settings');
+        }
+
+        this.initPoe(data);
+      },
+      error: (error) => {
+        console.error('There was an error!\n', error);
+      },
+    });
   }
 }

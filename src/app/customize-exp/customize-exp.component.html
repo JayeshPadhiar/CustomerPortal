@@ -1,4 +1,4 @@
-<div class="expander-component">
+<div *ngIf="poeFetched" class="expander-component">
   <h3 class="component-name">Customize the experience</h3>
 
   <mat-accordion class="accordion">
@@ -16,10 +16,12 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon style="height: fit-content" *ngIf="!stylePanel.expanded"
+            <mat-icon class="indicator-icon" *ngIf="!stylePanel.expanded"
               >keyboard_arrow_right</mat-icon
             >
-            <mat-icon style="height: fit-content" *ngIf="stylePanel.expanded"
+            <mat-icon
+              class="indicator-icon-selected"
+              *ngIf="stylePanel.expanded"
               >keyboard_arrow_down</mat-icon
             >
           </div>
@@ -54,7 +56,9 @@
               </div>
 
               <div
-                *ngIf="!(appStyle.brandLogoUrl === originalAppStyle.brandLogoUrl)"
+                *ngIf="
+                  !(appStyle.brandLogoUrl === originalAppStyle.brandLogoUrl)
+                "
                 class="logo-picker-div"
               >
                 <div
@@ -97,7 +101,11 @@
                         justify-content: center;
                       "
                     >
-                      <img class="image" [src]="appStyle.brandLogoUrl" alt="ACME" />
+                      <img
+                        class="image"
+                        [src]="appStyle.brandLogoUrl"
+                        alt="ACME"
+                      />
                     </div>
                   </div>
 
@@ -227,7 +235,11 @@
                         justify-content: center;
                       "
                     >
-                      <img class="image" [src]="appStyle.brandLogoUrl" alt="ACME" />
+                      <img
+                        class="image"
+                        [src]="appStyle.brandLogoUrl"
+                        alt="ACME"
+                      />
                     </div>
                   </div>
                   <div class="preview-div-body"></div>
@@ -310,17 +322,19 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon style="height: fit-content" *ngIf="!domainPanel.expanded"
+            <mat-icon class="indicator-icon" *ngIf="!domainPanel.expanded"
               >keyboard_arrow_right</mat-icon
             >
-            <mat-icon style="height: fit-content" *ngIf="domainPanel.expanded"
+            <mat-icon
+              class="indicator-icon-selected"
+              *ngIf="domainPanel.expanded"
               >keyboard_arrow_down</mat-icon
             >
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content">
-        <div #addDomainDiv *ngIf="!domain.value">
+        <div #addDomainDiv *ngIf="!trackingPageDomain.value">
           <h4 class="topic">
             Add your domain
             <mat-icon
@@ -332,7 +346,21 @@
             >
             </mat-icon>
           </h4>
-          <p class="description">
+          <p
+            class="description"
+            style="
+              font-family: Lato;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 16px;
+              /* or 133% */
+
+              letter-spacing: 0.5px;
+
+              color: #808080;
+            "
+          >
             By default, customers will be directed to https://acme.eshopbox.com
             when accessing the customer portal. To change, add a domain.
             <a>Learn More</a>
@@ -349,7 +377,7 @@
 
         <br />
 
-        <div #domainDiv *ngIf="domain.value">
+        <div #domainDiv *ngIf="trackingPageDomain.value">
           <form
             novalidate
             [formGroup]="domainFormGroup"
@@ -374,12 +402,25 @@
                   float: left;
                 "
               >
-                {{ domain.value }}
+                {{ trackingPageDomain.value }}
               </div>
-              <div class="connected-indicator">Connected</div>
+              <div class="connected-indicator">
+                <mat-icon
+                  class="connected-indicator-icon"
+                  svgIcon="connected"
+                ></mat-icon>
+                Connected
+              </div>
+              <div class="pending-indicator">
+                <mat-icon
+                  class="connected-indicator-icon"
+                  svgIcon="pending"
+                ></mat-icon
+                >Pending
+              </div>
 
               <mat-icon
-                (click)="domain.value = ''"
+                (click)="trackingPageDomain.value = ''"
                 style="
                   margin-left: 12px;
                   width: 18px;
@@ -453,10 +494,12 @@
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon style="height: fit-content" *ngIf="!linksPanel.expanded"
+            <mat-icon class="indicator-icon" *ngIf="!linksPanel.expanded"
               >keyboard_arrow_right</mat-icon
             >
-            <mat-icon style="height: fit-content" *ngIf="linksPanel.expanded"
+            <mat-icon
+              class="indicator-icon-selected"
+              *ngIf="linksPanel.expanded"
               >keyboard_arrow_down</mat-icon
             >
           </div>
@@ -515,8 +558,8 @@
                     overflow: hidden;
                   "
                 >
-                  <h4>
-                    Go to <a href="#"> {{ links.websiteUrl }}</a>
+                  <h4 *ngIf="links.websiteUrl">
+                    Go to&nbsp;<a href="#"> {{ links.websiteUrl }}</a>
                   </h4>
                 </div>
               </div>
@@ -679,16 +722,17 @@
                         >
                           <input
                             formControlName="url"
-                            (input)="links.footers[i].url = $event.target.value"
+                            (input)="
+                              links.footers[i]['url'] = $event.target.value
+                            "
                             matInput
                             placeholder="https://"
                           />
                         </mat-form-field>
                       </div>
                     </td>
-                    <td align="center" valign="center">
+                    <td style="margin: 3px" align="center" valign="center">
                       <mat-icon
-                        style="margin: 3px"
                         (click)="removeFooter(i)"
                         svgIcon="deletebin"
                       ></mat-icon>
@@ -725,7 +769,7 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-  <pre>{{styleFormGroup.value | json}}</pre>
+  <!--pre>{{styleFormGroup.value | json}}</pre>
   <pre>{{appStyle | json}}</pre>
-  <pre>{{links.footers.length}}</pre>
+  <pre>{{linksFormGroup.value | json}}</pre-->
 </div>

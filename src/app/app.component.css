@@ -183,6 +183,17 @@ div.expander-component {
   stroke: inherit;
 }
 
+.indicator-icon {
+  height: fit-content
+}
+
+.indicator-icon-selected {
+  height: fit-content;
+  color: #FA5C5D;
+}
+
+
+
 .accordion .mat-expansion-panel-header-title,
 .exp-title {
   margin: auto 0;
@@ -201,7 +212,7 @@ div.expander-component {
 
 div.accordion-content {
   margin: 0 auto;
-  width: 85%;
+  width: 80%;
   color: black;
 }
 
@@ -298,6 +309,36 @@ div.accordion-content {
   background: #e5f9ed;
   border-radius: 13px;
 }
+
+
+.accordion-content .connected-indicator-icon {
+  height: 13px;
+  width: 13px;
+  margin: 0 5px;
+}
+
+
+
+.accordion-content .pending-indicator {
+  color: #F53232;
+  fill: #F53232;
+  stroke: #F53232;
+  margin-left: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 12px;
+  background: #FDEAEA;
+  border-radius: 13px;
+}
+
+
+.accordion-content .pending-indicator-icon {
+  height: 13px;
+  width: 13px;
+  margin: 0 5px;
+}
+
 
 .accordion-content .tracking-page-info {
   background: #ffffff;
@@ -507,8 +548,8 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(25px);
-  -webkit-transform: translateX(20px);
-  -ms-transform: translateX(20px);
+  -webkit-transform: translateX(25px);
+  -ms-transform: translateX(25px);
 }
 
 .slider:after {
@@ -527,6 +568,11 @@ input:checked + .slider:after {
   content: "ON";
   left: 35%;
 }
+
+
+
+
+
 
 :host ::ng-deep .mat-radio-container {
   height: 13px;

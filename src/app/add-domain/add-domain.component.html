@@ -5,13 +5,14 @@
 <mat-divider></mat-divider>
 <mat-dialog-content class="mat-typography">
   <div>
-    <div class="form-container">
-      <mat-form-field style="width: 60%" floatLabel="never">
+    <div class="form-container" style="margin-top: 14px;">
+      <mat-form-field style="width: 80%" floatLabel="never">
         <input [(ngModel)]="domain" matInput value="https://"/>
       </mat-form-field>
       <div>
         <p
           style="
+          margin: 0;
             font-family: Lato;
             font-style: normal;
             font-weight: normal;
@@ -20,7 +21,6 @@
             display: flex;
             align-items: center;
             letter-spacing: 0.5px;
-
             color: #808080;
           "
         >
