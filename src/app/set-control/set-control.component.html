@@ -10,8 +10,16 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon class="exp-icon" svgIcon="mycp" *ngIf="!cancelPolicy.expanded"></mat-icon>
-          <mat-icon class="exp-icon" svgIcon="mycp-open" *ngIf="cancelPolicy.expanded"></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            svgIcon="mycp"
+            *ngIf="!cancelPolicy.expanded"
+          ></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            svgIcon="mycp-open"
+            *ngIf="cancelPolicy.expanded"
+          ></mat-icon>
           <div class="exp-title">Manage your cancellation policy</div>
         </mat-panel-title>
         <mat-panel-description>
@@ -30,7 +38,10 @@
 
       <div class="accordion-content">
         <div>
-          <form (ngSubmit)="submit()" [formGroup]="cancellationPolicy">
+          <form
+            (ngSubmit)="submitCancelPolicy()"
+            [formGroup]="cancellationPolicy"
+          >
             <h4 class="fs-16-lh-24">
               Customers are able to cancel their order before its marked
               <br />"ready to ship"
@@ -109,6 +120,7 @@
                             (click)="addReason()"
                             mat-flat-button
                             class="add-button"
+                            type="button"
                           >
                             + Add reason
                           </button>
@@ -150,15 +162,32 @@
               </div>
             </div>
 
-            <div class="save-cancel-container">
+            <div
+              *ngIf="isChanged(cancellationPolicy)"
+              class="save-cancel-container"
+            >
               <button class="save-button" mat-button>Save</button>
               <button mat-button>Cancel</button>
+            </div>
+
+            <div
+              *ngIf="!isChanged(cancellationPolicy)"
+              class="save-cancel-container"
+            >
+              <button
+                type="button"
+                (click)="expansions.cancelPolicy = false"
+                class="save-button"
+                mat-button
+              >
+                Close
+              </button>
             </div>
           </form>
         </div>
       </div>
     </mat-expansion-panel>
-    <!--pre>{{cancellationPolicy.value | json}}</pre-->
+    <pre>{{ cancellationPolicy.value | json }}</pre>
 
     <mat-expansion-panel
       (opened)="expansions.returnPolicy = true"
@@ -169,8 +198,16 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon class="exp-icon" svgIcon="myrp" *ngIf="!returnPolicy.expanded"></mat-icon>
-          <mat-icon class="exp-icon" svgIcon="myrp-open" *ngIf="returnPolicy.expanded"></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            svgIcon="myrp"
+            *ngIf="!returnPolicy.expanded"
+          ></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            svgIcon="myrp-open"
+            *ngIf="returnPolicy.expanded"
+          ></mat-icon>
           <div class="exp-title">Manage your return policy</div>
         </mat-panel-title>
         <mat-panel-description>
@@ -266,7 +303,7 @@
               </p>
 
               <div>
-                <table class="table-container" style="width: 800px;">
+                <table class="table-container" style="width: 800px">
                   <tbody>
                     <tr *ngFor="let excon of exconditions; let i = index">
                       <td>
@@ -499,6 +536,17 @@
           <div class="save-cancel-container">
             <button class="save-button" mat-button>Save</button>
             <button mat-button>Cancel</button>
+          </div>
+
+          <div class="save-cancel-container">
+            <button
+              type="button"
+              (click)="expansions.returnPolicy = false"
+              class="save-button"
+              mat-button
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>

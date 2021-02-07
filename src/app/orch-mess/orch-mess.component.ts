@@ -18,7 +18,6 @@ import {
   FormBuilder,
 } from '@angular/forms';
 
-
 import { NotifModalComponent } from './../notif-modal/notif-modal.component';
 
 import { Notification } from './orch-mess.model';
@@ -32,7 +31,6 @@ import { AppStyle } from '../c-portal/cportal.model';
   styleUrls: ['./orch-mess.component.css', '../app.component.css'],
 })
 export class OrchMessComponent implements OnInit {
-
   poeFetched: boolean = false;
   poeSettings: object;
 
@@ -154,7 +152,7 @@ export class OrchMessComponent implements OnInit {
     },
     {
       condition:
-      'When the return is cancelled due to multiple failed pickup attempts',
+        'When the return is cancelled due to multiple failed pickup attempts',
       sms: '',
       email: '',
       smschk: true,
@@ -170,14 +168,13 @@ export class OrchMessComponent implements OnInit {
       emailchk: true,
     },
   ];
-  
-  
+
   appStyle: AppStyle;
 
   expansions = {
     defineChannel: false,
     custNotifs: false,
-  }
+  };
 
   channelFormGroup: FormGroup;
   senderName: FormControl;
@@ -185,7 +182,6 @@ export class OrchMessComponent implements OnInit {
   smsSenderName: string;
 
   ngOnInit(): void {
-
     this.initialize();
 
     this.backendService.poeFetched.subscribe((fetched) => {
@@ -213,11 +209,13 @@ export class OrchMessComponent implements OnInit {
     }
   }
 
-
   initialize() {
-
-    this.backendService.getAppStyle().subscribe(style => this.appStyle = style)
-    this.backendService.poeSettings.asObservable().subscribe(settings => this.poeSettings = settings)
+    this.backendService
+      .getAppStyle()
+      .subscribe((style) => (this.appStyle = style));
+    this.backendService.poeSettings
+      .asObservable()
+      .subscribe((settings) => (this.poeSettings = settings));
 
     this.createFormControls();
     this.createFormGroups();
@@ -227,16 +225,15 @@ export class OrchMessComponent implements OnInit {
     this.senderName = new FormControl(this.poeSettings['senderName']);
     this.senderEmail = new FormControl(this.poeSettings['senderEmail']);
 
-
     this.smsSenderName = this.poeSettings['smsSenderName'];
-  }
+  };
 
   createFormGroups = () => {
     this.channelFormGroup = new FormGroup({
       senderName: this.senderName,
-      senderEmail: this.senderEmail
-    })
-  }
+      senderEmail: this.senderEmail,
+    });
+  };
 
   checkIfDirty(form: FormGroup) {
     if (form.dirty) {
@@ -249,7 +246,7 @@ export class OrchMessComponent implements OnInit {
   }
 
   isChanged(form: FormGroup) {
-    return this.backendService.formChanged(form)
+    return this.backendService.formChanged(form);
   }
 
   onSubmit(form: FormGroup) {
@@ -260,15 +257,21 @@ export class OrchMessComponent implements OnInit {
     }
   }
 
+  saveChannel = () => {
+    this.expansions.defineChannel = this.backendService.saveForm(
+      this.channelFormGroup
+    );
+  };
+
   cancel(form: FormGroup, exp) {
     if (this.checkIfDirty(form)) {
       this.confirmDiscard(form, exp);
     } else {
-      console.log("collapsing")
-      this.expansions[exp] = false; 
+      console.log('collapsing');
+      this.expansions[exp] = false;
     }
   }
-  
+
   confirmDiscard(form: FormGroup, exp) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       panelClass: 'confirm-dialog',
@@ -290,11 +293,14 @@ export class OrchMessComponent implements OnInit {
   resetForm(form: FormGroup) {
     form.reset({
       senderEmail: this.poeSettings['senderEmail'],
-      senderName: this.poeSettings['senderName']
+      senderName: this.poeSettings['senderName'],
     });
   }
 
-  constructor(private dialog: MatDialog, private backendService: CustomerPortalBackendService) {}
+  constructor(
+    private dialog: MatDialog,
+    private backendService: CustomerPortalBackendService
+  ) {}
 
   showDialog() {
     this.dialog.open(NotifModalComponent, {

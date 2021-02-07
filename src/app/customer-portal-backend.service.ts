@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AppStyle, Links, FooterLink } from './c-portal/cportal.model';
 
@@ -55,7 +55,7 @@ export class CustomerPortalBackendService {
     supportUrl: '',
     supportEmail: '',
     supportPhone: '',
-    footers: [{ name: '', url: '' }],
+    footerLinks: [{ name: '', url: '' }],
   });
 
   notif$: BehaviorSubject<object> = new BehaviorSubject({
@@ -74,7 +74,6 @@ export class CustomerPortalBackendService {
     return this.links$.asObservable();
   }
 
-
   //assing poeSettings to the AppStyle and Links interface
   assignInterfaces = (poeData = this.poeSettings.value) => {
     this.appStyle$.next({
@@ -90,7 +89,7 @@ export class CustomerPortalBackendService {
       supportUrl: poeData['supportUrl'],
       supportEmail: poeData['supportEmail'],
       supportPhone: poeData['supportPhone'],
-      footers: [],
+      footerLinks: [],
     });
   };
 
@@ -99,7 +98,25 @@ export class CustomerPortalBackendService {
     //return this.httpClient.get('https://montecarlo.auperator.co/customer-portal/api/v1/poe-setting');
     return this.httpClient.get<object>(
       'https://montecarlo.auperator.co/customer-portal/api/v1/poe-setting'
-      );
+    );
+  }
+
+  updatePoeSettings(data: object) {
+    console.log('new settings = ', { ...this.poeSettings.value, ...data });
+  }
+
+  saveForm(form: FormGroup, data = form.value): boolean {
+    if (form.dirty && form.valid) {
+      this.updatePoeSettings(data);
+      form.markAsPristine();
+      return false;
+    } else if (form.dirty && !form.valid) {
+      console.log(form.controls);
+      alert('Enter valid values');
+      return true;
+    } else {
+      return false;
+    }
   }
 
   //assign the parsed data to the interfaces and set fetched value to true
@@ -115,6 +132,16 @@ export class CustomerPortalBackendService {
       return true;
     } else {
       return false;
+    }
+  }
+
+  validateError(field: FormControl) {
+    if (field.hasError('required')) {
+      return 'This field should not be empty';
+    } else if (field.hasError('email')) {
+      return 'Enter a valid email';
+    } else {
+      return 'Enter a valid value';
     }
   }
 

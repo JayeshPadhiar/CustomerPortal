@@ -24,6 +24,7 @@ export class CustomizeExpComponent implements OnInit {
 
   urlpattern = /((?:(http|https|Http|Https|rtsp|Rtsp):\/\/(?:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,64}(?:\:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,25})?\@)?)?((?:(?:[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-zA-Z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-fA-F0-9]{2}))*)?(?:\b|$)/gi;
   phonepattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+  colorpattern = /^#[0-9a-f]{3}([0-9a-f]{3})?$/i;
 
   //footerLinks: Array<FooterLink>;
   //footerLinks: Array<FooterLink>;
@@ -48,7 +49,7 @@ export class CustomizeExpComponent implements OnInit {
   supportUrl: FormControl;
   supportEmail: FormControl;
   supportPhone: FormControl;
-  footers: FormArray;
+  footerLinks: FormArray;
 
   poeFetched: boolean;
   poeSettings: object;
@@ -116,12 +117,18 @@ export class CustomizeExpComponent implements OnInit {
   createFormControls = () => {
     this.brandLogoUrl = new FormControl('');
     this.faviconUrl = new FormControl('');
-    this.backgroundColor = new FormControl(this.appStyle['backgroundColor']);
-    this.actionColor = new FormControl(this.appStyle['actionColor']);
+    this.backgroundColor = new FormControl(this.appStyle['backgroundColor'], [
+      Validators.required,
+      Validators.pattern(this.colorpattern),
+    ]);
+    this.actionColor = new FormControl(this.appStyle['actionColor'], [
+      Validators.required,
+      Validators.pattern(this.colorpattern),
+    ]);
 
     this.trackingPageDomain = new FormControl(
       this.poeSettings['trackingPageDomain'],
-      [Validators.required, Validators.pattern(this.urlpattern)]
+      [Validators.required]
     );
 
     this.websiteUrl = new FormControl(this.links['websiteUrl'], [
@@ -140,7 +147,7 @@ export class CustomizeExpComponent implements OnInit {
       Validators.required,
       Validators.pattern(this.phonepattern),
     ]);
-    this.footers = new FormArray([]);
+    this.footerLinks = new FormArray([]);
   };
 
   //create form groups
@@ -161,24 +168,38 @@ export class CustomizeExpComponent implements OnInit {
       supportUrl: this.supportUrl,
       supportEmail: this.supportEmail,
       supportPhone: this.supportPhone,
-      footers: this.footers,
+      footerLinks: this.footerLinks,
     });
   };
 
-  selectIcon(icontype, event) {
+  selectIcon(icontype, event, maxw, maxh) {
     if (window.FileReader) {
       var file = event.target.files[0];
       var reader = new FileReader();
       if (file && file.type.match('image.*')) {
         reader.readAsDataURL(file);
       } else {
-        console.log('Choose correct file');
+        alert('Please upload Image file only');
       }
       reader.onloadend = (event) => {
-        this.backendService.appStyle$.next({
-          ...this.appStyle,
-          [icontype]: event.target.result,
-        });
+        var icon = new Image();
+
+        icon.src = event.target.result.toString();
+
+        icon.onload = () => {
+          let height = icon.height;
+          let width = icon.width;
+
+          if (height > maxh || width > maxw) {
+            alert(`Please enter icon of size ${maxw}x${maxh}`);
+          } else {
+            console.log('Valid image added');
+            this.backendService.appStyle$.next({
+              ...this.appStyle,
+              [icontype]: event.target.result,
+            });
+          }
+        };
       };
     }
   }
@@ -255,23 +276,18 @@ export class CustomizeExpComponent implements OnInit {
   newFooter(): FormGroup {
     return new FormGroup({
       name: new FormControl('', [Validators.required]),
-      url: new FormControl('https://', [
-        Validators.required,
-        Validators.pattern(
-          /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
-        ),
-      ]),
+      url: new FormControl('https://', [Validators.required]),
     });
   }
 
   addFooter() {
-    this.footers.push(this.newFooter());
-    this.links.footers.push({ name: '', url: '' });
+    this.footerLinks.push(this.newFooter());
+    this.links.footerLinks.push({ name: '', url: '' });
   }
 
   removeFooter(index) {
-    this.footers.removeAt(index);
-    this.links.footers.splice(index, 1);
+    this.footerLinks.removeAt(index);
+    this.links.footerLinks.splice(index, 1);
 
     /*if (this.footerLinks.length == 1) {
       this.footerLinks.splice(index, 1);
@@ -285,7 +301,7 @@ export class CustomizeExpComponent implements OnInit {
   }
 
   get getFooterLinks() {
-    return this.linksFormGroup.get('footers') as FormArray;
+    return this.linksFormGroup.get('footerLinks') as FormArray;
   }
 
   dirty(form: FormGroup) {
@@ -310,25 +326,73 @@ export class CustomizeExpComponent implements OnInit {
     }
   }
 
-  validateError(field: FormControl) {
-    if (field.hasError('required')) {
-      return 'This field should not be empty';
-    } else if (field.hasError('email')) {
-      return 'Enter a valid email';
+  saveDomain = () => {
+    this.expansions.domainExp = this.backendService.saveForm(
+      this.domainFormGroup
+    );
+  };
+
+  saveStyle = () => {
+    this.expansions.styleExp = this.backendService.saveForm(
+      this.styleFormGroup
+    );
+
+    /*if (this.styleFormGroup.dirty && this.styleFormGroup.valid) {
+      this.backendService.updatePoeSettings(this.styleFormGroup.value);
+      this.styleFormGroup.markAsPristine();
+      this.expansions.styleExp = false;
+    } else if (this.styleFormGroup.dirty && !this.styleFormGroup.valid) {
+      alert('Enter valid values');
     } else {
-      return 'Enter a valid value';
-    }
+      this.expansions.styleExp = false;
+    }*/
+  };
+
+  saveLinks = () => {
+    let footerlinksobject = {};
+    let footers: Array<object> = this.linksFormGroup.value['footerLinks'];
+    footers.forEach((footer) => {
+      footerlinksobject[footer['name']] = footer['url'];
+    });
+
+    console.log(footerlinksobject);
+
+    let linksObject = {
+      ...this.linksFormGroup.value,
+      footerLinks: footerlinksobject,
+    };
+
+    console.log(linksObject);
+
+    this.expansions.linksExp = this.backendService.saveForm(
+      this.linksFormGroup,
+      linksObject
+    );
+
+    /*if (this.linksFormGroup.dirty && this.linksFormGroup.valid) {
+      this.backendService.updatePoeSettings(this.linksFormGroup.value);
+      this.styleFormGroup.markAsPristine();
+      this.expansions.styleExp = false;
+    } else if (this.styleFormGroup.dirty && !this.styleFormGroup.valid) {
+      alert('Enter valid values');
+    } else {
+      this.expansions.styleExp = false;
+    }*/
+  };
+
+  validateError(field: FormControl) {
+    return this.backendService.validateError(field);
   }
 
   /*addRow() {
-    this.footerLinks = [...this.footers.value]
+    this.footerLinks = [...this.footerLinks.value]
     //console.log(this.footerLinks);
 
-    //this.footerLinks = this.footers.value.slice();
+    //this.footerLinks = this.footerLinks.value.slice();
     this.addFooter();
 
-    //console.log(this.footers.value[length]);
-    console.log(this.footers.value);
+    //console.log(this.footerLinks.value[length]);
+    console.log(this.footerLinks.value);
     console.log(this.footerLinks)
     
     return true;

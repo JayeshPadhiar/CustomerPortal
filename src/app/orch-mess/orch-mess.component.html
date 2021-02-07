@@ -41,7 +41,7 @@
         <form
           novalidate
           [formGroup]="channelFormGroup"
-          (ngSubmit)="onSubmit(channelFormGroup)"
+          (ngSubmit)="saveChannel()"
         >
           <div>
             <h4 class="lh-17">
@@ -228,6 +228,9 @@
         </form>
       </div>
     </mat-expansion-panel>
+
+    <pre>{{ channelFormGroup.value | json }}</pre>
+
 
     <mat-expansion-panel
       (opened)="expansions.custNotifs = true"
@@ -482,7 +485,7 @@
         </div>
       </div>
     </mat-expansion-panel>
+    <!--pre>{{ channelFormGroup.value | json }}</pre-->
   </mat-accordion>
 
-  <!--pre>{{ channelFormGroup.value | json }}</pre-->
 </div>

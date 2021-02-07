@@ -102,7 +102,11 @@ export class SetControlComponent implements OnInit {
     return this.backendService.formChanged(form)
   }
 
-  submit() {}
+  submitCancelPolicy() {
+    this.expansions.cancelPolicy = this.backendService.saveForm(
+      this.cancellationPolicy
+    ); 
+  }
 
   addCondition() {
     this.excon = { option: '', condition: '', value: 0 };

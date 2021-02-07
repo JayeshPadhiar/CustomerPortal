@@ -37,11 +37,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content">
-        <form
-          novalidate
-          [formGroup]="styleFormGroup"
-          (ngSubmit)="onSubmit(styleFormGroup)"
-        >
+        <form novalidate [formGroup]="styleFormGroup" (ngSubmit)="saveStyle()">
           <div>
             <div>
               <h4 class="topic">Upload your brand logo</h4>
@@ -58,7 +54,7 @@
                 <input
                   formControlName="brandLogoUrl"
                   hidden
-                  (input)="selectIcon('brandLogoUrl', $event)"
+                  (input)="selectIcon('brandLogoUrl', $event, 154, 24)"
                   #logoInput
                   type="file"
                 />
@@ -136,7 +132,7 @@
                 <input
                   formControlName="faviconUrl"
                   hidden
-                  (change)="selectIcon('faviconUrl', $event)"
+                  (change)="selectIcon('faviconUrl', $event, 16, 16)"
                   #faviconInput
                   type="file"
                 />
@@ -354,6 +350,7 @@
     </mat-expansion-panel>
 
     <pre>{{ styleFormGroup.value | json }}</pre>
+    <pre>{{ styleFormGroup.dirty | json }}</pre>
 
     <mat-expansion-panel
       (opened)="expansions.domainExp = true"
@@ -432,7 +429,7 @@
           <form
             novalidate
             [formGroup]="domainFormGroup"
-            (ngSubmit)="onSubmit(domainFormGroup)"
+            (ngSubmit)="saveDomain()"
           >
             <div style="align-items: center; display: flex">
               <mat-icon
@@ -567,11 +564,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content" style="overflow: auto">
-        <form
-          novalidate
-          [formGroup]="linksFormGroup"
-          (ngSubmit)="onSubmit(linksFormGroup)"
-        >
+        <form novalidate [formGroup]="linksFormGroup" (ngSubmit)="saveLinks()">
           <div>
             <h4 class="lh-17 topic">Website URL</h4>
             <p class="lh-16-fs-12">
@@ -776,7 +769,7 @@
               </div>
 
               <table
-                formArrayName="footers"
+                formArrayName="footerLinks"
                 style="width: 450px"
                 class="table-container"
               >
@@ -797,7 +790,7 @@
                           <input
                             formControlName="name"
                             (input)="
-                              links.footers[i].name = $event.target.value
+                              links.footerLinks[i].name = $event.target.value
                             "
                             matInput
                             placeholder="Link name"
@@ -814,7 +807,7 @@
                           <input
                             formControlName="url"
                             (input)="
-                              links.footers[i]['url'] = $event.target.value
+                              links.footerLinks[i]['url'] = $event.target.value
                             "
                             matInput
                             placeholder="https://"
@@ -836,7 +829,7 @@
                       mat-flat-button
                       class="add-button"
                       #addLinksButton
-                      *ngIf="links.footers.length < 3"
+                      *ngIf="links.footerLinks.length < 3"
                     >
                       + Add links
                     </button>

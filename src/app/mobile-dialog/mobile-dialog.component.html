@@ -417,11 +417,11 @@
     </div>
 
     <div class="footer">
-      <div *ngIf="links.footers.length > 0" class="mobile-footer-links">
+      <div *ngIf="links.footerLinks.length > 0" class="mobile-footer-links">
         <div *ngIf="links.websiteUrl" class="mobile-footer-url">
           Go to &nbsp;<a href="#">{{ links.websiteUrl }}</a>
         </div>
-        <div *ngFor="let link of links.footers" class="footer-link">
+        <div *ngFor="let link of links.footerLinks" class="footer-link">
           {{ link.name }}
         </div>
       </div>
