@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AppStyle, Links, FooterLink } from './c-portal/cportal.model';
 
@@ -36,7 +37,9 @@ export class CustomerPortalBackendService {
     returnWindowDays: 30,
   };
 
-  poeSettings: BehaviorSubject<object> = new BehaviorSubject(this.defaultPoeSettings);
+  poeSettings: BehaviorSubject<object> = new BehaviorSubject(
+    this.defaultPoeSettings
+  );
   poeFetched: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   appStyle$: BehaviorSubject<AppStyle> = new BehaviorSubject({
@@ -60,15 +63,19 @@ export class CustomerPortalBackendService {
     show: false,
   });
 
+  //return AppStyle
   getAppStyle(): Observable<AppStyle> {
     //this.getPoeSettings()
     return this.appStyle$.asObservable();
   }
 
+  //return Links
   getLinks(): Observable<Links> {
     return this.links$.asObservable();
   }
 
+
+  //assing poeSettings to the AppStyle and Links interface
   assignInterfaces = (poeData = this.poeSettings.value) => {
     this.appStyle$.next({
       backgroundColor: poeData['backgroundColor'],
@@ -87,55 +94,54 @@ export class CustomerPortalBackendService {
     });
   };
 
+  //GET request for fetching poeSettings from Eshopbox Backend
   getPoeSettings(): Observable<any> {
     //return this.httpClient.get('https://montecarlo.auperator.co/customer-portal/api/v1/poe-setting');
-
-    return this.httpClient
-      .get<object>(
-        'https://montecarlo.auperator.co/customer-portal/api/v1/poe-setting'
+    return this.httpClient.get<object>(
+      'https://montecarlo.auperator.co/customer-portal/api/v1/poe-setting'
       );
-      /*.subscribe({
-        next: (data) => {
-          if (data['channelId'] === '0') {
-            console.log('channelID not available. Workspace Settings');
-          } else {
-            console.log('channelId available. Default Channel Settings');
-          }
-
-          console.log('POE Settings\n', this.poeSettings.value);
-          this.poeSettings.next(data);
-          console.log('New POE Settings\n', this.poeSettings.value);
-          this.assignInterfaces(data);
-          this.poeFetched.next(true);
-          console.log('POEFetched\n', this.poeFetched.value);
-
-        },
-        error: (error) => {
-          console.error('There was an error!\n', error);
-        },
-      });*/
   }
 
+  //assign the parsed data to the interfaces and set fetched value to true
   initPoe(data) {
-        //console.log('POE Settings\n', this.poeSettings.value);
-        this.poeSettings.next(data);
-        console.log('New POE Settings\n', this.poeSettings.value);
-        this.assignInterfaces(data);
-        this.poeFetched.next(true);
-        //console.log('POEFetched\n', this.poeFetched.value);
+    this.poeSettings.next(data);
+    console.log('New POE Settings\n', this.poeSettings.value);
+    this.assignInterfaces(data);
+    this.poeFetched.next(true);
   }
+
+  formChanged(form: FormGroup) {
+    if (form.dirty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  //nullParser for parsing the incoming data with null string ("null") into actual null object (null)
+  nullParser = (data: object) => {
+    let eqData: object = Object.assign({}, data);
+
+    Object.keys(eqData).map(function (key, index) {
+      if (eqData[key] === 'null') {
+        eqData[key] = null;
+      } else {
+      }
+    });
+    console.log('Eq: Data \n', eqData);
+    return eqData;
+  };
 
   constructor(private httpClient: HttpClient) {
     this.getPoeSettings().subscribe({
       next: (data) => {
-        //data = JSON.parse(data);
         if (data['channelId'] === '0') {
           console.log('channelID not available. Workspace Settings');
         } else {
           console.log('channelId available. Default Channel Settings');
         }
 
-        this.initPoe(data);
+        this.initPoe(this.nullParser(data));
       },
       error: (error) => {
         console.error('There was an error!\n', error);

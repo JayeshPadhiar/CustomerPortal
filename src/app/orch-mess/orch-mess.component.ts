@@ -173,7 +173,6 @@ export class OrchMessComponent implements OnInit {
   
   
   appStyle: AppStyle;
-  
 
   expansions = {
     defineChannel: false,
@@ -247,6 +246,10 @@ export class OrchMessComponent implements OnInit {
       console.log('Form was not changed');
       return false;
     }
+  }
+
+  isChanged(form: FormGroup) {
+    return this.backendService.formChanged(form)
   }
 
   onSubmit(form: FormGroup) {

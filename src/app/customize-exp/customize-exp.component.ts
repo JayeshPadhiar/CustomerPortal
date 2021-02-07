@@ -51,7 +51,7 @@ export class CustomizeExpComponent implements OnInit {
   footers: FormArray;
 
   poeFetched: boolean;
-  poeSettings : object;
+  poeSettings: object;
 
   constructor(
     private dialog: MatDialog,
@@ -61,15 +61,14 @@ export class CustomizeExpComponent implements OnInit {
   ngOnInit() {
     //this.footerLinks.push(this.link);
 
-    this.initialize();
+    //this.initialize();
 
     this.backendService.poeFetched.subscribe((fetched) => {
       this.poeFetched = fetched;
     });
 
     if (this.backendService.poeFetched.getValue()) {
-
-      console.log('poeSettings already fetched')
+      console.log('poeSettings already fetched');
       this.initialize();
     } else {
       this.backendService.getPoeSettings().subscribe({
@@ -79,6 +78,7 @@ export class CustomizeExpComponent implements OnInit {
           } else {
             console.log('channelId available. Default Channel Settings');
           }
+
           this.backendService.initPoe(data);
 
           this.initialize();
@@ -92,7 +92,12 @@ export class CustomizeExpComponent implements OnInit {
     console.log('val ' + this.backendService.poeFetched.value);
   }
 
+  //get required data from the CustomerPortalBackendService and assign it to the forms and previews
   initialize() {
+    this.backendService.poeSettings.asObservable().subscribe((poe) => {
+      this.poeSettings = poe;
+    });
+
     this.backendService.appStyle$.asObservable().subscribe((style) => {
       this.appStyle = Object.assign({}, style);
     });
@@ -107,17 +112,17 @@ export class CustomizeExpComponent implements OnInit {
     this.createFormGroups();
   }
 
+  //create form controls
   createFormControls = () => {
     this.brandLogoUrl = new FormControl('');
     this.faviconUrl = new FormControl('');
     this.backgroundColor = new FormControl(this.appStyle['backgroundColor']);
     this.actionColor = new FormControl(this.appStyle['actionColor']);
 
-    this.trackingPageDomain = new FormControl('www.google.com', [
-      Validators.required,
-
-      Validators.pattern(this.urlpattern),
-    ]);
+    this.trackingPageDomain = new FormControl(
+      this.poeSettings['trackingPageDomain'],
+      [Validators.required, Validators.pattern(this.urlpattern)]
+    );
 
     this.websiteUrl = new FormControl(this.links['websiteUrl'], [
       Validators.required,
@@ -138,6 +143,7 @@ export class CustomizeExpComponent implements OnInit {
     this.footers = new FormArray([]);
   };
 
+  //create form groups
   createFormGroups = () => {
     this.styleFormGroup = new FormGroup({
       brandLogoUrl: this.brandLogoUrl,
@@ -199,7 +205,7 @@ export class CustomizeExpComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe((result: Boolean) => {
         if (result) {
-          console.log('baba re baba');
+          //console.log('baba re baba');
 
           this.backendService.assignInterfaces();
 
@@ -214,6 +220,9 @@ export class CustomizeExpComponent implements OnInit {
           console.log(this.styleFormGroup);
           console.log('collapsing after discarding');
           this.expansions['styleExp'] = false;
+        } else {
+          this.expansions['styleExp'] = true;
+          console.log('Expanding again');
         }
       });
     } else {
@@ -225,6 +234,7 @@ export class CustomizeExpComponent implements OnInit {
   addDomain() {
     const dialogRef = this.dialog.open(AddDomainComponent, {
       panelClass: 'add-domain-dialog',
+      data: this.domainFormGroup,
     });
 
     dialogRef.afterClosed().subscribe((domain: String) => {
@@ -286,6 +296,10 @@ export class CustomizeExpComponent implements OnInit {
       console.log('Form was not changed');
       return false;
     }
+  }
+
+  isChanged(form: FormGroup) {
+    return this.backendService.formChanged(form);
   }
 
   onSubmit(form: FormGroup) {

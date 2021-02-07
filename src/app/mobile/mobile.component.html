@@ -8,7 +8,7 @@
       class="mobile-notif"
       [style.background-color]="appStyle.noticeBackgroundColor"
     >
-      <p>{{ notif.message }}</p>
+      <p class="notif-text" style="max-width: 90%; word-wrap: break-word;">{{ notif.message }}</p>
     </div>
 
     <div class="header">
@@ -54,7 +54,7 @@
             color: #bdbdbd;
           "
         >
-          Help?
+          Help ?
         </div>
       </div>
 
@@ -70,15 +70,13 @@
           <ng-template matStepperIcon="edit">
             <mat-icon style="height: 24px; width: 24px;" svgIcon="shippingSoon"></mat-icon> 
           </ng-template>
-          <ng-template matStepperIcon="home">
-            <mat-icon>home</mat-icon>
+
+          <ng-template matStepperIcon="done">
+            <mat-icon style="height: 24px; width: 24px;" svgIcon="shippingSoon"></mat-icon> 
           </ng-template>
-          <ng-template matStepperIcon="form">
-            <mat-icon>format_align_center</mat-icon>
-          </ng-template>
-          <ng-template matStepperIcon="last">
-            <mat-icon>done_all</mat-icon>
-          </ng-template>
+
+          
+
 
           <ng-template matStepperIcon="shippingSoon">
             <mat-icon style="height: 24px; width: 24px;" svgIcon="shippingSoon"></mat-icon> 
@@ -86,11 +84,11 @@
           <ng-template matStepperIcon="inTransit">
             <mat-icon style="height: 35px; width: 25px;" svgIcon="inTransit"></mat-icon> 
           </ng-template>
-          <ng-template matStepperIcon="last">
-            <mat-icon>done_all</mat-icon>
-          </ng-template>
-
+          
           <mat-step state="shippingSoon">
+            <ng-template matStepperIcon="shippingSoon">
+              <mat-icon style="height: 24px; width: 24px;" svgIcon="shippingSoon"></mat-icon> 
+            </ng-template>
             <ng-template matStepLabel>
               <div class="mobile-stepper-title">Shipping Soon</div>
               <div class="mobile-stepper-title-desc">

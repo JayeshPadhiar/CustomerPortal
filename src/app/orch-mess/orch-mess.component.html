@@ -10,19 +10,28 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon class="exp-icon" svgIcon="dyccwc"></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            svgIcon="dyccwc"
+            *ngIf="!defineChannel.expanded"
+          ></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            svgIcon="dyccwc-open"
+            *ngIf="defineChannel.expanded"
+          ></mat-icon>
           <div class="exp-title">
             Define your communication channel with customers
           </div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon
-            class="indicator-icon"
-              *ngIf="!defineChannel.expanded"
+            <mat-icon class="indicator-icon" *ngIf="!defineChannel.expanded"
               >keyboard_arrow_right</mat-icon
             >
-            <mat-icon class="indicator-icon-selected" *ngIf="defineChannel.expanded"
+            <mat-icon
+              class="indicator-icon-selected"
+              *ngIf="defineChannel.expanded"
               >keyboard_arrow_down</mat-icon
             >
           </div>
@@ -35,10 +44,11 @@
           (ngSubmit)="onSubmit(channelFormGroup)"
         >
           <div>
-            <h4 class="topic">
+            <h4 class="lh-17">
               Email Sender Name
               <mat-icon
                 svgIcon="infoicon"
+                style="margin-left: 6px"
                 class="tooltipicon"
                 inline="true"
                 matTooltip="Use a sender name which is easily recognisable by your customers"
@@ -46,12 +56,12 @@
               >
               </mat-icon>
             </h4>
-            <p class="description">
+            <p class="lh-16-fs-12">
               Your customers will receive email from this sender name
             </p>
 
             <div class="form-container">
-              <mat-form-field style="width: 100%" floatLabel="never">
+              <mat-form-field style="width: 403px" floatLabel="never">
                 <input
                   #emailsendername
                   (input)="(emailsendername)"
@@ -81,23 +91,24 @@
               </div>
             </div>
 
-            <h4 class="topic">
+            <h4 class="lh-17">
               Send-from email address
               <mat-icon
                 svgIcon="infoicon"
                 class="tooltipicon"
+                style="margin-left: 6px"
                 inline="true"
                 matTooltip="Use an email address which is setup to receive incoming emails"
                 matTooltipPosition="after"
               >
               </mat-icon>
             </h4>
-            <p class="description">
+            <p class="lh-16-fs-12">
               Your customers will receive email from this email address
             </p>
 
             <div class="form-container">
-              <mat-form-field style="width: 100%" floatLabel="never">
+              <mat-form-field style="width: 403px" floatLabel="never">
                 <input
                   #senderEmail
                   (input)="(senderEmail)"
@@ -108,32 +119,46 @@
               </mat-form-field>
             </div>
 
-            <div class="preview-container" style="background-color: #f6f6f6">
+            <div
+              class="preview-container"
+              style="
+                background-color: #f6f6f6;
+                max-width: 100%;
+                min-width: 199px;
+              "
+            >
               <div
                 class="preview-div-body"
                 style="
                   background-color: #ffffff;
-                  width: 85%;
+                  min-width: 100%;
+                  width: fit-content;
+                  max-height: fit-content;
                   height: 75%;
-                  bottom: 0;
-                  right: 0;
+                  margin: 10px 0 0 10px;
                   border-radius: 0;
                   border-top-left-radius: 10px;
                   padding: 8px;
                 "
               >
-                <div style="color: #999999; flex-direction: column">
+                <div
+                  style="
+                    color: #999999;
+                    flex-direction: column;
+                    min-width: 100%;
+                  "
+                >
                   from: {{ emailsendername.value }} &lt;
-                  <div style="display: inline; color: black">
+                  <p style="display: inline; color: black">
                     {{ senderEmail.value }}
-                  </div>
+                  </p>
                   &gt;
                 </div>
               </div>
             </div>
 
-            <h4 class="topic">SMS sender name</h4>
-            <p class="description">
+            <h4 class="lh-17">SMS sender name</h4>
+            <p class="lh-16-fs-12" style="margin-bottom: 8px">
               Your customers will receive SMS from this sender name
             </p>
 
@@ -160,7 +185,7 @@
                   margin-bottom: 4px;
                 "
               >
-                {{smsSenderName}}
+                {{ smsSenderName }}
               </div>
               <div
                 style="
@@ -178,13 +203,14 @@
                   color: #808080;
                 "
               >
-                Want to customize the sender code? &nbsp;<a style="display: inline;">Learn More</a>
+                Want to customize the sender code? &nbsp;<a
+                  style="display: inline"
+                  >Learn More</a
+                >
               </div>
             </div>
 
-            <br />
-
-            <div>
+            <div class="save-cancel-container" *ngIf="isChanged(channelFormGroup)">
               <button class="save-button" type="submit" mat-button>Save</button>
               <button
                 mat-button
@@ -193,6 +219,10 @@
               >
                 Cancel
               </button>
+            </div>
+
+            <div *ngIf="!(isChanged(channelFormGroup))" class="save-cancel-container">
+              <button type="button" (click)="expansions.defineChannel = false" class="save-button" mat-button>Close</button>
             </div>
           </div>
         </form>
@@ -208,15 +238,26 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon class="exp-icon" svgIcon="mycn"></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            svgIcon="mycn"
+            *ngIf="!custNotifs.expanded"
+          ></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            svgIcon="mycn-open"
+            *ngIf="custNotifs.expanded"
+          ></mat-icon>
           <div class="exp-title">Manage your customer notifications</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon class="indicator-icon"*ngIf="!custNotifs.expanded"
+            <mat-icon class="indicator-icon" *ngIf="!custNotifs.expanded"
               >keyboard_arrow_right</mat-icon
             >
-            <mat-icon class="indicator-icon-selected"*ngIf="custNotifs.expanded"
+            <mat-icon
+              class="indicator-icon-selected"
+              *ngIf="custNotifs.expanded"
               >keyboard_arrow_down</mat-icon
             >
           </div>
@@ -224,40 +265,46 @@
       </mat-expansion-panel-header>
       <div class="accordion-content">
         <div>
-          <p class="description" style="font-size: 14px">
+          <p class="lh-14">
             You can choose to send notifications to customers via Email and SMS
           </p>
-          <mat-accordion class="accordion">
+          <mat-accordion class="accordion" class="inner-exp">
             <mat-expansion-panel hideToggle #orders>
               <mat-expansion-panel-header style="height: 49px">
                 <mat-panel-title>Orders</mat-panel-title>
                 <mat-panel-description>
                   <div class="indicator">
                     <mat-icon
-                      style="height: fit-content; margin-right: 20px"
+                      style="height: fit-content; margin-right: 0"
                       *ngIf="!orders.expanded"
                       >keyboard_arrow_right</mat-icon
-                    >
-                    <mat-icon
-                      style="height: fit-content; margin-right: 20px"
-                      *ngIf="orders.expanded"
-                      >keyboard_arrow_down</mat-icon
                     >
                   </div>
                 </mat-panel-description>
               </mat-expansion-panel-header>
 
               <div class="accordion-content" style="width: 100%">
-                <table class="table-container">
+                <table
+                  class="table-container"
+                  style="border-collapse: collapse; width: 100%"
+                >
                   <tbody>
-                    <tr *ngFor="let notif of orderNotifs; let i = index">
+                    <tr
+                      class="notif-table"
+                      *ngFor="let notif of orderNotifs; let i = index"
+                    >
                       <td>
                         <div>
-                          <p>{{ orderNotifs[i].condition }}</p>
+                          <h4 style="margin: 16px 0" class="lh-17">
+                            {{ orderNotifs[i].condition }}
+                          </h4>
                         </div>
                       </td>
 
-                      <td>
+                      <td
+                        align="right"
+                        style="width: fit-content; height: fit-content"
+                      >
                         <div style="display: flex; align-items: center">
                           <mat-icon
                             class="eyecon"
@@ -267,15 +314,19 @@
                         </div>
                       </td>
 
-                      <td>
+                      <td align="right" style="width: 85px; height: 17px">
                         <mat-checkbox [checked]="orderNotifs[i].emailchk">
-                          <p style="margin: 0">Email</p>
+                          <p class="lh-14" style="margin: 0; color: #343434">
+                            Email
+                          </p>
                         </mat-checkbox>
                       </td>
 
-                      <td>
+                      <td align="right" style="width: 85px; height: 17px">
                         <mat-checkbox [checked]="orderNotifs[i].smschk">
-                          <p style="margin: 0">SMS</p>
+                          <p class="lh-14" style="margin: 0; color: #343434">
+                            SMS
+                          </p>
                         </mat-checkbox>
                       </td>
                     </tr>
@@ -290,29 +341,35 @@
                 <mat-panel-description>
                   <div class="indicator">
                     <mat-icon
-                      style="height: fit-content; margin-right: 20px"
+                      style="height: fit-content; margin-right: 0"
                       *ngIf="!returns.expanded"
                       >keyboard_arrow_right</mat-icon
-                    >
-                    <mat-icon
-                      style="height: fit-content; margin-right: 20px"
-                      *ngIf="returns.expanded"
-                      >keyboard_arrow_down</mat-icon
                     >
                   </div>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="accordion-content" style="width: 100%">
-                <table class="table-container">
+                <table
+                  class="table-container"
+                  style="border-collapse: collapse; width: 100%"
+                >
                   <tbody>
-                    <tr *ngFor="let notif of returnNotifs; let i = index">
+                    <tr
+                      class="notif-table"
+                      *ngFor="let notif of returnNotifs; let i = index"
+                    >
                       <td>
                         <div>
-                          <p>{{ returnNotifs[i].condition }}</p>
+                          <h4 style="margin: 16px 0" class="lh-17">
+                            {{ returnNotifs[i].condition }}
+                          </h4>
                         </div>
                       </td>
 
-                      <td>
+                      <td
+                        align="right"
+                        style="width: fit-content; height: fit-content"
+                      >
                         <div style="display: flex; align-items: center">
                           <mat-icon
                             class="eyecon"
@@ -322,15 +379,19 @@
                         </div>
                       </td>
 
-                      <td>
+                      <td align="right" style="width: 85px; height: 17px">
                         <mat-checkbox [checked]="returnNotifs[i].emailchk">
-                          <p style="margin: 0">Email</p>
+                          <p class="lh-14" style="margin: 0; color: #343434">
+                            Email
+                          </p>
                         </mat-checkbox>
                       </td>
 
-                      <td>
+                      <td align="right" style="width: 85px; height: 17px">
                         <mat-checkbox [checked]="returnNotifs[i].smschk">
-                          <p style="margin: 0">SMS</p>
+                          <p class="lh-14" style="margin: 0; color: #343434">
+                            SMS
+                          </p>
                         </mat-checkbox>
                       </td>
                     </tr>
@@ -345,29 +406,35 @@
                 <mat-panel-description>
                   <div class="indicator">
                     <mat-icon
-                      style="height: fit-content; margin-right: 20px"
+                      style="height: fit-content; margin-right: 0px"
                       *ngIf="!refunds.expanded"
                       >keyboard_arrow_right</mat-icon
-                    >
-                    <mat-icon
-                      style="height: fit-content; margin-right: 20px"
-                      *ngIf="refunds.expanded"
-                      >keyboard_arrow_down</mat-icon
                     >
                   </div>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="accordion-content" style="width: 100%">
-                <table class="table-container">
+                <table
+                  class="table-container"
+                  style="border-collapse: collapse; width: 100%"
+                >
                   <tbody>
-                    <tr *ngFor="let notif of refundNotifs; let i = index">
+                    <tr
+                      class="notif-table"
+                      *ngFor="let notif of refundNotifs; let i = index"
+                    >
                       <td>
                         <div>
-                          <p>{{ refundNotifs[i].condition }}</p>
+                          <h4 style="margin: 16px 0" class="lh-17">
+                            {{ refundNotifs[i].condition }}
+                          </h4>
                         </div>
                       </td>
 
-                      <td>
+                      <td
+                        align="right"
+                        style="width: fit-content; height: fit-content"
+                      >
                         <div style="display: flex; align-items: center">
                           <mat-icon
                             class="eyecon"
@@ -377,15 +444,19 @@
                         </div>
                       </td>
 
-                      <td>
+                      <td align="right" style="width: 85px; height: 17px">
                         <mat-checkbox [checked]="refundNotifs[i].emailchk">
-                          <p style="margin: 0">Email</p>
+                          <p class="lh-14" style="margin: 0; color: #343434">
+                            Email
+                          </p>
                         </mat-checkbox>
                       </td>
 
-                      <td>
+                      <td align="right" style="width: 85px; height: 17px">
                         <mat-checkbox [checked]="refundNotifs[i].smschk">
-                          <p style="margin: 0">SMS</p>
+                          <p class="lh-14" style="margin: 0; color: #343434">
+                            SMS
+                          </p>
                         </mat-checkbox>
                       </td>
                     </tr>
@@ -395,7 +466,7 @@
             </mat-expansion-panel>
           </mat-accordion>
 
-          <div>
+          <div class="save-cancel-container" *ngIf="isChanged(channelFormGroup)">
             <button class="save-button" mat-button>Save</button>
             <button
               mat-button
@@ -403,6 +474,10 @@
             >
               Cancel
             </button>
+          </div>
+
+          <div *ngIf="!(isChanged(channelFormGroup))" class="save-cancel-container">
+            <button type="button" (click)="expansions.custNotifs = false" class="save-button" mat-button>Close</button>
           </div>
         </div>
       </div>

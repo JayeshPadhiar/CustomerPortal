@@ -1,17 +1,26 @@
-<div *ngIf="poeFetched" class="expander-component">
+<div class="expander-component">
   <h3 class="component-name">Customize the experience</h3>
 
   <mat-accordion class="accordion">
     <mat-expansion-panel
       (opened)="expansions.styleExp = true"
-      (closed)="expansions.styleExp = false"
+      (closed)="cancelStyle()"
       [expanded]="expansions.styleExp"
       hideToggle
       #stylePanel
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon class="exp-icon" svgIcon="sycp"></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            *ngIf="!stylePanel.expanded"
+            svgIcon="sycp"
+          ></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            *ngIf="stylePanel.expanded"
+            svgIcon="sycp-open"
+          ></mat-icon>
           <div class="exp-title">Style Your Customer Portal</div>
         </mat-panel-title>
         <mat-panel-description>
@@ -114,9 +123,6 @@
               </div>
             </div>
 
-            <br />
-            <br />
-
             <div>
               <h4 class="topic">Upload your favicon</h4>
               <p class="description">
@@ -195,9 +201,6 @@
               </div>
             </div>
 
-            <br />
-            <br />
-
             <div>
               <h4 class="topic">Background Color</h4>
               <p class="description">
@@ -213,6 +216,7 @@
                   (input)="changeColor($event.target.value, 'backgroundColor')"
                 />
                 <input
+                  style="width: 90px"
                   formControlName="backgroundColor"
                   [value]="appStyle.backgroundColor"
                   (input)="changeColor($event.target.value, 'backgroundColor')"
@@ -247,9 +251,6 @@
               </div>
             </div>
 
-            <br />
-            <br />
-
             <div>
               <h4 class="topic">Action Color</h4>
               <p class="description">Used in your action buttons</p>
@@ -263,6 +264,7 @@
                   (input)="changeColor($event.target.value, 'actionColor')"
                 />
                 <input
+                  style="width: 90px"
                   formControlName="actionColor"
                   [value]="appStyle.actionColor"
                   (input)="changeColor($event.target.value, 'actionColor')"
@@ -271,24 +273,50 @@
               </div>
 
               <div
-                class="preview-container"
-                [style.background-color]="appStyle.backgroundColor"
                 style="
+                  width: 202px;
+                  height: 102px;
+                  background: #e5e5e5;
+                  border-radius: 4px;
                   display: flex;
                   align-items: center;
                   justify-content: center;
+                  margin-top: 16px;
                 "
               >
                 <button
                   type="button"
                   [style.background-color]="appStyle.actionColor"
                   style="
-                    color: #e7e7e7;
-                    border-radius: 10px;
-                    border: none;
+                    font-family: Work Sans;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 19px;
+                    /* identical to box height */
+
+                    letter-spacing: 0.03em;
+                    text-transform: uppercase;
+
+                    color: #ffffff;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 16px 72px;
+
+                    position: absolute;
+                    width: 138px;
+                    height: 51px;
                     margin: 0;
-                    width: 70%;
-                    height: 55%;
+
+                    /* Accent */
+
+                    background: #2ddbd1;
+                    box-shadow: 0px 4px 8px rgba(45, 219, 209, 0.18),
+                      0px 0px 2px rgba(45, 219, 209, 0.12),
+                      0px 0px 1px rgba(0, 0, 0, 0.04);
+                    border-radius: 8px;
                   "
                   mat-flat-button
                 >
@@ -297,16 +325,35 @@
               </div>
             </div>
 
-            <div>
+            <div
+              *ngIf="isChanged(styleFormGroup)"
+              class="save-cancel-container"
+            >
               <button class="save-button" type="submit" mat-button>Save</button>
               <button type="button" (click)="cancelStyle()" mat-button>
                 Cancel
+              </button>
+            </div>
+
+            <div
+              *ngIf="!isChanged(styleFormGroup)"
+              class="save-cancel-container"
+            >
+              <button
+                type="button"
+                (click)="expansions.styleExp = false"
+                class="save-button"
+                mat-button
+              >
+                Close
               </button>
             </div>
           </div>
         </form>
       </div>
     </mat-expansion-panel>
+
+    <pre>{{ styleFormGroup.value | json }}</pre>
 
     <mat-expansion-panel
       (opened)="expansions.domainExp = true"
@@ -317,7 +364,16 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon class="exp-icon" svgIcon="sytpd"></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            *ngIf="!domainPanel.expanded"
+            svgIcon="sytpd"
+          ></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            *ngIf="domainPanel.expanded"
+            svgIcon="sytpd-open"
+          ></mat-icon>
           <div class="exp-title">Setup your tracking page domain</div>
         </mat-panel-title>
         <mat-panel-description>
@@ -335,12 +391,13 @@
       </mat-expansion-panel-header>
       <div class="accordion-content">
         <div #addDomainDiv *ngIf="!trackingPageDomain.value">
-          <h4 class="topic">
+          <h4 class="lh-17">
             Add your domain
             <mat-icon
               svgIcon="infoicon"
               class="tooltipicon"
               inline="true"
+              style="margin-left: 8px"
               matTooltip="Rather than registering a new domain name, you can create a subdomain using the domain you already own"
               matTooltipPosition="after"
             >
@@ -362,20 +419,14 @@
             "
           >
             By default, customers will be directed to https://acme.eshopbox.com
-            when accessing the customer portal. To change, add a domain.
+            when accessing <br />
+            the customer portal. To change, add a domain.
             <a>Learn More</a>
           </p>
-          <button
-            class="save-button"
-            style="margin-top: 12px"
-            (click)="addDomain()"
-            mat-button
-          >
+          <button class="save-button" (click)="addDomain()" mat-button>
             + Add domain
           </button>
         </div>
-
-        <br />
 
         <div #domainDiv *ngIf="trackingPageDomain.value">
           <form
@@ -393,25 +444,24 @@
                 "
                 svgIcon="globeicon"
               ></mat-icon>
-              <div
-                style="
-                  margin: auto 0;
-                  font-size: 14px;
-                  line-height: 17px;
-                  color: #333333;
-                  float: left;
-                "
-              >
+              <div class="domain-url-text">
                 {{ trackingPageDomain.value }}
               </div>
-              <div class="connected-indicator">
+
+              <div
+                *ngIf="poeSettings['trackingDomainStatus'] === 'Connected'"
+                class="connected-indicator"
+              >
                 <mat-icon
                   class="connected-indicator-icon"
                   svgIcon="connected"
                 ></mat-icon>
                 Connected
               </div>
-              <div class="pending-indicator">
+              <div
+                *ngIf="poeSettings['trackingDomainStatus'] === 'Pending'"
+                class="pending-indicator"
+              >
                 <mat-icon
                   class="connected-indicator-icon"
                   svgIcon="pending"
@@ -431,54 +481,56 @@
               ></mat-icon>
             </div>
 
-            <br />
-
             <div class="tracking-page-info">
-              <p>
+              <div class="tracking-page-info-text">
                 Visit the admin console of your domain registrar panel (the
-                website you purchased your domain from) and create a CNAME
-                Record with the details below.
-              </p>
+                website you purchased <br />
+                your domain from) and create a CNAME Record with the details
+                below.
+              </div>
               <br />
 
-              <table style="width: 50%">
-                <tr
-                  style="
-                    text-align: left;
-                    font-size: 10px;
-                    line-height: 12px;
-                    color: #808080;
-                  "
-                >
-                  <th>Type</th>
-                  <th>Name</th>
-                  <th>Value</th>
+              <table style="width: 60%; table-layout: auto">
+                <tr>
+                  <th class="table-headers">Type</th>
+                  <th class="table-headers">Name</th>
+                  <th class="table-headers">Value</th>
                 </tr>
-                <tr
-                  style="
-                    text-align: left;
-                    font-size: 10px;
-                    line-height: 12px;
-                    color: #808080;
-                  "
-                >
-                  <td>CNAME</td>
-                  <td>acme.domainkey.eshopbox.com</td>
-                  <td>Acme</td>
+                <tr>
+                  <td class="type">CNAME</td>
+                  <td class="name-value">acme.domainkey.eshopbox.com</td>
+                  <td class="name-value">{{ poeSettings["cnameValue"] }}</td>
                 </tr>
               </table>
             </div>
 
-            <br />
-
-            <div>
+            <div
+              *ngIf="isChanged(domainFormGroup)"
+              class="save-cancel-container"
+            >
               <button class="save-button" type="submit" mat-button>Save</button>
               <button type="button" mat-button>Cancel</button>
+            </div>
+
+            <div
+              *ngIf="!isChanged(domainFormGroup)"
+              class="save-cancel-container"
+            >
+              <button
+                type="button"
+                (click)="expansions.domainExp = false"
+                class="save-button"
+                mat-button
+              >
+                Close
+              </button>
             </div>
           </form>
         </div>
       </div>
     </mat-expansion-panel>
+
+    <pre>{{ domainFormGroup.value | json }}</pre>
 
     <mat-expansion-panel
       (opened)="expansions.linksExp = true"
@@ -489,7 +541,16 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon class="exp-icon" svgIcon="grltyc"></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            svgIcon="grltyc"
+            *ngIf="!linksPanel.expanded"
+          ></mat-icon>
+          <mat-icon
+            class="exp-icon"
+            svgIcon="grltyc-open"
+            *ngIf="linksPanel.expanded"
+          ></mat-icon>
           <div class="exp-title">Give relavant links to your customers</div>
         </mat-panel-title>
         <mat-panel-description>
@@ -505,20 +566,20 @@
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div class="accordion-content">
+      <div class="accordion-content" style="overflow: auto">
         <form
           novalidate
           [formGroup]="linksFormGroup"
           (ngSubmit)="onSubmit(linksFormGroup)"
         >
           <div>
-            <h4 class="topic">Website URL</h4>
-            <p class="description">
+            <h4 class="lh-17 topic">Website URL</h4>
+            <p class="lh-16-fs-12">
               Direct customers to your website from the customer portal
             </p>
 
             <div class="form-container">
-              <mat-form-field style="width: 80%" floatLabel="never">
+              <mat-form-field style="width: 405px" floatLabel="never">
                 <input
                   style="width: 100%"
                   matInput
@@ -532,17 +593,30 @@
               </mat-form-field>
             </div>
 
-            <div class="preview-container" style="overflow: hidden">
+            <div
+              class="preview-container"
+              style="
+                max-width: 100%;
+                min-width: 199px;
+                height: 106px;
+                padding: 0 0 0 20px;
+              "
+            >
               <div
-                class="preview-div"
                 [style.background-color]="appStyle.backgroundColor"
-                style="top: 0; right: 0; width: fit-content; overflow: hidden"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  overflow-x: auto;
+                  padding-left: 10%;
+                "
               >
                 <div
                   class="preview-div-body"
                   style="
                     top: 0;
-                    right: 0;
+                    height: 30px;
+                    width: 100%;
                     border-radius: 0;
                     border-bottom-left-radius: 10px;
                     overflow: hidden;
@@ -550,23 +624,21 @@
                 ></div>
                 <div
                   style="
-                    padding-bottom: 10%;
-                    display: flex;
-                    align-items: flex-end;
-                    justify-content: center;
-                    height: 100%;
+                    bottom: 0;
+                    margin: auto 0 0;
+                    height: fit-content;
                     overflow: hidden;
                   "
                 >
-                  <h4 *ngIf="links.websiteUrl">
+                  <p class="link-text" *ngIf="links.websiteUrl">
                     Go to&nbsp;<a href="#"> {{ links.websiteUrl }}</a>
-                  </h4>
+                  </p>
                 </div>
               </div>
             </div>
 
-            <h4 class="topic">Support</h4>
-            <p class="description">
+            <h4 class="lh-17 topic">Support</h4>
+            <p class="lh-16-fs-12" style="margin-bottom: 20px">
               Provide help and support to your customers at every step
             </p>
 
@@ -582,7 +654,7 @@
                 >
                 </mat-icon>
               </mat-label>
-              <mat-form-field style="width: 80%" floatLabel="never">
+              <mat-form-field style="width: 405px" floatLabel="never">
                 <input
                   style="width: 100%"
                   formControlName="supportUrl"
@@ -597,10 +669,13 @@
             </div>
 
             <div>
-              <table style="width: 80%" cellspacing="0">
+              <table style="max-width: 390px">
                 <tr>
-                  <td>
-                    <div class="form-container">
+                  <td style="height: fit-content">
+                    <div
+                      class="form-container"
+                      style="width: 180px; margin: 0 43px 0 0"
+                    >
                       <mat-label class="label"> Support email </mat-label>
                       <mat-form-field floatLabel="never">
                         <input
@@ -617,7 +692,10 @@
                     </div>
                   </td>
                   <td>
-                    <div class="form-container">
+                    <div
+                      class="form-container"
+                      style="width: 180px; margin: 0 0 0"
+                    >
                       <mat-label class="label">
                         Support phone number
                       </mat-label>
@@ -658,11 +736,17 @@
               >
                 <h4
                   style="
-                    margin-top: 20%;
-                    margin-right: 20%;
+                    margin-top: 10%;
+                    margin-right: 10%;
                     float: right;
                     top: 0;
                     right: 0;
+                    font-family: 'Work Sans', sans-serif;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 14px;
+                    line-height: 145%;
+                    color: #bdbdbd;
                   "
                 >
                   Help ?
@@ -671,9 +755,10 @@
             </div>
 
             <div>
-              <h4 class="topic">
+              <h4 class="lh-17">
                 Add footer links
                 <mat-icon
+                  style="height: 14px; width: 14px"
                   svgIcon="infoicon"
                   class="tooltipicon"
                   inline="true"
@@ -682,14 +767,17 @@
                 >
                 </mat-icon>
               </h4>
-              <p class="description">
-                Allow customers to access important links of your website
-                through the footer section
-              </p>
+              <div style="width: 70%">
+                <p class="lh-16-fs-12">
+                  Allow customers to access important links of your website
+                  <br />
+                  through the footer section
+                </p>
+              </div>
 
               <table
                 formArrayName="footers"
-                style="width: 82%"
+                style="width: 450px"
                 class="table-container"
               >
                 <tbody>
@@ -701,7 +789,10 @@
                     [formGroupName]="i"
                   >
                     <td>
-                      <div class="form-container">
+                      <div
+                        class="form-container"
+                        style="width: 180px; margin: 0 43px 0 0"
+                      >
                         <mat-form-field floatLabel="never" style="margin: 0">
                           <input
                             formControlName="name"
@@ -715,11 +806,11 @@
                       </div>
                     </td>
                     <td>
-                      <div class="form-container">
-                        <mat-form-field
-                          floatLabel="never"
-                          style="margin: 0 10px"
-                        >
+                      <div
+                        class="form-container"
+                        style="width: 180px; margin: 0 16px 0 0"
+                      >
+                        <mat-form-field floatLabel="never" style="margin: 0">
                           <input
                             formControlName="url"
                             (input)="
@@ -743,31 +834,45 @@
                       type="button"
                       (click)="addFooter()"
                       mat-flat-button
-                      style="
-                        height: min-content;
-                        color: #fa5c5d;
-                        border: none;
-                        margin: 0;
-                        padding: 0;
-                      "
+                      class="add-button"
                       #addLinksButton
                       *ngIf="links.footers.length < 3"
                     >
                       + Add links
                     </button>
-                    <p>Max. 3 links</p>
+                    <p class="max-links" style="margin-bottom: 0">
+                      Max. 3 links
+                    </p>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div>
+            <div
+              *ngIf="isChanged(linksFormGroup)"
+              class="save-cancel-container"
+            >
               <button class="save-button" type="submit" mat-button>Save</button>
               <button type="button" mat-button>Cancel</button>
+            </div>
+
+            <div
+              *ngIf="!isChanged(linksFormGroup)"
+              class="save-cancel-container"
+            >
+              <button
+                type="button"
+                (click)="expansions.linksExp = false"
+                class="save-button"
+                mat-button
+              >
+                Close
+              </button>
             </div>
           </div>
         </form>
       </div>
     </mat-expansion-panel>
+    <pre>{{ linksFormGroup.value | json }}</pre>
   </mat-accordion>
   <!--pre>{{styleFormGroup.value | json}}</pre>
   <pre>{{appStyle | json}}</pre>

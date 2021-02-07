@@ -1,3 +1,14 @@
+::ng-deep.mobile-div
+  .mat-button-toggle-appearance-standard
+  .mat-button-toggle-label-content {
+  line-height: 35px;
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
 h2 {
   font-family: Lato;
   font-style: normal;
@@ -30,7 +41,6 @@ h4 {
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  display: flex;
   align-items: center;
   letter-spacing: 1px;
   color: #808080;
@@ -40,10 +50,267 @@ h4.topic {
   font-family: Lato;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
   letter-spacing: 0.5px;
   color: #333333;
+  margin: 0;
+}
+
+h4.lh-17 {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  color: #343434;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+h4.lh-16-fs-14 {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  /* identical to box height, or 114% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  color: #343434;
+
+  margin: 36px 0 12px;
+}
+
+h4.lh-22 {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  /* identical to box height, or 137% */
+
+  letter-spacing: 0.5px;
+
+  color: #333333;
+
+  margin: 0;
+}
+
+p.link-text {
+  font-family: 'Work Sans' sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 160%;
+  /* or 22px */
+
+  /* Dark Gray */
+
+  color: #828282;
+}
+
+p.lh-16-fs-12 {
+  margin: 0 0 12px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  /* identical to box height, or 133% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  color: #808080;
+}
+
+p.lh-20-fs-12 {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+  /* identical to box height, or 167% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  color: #808080;
+
+  margin: 0;
+}
+
+p.fs-12-lh-12 {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  /* or 100% */
+
+  letter-spacing: 0.5px;
+
+  color: #343434 !important;
+
+  margin: 2px 4px !important;
+}
+
+p.fs-12-lh-14 {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  color: #343434 !important;
+
+  margin: 0 0 12px;
+}
+
+p.lh-14 {
+  margin: 0 0 32px;
+
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.5px;
+
+  color: #808080;
+}
+
+h4.fs-16-lh-16 {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 16px;
+  /* identical to box height, or 100% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  color: #343434;
+
+  margin: 0;
+}
+
+h4.fs-16-lh-24 {
+  margin: 0 0 16px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  /* or 150% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  color: #343434;
+}
+
+h4.fs-16-lh-19 {
+  margin: 36px 0 8px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  color: #343434;
+}
+
+p.max-links {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  color: #999999;
+}
+
+p.max-reasons {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  color: #808080;
+}
+
+p.notif-text {
+  /* 14 px */
+
+  font-family: "Work Sans" sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 160%;
+
+  max-width: 80%;
+  /* or 22px */
+
+  text-align: center;
+
+  color: #ffffff !important;
+}
+
+.domain-url-text {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  letter-spacing: 0.5px;
+
+  color: #333333;
+}
+
+tr.notif-table {
+  margin: 16px 0;
+  border: solid #e7e7e7;
+  border-width: 1px 0;
+}
+
+tr.notif-table:first-child {
+  border: none;
+}
+tr.notif-table:last-child {
+  border: none;
 }
 
 .label {
@@ -72,6 +339,61 @@ h4.topic {
 
 h5 {
   font-weight: 400;
+}
+
+.note {
+  margin: 10px 0 0 10px;
+  width: 99%;
+  height: 90%;
+  font-family: "Work Sans", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 145%;
+  letter-spacing: 0.02em;
+  color: #4f4f4f;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #f6f6f6;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 13px -8px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+
+p.note {
+  font-family: "Work Sans" sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 160%;
+
+  max-width: 80%;
+  max-height: fit-content;
+  height: fit-content;
+  width: max-content;
+
+  padding: 0 20px;
+  /* or 22px */
+
+  text-align: center;
+
+  font-family: Work Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 145%;
+  /* or 15px */
+
+  letter-spacing: 0.02em;
+
+  /* Darkest Gray */
+
+  color: #4f4f4f !important;
+
+  background: #f6f6f6;
 }
 
 a.learn-more {
@@ -119,6 +441,25 @@ button.save-button {
   border-radius: 4px;
 }
 
+button.add-button {
+  height: 12px;
+  color: #fa5c5d;
+  border: none;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  color: #fa5c5d;
+}
+
 div.expander-component {
   padding: 5px;
 }
@@ -152,6 +493,19 @@ div.expander-component {
   padding-left: 0;
 }
 
+:host ::ng-deep.mat-expansion-panel-body {
+  padding: 0 24px 30px;
+}
+
+:host ::ng-deep .inner-exp .mat-expansion-panel-header {
+  height: 49px;
+}
+
+:host ::ng-deep .inner-exp .mat-expansion-panel-body {
+  overflow: auto;
+  padding: 0 24px 26px;
+}
+
 .mat-icon {
   margin-right: 25px;
   height: 34px;
@@ -164,6 +518,11 @@ div.expander-component {
   fill: #343434;
   stroke: #343434;
   stroke-width: 0;
+
+  height: 13px !important;
+  width: 13px !important;
+
+  margin: 0;
 }
 
 .tooltipicon {
@@ -171,7 +530,7 @@ div.expander-component {
   width: 14px;
   margin: 0;
   stroke: white;
-  margin-left: 6px;
+  margin-left: 4px;
   background-color: white;
 }
 
@@ -179,23 +538,20 @@ div.expander-component {
   margin: 23px 26px;
   height: 34px;
   width: 34px;
-  fill: inherit;
-  stroke: inherit;
 }
 
 .indicator-icon {
-  height: fit-content
+  height: fit-content;
 }
 
 .indicator-icon-selected {
   height: fit-content;
-  color: #FA5C5D;
+  color: #fa5c5d;
 }
-
-
 
 .accordion .mat-expansion-panel-header-title,
 .exp-title {
+  max-width: 85%;
   margin: auto 0;
   color: inherit;
   font-family: Lato;
@@ -214,11 +570,11 @@ div.accordion-content {
   margin: 0 auto;
   width: 80%;
   color: black;
+  overflow: auto;
 }
 
 .accordion-content p {
   color: gray;
-  margin-top: 5px;
 }
 
 .accordion-content p.description {
@@ -229,12 +585,14 @@ div.accordion-content {
   line-height: 20px;
   letter-spacing: 1px;
   color: #999999;
+  margin-top: 2px;
 }
 
+/*
 .accordion-content h4 {
   margin-top: 0;
   margin-bottom: 0;
-}
+}*/
 
 .accordion-content h5 {
   margin-top: 0;
@@ -242,7 +600,7 @@ div.accordion-content {
 }
 
 .accordion-content button {
-  margin-right: 10px;
+  margin-right: 12px;
   padding: 0px 20px;
 }
 
@@ -310,28 +668,24 @@ div.accordion-content {
   border-radius: 13px;
 }
 
-
 .accordion-content .connected-indicator-icon {
   height: 13px;
   width: 13px;
   margin: 0 5px;
 }
 
-
-
 .accordion-content .pending-indicator {
-  color: #F53232;
-  fill: #F53232;
-  stroke: #F53232;
+  color: #f53232;
+  fill: #f53232;
+  stroke: #f53232;
   margin-left: 12px;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 6px 12px;
-  background: #FDEAEA;
+  background: #fdeaea;
   border-radius: 13px;
 }
-
 
 .accordion-content .pending-indicator-icon {
   height: 13px;
@@ -339,13 +693,70 @@ div.accordion-content {
   margin: 0 5px;
 }
 
-
 .accordion-content .tracking-page-info {
   background: #ffffff;
   border: 1px solid #e7e7e7;
   box-sizing: border-box;
   border-radius: 4px;
   padding: 16px;
+  margin-top: 16px;
+}
+
+.accordion-content .tracking-page-info .tracking-page-info-text {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  /* or 150% */
+  letter-spacing: 0.5px;
+  color: #666666;
+}
+
+.accordion-content .tracking-page-info .table-headers {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  /* identical to box height, or 120% */
+
+  letter-spacing: 0.5px;
+  text-align: left;
+
+  color: #808080;
+}
+
+.accordion-content .tracking-page-info .type {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 12px;
+  /* identical to box height, or 100% */
+
+  letter-spacing: 0.5px;
+  text-align: left;
+
+  color: #666666;
+}
+
+.accordion-content .tracking-page-info .name-value {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  /* identical to box height, or 100% */
+  text-align: left;
+
+  letter-spacing: 0.5px;
+
+  color: #666666;
+}
+
+.save-cancel-container {
+  margin-top: 32px;
 }
 
 .accordion-content .table-container {
@@ -373,9 +784,10 @@ td {
   width: fit-content;
   background: #ffffff;
   border: 1px solid #cfc9c9;
-  padding: 10px;
+  padding: 0px 7px;
   border-radius: 4px;
   height: 34px;
+  width: 136px;
 }
 
 .color-picker-container input {
@@ -417,7 +829,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .preview-container {
   position: relative;
-  margin: 20px 0px;
+  margin: 16px 0px 36px;
   border-radius: 4px;
   background-color: gainsboro;
   height: 100px;
@@ -457,9 +869,10 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .preview-container .preview-div-notif {
-  height: 40%;
-  width: 100%;
+  max-height: fit-content;
+  width: 519px;
   background-color: black;
+  word-wrap: break-word;
   bottom: top;
   display: flex;
   align-items: center;
@@ -500,7 +913,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .form-container {
-  margin-right: 20px;
+  margin-right: 43px;
   margin-bottom: 20px;
   color: gray;
 }
@@ -569,11 +982,6 @@ input:checked + .slider:after {
   left: 35%;
 }
 
-
-
-
-
-
 :host ::ng-deep .mat-radio-container {
   height: 13px;
   width: 13px;
@@ -591,8 +999,8 @@ input:checked + .slider:after {
   width: 13px;
 }
 :host ::ng-deep .mat-radio-button .mat-radio-ripple {
-  height: 20px; 
-  width: 20px; 
+  height: 20px;
+  width: 20px;
   left: calc(50% - 10px);
   top: calc(50% - 10px);
 }
@@ -664,7 +1072,6 @@ input:checked + .slider:after {
   /*change color of underline when focused*/
   background-color: #4a90e2 !important;
 }
-
 
 ::ng-deep.mat-form-field-infix {
   border: none;

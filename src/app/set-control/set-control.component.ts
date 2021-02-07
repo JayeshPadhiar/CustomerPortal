@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 import { Reason, ExcludeCondition } from './set-control.model';
 
 @Component({
@@ -8,7 +9,7 @@ import { Reason, ExcludeCondition } from './set-control.model';
   styleUrls: ['./set-control.component.css', '../app.component.css'],
 })
 export class SetControlComponent implements OnInit {
-  constructor(public fb: FormBuilder) {}
+  constructor(public fb: FormBuilder, public backendService: CustomerPortalBackendService) {}
 
   creasons: Array<Reason> = [
     { reason: 'Delivery is delayed' },
@@ -95,6 +96,10 @@ export class SetControlComponent implements OnInit {
 
   deleteReason(index) {
     this.getReasons.removeAt(index);
+  }
+
+  isChanged(form: FormGroup) {
+    return this.backendService.formChanged(form)
   }
 
   submit() {}

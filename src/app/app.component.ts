@@ -19,7 +19,7 @@ export class AppComponent {
   }
 
   public registerIcons(): void {
-    this.loadIcons(["connected", "pending", "eyecon", "learnmore", "infoicon", "globeicon", "trashicon", "danoycp", "dyccwc", "etas", "grltyc", "mycn", "mycp", "myrp", "scam", "sycp", "sytpd", "crossbutton", "deletebin", "shippingSoon", "inTransit"], '../assets/svg');
+    this.loadIcons(["connected", "pending", "eyecon", "learnmore", "infoicon", "globeicon", "trashicon", "danoycp", "dyccwc", "etas", "grltyc", "mycn", "mycp", "myrp", "scam", "sycp", "sytpd", "danoycp-open", "dyccwc-open", "etas-open", "grltyc-open", "mycn-open", "mycp-open", "myrp-open", "scam-open", "sycp-open", "sytpd-open", "crossbutton", "deletebin", "shippingSoon", "inTransit"], '../assets/svg');
   }
 
   private loadIcons(iconKeys: string[], iconUrl: string): void {

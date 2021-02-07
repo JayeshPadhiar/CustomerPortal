@@ -28,7 +28,9 @@
       class="notif-body"
       [style.background-color]="appStyle.noticeBackgroundColor"
     >
-      <p>{{ notif.message }}</p>
+      <p class="notif-text" style="max-width: 90%; word-wrap: break-word">
+        {{ notif.message }}
+      </p>
     </div>
 
     <div>
@@ -54,8 +56,8 @@
                 padding: 27px 20px 0px 30px;
               "
             >
-              <div>
-                <div class="xtitle" style="margin: 0;">Order Summary</div>
+              <div style="height: 100%">
+                <div class="xtitle" style="margin: 0">Order Summary</div>
                 <div class="pre-title" style="margin: 14px 0 16px">
                   You purchased <b>2 items</b> in order <b>BB3648390</b> on
                   <b>2 Oct, 2020</b> for <b>INR 1995</b> via
@@ -74,11 +76,14 @@
                   ITEMS IN THIS ORDER
                 </div>
 
-                <div>
-                  <div
-                    (click)="productListView = false"
-                    class="item-list-container"
-                  >
+                <div
+                  style="
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                    max-height: 280px;
+                  "
+                >
+                  <div class="item-list-container">
                     <img
                       class="product-img"
                       style="margin: 0 5px"
@@ -111,36 +116,74 @@
                       >
                     </div>
                   </div>
-                </div>
 
-                <div class="xtitle" style="margin: 28px 0 16px">
-                  Delivery Details
+                  <div class="item-list-container">
+                    <img
+                      class="product-img"
+                      style="margin: 0 5px"
+                      src="../../assets/img/shippingImg3.png"
+                    />
+                    <div class="mobile-content" style="display: inline-block">
+                      Regular Fit Navy Shirt
+                    </div>
+
+                    <div class="arrow">
+                      <mat-icon style="height: fit-content"
+                        >keyboard_arrow_right</mat-icon
+                      >
+                    </div>
+                  </div>
+
+                  <div class="item-list-container">
+                    <img
+                      class="product-img"
+                      style="margin: 0 5px"
+                      src="../../assets/img/shippingImg2.png"
+                    />
+                    <div class="mobile-content" style="display: inline-block">
+                      Regular Fit Navy Shirt
+                    </div>
+
+                    <div class="arrow">
+                      <mat-icon style="height: fit-content"
+                        >keyboard_arrow_right</mat-icon
+                      >
+                    </div>
+                  </div>
                 </div>
 
                 <div
-                  style="
-                    font-family: 'Work Sans', sans-serif;
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 10px;
-                    line-height: 12px;
-                    letter-spacing: 0.02em;
-                    text-transform: uppercase;
-                    color: #828282;
-                  "
+                  style="bottom: 0; margin-top: auto; vertical-align: bottom"
                 >
-                  Deepak Khetan
-                </div>
+                  <div class="xtitle" style="margin: 28px 0 16px">
+                    Delivery Details
+                  </div>
 
-                <div class="pre-title" style="margin: 14px 0 16px">
-                  +91 9999900000 | deepak.khetan@gmail.com
-                </div>
-                <div
-                  class="pre-title"
-                  style="font-weight: normal; margin: 14px 0 16px"
-                >
-                  G 55, G block, South city II, Sector 50, Gurgaon Gurugram -
-                  122018
+                  <div
+                    style="
+                      font-family: 'Work Sans', sans-serif;
+                      font-style: normal;
+                      font-weight: 600;
+                      font-size: 10px;
+                      line-height: 12px;
+                      letter-spacing: 0.02em;
+                      text-transform: uppercase;
+                      color: #828282;
+                    "
+                  >
+                    Deepak Khetan
+                  </div>
+
+                  <div class="pre-title" style="margin: 6px 0 7px">
+                    +91 9999900000 | deepak.khetan@gmail.com
+                  </div>
+                  <div
+                    class="pre-title"
+                    style="font-weight: normal; margin: 14px 0 16px"
+                  >
+                    G 55, G block, South city II, Sector 50, Gurgaon Gurugram -
+                    122018
+                  </div>
                 </div>
               </div>
             </div>
@@ -194,7 +237,10 @@
               >
                 <mat-horizontal-stepper class="mobile-stepper" #stepper>
                   <ng-template matStepperIcon="edit">
-                    <mat-icon>edit</mat-icon>
+                    <mat-icon
+                      style="height: 24px; width: 24px"
+                      svgIcon="shippingSoon"
+                    ></mat-icon>
                   </ng-template>
                   <ng-template matStepperIcon="home">
                     <mat-icon>home</mat-icon>
@@ -206,17 +252,23 @@
                     <mat-icon>done_all</mat-icon>
                   </ng-template>
 
-                  <ng-template matStepperIcon="home">
-                    <mat-icon>home</mat-icon>
+                  <ng-template matStepperIcon="shippingSoon">
+                    <mat-icon
+                      style="height: 24px; width: 24px"
+                      svgIcon="shippingSoon"
+                    ></mat-icon>
                   </ng-template>
-                  <ng-template matStepperIcon="form">
-                    <mat-icon>format_align_center</mat-icon>
+                  <ng-template matStepperIcon="inTransit">
+                    <mat-icon
+                      style="height: 35px; width: 25px"
+                      svgIcon="inTransit"
+                    ></mat-icon>
                   </ng-template>
                   <ng-template matStepperIcon="last">
                     <mat-icon>done_all</mat-icon>
                   </ng-template>
 
-                  <mat-step state="edit">
+                  <mat-step state="shippingSoon">
                     <ng-template matStepLabel>
                       <div class="mobile-stepper-title">Shipping Soon</div>
                       <div class="mobile-stepper-title-desc">
@@ -287,7 +339,7 @@
                     </div>
                   </mat-step>
 
-                  <mat-step state="edit">
+                  <mat-step state="inTransit">
                     <ng-template matStepLabel>
                       <div class="mobile-stepper-title">In transit</div>
                       <div class="mobile-stepper-title-desc">

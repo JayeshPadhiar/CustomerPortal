@@ -55,6 +55,8 @@ mat-dialog-content {
 ::-webkit-scrollbar {
   width: 8px;
   transform: rotate(-90deg);
+  background-color: #F6F6F6;
+
 }
 
 ::-webkit-scrollbar-track {
@@ -175,7 +177,7 @@ div.mobile-container {
 .mobile-container .item-list-container {
   display: flex;
   align-items: center;
-  width: 318px;
+  width: 300px;
   height: 87px;
   background: #ffffff;
   border: 1px solid #f6f6f6;
@@ -267,11 +269,11 @@ div.mobile-container {
 }
 
 ::ng-deep .mat-step-header .mat-step-icon-selected {
-  background-color: gray;
+  background-color: transparent;
 }
 
 ::ng-deep .mat-step-header .mat-step-icon {
-  background-color: gray;
+  background-color: transparent;
 }
 
 .mobile-content {
