@@ -1065,7 +1065,7 @@ input:checked + .slider:after {
 
 ::ng-deep.mat-form-field-underline {
   /*change color of underline*/
-  background-color: #c4c4c4 !important;
+  background-color: #C8C8C8 !important;
 }
 
 ::ng-deep.mat-form-field-ripple {

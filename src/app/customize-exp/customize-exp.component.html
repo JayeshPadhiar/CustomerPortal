@@ -52,7 +52,7 @@
                   Upload logo
                 </button>
                 <input
-                  formControlName="brandLogoUrl"
+                  
                   hidden
                   (input)="selectIcon('brandLogoUrl', $event, 154, 24)"
                   #logoInput
@@ -130,7 +130,6 @@
                   Upload Favicon
                 </button>
                 <input
-                  formControlName="faviconUrl"
                   hidden
                   (change)="selectIcon('faviconUrl', $event, 16, 16)"
                   #faviconInput
@@ -349,8 +348,8 @@
       </div>
     </mat-expansion-panel>
 
-    <pre>{{ styleFormGroup.value | json }}</pre>
-    <pre>{{ styleFormGroup.dirty | json }}</pre>
+    <!--pre>{{ styleFormGroup.value | json }}</pre>
+    <pre>{{ styleFormGroup.dirty | json }}</pre-->
 
     <mat-expansion-panel
       (opened)="expansions.domainExp = true"
@@ -527,7 +526,7 @@
       </div>
     </mat-expansion-panel>
 
-    <pre>{{ domainFormGroup.value | json }}</pre>
+    <!--pre>{{ domainFormGroup.value | json }}</pre-->
 
     <mat-expansion-panel
       (opened)="expansions.linksExp = true"
@@ -623,7 +622,7 @@
                     overflow: hidden;
                   "
                 >
-                  <p class="link-text" *ngIf="links.websiteUrl">
+                  <p class="link-text" *ngIf="links.websiteUrl" style="margin-top: 50px; margin-left: 10px;">
                     Go to&nbsp;<a href="#"> {{ links.websiteUrl }}</a>
                   </p>
                 </div>
@@ -639,6 +638,7 @@
               <mat-label class="label">
                 Support URL
                 <mat-icon
+                style="margin-bottom: 1px; height: 12px; width: 12px;"
                   svgIcon="infoicon"
                   class="tooltipicon"
                   inline="true"
@@ -865,9 +865,9 @@
         </form>
       </div>
     </mat-expansion-panel>
-    <pre>{{ linksFormGroup.value | json }}</pre>
   </mat-accordion>
-  <!--pre>{{styleFormGroup.value | json}}</pre>
+  <!--pre>{{ linksFormGroup.value | json }}</pre>
+  <pre>{{styleFormGroup.value | json}}</pre>
   <pre>{{appStyle | json}}</pre>
   <pre>{{linksFormGroup.value | json}}</pre-->
 </div>

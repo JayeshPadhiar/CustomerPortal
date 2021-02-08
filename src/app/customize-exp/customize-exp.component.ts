@@ -22,7 +22,7 @@ export class CustomizeExpComponent implements OnInit {
   links: Links;
   originalLinks: Links;
 
-  urlpattern = /((?:(http|https|Http|Https|rtsp|Rtsp):\/\/(?:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,64}(?:\:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,25})?\@)?)?((?:(?:[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-zA-Z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-fA-F0-9]{2}))*)?(?:\b|$)/gi;
+  urlpattern = /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
   phonepattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
   colorpattern = /^#[0-9a-f]{3}([0-9a-f]{3})?$/i;
 
@@ -34,6 +34,8 @@ export class CustomizeExpComponent implements OnInit {
     domainExp: false,
     linksExp: false,
   };
+
+  files = [];
 
   styleFormGroup: FormGroup;
   brandLogoUrl: FormControl;
@@ -115,8 +117,8 @@ export class CustomizeExpComponent implements OnInit {
 
   //create form controls
   createFormControls = () => {
-    this.brandLogoUrl = new FormControl('');
-    this.faviconUrl = new FormControl('');
+    this.brandLogoUrl = new FormControl(this.appStyle['brandLogoUrl']);
+    this.faviconUrl = new FormControl(this.appStyle['faviconUrl']);
     this.backgroundColor = new FormControl(this.appStyle['backgroundColor'], [
       Validators.required,
       Validators.pattern(this.colorpattern),
@@ -148,6 +150,12 @@ export class CustomizeExpComponent implements OnInit {
       Validators.pattern(this.phonepattern),
     ]);
     this.footerLinks = new FormArray([]);
+
+    this.links['footerLinks'].forEach((footer) => {
+      this.footerLinks.push(
+        this.newFooter(footer['name'].toString(), footer['url'].toString())
+      );
+    });
   };
 
   //create form groups
@@ -181,10 +189,10 @@ export class CustomizeExpComponent implements OnInit {
       } else {
         alert('Please upload Image file only');
       }
-      reader.onloadend = (event) => {
+      reader.onloadend = (e) => {
         var icon = new Image();
 
-        icon.src = event.target.result.toString();
+        icon.src = e.target.result.toString();
 
         icon.onload = () => {
           let height = icon.height;
@@ -194,9 +202,13 @@ export class CustomizeExpComponent implements OnInit {
             alert(`Please enter icon of size ${maxw}x${maxh}`);
           } else {
             console.log('Valid image added');
+
+            this.files.push(file);
+            console.log(this.files);
+
             this.backendService.appStyle$.next({
               ...this.appStyle,
-              [icontype]: event.target.result,
+              [icontype]: e.target.result,
             });
           }
         };
@@ -210,6 +222,9 @@ export class CustomizeExpComponent implements OnInit {
       ...this.appStyle,
       [icontype]: this.originalAppStyle[icontype],
     });
+
+    this.files.pop();
+    console.log('deleted', this.files);
   }
 
   changeColor(color, prop) {
@@ -273,21 +288,23 @@ export class CustomizeExpComponent implements OnInit {
     this.backendService.links$.next({ ...this.links, [type]: val });
   }
 
-  newFooter(): FormGroup {
+  newFooter(name = '', url = 'https://'): FormGroup {
     return new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      url: new FormControl('https://', [Validators.required]),
+      name: new FormControl(name, [Validators.required]),
+      url: new FormControl(url, [Validators.required, Validators.pattern(this.urlpattern)]),
     });
   }
 
-  addFooter() {
+  addFooter(name = '', url = 'https://') {
     this.footerLinks.push(this.newFooter());
-    this.links.footerLinks.push({ name: '', url: '' });
+    this.links.footerLinks.push({ name: name, url: url });
   }
 
   removeFooter(index) {
     this.footerLinks.removeAt(index);
     this.links.footerLinks.splice(index, 1);
+
+    this.linksFormGroup.markAsDirty();
 
     /*if (this.footerLinks.length == 1) {
       this.footerLinks.splice(index, 1);

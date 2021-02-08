@@ -61,6 +61,8 @@ export class CustomerPortalBackendService {
   notif$: BehaviorSubject<object> = new BehaviorSubject({
     message: 'Your message will be displayed here',
     show: false,
+    delaymessage: '',
+    showdelay: true,
   });
 
   //return AppStyle
@@ -84,13 +86,31 @@ export class CustomerPortalBackendService {
       faviconUrl: poeData['faviconUrl'],
     });
 
+    /*let obj = {
+      google: 'google.com',
+      contact: 'contact',
+    };*/
+    let footerss = [];
+
+    if (this.poeSettings.value['footerLinks']) {
+      for (let [key, val] of Object.entries(this.poeSettings.value['footerLinks'])) {
+        footerss.push({ name: key, url: val });
+        console.log('Links', this.links$);
+      }
+    }
+
     this.links$.next({
       websiteUrl: poeData['websiteUrl'],
       supportUrl: poeData['supportUrl'],
       supportEmail: poeData['supportEmail'],
       supportPhone: poeData['supportPhone'],
-      footerLinks: [],
+      footerLinks: footerss,
     });
+
+    this.notif$.next({...this.notif$.value, 
+      message: poeData['noticeMessage'],
+      show: poeData['noticeMessage']
+    })
   };
 
   //GET request for fetching poeSettings from Eshopbox Backend
@@ -103,7 +123,18 @@ export class CustomerPortalBackendService {
 
   updatePoeSettings(data: object) {
     console.log('new settings = ', { ...this.poeSettings.value, ...data });
+
+    this.poeSettings.next({...this.poeSettings.value, ...data})
+
+    this.httpClient
+      .post(
+        'https://montecarlo.auperator.co/customer-portal/api/v1/poe-setting',
+        JSON.stringify(data)
+      )
+      .subscribe((newdata) => console.log('new data = ', newdata));
   }
+
+  postPoeSettings(data: object) {}
 
   saveForm(form: FormGroup, data = form.value): boolean {
     if (form.dirty && form.valid) {

@@ -9,7 +9,10 @@ import { Reason, ExcludeCondition } from './set-control.model';
   styleUrls: ['./set-control.component.css', '../app.component.css'],
 })
 export class SetControlComponent implements OnInit {
-  constructor(public fb: FormBuilder, public backendService: CustomerPortalBackendService) {}
+  constructor(
+    public fb: FormBuilder,
+    public backendService: CustomerPortalBackendService
+  ) {}
 
   creasons: Array<Reason> = [
     { reason: 'Delivery is delayed' },
@@ -54,59 +57,100 @@ export class SetControlComponent implements OnInit {
 
   createFormGroup() {
     this.cancellationPolicy = this.fb.group({
+      allowCancellation: this.fb.control(true),
       cancellationReasons: this.fb.array([]),
       cancellationRefundPolicy: this.fb.group({
-        bank: this.fb.control(''),
-        originalPaymentMode: this.fb.control(''),
-        storeCredit: this.fb.control(''),
+        bank: this.fb.control(
+          this.backendService.poeSettings.value['cancellationRefundPolicy'][
+            'bank'
+          ]
+        ),
+        originalPaymentMode: this.fb.control(
+          this.backendService.poeSettings.value['cancellationRefundPolicy'][
+            'originalPaymentMode'
+          ]
+        ),
+        storeCredit: this.fb.control(
+          this.backendService.poeSettings.value['cancellationRefundPolicy'][
+            'storeCredit'
+          ]
+        ),
       }),
+    });
+
+    let creasons: Array<string> = this.backendService.poeSettings.value[
+      'cancellationReasons'
+    ];
+    creasons.forEach((reason) => {
+      this.addReason(this.cancellationPolicy, 'cancellationReasons', reason);
     });
 
     this.returnPolicy = this.fb.group({
-      allowReturns: this.fb.control(false),
-      /*returnWindowDays: this.fb.control(0),
-
+      allowReturns: this.fb.control(this.backendService.poeSettings.value['allowReturns']),
       returnReasons: this.fb.array([]),
+      returnWindowDays: this.fb.control(this.backendService.poeSettings.value['returnWindowDays']),
 
       returnResolutionPolicy: this.fb.group({
-        refund: this.fb.control(''),
-        exchange: this.fb.control(''),
-        storeCredit: this.fb.control(''),
+        refund: this.fb.control(
+          this.backendService.poeSettings.value['returnResolutionPolicy'][
+            'refund'
+          ]
+        ),
+        exchange: this.fb.control(this.backendService.poeSettings.value['returnResolutionPolicy'][
+          'exchange'
+        ]),
       }),
 
       returnRefundPolicy: this.fb.group({
-        originalPaymentMode: this.fb.control(''),
-        bank: this.fb.control(''),
+        bank: this.fb.control(this.backendService.poeSettings.value['returnRefundPolicy']['bank']),
+        originalPaymentMode: this.fb.control(this.backendService.poeSettings.value['returnRefundPolicy']['originalPaymentMode']),
+        storeCredit: this.fb.control(this.backendService.poeSettings.value['returnRefundPolicy']['storeCredit']),
       }),
 
       returnAllowRefundOptions: this.fb.group({
-        cod: this.fb.control(''),
-        prepaid: this.fb.control(''),
-      }),*/
+        cod: this.fb.control(this.backendService.poeSettings.value['returnAllowRefundOptions']['cod']),
+        prepaid: this.fb.control(this.backendService.poeSettings.value['returnAllowRefundOptions']['prepaid']),
+      }),
     });
+
+    let rreasons: Array<string> = this.backendService.poeSettings.value[
+      'returnReasons'
+    ];
+    rreasons.forEach((reason) => {
+      this.addReason(this.returnPolicy, 'returnReasons', reason);
+    });
+
+    console.log(this.cancellationPolicy.value['allowCancellation']);
   }
 
-  get getReasons(): FormArray {
-    return this.cancellationPolicy.get('cancellationReasons') as FormArray;
+  getReasons(form: FormGroup, reasonType): FormArray {
+    return form.get(reasonType) as FormArray;
   }
 
-  addReason() {
-    this.getReasons.push(this.newReason('Hello'));
+  addReason(form: FormGroup, reasonType: string, reason = '') {
+    this.getReasons(form, reasonType).push(this.newReason(reason));
   }
 
-  deleteReason(index) {
-    this.getReasons.removeAt(index);
+  deleteReason(form: FormGroup, reasonType: string, index) {
+    this.getReasons(form, reasonType).removeAt(index);
   }
 
   isChanged(form: FormGroup) {
-    return this.backendService.formChanged(form)
+    return this.backendService.formChanged(form);
   }
 
   submitCancelPolicy() {
     this.expansions.cancelPolicy = this.backendService.saveForm(
       this.cancellationPolicy
-    ); 
+    );
   }
+
+  submitReturnPolicy() {
+    this.expansions.returnPolicy = this.backendService.saveForm(
+      this.returnPolicy
+    );
+  }
+
 
   addCondition() {
     this.excon = { option: '', condition: '', value: 0 };
