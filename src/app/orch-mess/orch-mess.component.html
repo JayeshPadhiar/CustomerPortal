@@ -211,7 +211,10 @@
               </div>
             </div>
 
-            <div class="save-cancel-container" *ngIf="isChanged(channelFormGroup)">
+            <div
+              class="save-cancel-container"
+              *ngIf="isChanged(channelFormGroup)"
+            >
               <button class="save-button" type="submit" mat-button>Save</button>
               <button
                 mat-button
@@ -222,8 +225,18 @@
               </button>
             </div>
 
-            <div *ngIf="!(isChanged(channelFormGroup))" class="save-cancel-container">
-              <button type="button" (click)="expansions.defineChannel = false" class="save-button" mat-button>Close</button>
+            <div
+              *ngIf="!isChanged(channelFormGroup)"
+              class="save-cancel-container"
+            >
+              <button
+                type="button"
+                (click)="expansions.defineChannel = false"
+                class="save-button"
+                mat-button
+              >
+                Close
+              </button>
             </div>
           </div>
         </form>
@@ -231,7 +244,6 @@
     </mat-expansion-panel>
 
     <!--pre>{{ channelFormGroup.value | json }}</pre-->
-
 
     <mat-expansion-panel
       (opened)="expansions.custNotifs = true"
@@ -295,12 +307,15 @@
                   <tbody>
                     <tr
                       class="notif-table"
-                      *ngFor="let notif of orderNotifs; let i = index"
+                      *ngFor="
+                        let notif of getResourceArray('shipment');
+                        let i = index
+                      "
                     >
                       <td>
                         <div>
                           <h4 style="margin: 16px 0" class="lh-17">
-                            {{ orderNotifs[i].condition }}
+                            {{ notif["description"] }}
                           </h4>
                         </div>
                       </td>
@@ -319,7 +334,20 @@
                       </td>
 
                       <td align="right" style="width: 85px; height: 17px">
-                        <mat-checkbox [checked]="orderNotifs[i].emailchk">
+                        <mat-checkbox
+                          #emailChkBox
+                          [checked]="
+                            notif['isEmailEnabled'] == '1' ? true : false
+                          "
+                          (change)="
+                            recordChanges(
+                              notif['resource'],
+                              notif['eventSubType'],
+                              emailChkBox.checked,
+                              smsChkBox.checked
+                            )
+                          "
+                        >
                           <p class="lh-14" style="margin: 0; color: #343434">
                             Email
                           </p>
@@ -327,7 +355,20 @@
                       </td>
 
                       <td align="right" style="width: 85px; height: 17px">
-                        <mat-checkbox [checked]="orderNotifs[i].smschk">
+                        <mat-checkbox
+                          #smsChkBox
+                          [checked]="
+                            notif['isEmailEnabled'] == '1' ? true : false
+                          "
+                          (change)="
+                            recordChanges(
+                              notif['resource'],
+                              notif['eventSubType'],
+                              emailChkBox.checked,
+                              smsChkBox.checked
+                            )
+                          "
+                        >
                           <p class="lh-14" style="margin: 0; color: #343434">
                             SMS
                           </p>
@@ -360,12 +401,15 @@
                   <tbody>
                     <tr
                       class="notif-table"
-                      *ngFor="let notif of returnNotifs; let i = index"
+                      *ngFor="
+                        let notif of getResourceArray('returnshipment');
+                        let i = index
+                      "
                     >
                       <td>
                         <div>
                           <h4 style="margin: 16px 0" class="lh-17">
-                            {{ returnNotifs[i].condition }}
+                            {{ notif["description"] }}
                           </h4>
                         </div>
                       </td>
@@ -384,7 +428,20 @@
                       </td>
 
                       <td align="right" style="width: 85px; height: 17px">
-                        <mat-checkbox [checked]="returnNotifs[i].emailchk">
+                        <mat-checkbox
+                          #emailChkBox
+                          [checked]="
+                            notif['isEmailEnabled'] == '1' ? true : false
+                          "
+                          (change)="
+                            recordChanges(
+                              notif['resource'],
+                              notif['eventSubType'],
+                              emailChkBox.checked,
+                              smsChkBox.checked
+                            )
+                          "
+                        >
                           <p class="lh-14" style="margin: 0; color: #343434">
                             Email
                           </p>
@@ -392,7 +449,20 @@
                       </td>
 
                       <td align="right" style="width: 85px; height: 17px">
-                        <mat-checkbox [checked]="returnNotifs[i].smschk">
+                        <mat-checkbox
+                          #smsChkBox
+                          [checked]="
+                            notif['isEmailEnabled'] == '1' ? true : false
+                          "
+                          (change)="
+                            recordChanges(
+                              notif['resource'],
+                              notif['eventSubType'],
+                              emailChkBox.checked,
+                              smsChkBox.checked
+                            )
+                          "
+                        >
                           <p class="lh-14" style="margin: 0; color: #343434">
                             SMS
                           </p>
@@ -425,12 +495,12 @@
                   <tbody>
                     <tr
                       class="notif-table"
-                      *ngFor="let notif of refundNotifs; let i = index"
+                      *ngFor="let notif of getResourceArray('refund')"
                     >
                       <td>
                         <div>
                           <h4 style="margin: 16px 0" class="lh-17">
-                            {{ refundNotifs[i].condition }}
+                            {{ notif["description"] }}
                           </h4>
                         </div>
                       </td>
@@ -449,7 +519,20 @@
                       </td>
 
                       <td align="right" style="width: 85px; height: 17px">
-                        <mat-checkbox [checked]="refundNotifs[i].emailchk">
+                        <mat-checkbox
+                          #emailChkBox
+                          [checked]="
+                            notif['isEmailEnabled'] == '1' ? true : false
+                          "
+                          (change)="
+                            recordChanges(
+                              notif['resource'],
+                              notif['eventSubType'],
+                              emailChkBox.checked,
+                              smsChkBox.checked
+                            )
+                          "
+                        >
                           <p class="lh-14" style="margin: 0; color: #343434">
                             Email
                           </p>
@@ -457,7 +540,20 @@
                       </td>
 
                       <td align="right" style="width: 85px; height: 17px">
-                        <mat-checkbox [checked]="refundNotifs[i].smschk">
+                        <mat-checkbox
+                          #smsChkBox
+                          [checked]="
+                            notif['isEmailEnabled'] == '1' ? true : false
+                          "
+                          (change)="
+                            recordChanges(
+                              notif['resource'],
+                              notif['eventSubType'],
+                              emailChkBox.checked,
+                              smsChkBox.checked
+                            )
+                          "
+                        >
                           <p class="lh-14" style="margin: 0; color: #343434">
                             SMS
                           </p>
@@ -470,23 +566,24 @@
             </mat-expansion-panel>
           </mat-accordion>
 
-          <div class="save-cancel-container" *ngIf="isChanged(channelFormGroup)">
+          <div class="save-cancel-container" *ngIf="changes.length">
             <button class="save-button" mat-button>Save</button>
-            <button
-              mat-button
-              (click)="cancel(channelFormGroup, expansions.defineChannel)"
-            >
-              Cancel
-            </button>
+            <button type="button" mat-button>Cancel</button>
           </div>
 
-          <div *ngIf="!(isChanged(channelFormGroup))" class="save-cancel-container">
-            <button type="button" (click)="expansions.custNotifs = false" class="save-button" mat-button>Close</button>
+          <div *ngIf="!changes.length" class="save-cancel-container">
+            <button
+              type="button"
+              (click)="expansions.custNotifs = false"
+              class="save-button"
+              mat-button
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
     </mat-expansion-panel>
     <!--pre>{{ channelFormGroup.value | json }}</pre-->
   </mat-accordion>
-
 </div>

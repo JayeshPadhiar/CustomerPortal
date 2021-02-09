@@ -86,9 +86,13 @@ export class SetControlComponent implements OnInit {
     });
 
     this.returnPolicy = this.fb.group({
-      allowReturns: this.fb.control(this.backendService.poeSettings.value['allowReturns']),
+      allowReturns: this.fb.control(
+        this.backendService.poeSettings.value['allowReturns']
+      ),
       returnReasons: this.fb.array([]),
-      returnWindowDays: this.fb.control(this.backendService.poeSettings.value['returnWindowDays']),
+      returnWindowDays: this.fb.control(
+        this.backendService.poeSettings.value['returnWindowDays']
+      ),
 
       returnResolutionPolicy: this.fb.group({
         refund: this.fb.control(
@@ -96,20 +100,40 @@ export class SetControlComponent implements OnInit {
             'refund'
           ]
         ),
-        exchange: this.fb.control(this.backendService.poeSettings.value['returnResolutionPolicy'][
-          'exchange'
-        ]),
+        exchange: this.fb.control(
+          this.backendService.poeSettings.value['returnResolutionPolicy'][
+            'exchange'
+          ]
+        ),
       }),
 
       returnRefundPolicy: this.fb.group({
-        bank: this.fb.control(this.backendService.poeSettings.value['returnRefundPolicy']['bank']),
-        originalPaymentMode: this.fb.control(this.backendService.poeSettings.value['returnRefundPolicy']['originalPaymentMode']),
-        storeCredit: this.fb.control(this.backendService.poeSettings.value['returnRefundPolicy']['storeCredit']),
+        bank: this.fb.control(
+          this.backendService.poeSettings.value['returnRefundPolicy']['bank']
+        ),
+        originalPaymentMode: this.fb.control(
+          this.backendService.poeSettings.value['returnRefundPolicy'][
+            'originalPaymentMode'
+          ]
+        ),
+        storeCredit: this.fb.control(
+          this.backendService.poeSettings.value['returnRefundPolicy'][
+            'storeCredit'
+          ]
+        ),
       }),
 
       returnAllowRefundOptions: this.fb.group({
-        cod: this.fb.control(this.backendService.poeSettings.value['returnAllowRefundOptions']['cod']),
-        prepaid: this.fb.control(this.backendService.poeSettings.value['returnAllowRefundOptions']['prepaid']),
+        cod: this.fb.control(
+          this.backendService.poeSettings.value['returnAllowRefundOptions'][
+            'cod'
+          ]
+        ),
+        prepaid: this.fb.control(
+          this.backendService.poeSettings.value['returnAllowRefundOptions'][
+            'prepaid'
+          ]
+        ),
       }),
     });
 
@@ -133,6 +157,8 @@ export class SetControlComponent implements OnInit {
 
   deleteReason(form: FormGroup, reasonType: string, index) {
     this.getReasons(form, reasonType).removeAt(index);
+
+    form.markAsDirty();
   }
 
   isChanged(form: FormGroup) {
@@ -150,7 +176,6 @@ export class SetControlComponent implements OnInit {
       this.returnPolicy
     );
   }
-
 
   addCondition() {
     this.excon = { option: '', condition: '', value: 0 };

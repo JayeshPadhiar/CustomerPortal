@@ -68,29 +68,30 @@
                     matInput
                     placeholder="Your messase will be"
                   />
+                  <mat-hint class="fs-13-lh-12" align="end">{{notifInput.value?.length || 0}}/200</mat-hint>
                 </mat-form-field>
               </div>
 
               <div
                 class="preview-container"
-                style="max-width: 542px; width: 542px; padding: 10px 10px 0"
+                style="margin: 0; max-width: 522px; width: 522px;  padding: 10px 10px 0;"
               >
                 <div
-                  style="height: 100%; width: 519px"
+                  style="height: 100%; width: 100%;"
                   [style.background-color]="appStyle.backgroundColor"
                 >
                   <div
                     class="preview-div-notif"
                     [style.background-color]="appStyle.noticeBackgroundColor"
                   >
-                    <p class="notif-text">
+                    <p class="notif-text" style="margin: 6px">
                       {{ notif.message }}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <h4 class="lh-22">Background Color</h4>
+              <h4 class="lh-22" style="margin-top: 36px;">Background Color</h4>
               <p class="lh-20-fs-12" style="margin-bottom: 15px">
                 Customize the snackbar background color
               </p>
@@ -222,12 +223,12 @@
 
               <div *ngIf="isChanged(message)" class="save-cancel-container">
                 <button class="save-button" mat-button>Save</button>
-                <button mat-button>Cancel</button>
+                <button type="button" mat-button>Cancel</button>
               </div>
             </div>
 
             <div *ngIf="!isChanged(message)" class="save-cancel-container">
-              <button class="save-button" mat-button>Close</button>
+              <button type="button" class="save-button" mat-button>Close</button>
             </div>
           </form>
         </div>

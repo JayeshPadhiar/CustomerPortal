@@ -276,66 +276,68 @@
                       </div>
                     </ng-template>
                     <div>
-                      <div
-                        style="
-                          margin: 10px 0;
-                          display: flex;
-                          width: 262.71px;
-                          align-items: center;
-                          background: #ffffff;
-                          border-radius: 4px;
-                          border: 1px solid #f6f6f6;
-                        "
-                      >
-                        <img
-                          style="margin: 5px; width: 57.67px; height: 69.15px"
-                          src="../../assets/img/shippingImg.png"
-                        />
+                      <div>
+                        <div
+                          style="
+                            margin: 10px 0;
+                            display: flex;
+                            width: 262.71px;
+                            align-items: center;
+                            background: #ffffff;
+                            border-radius: 4px;
+                            border: 1px solid #f6f6f6;
+                          "
+                        >
+                          <img
+                            style="margin: 5px; width: 57.67px; height: 69.15px"
+                            src="../../assets/img/shippingImg.png"
+                          />
+                          <div
+                            class="mobile-content"
+                            style="display: inline-block"
+                          >
+                            Regular Fit Navy Shirt
+                          </div>
+                        </div>
+
                         <div
                           class="mobile-content"
-                          style="display: inline-block"
+                          style="
+                            display: block;
+                            width: 255.29px;
+                            height: 45px;
+
+                            /* Small */
+
+                            font-family: Work Sans;
+                            font-style: normal;
+                            font-weight: normal;
+                            font-size: 10px;
+                            line-height: 145%;
+                            /* or 15px */
+
+                            letter-spacing: 0.02em;
+
+                            /* Dark Gray */
+
+                            color: #828282;
+                          "
                         >
-                          Regular Fit Navy Shirt
+                          <p>
+                            Your item is ready to be shipped by our courier
+                            partner. You will be notified as soon as it is
+                            dispatched.
+                          </p>
                         </div>
+
+                        <button
+                          [style.background-color]="appStyle.actionColor"
+                          class="mobile-button"
+                          mat-flat-button
+                        >
+                          Cancel Order
+                        </button>
                       </div>
-
-                      <div
-                        class="mobile-content"
-                        style="
-                          display: block;
-                          width: 255.29px;
-                          height: 45px;
-
-                          /* Small */
-
-                          font-family: Work Sans;
-                          font-style: normal;
-                          font-weight: normal;
-                          font-size: 10px;
-                          line-height: 145%;
-                          /* or 15px */
-
-                          letter-spacing: 0.02em;
-
-                          /* Dark Gray */
-
-                          color: #828282;
-                        "
-                      >
-                        <p>
-                          Your item is ready to be shipped by our courier
-                          partner. You will be notified as soon as it is
-                          dispatched.
-                        </p>
-                      </div>
-
-                      <button
-                        [style.background-color]="appStyle.actionColor"
-                        class="mobile-button"
-                        mat-flat-button
-                      >
-                        Cancel Order
-                      </button>
                     </div>
                   </mat-step>
 
@@ -346,58 +348,61 @@
                         Arriving by Sat, 24 Oct
                       </div>
                     </ng-template>
-                    <div>
-                      <div
-                        style="
-                          margin: 10px 0;
-                          display: flex;
-                          width: 262.71px;
-                          align-items: center;
-                          background: #ffffff;
-                          border-radius: 4px;
-                          border: 1px solid #f6f6f6;
-                        "
-                      >
-                        <img
-                          style="margin: 5px"
-                          src="../../assets/img/shippingImg.png"
-                        />
+                    <div style="display: flex; justify-content: center">
+                      <div style="margin: 0 auto">
+                        <div
+                          style="
+                            margin: 12px 0 7px;
+                            display: flex;
+                            width: 262.71px;
+                            align-items: center;
+                            background: #ffffff;
+                            border-radius: 4px;
+                            border: 1px solid #f6f6f6;
+                          "
+                        >
+                          <img
+                            style="margin: 5px"
+                            src="../../assets/img/shippingImg.png"
+                          />
+                          <div
+                            class="mobile-content"
+                            style="display: inline-block"
+                          >
+                            Regular Fit Navy Shirt
+                          </div>
+                        </div>
+
                         <div
                           class="mobile-content"
-                          style="display: inline-block"
+                          style="
+                            width: 264px;
+
+                            /* white */
+
+                            background: #ffffff;
+                            /* Lightest Gray */
+
+                            border: 1px solid #f6f6f6;
+                            box-sizing: border-box;
+                            border-radius: 4px;
+                          "
                         >
-                          Regular Fit Navy Shirt
-                        </div>
-                      </div>
-
-                      <div
-                        class="mobile-content"
-                        style="
-                          width: 264px;
-
-                          /* white */
-
-                          background: #ffffff;
-                          /* Lightest Gray */
-
-                          border: 1px solid #f6f6f6;
-                          box-sizing: border-box;
-                          border-radius: 4px;
-                        "
-                      >
-                        <p>
-                          Your item has been picked up by our courier partner.
-                          You will be notified as soon as it is out for delivery
-                        </p>
-                        <p>
-                          Your order has been shipped by Bluedart logistics with
-                          tracking number #xxxxxxx
-                        </p>
-                        <div class="note">
                           <p>
-                            Note: Expected delivery date is delayed. We will
-                            keep you updated!
+                            Your item has been picked up by our courier partner.
+                            You will be notified as soon as it is out for
+                            delivery
                           </p>
+                          <p>
+                            Your order has been shipped by Bluedart logistics
+                            with tracking number #xxxxxxx
+                          </p>
+                          <div class="note">
+                            <p>
+                              Note: Expected delivery date is delayed. We will
+                              keep you updated!
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>

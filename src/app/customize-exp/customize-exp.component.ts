@@ -130,7 +130,7 @@ export class CustomizeExpComponent implements OnInit {
 
     this.trackingPageDomain = new FormControl(
       this.poeSettings['trackingPageDomain'],
-      [Validators.required]
+      [Validators.required, Validators.pattern(this.urlpattern)]
     );
 
     this.websiteUrl = new FormControl(this.links['websiteUrl'], [
@@ -291,7 +291,10 @@ export class CustomizeExpComponent implements OnInit {
   newFooter(name = '', url = 'https://'): FormGroup {
     return new FormGroup({
       name: new FormControl(name, [Validators.required]),
-      url: new FormControl(url, [Validators.required, Validators.pattern(this.urlpattern)]),
+      url: new FormControl(url, [
+        Validators.required,
+        Validators.pattern(this.urlpattern),
+      ]),
     });
   }
 

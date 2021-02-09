@@ -61,7 +61,8 @@ export class CustomerPortalBackendService {
   notif$: BehaviorSubject<object> = new BehaviorSubject({
     message: 'Your message will be displayed here',
     show: false,
-    delaymessage: '',
+    delaymessage:
+      'Note: Expected delivery date is delayed. We will keep you updated!',
     showdelay: true,
   });
 
@@ -93,7 +94,9 @@ export class CustomerPortalBackendService {
     let footerss = [];
 
     if (this.poeSettings.value['footerLinks']) {
-      for (let [key, val] of Object.entries(this.poeSettings.value['footerLinks'])) {
+      for (let [key, val] of Object.entries(
+        this.poeSettings.value['footerLinks']
+      )) {
         footerss.push({ name: key, url: val });
         console.log('Links', this.links$);
       }
@@ -107,15 +110,17 @@ export class CustomerPortalBackendService {
       footerLinks: footerss,
     });
 
-    this.notif$.next({...this.notif$.value, 
+    this.notif$.next({
+      ...this.notif$.value,
       message: poeData['noticeMessage'],
-      show: poeData['noticeMessage']
-    })
+      show: poeData['noticeMessage'],
+    });
   };
 
   //GET request for fetching poeSettings from Eshopbox Backend
   getPoeSettings(): Observable<any> {
     //return this.httpClient.get('https://montecarlo.auperator.co/customer-portal/api/v1/poe-setting');
+
     return this.httpClient.get<object>(
       'https://montecarlo.auperator.co/customer-portal/api/v1/poe-setting'
     );
@@ -124,7 +129,7 @@ export class CustomerPortalBackendService {
   updatePoeSettings(data: object) {
     console.log('new settings = ', { ...this.poeSettings.value, ...data });
 
-    this.poeSettings.next({...this.poeSettings.value, ...data})
+    this.poeSettings.next({ ...this.poeSettings.value, ...data });
 
     this.httpClient
       .post(

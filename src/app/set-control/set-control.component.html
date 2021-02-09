@@ -92,7 +92,7 @@
                         <div class="form-container">
                           <mat-form-field
                             floatLabel="never"
-                            style="margin: 0; color: #343434; padding: 0;"
+                            style="margin: 0; color: #343434; padding: 0"
                           >
                             <input
                               [formControlName]="i"
@@ -105,8 +105,7 @@
 
                       <td align="center" valign="center">
                         <mat-icon
-                          style="margin-left: 8px; height: 11px; width: 10px;"
-
+                          style="margin-left: 8px; height: 11px; width: 10px"
                           (click)="
                             deleteReason(
                               cancellationPolicy,
@@ -118,7 +117,12 @@
                         ></mat-icon>
                       </td>
                     </tr>
-                    <tr>
+                    <tr
+                      *ngIf="
+                        getReasons(cancellationPolicy, 'cancellationReasons')
+                          .controls.length < 10
+                      "
+                    >
                       <td>
                         <div
                           style="
@@ -183,7 +187,7 @@
               class="save-cancel-container"
             >
               <button class="save-button" mat-button>Save</button>
-              <button mat-button>Cancel</button>
+              <button type="button" mat-button>Cancel</button>
             </div>
 
             <div
@@ -434,7 +438,7 @@
 
                         <td align="center" valign="center">
                           <mat-icon
-                          style="margin-left: 8px; height: 11px; width: 10px;"
+                            style="margin-left: 8px; height: 11px; width: 10px"
                             (click)="
                               deleteReason(returnPolicy, 'returnReasons', i)
                             "
@@ -442,7 +446,12 @@
                           ></mat-icon>
                         </td>
                       </tr>
-                      <tr>
+                      <tr
+                        *ngIf="
+                          getReasons(returnPolicy, 'returnReasons').controls
+                            .length < 10
+                        "
+                      >
                         <td>
                           <div
                             style="
@@ -452,6 +461,7 @@
                             "
                           >
                             <button
+                            type="button"
                               (click)="addReason(returnPolicy, 'returnReasons')"
                               mat-flat-button
                               class="add-button"

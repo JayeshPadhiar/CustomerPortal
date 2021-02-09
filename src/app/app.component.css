@@ -179,6 +179,20 @@ p.fs-12-lh-14 {
   margin: 0 0 12px;
 }
 
+.fs-13-lh-12 {
+  font-family: Lato;
+font-style: normal;
+font-weight: normal;
+font-size: 13px;
+line-height: 12px;
+/* identical to box height, or 92% */
+
+letter-spacing: 0.5px;
+
+color: #999999;
+
+}
+
 p.lh-14 {
   margin: 0 0 32px;
 
@@ -370,7 +384,7 @@ p.note {
   font-size: 14px;
   line-height: 160%;
 
-  max-width: 80%;
+  max-width: 60%;
   max-height: fit-content;
   height: fit-content;
   width: max-content;
@@ -870,7 +884,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .preview-container .preview-div-notif {
   max-height: fit-content;
-  width: 519px;
+  width: 522px;
   background-color: black;
   word-wrap: break-word;
   bottom: top;

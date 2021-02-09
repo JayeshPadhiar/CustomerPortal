@@ -17,10 +17,10 @@ div.mobile-div {
   display: inline-block;
   margin: 0;
   margin-left: 24px;
-  margin-top: 92px;
+  margin-top: 118px;
   margin-right: 40px;
 
-  padding: 40px 0;
+  padding: 0;
 
   overflow: auto;
 
@@ -29,7 +29,6 @@ div.mobile-div {
 }
 
 .mobile-div .mat-button-toggle-group {
-
   background-color: transparent;
   border-radius: 4px;
   left: 50%;
@@ -37,6 +36,16 @@ div.mobile-div {
   min-height: 35px;
   height: 38px;
   margin-bottom: 14px;
+  margin-top: 14px;
+
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  letter-spacing: 1px;
 }
 
 .mobile-div .mat-button-toggle-group .mat-button-toggle:first-of-type {
@@ -46,6 +55,15 @@ div.mobile-div {
   background-color: #ffffff;
   border: 1px solid #fa5c5d;
   color: #fa5c5d;
+
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  letter-spacing: 1px;
 }
 
 .mobile-div .mat-button-toggle-group .mat-button-toggle:last-of-type {
@@ -53,6 +71,17 @@ div.mobile-div {
   min-height: 35px;
   height: 36px;
   background-color: transparent;
+
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  letter-spacing: 1px;
+
+  color: #808080;
 }
 
 .mobile-div .mat-button-toggle-group .mat-button-toggle:active {
@@ -76,12 +105,13 @@ div.mobile-div {
   background-color: #ffffff;
 }
 
-::ng-deep.mobile-div .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+::ng-deep.mobile-div
+  .mat-button-toggle-appearance-standard
+  .mat-button-toggle-label-content {
   line-height: 35px;
 }
 
-
 ::-webkit-scrollbar {
-  width: 0px;  /* Remove scrollbar space */
-  background: transparent;  /* Optional: just make scrollbar invisible */
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }
