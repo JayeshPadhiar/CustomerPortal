@@ -567,8 +567,8 @@
           </mat-accordion>
 
           <div class="save-cancel-container" *ngIf="changes.length">
-            <button class="save-button" mat-button>Save</button>
-            <button type="button" mat-button>Cancel</button>
+            <button (click)="saveNotifications()" class="save-button" mat-button>Save</button>
+            <button (click)="cancelNotifs()" type="button" mat-button>Cancel</button>
           </div>
 
           <div *ngIf="!changes.length" class="save-cancel-container">

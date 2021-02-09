@@ -136,7 +136,10 @@ export class CustomerPortalBackendService {
         'https://montecarlo.auperator.co/customer-portal/api/v1/poe-setting',
         JSON.stringify(data)
       )
-      .subscribe((newdata) => console.log('new data = ', newdata));
+      .subscribe((newdata) => {
+        console.log('new data = ', newdata);
+        this.poeSettings.next(newdata);
+      });
   }
 
   postPoeSettings(data: object) {}

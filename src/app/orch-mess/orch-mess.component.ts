@@ -431,8 +431,8 @@ export class OrchMessComponent implements OnInit {
           ...{
             resource: resource,
             eventSubType: eventSubType,
-            email: email ? '1' : '0',
-            sms: sms ? '1' : '0',
+            isEmailEnabled: email ? '1' : '0',
+            isSmsEnabled: sms ? '1' : '0',
           },
         };
 
@@ -445,10 +445,59 @@ export class OrchMessComponent implements OnInit {
       this.changes.push({
         resource: resource,
         eventSubType: eventSubType,
-        email: email ? '1' : '0',
-        sms: sms ? '1' : '0',
+        isEmailEnabled: email ? '1' : '0',
+        isSmsEnabled: sms ? '1' : '0',
       });
     }
     console.log(this.changes);
+  }
+
+  saveNotifications() {
+    let postData: object = {
+      notificationOptions: this.changes,
+    };
+
+    if (this.poeSettings['channelId'] === '0') {
+      console.log('Not going to add the channelId in the POST request');
+    } else {
+      postData['channelId'] = this.poeSettings['channelId'];
+    }
+
+    console.log(postData);
+
+    console.log(JSON.stringify(postData));
+
+    this.httpClient
+      .post(
+        'https://montecarlo.auperator.co/customer-portal/api/v1/poe-notifications',
+        JSON.stringify(postData)
+      )
+      .subscribe((newNotifdata) => {
+        console.log('new Notif Data = ', newNotifdata);
+
+        this.parseLatestNotifications(newNotifdata['notificationOptions']);
+
+        this.expansions.custNotifs = false;
+      });
+  }
+
+  cancelNotifs() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      panelClass: 'confirm-dialog',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+
+      if (result) {
+        this.notifications = [...this.defaultNotifications];
+        this.changes = [];
+
+        this.expansions['custNotifs'] = false;
+      } else {
+        this.expansions['custNotifs'] = true;
+      }
+    });
   }
 }

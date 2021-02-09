@@ -393,7 +393,7 @@
               svgIcon="infoicon"
               class="tooltipicon"
               inline="true"
-              style="margin-left: 8px"
+              style="margin-top: 1px; margin-left: 8px; height: 14px; width: 14px;"
               matTooltip="Rather than registering a new domain name, you can create a subdomain using the domain you already own"
               matTooltipPosition="after"
             >
@@ -505,7 +505,7 @@
               class="save-cancel-container"
             >
               <button class="save-button" type="submit" mat-button>Save</button>
-              <button type="button" mat-button>Cancel</button>
+              <button (click)="cancelDomain()" type="button" mat-button>Cancel</button>
             </div>
 
             <div
@@ -845,7 +845,7 @@
               class="save-cancel-container"
             >
               <button class="save-button" type="submit" mat-button>Save</button>
-              <button type="button" mat-button>Cancel</button>
+              <button (click)="cancelLinks()" type="button" mat-button>Cancel</button>
             </div>
 
             <div

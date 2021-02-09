@@ -187,7 +187,7 @@
               class="save-cancel-container"
             >
               <button class="save-button" mat-button>Save</button>
-              <button type="button" mat-button>Cancel</button>
+              <button (click)="cancel('cancelPolicy')" type="button" mat-button>Cancel</button>
             </div>
 
             <div
@@ -604,7 +604,7 @@
 
             <div *ngIf="isChanged(returnPolicy)" class="save-cancel-container">
               <button class="save-button" mat-button>Save</button>
-              <button type="button" mat-button>Cancel</button>
+              <button (click)="cancel('returnPolicy')" type="button" mat-button>Cancel</button>
             </div>
 
             <div *ngIf="!isChanged(returnPolicy)" class="save-cancel-container">
@@ -622,6 +622,6 @@
       </div>
     </mat-expansion-panel>
 
-    <pre>{{ returnPolicy.value | json }}</pre>
+    <!--pre>{{ returnPolicy.value | json }}</pre-->
   </mat-accordion>
 </div>

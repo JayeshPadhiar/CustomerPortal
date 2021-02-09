@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AppStyle } from '../c-portal/cportal.model';
 import { CustomerPortalBackendService } from '../customer-portal-backend.service';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-manage-unex',
@@ -25,6 +27,7 @@ export class ManageUnexComponent implements OnInit {
   message: FormGroup;
 
   constructor(
+    private dialog: MatDialog,
     private backendService: CustomerPortalBackendService,
     public fb: FormBuilder
   ) {}
@@ -111,16 +114,33 @@ export class ManageUnexComponent implements OnInit {
     this.expansions.displayNotice = this.backendService.saveForm(this.notice);
   }
 
-  toggle(checked: boolean){
-    this.notif['show'] = checked
+  toggle(checked: boolean) {
+    this.notif['show'] = checked;
 
-    if (checked){
-
-    }else{
+    if (checked) {
+    } else {
       this.notice.controls['noticeMessage'].patchValue('');
       this.notice.markAsDirty();
     }
+  }
 
+  cancel(type: string) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      panelClass: 'confirm-dialog',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+
+      if (result) {
+        this.initialize()
+    
+        this.expansions[type] = false;
+      } else {
+        this.expansions[type] = true;
+      }
+    });
   }
 
   save() {}

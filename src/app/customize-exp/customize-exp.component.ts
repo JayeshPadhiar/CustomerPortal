@@ -284,6 +284,69 @@ export class CustomizeExpComponent implements OnInit {
     });
   }
 
+  cancelDomain() {
+    /*this.domainFormGroup = new FormGroup({
+      trackingPageDomain: this.trackingPageDomain,
+    });*/
+
+    if (this.dirty(this.domainFormGroup)) {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        panelClass: 'confirm-dialog',
+        data: {},
+      });
+
+      dialogRef.afterClosed().subscribe((result: Boolean) => {
+        if (result) {
+          //console.log('baba re baba');
+          this.backendService.assignInterfaces();
+
+          this.domainFormGroup.reset({
+            trackingPageDomain: this.poeSettings['trackingPageDomain'],
+          });
+
+          //this.backendService.setStyle(this.originalAppStyle);
+          console.log('collapsing after discarding');
+          this.expansions['domainExp'] = false;
+        } else {
+          this.expansions['domainExp'] = true;
+          console.log('Expanding again');
+        }
+      });
+    } else {
+      console.log('collapsing');
+      this.expansions['domainExp'] = false;
+    }
+  }
+
+  cancelLinks() {
+    if (this.dirty(this.linksFormGroup)) {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        panelClass: 'confirm-dialog',
+        data: {},
+      });
+
+      dialogRef.afterClosed().subscribe((result: Boolean) => {
+        if (result) {
+          //console.log('baba re baba');
+          this.backendService.assignInterfaces();
+
+          this.createFormControls();
+          this.createFormGroups();
+
+          //this.backendService.setStyle(this.originalAppStyle);
+          console.log('collapsing after discarding');
+          this.expansions['linksExp'] = false;
+        } else {
+          this.expansions['linksExp'] = true;
+          console.log('Expanding again');
+        }
+      });
+    } else {
+      console.log('collapsing');
+      this.expansions['linksExp'] = false;
+    }
+  }
+
   changeLink(type, val) {
     this.backendService.links$.next({ ...this.links, [type]: val });
   }

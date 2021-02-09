@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 import { Reason, ExcludeCondition } from './set-control.model';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-set-control',
@@ -10,6 +12,7 @@ import { Reason, ExcludeCondition } from './set-control.model';
 })
 export class SetControlComponent implements OnInit {
   constructor(
+    private dialog: MatDialog,
     public fb: FormBuilder,
     public backendService: CustomerPortalBackendService
   ) {}
@@ -182,5 +185,24 @@ export class SetControlComponent implements OnInit {
     this.exconditions.push(this.excon);
     console.log(this.exconditions);
     return true;
+  }
+
+  cancel(type: string) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      panelClass: 'confirm-dialog',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+
+      if (result) {
+
+        this.createFormGroup();
+        this.expansions[type] = false;
+      } else {
+        this.expansions[type] = true;
+      }
+    });
   }
 }

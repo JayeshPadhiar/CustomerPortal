@@ -124,11 +124,11 @@
             </div>
             <div *ngIf="isChanged(notice)" class="save-cancel-container">
               <button class="save-button" mat-button>Save</button>
-              <button type="button" mat-button>Cancel</button>
+              <button (click)="cancel('displayNotice')" type="button" mat-button>Cancel</button>
             </div>
 
             <div *ngIf="!isChanged(notice)" class="save-cancel-container">
-              <button type="button" class="save-button" mat-button>
+              <button (click)="expansions.displayNotice = false" type="button" class="save-button" mat-button>
                 Close
               </button>
             </div>
@@ -137,7 +137,7 @@
       </div>
     </mat-expansion-panel>
 
-    <pre>{{ notice.value | json }}</pre>
+    <!--pre>{{ notice.value | json }}</pre-->
 
     <mat-expansion-panel
       (opened)="expansions.showMessage = true"
@@ -223,20 +223,20 @@
 
               <div *ngIf="isChanged(message)" class="save-cancel-container">
                 <button class="save-button" mat-button>Save</button>
-                <button type="button" mat-button>Cancel</button>
+                <button (click)="cancel('showMessage')" type="button" mat-button>Cancel</button>
               </div>
             </div>
 
             <div *ngIf="!isChanged(message)" class="save-cancel-container">
-              <button type="button" class="save-button" mat-button>Close</button>
+              <button (click)="expansions.showMessage = false" type="button" class="save-button" mat-button>Close</button>
             </div>
           </form>
         </div>
       </div>
     </mat-expansion-panel>
 
-    <pre>{{ message.value | json }}</pre>
-    <pre>{{ notif| json }}</pre>
+    <!--pre>{{ message.value | json }}</pre>
+    <pre>{{ notif| json }}</pre-->
 
   </mat-accordion>
 
