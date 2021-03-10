@@ -358,7 +358,7 @@
                         <mat-checkbox
                           #smsChkBox
                           [checked]="
-                            notif['isEmailEnabled'] == '1' ? true : false
+                            notif['isSmsEnabled'] == '1' ? true : false
                           "
                           (change)="
                             recordChanges(
@@ -452,7 +452,7 @@
                         <mat-checkbox
                           #smsChkBox
                           [checked]="
-                            notif['isEmailEnabled'] == '1' ? true : false
+                            notif['isSmsEnabled'] == '1' ? true : false
                           "
                           (change)="
                             recordChanges(
@@ -543,7 +543,7 @@
                         <mat-checkbox
                           #smsChkBox
                           [checked]="
-                            notif['isEmailEnabled'] == '1' ? true : false
+                            notif['isSmsEnabled'] == '1' ? true : false
                           "
                           (change)="
                             recordChanges(
@@ -567,8 +567,16 @@
           </mat-accordion>
 
           <div class="save-cancel-container" *ngIf="changes.length">
-            <button (click)="saveNotifications()" class="save-button" mat-button>Save</button>
-            <button (click)="cancelNotifs()" type="button" mat-button>Cancel</button>
+            <button
+              (click)="saveNotifications()"
+              class="save-button"
+              mat-button
+            >
+              Save
+            </button>
+            <button (click)="cancelNotifs()" type="button" mat-button>
+              Cancel
+            </button>
           </div>
 
           <div *ngIf="!changes.length" class="save-cancel-container">
