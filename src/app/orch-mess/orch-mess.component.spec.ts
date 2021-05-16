@@ -8,9 +8,8 @@ describe('OrchMessComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrchMessComponent ]
-    })
-    .compileComponents();
+      declarations: [OrchMessComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,9 +1,10 @@
 mat-dialog-content {
+  max-height: 80vh;
   margin: auto;
   padding: 0;
   overflow: auto;
+  overflow-y: auto;
   background-color: #dadeff;
-  min-height: fit-content;
 }
 
 .modal-preview {
@@ -19,7 +20,7 @@ mat-dialog-content {
   align-items: center;
   justify-content: center;
   background-color: #14b6ac;
-  height: 46px;
+  height: fit-content;
   width: 100%;
   color: white;
 }
@@ -55,8 +56,7 @@ mat-dialog-content {
 ::-webkit-scrollbar {
   width: 8px;
   transform: rotate(-90deg);
-  background-color: #F6F6F6;
-
+  background-color: #f6f6f6;
 }
 
 ::-webkit-scrollbar-track {
@@ -81,7 +81,7 @@ mat-dialog-content {
 }
 
 div.mobile-container {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   width: 360px;
   height: 550px;
   overflow: auto;
@@ -91,7 +91,7 @@ div.mobile-container {
 }
 
 .header {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   overflow: hidden;
   top: 0;
   width: 100%;
@@ -100,7 +100,7 @@ div.mobile-container {
 }
 
 .mobile-container .xtitle {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-style: normal;
   font-weight: 550;
   font-size: 16px;
@@ -111,7 +111,7 @@ div.mobile-container {
 
 .mobile-container .pre-title {
   width: 263px;
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
@@ -126,7 +126,7 @@ div.mobile-container {
 }
 
 .mobile-container .body {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   overflow: auto;
   border-radius: 12px;
   width: 100%;
@@ -136,7 +136,7 @@ div.mobile-container {
 
 .body .note {
   width: 100%;
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
@@ -160,7 +160,7 @@ div.mobile-container {
 }
 
 .mobile-notif {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -187,11 +187,7 @@ div.mobile-container {
 }
 
 .mobile-container .item-list-container:hover {
-  background: #f0f0f0;
-}
-
-.mobile-container .item-list-container:active {
-  background: #e7e7e7;
+  background: #ffffff;
 }
 
 .mobile-container .arrow {
@@ -201,7 +197,7 @@ div.mobile-container {
 }
 
 .mobile-container .footer {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   align-items: center;
   justify-content: center;
   max-width: max-content;
@@ -210,7 +206,7 @@ div.mobile-container {
 }
 
 .mobile-footer-links {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -219,7 +215,7 @@ div.mobile-container {
 }
 
 .footer-link {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
 
   margin: 20px;
   font-style: normal;
@@ -229,7 +225,7 @@ div.mobile-container {
 }
 
 .mobile-footer-url {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
 
   bottom: 0;
   padding: 16px;
@@ -241,6 +237,19 @@ div.mobile-container {
   font-weight: normal;
   font-size: 14px;
   color: #828282;
+
+  bottom: 0;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+  color: #828282;
 }
 
 .mobile-stepper {
@@ -248,7 +257,7 @@ div.mobile-container {
 }
 
 .mobile-stepper-title {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
 
   font-style: normal;
   font-weight: normal;
@@ -259,7 +268,7 @@ div.mobile-container {
 
 .mobile-stepper-title-desc {
   display: block;
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
@@ -277,7 +286,7 @@ div.mobile-container {
 }
 
 .mobile-content {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   margin-left: 7px;
@@ -285,27 +294,33 @@ div.mobile-container {
   line-height: 145%;
   letter-spacing: 0.02em;
   color: #828282;
-  padding: 13px 8px;
+
+  background-color: inherit;
 }
 
 .mobile-button {
   justify-items: center;
   justify-self: center;
   justify-content: center;
-  color: #ffffff;
-  margin: auto;
-  background-color: #2ddbd1;
-  background: #2ddbd1;
-  box-shadow: 0px 4px 8px rgba(45, 219, 209, 0.18),
-    0px 0px 2px rgba(45, 219, 209, 0.12), 0px 0px 1px rgba(0, 0, 0, 0.04);
-  border-radius: 8px;
+  background-color: #ffffff;
+  color: #2ddbd1;
 
-  width: 262px;
-  height: 41px;
+  /* Pre Title */
+
+  font-family: 'Work Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+  /* identical to box height */
+
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  /* Accent */
 }
-
 img {
-  margin: 25px 46px;
+  margin: 25px 46px 10px;
   max-width: 70%;
   max-height: 60%;
 }

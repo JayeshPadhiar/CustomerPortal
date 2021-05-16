@@ -4,16 +4,16 @@ import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { AppStyle, FooterLink, Links } from '../c-portal/cportal.model';
 import { AddDomainComponent } from '../add-domain/add-domain.component';
-import { CustomerPortalBackendService } from '../customer-portal-backend.service';
+import { CustomerPortalBackendService } from '../../../shared/services/customer-portal-backend.service';
+import { AlertService } from '../../../shared/services/alert.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MobileComponent } from '../mobile/mobile.component';
 import { style } from '@angular/animations';
-import { resourceUsage } from 'process';
 
 @Component({
   selector: 'app-customize-exp',
   templateUrl: './customize-exp.component.html',
-  styleUrls: ['./customize-exp.component.css', '../app.component.css'],
+  styleUrls: ['./customize-exp.component.css', '../../customer-portal.component.css']
 })
 export class CustomizeExpComponent implements OnInit {
   appStyle: AppStyle;
@@ -32,7 +32,7 @@ export class CustomizeExpComponent implements OnInit {
   expansions = {
     styleExp: false,
     domainExp: false,
-    linksExp: false,
+    linksExp: false
   };
 
   files = [];
@@ -58,7 +58,8 @@ export class CustomizeExpComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    public backendService: CustomerPortalBackendService
+    public backendService: CustomerPortalBackendService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -66,7 +67,7 @@ export class CustomizeExpComponent implements OnInit {
 
     //this.initialize();
 
-    this.backendService.poeFetched.subscribe((fetched) => {
+    this.backendService.poeFetched.subscribe(fetched => {
       this.poeFetched = fetched;
     });
 
@@ -75,7 +76,7 @@ export class CustomizeExpComponent implements OnInit {
       this.initialize();
     } else {
       this.backendService.getPoeSettings().subscribe({
-        next: (data) => {
+        next: data => {
           if (data['channelId'] === '0') {
             console.log('channelID not available. Workspace Settings');
           } else {
@@ -86,9 +87,9 @@ export class CustomizeExpComponent implements OnInit {
 
           this.initialize();
         },
-        error: (error) => {
+        error: error => {
           console.error('There was an error!\n', error);
-        },
+        }
       });
     }
 
@@ -97,16 +98,16 @@ export class CustomizeExpComponent implements OnInit {
 
   //get required data from the CustomerPortalBackendService and assign it to the forms and previews
   initialize() {
-    this.backendService.poeSettings.asObservable().subscribe((poe) => {
+    this.backendService.poeSettings.asObservable().subscribe(poe => {
       this.poeSettings = poe;
     });
 
-    this.backendService.appStyle$.asObservable().subscribe((style) => {
+    this.backendService.appStyle$.asObservable().subscribe(style => {
       this.appStyle = Object.assign({}, style);
     });
     this.originalAppStyle = Object.assign({}, this.appStyle);
 
-    this.backendService.links$.asObservable().subscribe((links) => {
+    this.backendService.links$.asObservable().subscribe(links => {
       this.links = Object.assign({}, links);
     });
     this.originalLinks = Object.assign({}, this.links);
@@ -121,40 +122,35 @@ export class CustomizeExpComponent implements OnInit {
     this.faviconUrl = new FormControl(this.appStyle['faviconUrl']);
     this.backgroundColor = new FormControl(this.appStyle['backgroundColor'], [
       Validators.required,
-      Validators.pattern(this.colorpattern),
+      Validators.pattern(this.colorpattern)
     ]);
     this.actionColor = new FormControl(this.appStyle['actionColor'], [
       Validators.required,
-      Validators.pattern(this.colorpattern),
+      Validators.pattern(this.colorpattern)
     ]);
 
-    this.trackingPageDomain = new FormControl(
-      this.poeSettings['trackingPageDomain'],
-      [Validators.required, Validators.pattern(this.urlpattern)]
-    );
+    this.trackingPageDomain = new FormControl(this.poeSettings['trackingPageDomain'], [
+      Validators.required,
+      Validators.pattern(this.urlpattern)
+    ]);
 
     this.websiteUrl = new FormControl(this.links['websiteUrl'], [
       Validators.required,
-      Validators.pattern(this.urlpattern),
+      Validators.pattern(this.urlpattern)
     ]);
     this.supportUrl = new FormControl(this.links['supportUrl'], [
       Validators.required,
-      Validators.pattern(this.urlpattern),
+      Validators.pattern(this.urlpattern)
     ]);
-    this.supportEmail = new FormControl(this.links['supportEmail'], [
-      Validators.required,
-      Validators.email,
-    ]);
+    this.supportEmail = new FormControl(this.links['supportEmail'], [Validators.required, Validators.email]);
     this.supportPhone = new FormControl(this.links['supportPhone'], [
       Validators.required,
-      Validators.pattern(this.phonepattern),
+      Validators.pattern(this.phonepattern)
     ]);
     this.footerLinks = new FormArray([]);
 
-    this.links['footerLinks'].forEach((footer) => {
-      this.footerLinks.push(
-        this.newFooter(footer['name'].toString(), footer['url'].toString())
-      );
+    this.links['footerLinks'].forEach(footer => {
+      this.footerLinks.push(this.newFooter(footer['name'].toString(), footer['url'].toString()));
     });
   };
 
@@ -164,11 +160,11 @@ export class CustomizeExpComponent implements OnInit {
       brandLogoUrl: this.brandLogoUrl,
       faviconUrl: this.faviconUrl,
       backgroundColor: this.backgroundColor,
-      actionColor: this.actionColor,
+      actionColor: this.actionColor
     });
 
     this.domainFormGroup = new FormGroup({
-      trackingPageDomain: this.trackingPageDomain,
+      trackingPageDomain: this.trackingPageDomain
     });
 
     this.linksFormGroup = new FormGroup({
@@ -176,20 +172,20 @@ export class CustomizeExpComponent implements OnInit {
       supportUrl: this.supportUrl,
       supportEmail: this.supportEmail,
       supportPhone: this.supportPhone,
-      footerLinks: this.footerLinks,
+      footerLinks: this.footerLinks
     });
   };
 
   selectIcon(icontype, event, maxw, maxh) {
-    if (window.FileReader) {
+    if ((window as any).FileReader) {
       var file = event.target.files[0];
       var reader = new FileReader();
       if (file && file.type.match('image.*')) {
         reader.readAsDataURL(file);
       } else {
-        alert('Please upload Image file only');
+        this.alertService.showError('Please upload Image file only');
       }
-      reader.onloadend = (e) => {
+      reader.onloadend = (e: any) => {
         var icon = new Image();
 
         icon.src = e.target.result.toString();
@@ -199,7 +195,7 @@ export class CustomizeExpComponent implements OnInit {
           let width = icon.width;
 
           if (height > maxh || width > maxw) {
-            alert(`Please enter icon of size ${maxw}x${maxh}`);
+            this.alertService.showError(`Please upload your logo in recommended size i.e. ${maxw}x${maxh}px`);
           } else {
             console.log('Valid image added');
 
@@ -208,7 +204,7 @@ export class CustomizeExpComponent implements OnInit {
 
             this.backendService.appStyle$.next({
               ...this.appStyle,
-              [icontype]: e.target.result,
+              [icontype]: e.target.result
             });
           }
         };
@@ -216,11 +212,25 @@ export class CustomizeExpComponent implements OnInit {
     }
   }
 
+  copyMessage(val: string) {
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
+
   cancelIconSelect(icontype) {
     this.styleFormGroup.controls[icontype].reset();
     this.backendService.appStyle$.next({
       ...this.appStyle,
-      [icontype]: this.originalAppStyle[icontype],
+      [icontype]: this.originalAppStyle[icontype]
     });
 
     this.files.pop();
@@ -236,7 +246,7 @@ export class CustomizeExpComponent implements OnInit {
     if (this.dirty(this.styleFormGroup)) {
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         panelClass: 'confirm-dialog',
-        data: {},
+        data: {}
       });
 
       dialogRef.afterClosed().subscribe((result: Boolean) => {
@@ -247,7 +257,7 @@ export class CustomizeExpComponent implements OnInit {
 
           this.styleFormGroup.reset({
             backgroundColor: this.originalAppStyle.backgroundColor,
-            actionColor: this.originalAppStyle.actionColor,
+            actionColor: this.originalAppStyle.actionColor
           });
 
           //this.backendService.setStyle(this.originalAppStyle);
@@ -270,11 +280,13 @@ export class CustomizeExpComponent implements OnInit {
   addDomain() {
     const dialogRef = this.dialog.open(AddDomainComponent, {
       panelClass: 'add-domain-dialog',
-      data: this.domainFormGroup,
+      data: this.domainFormGroup
     });
 
     dialogRef.afterClosed().subscribe((domain: String) => {
       if (domain) {
+        domain = domain.replace('https://', '');
+
         this.trackingPageDomain.patchValue(domain);
         this.trackingPageDomain.markAsDirty();
         console.log(this.domainFormGroup);
@@ -292,7 +304,7 @@ export class CustomizeExpComponent implements OnInit {
     if (this.dirty(this.domainFormGroup)) {
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         panelClass: 'confirm-dialog',
-        data: {},
+        data: {}
       });
 
       dialogRef.afterClosed().subscribe((result: Boolean) => {
@@ -301,7 +313,7 @@ export class CustomizeExpComponent implements OnInit {
           this.backendService.assignInterfaces();
 
           this.domainFormGroup.reset({
-            trackingPageDomain: this.poeSettings['trackingPageDomain'],
+            trackingPageDomain: this.poeSettings['trackingPageDomain']
           });
 
           //this.backendService.setStyle(this.originalAppStyle);
@@ -322,7 +334,7 @@ export class CustomizeExpComponent implements OnInit {
     if (this.dirty(this.linksFormGroup)) {
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         panelClass: 'confirm-dialog',
-        data: {},
+        data: {}
       });
 
       dialogRef.afterClosed().subscribe((result: Boolean) => {
@@ -351,13 +363,10 @@ export class CustomizeExpComponent implements OnInit {
     this.backendService.links$.next({ ...this.links, [type]: val });
   }
 
-  newFooter(name = '', url = 'https://'): FormGroup {
+  newFooter(name = '', url = ''): FormGroup {
     return new FormGroup({
       name: new FormControl(name, [Validators.required]),
-      url: new FormControl(url, [
-        Validators.required,
-        Validators.pattern(this.urlpattern),
-      ]),
+      url: new FormControl(url, [Validators.required, Validators.pattern(this.urlpattern)])
     });
   }
 
@@ -410,15 +419,12 @@ export class CustomizeExpComponent implements OnInit {
   }
 
   saveDomain = () => {
-    this.expansions.domainExp = this.backendService.saveForm(
-      this.domainFormGroup
-    );
+    this.expansions.domainExp = this.backendService.saveForm(this.domainFormGroup);
   };
 
   saveStyle = () => {
-    this.expansions.styleExp = this.backendService.saveForm(
-      this.styleFormGroup
-    );
+    this.expansions.styleExp = this.backendService.saveForm(this.styleFormGroup);
+    this.originalAppStyle = Object.assign({}, this.appStyle);
 
     /*if (this.styleFormGroup.dirty && this.styleFormGroup.valid) {
       this.backendService.updatePoeSettings(this.styleFormGroup.value);
@@ -434,7 +440,7 @@ export class CustomizeExpComponent implements OnInit {
   saveLinks = () => {
     let footerlinksobject = {};
     let footers: Array<object> = this.linksFormGroup.value['footerLinks'];
-    footers.forEach((footer) => {
+    footers.forEach(footer => {
       footerlinksobject[footer['name']] = footer['url'];
     });
 
@@ -442,15 +448,13 @@ export class CustomizeExpComponent implements OnInit {
 
     let linksObject = {
       ...this.linksFormGroup.value,
-      footerLinks: footerlinksobject,
+      footerLinks: footerlinksobject
     };
 
     console.log(linksObject);
 
-    this.expansions.linksExp = this.backendService.saveForm(
-      this.linksFormGroup,
-      linksObject
-    );
+    this.expansions.linksExp = this.backendService.saveForm(this.linksFormGroup, linksObject);
+    this.originalLinks = Object.assign({}, this.links);
 
     /*if (this.linksFormGroup.dirty && this.linksFormGroup.valid) {
       this.backendService.updatePoeSettings(this.linksFormGroup.value);

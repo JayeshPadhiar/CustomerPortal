@@ -8,9 +8,8 @@ describe('ManageUnexComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManageUnexComponent ]
-    })
-    .compileComponents();
+      declarations: [ManageUnexComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

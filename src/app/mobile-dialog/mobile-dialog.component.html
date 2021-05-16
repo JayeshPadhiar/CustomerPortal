@@ -8,28 +8,31 @@
 >
   <h2 mat-dialog-title style="margin: 10px">Preview</h2>
   <mat-icon
+    (click)="close()"
     style="position: relative; align-self: flex-end"
-    [mat-dialog-close]="true"
-    style="margin: 5px"
+    mat-dialog-close
+    style="margin: 5px; cursor: pointer; "
     >close</mat-icon
   >
 </div>
 <mat-divider></mat-divider>
-<mat-dialog-content
-  class="mat-typography"
-  [style.background-color]="appStyle.backgroundColor"
->
-  <div
-    class="modal-preview"
-    [style.background-color]="appStyle.backgroundColor"
-  >
-    <div
-      *ngIf="notif['show']"
-      class="notif-body"
-      [style.background-color]="appStyle.noticeBackgroundColor"
-    >
-      <p class="notif-text" style="max-width: 90%; word-wrap: break-word">
+<mat-dialog-content class="mat-typography" [style.background-color]="appStyle.backgroundColor">
+  <div style="text-align: start;" class="modal-preview" [style.background-color]="appStyle.backgroundColor">
+    <div *ngIf="notif['exp']" class="notif-body" [style.background-color]="notif.noticeBackgroundColor">
+      <p
+        *ngIf="notif['message']"
+        class="notif-text"
+        style="margin: 8px 0; max-width: 90%; word-wrap: break-word; color: #ffffff !important;"
+      >
         {{ notif.message }}
+      </p>
+
+      <p
+        *ngIf="!notif['message']"
+        class="notif-text"
+        style="margin: 8px 0; max-width: 90%; word-wrap: break-word; color: #ffffff !important;"
+      >
+        Your message will be displayed here
       </p>
     </div>
 
@@ -39,11 +42,7 @@
 
     <div class="main-body">
       <div class="order-summary">
-        <div
-          class="mobile-container"
-          style="width: 360px"
-          [style.background-color]="appStyle.backgroundColor"
-        >
+        <div class="mobile-container" style="width: 360px" [style.background-color]="appStyle.backgroundColor">
           <div>
             <div
               #productList
@@ -59,8 +58,7 @@
               <div style="height: 100%">
                 <div class="xtitle" style="margin: 0">Order Summary</div>
                 <div class="pre-title" style="margin: 14px 0 16px">
-                  You purchased <b>2 items</b> in order <b>BB3648390</b> on
-                  <b>2 Oct, 2020</b> for <b>INR 1995</b> via
+                  You purchased <b>2 items</b> in order <b>BB3648390</b> on <b>2 Oct, 2020</b> for <b>INR 1995</b> via
                   <b>Cash on Delivery</b>
                 </div>
 
@@ -84,77 +82,51 @@
                   "
                 >
                   <div class="item-list-container">
-                    <img
-                      class="product-img"
-                      style="margin: 0 5px"
-                      src="../../assets/img/shippingImg.png"
-                    />
+                    <img class="product-img" style="margin: 0 5px" src="../../assets/img/shippingImg.png" />
                     <div class="mobile-content" style="display: inline-block">
                       Regular Fit Navy Shirt
                     </div>
 
                     <div class="arrow">
-                      <mat-icon style="height: fit-content"
-                        >keyboard_arrow_right</mat-icon
-                      >
+                      <mat-icon style="height: fit-content">keyboard_arrow_right</mat-icon>
                     </div>
                   </div>
 
                   <div class="item-list-container">
-                    <img
-                      class="product-img"
-                      style="margin: 0 5px"
-                      src="../../assets/img/shippingImg2.png"
-                    />
+                    <img class="product-img" style="margin: 0 5px" src="../../assets/img/shippingImg2.png" />
                     <div class="mobile-content" style="display: inline-block">
                       Regular Fit Navy Shirt
                     </div>
 
                     <div class="arrow">
-                      <mat-icon style="height: fit-content"
-                        >keyboard_arrow_right</mat-icon
-                      >
+                      <mat-icon style="height: fit-content">keyboard_arrow_right</mat-icon>
                     </div>
                   </div>
 
                   <div class="item-list-container">
-                    <img
-                      class="product-img"
-                      style="margin: 0 5px"
-                      src="../../assets/img/shippingImg3.png"
-                    />
+                    <img class="product-img" style="margin: 0 5px" src="../../assets/img/shippingImg3.png" />
                     <div class="mobile-content" style="display: inline-block">
                       Regular Fit Navy Shirt
                     </div>
 
                     <div class="arrow">
-                      <mat-icon style="height: fit-content"
-                        >keyboard_arrow_right</mat-icon
-                      >
+                      <mat-icon style="height: fit-content">keyboard_arrow_right</mat-icon>
                     </div>
                   </div>
 
                   <div class="item-list-container">
-                    <img
-                      class="product-img"
-                      style="margin: 0 5px"
-                      src="../../assets/img/shippingImg2.png"
-                    />
+                    <img class="product-img" style="margin: 0 5px" src="../../assets/img/shippingImg2.png" />
                     <div class="mobile-content" style="display: inline-block">
                       Regular Fit Navy Shirt
                     </div>
 
                     <div class="arrow">
-                      <mat-icon style="height: fit-content"
-                        >keyboard_arrow_right</mat-icon
-                      >
+                      <mat-icon style="height: fit-content">keyboard_arrow_right</mat-icon>
                     </div>
                   </div>
                 </div>
 
-                <div
-                  style="bottom: 0; margin-top: auto; vertical-align: bottom"
-                >
+                <div style="bottom: 0; margin-top: auto; vertical-align: bottom">
                   <div class="xtitle" style="margin: 28px 0 16px">
                     Delivery Details
                   </div>
@@ -177,12 +149,8 @@
                   <div class="pre-title" style="margin: 6px 0 7px">
                     +91 9999900000 | deepak.khetan@gmail.com
                   </div>
-                  <div
-                    class="pre-title"
-                    style="font-weight: normal; margin: 14px 0 16px"
-                  >
-                    G 55, G block, South city II, Sector 50, Gurgaon Gurugram -
-                    122018
+                  <div class="pre-title" style="font-weight: normal; margin: 14px 0 16px">
+                    G 55, G block, South city II, Sector 50, Gurgaon Gurugram - 122018
                   </div>
                 </div>
               </div>
@@ -192,11 +160,7 @@
       </div>
 
       <div class="item-details">
-        <div
-          class="mobile-container"
-          style="width: 872px"
-          [style.background-color]="appStyle.backgroundColor"
-        >
+        <div class="mobile-container" style="width: 872px" [style.background-color]="appStyle.backgroundColor">
           <div>
             <div class="body" #productDetails>
               <div
@@ -237,10 +201,7 @@
               >
                 <mat-horizontal-stepper class="mobile-stepper" #stepper>
                   <ng-template matStepperIcon="edit">
-                    <mat-icon
-                      style="height: 24px; width: 24px"
-                      svgIcon="shippingSoon"
-                    ></mat-icon>
+                    <mat-icon style="height: 24px; width: 24px" svgIcon="shippingSoon"></mat-icon>
                   </ng-template>
                   <ng-template matStepperIcon="home">
                     <mat-icon>home</mat-icon>
@@ -253,16 +214,10 @@
                   </ng-template>
 
                   <ng-template matStepperIcon="shippingSoon">
-                    <mat-icon
-                      style="height: 24px; width: 24px"
-                      svgIcon="shippingSoon"
-                    ></mat-icon>
+                    <mat-icon style="height: 24px; width: 24px" svgIcon="shippingSoon"></mat-icon>
                   </ng-template>
                   <ng-template matStepperIcon="inTransit">
-                    <mat-icon
-                      style="height: 35px; width: 25px"
-                      svgIcon="inTransit"
-                    ></mat-icon>
+                    <mat-icon style="height: 35px; width: 25px" svgIcon="inTransit"></mat-icon>
                   </ng-template>
                   <ng-template matStepperIcon="last">
                     <mat-icon>done_all</mat-icon>
@@ -275,67 +230,104 @@
                         Arriving by Sat, 24 Oct
                       </div>
                     </ng-template>
-                    <div>
-                      <div>
-                        <div
-                          style="
-                            margin: 10px 0;
-                            display: flex;
-                            width: 262.71px;
-                            align-items: center;
-                            background: #ffffff;
-                            border-radius: 4px;
-                            border: 1px solid #f6f6f6;
-                          "
-                        >
-                          <img
-                            style="margin: 5px; width: 57.67px; height: 69.15px"
-                            src="../../assets/img/shippingImg.png"
-                          />
-                          <div
-                            class="mobile-content"
-                            style="display: inline-block"
-                          >
+                    <div style="width: 265px;">
+                      <div
+                        style="
+                          margin: 10px 0 0;
+                          margin-left: 7px;
+                          display: flex;
+                          align-items: center;
+                          width: 100%;
+                          background: #ffffff;
+                          border: 1px solid #F6F6F6;
+                          box-sizing: border-box;
+                          border-radius: 4px 4px 0px 0px;
+                          border-width: 1px 1px 0px 1px;
+        
+                        "
+                      >
+                        <img style="margin: 5px; border-radius: 4px;" src="../../assets/img/shippingImg.png" />
+                        <div style="display: inline-block;">
+                          <div class="mobile-content" style="display: block; margin: 8px 0 8px;">
                             Regular Fit Navy Shirt
                           </div>
-                        </div>
 
-                        <div
-                          class="mobile-content"
+                          <div class="mobile-content" style="display: block; margin: 8px 0 8px;">
+                            ₹ 1000
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        class="mobile-content"
+                        style="display: block; background: #ffffff;
+                      border: 1px solid #F6F6F6;
+                      box-sizing: border-box;
+                      border-radius: 0px 0px 0px 0px;
+                      border-width: 1px 1px 0px 1px;
+        
+                      padding: 8px;
+                      /* Small */
+        
+                      font-family: 'Work Sans', sans-serif;
+                      font-style: normal;
+                      font-weight: normal;
+                      font-size: 10px;
+                      line-height: 145%;
+                      /* or 15px */
+                      
+                      letter-spacing: 0.02em;
+                      
+                      /* Dark Gray */
+                      
+                      color: #828282;"
+                      >
+                        <img
+                          style="max-width: 100%; max-height: 100%; margin: 0; margin-bottom: 9px;"
+                          src="../../../../assets/img/placed-mobile.svg"
+                        />
+                        <p
                           style="
-                            display: block;
-                            width: 255.29px;
-                            height: 45px;
-
-                            /* Small */
-
-                            font-family: Work Sans;
-                            font-style: normal;
-                            font-weight: normal;
-                            font-size: 10px;
-                            line-height: 145%;
-                            /* or 15px */
-
-                            letter-spacing: 0.02em;
-
-                            /* Dark Gray */
-
-                            color: #828282;
-                          "
+                        font-family: 'Work Sans', sans-serif;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 10px;
+                        line-height: 145%;
+                        /* or 15px */
+                        
+                        letter-spacing: 0.02em;
+                        
+                        /* Dark Gray */
+                        
+                        color: #828282;"
                         >
-                          <p>
-                            Your item is ready to be shipped by our courier
-                            partner. You will be notified as soon as it is
-                            dispatched.
-                          </p>
-                        </div>
+                          Your item is ready to be shipped by our courier partner. You will be notified as soon as it is
+                          dispatched.
+                        </p>
+                      </div>
 
+                      <div
+                        class="mobile-content"
+                        style="display: block; background: #ffffff;
+                      border: 1px solid #F6F6F6;
+                      box-sizing: border-box;
+                      border-radius: 0px 0px 4px 4px;
+                      padding: 12px 0;"
+                      >
                         <button
-                          [style.background-color]="appStyle.actionColor"
+                          [style.color]="appStyle.actionColor"
+                          style="
+                          height: fit-content;
+                              pointer-events: none;
+                              background-color: white;
+                              text-align: inherit;
+                              border: none;
+                              box-shadow: none;
+                        "
                           class="mobile-button"
                           mat-flat-button
                         >
-                          Cancel Order
+                          Cancel
                         </button>
                       </div>
                     </div>
@@ -349,59 +341,157 @@
                       </div>
                     </ng-template>
                     <div style="display: flex; justify-content: center">
-                      <div style="margin: 0 auto">
-                        <div
-                          style="
-                            margin: 12px 0 7px;
-                            display: flex;
-                            width: 262.71px;
-                            align-items: center;
-                            background: #ffffff;
-                            border-radius: 4px;
-                            border: 1px solid #f6f6f6;
-                          "
-                        >
-                          <img
-                            style="margin: 5px"
-                            src="../../assets/img/shippingImg.png"
-                          />
+                      <div style="margin: 0 auto; width: 264px;">
+                        <div>
+                          <div
+                            style="
+                              margin: 10px 0 0;
+                              margin-left: 7px;
+                              display: flex;
+                              align-items: center;
+                              width: 100%;
+                              background: #ffffff;
+                              border: 1px solid #F6F6F6;
+                              box-sizing: border-box;
+                              border-radius: 4px 4px 0px 0px;
+                              border-width: 1px 1px 0px 1px;
+            
+                            "
+                          >
+                            <img style="margin: 5px; border-radius: 4px;" src="../../assets/img/shippingImg.png" />
+                            <div style="display: inline-block;">
+                              <div class="mobile-content" style="display: block; margin: 8px 0 8px;">
+                                Regular Fit Navy Shirt
+                              </div>
+
+                              <div class="mobile-content" style="display: block; margin: 8px 0 8px;">
+                                ₹ 1000
+                              </div>
+                            </div>
+                          </div>
+
                           <div
                             class="mobile-content"
-                            style="display: inline-block"
+                            style="display: block; background: #ffffff;
+                          border: 1px solid #F6F6F6;
+                          box-sizing: border-box;
+                          border-radius: 0px 0px 0px 0px;
+            
+                          padding: 8px;
+                          /* Small */
+            
+                          font-family: 'Work Sans', sans-serif;
+                          font-style: normal;
+                          font-weight: normal;
+                          font-size: 10px;
+                          line-height: 145%;
+                          /* or 15px */
+                          
+                          letter-spacing: 0.02em;
+                          
+                          /* Dark Gray */
+                          
+                          color: #828282;"
                           >
-                            Regular Fit Navy Shirt
-                          </div>
-                        </div>
-
-                        <div
-                          class="mobile-content"
-                          style="
-                            width: 264px;
-
-                            /* white */
-
-                            background: #ffffff;
-                            /* Lightest Gray */
-
-                            border: 1px solid #f6f6f6;
-                            box-sizing: border-box;
-                            border-radius: 4px;
-                          "
-                        >
-                          <p>
-                            Your item has been picked up by our courier partner.
-                            You will be notified as soon as it is out for
-                            delivery
-                          </p>
-                          <p>
-                            Your order has been shipped by Bluedart logistics
-                            with tracking number #xxxxxxx
-                          </p>
-                          <div class="note">
-                            <p>
-                              Note: Expected delivery date is delayed. We will
-                              keep you updated!
+                            <img
+                              style="max-width: 100%; max-height: 100%; margin: 0 0 9px;"
+                              src="../../../../assets/img/shipped-icon.png"
+                            />
+                            <p
+                              style="
+                              margin-bottom: 8px;
+                            font-family: 'Work Sans', sans-serif;
+                            font-style: normal;
+                            font-weight: normal;
+                            font-size: 10px;
+                            line-height: 145%;
+                            /* or 15px */
+                            
+                            letter-spacing: 0.02em;
+                            
+                            /* Dark Gray */
+                            
+                            color: #828282;"
+                            >
+                              Your item has been picked up by our courier partner. You will be notified as soon as it is
+                              out for delivery
                             </p>
+
+                            <div
+                              style="
+                              margin-bottom: 8px;
+                            font-family: 'Work Sans', sans-serif;
+                            font-style: normal;
+                            font-weight: normal;
+                            font-size: 10px;
+                            line-height: 145%;
+                            /* or 15px */
+                            
+                            letter-spacing: 0.02em;
+                            
+                            /* Dark Gray */
+                            
+                            color: #828282;"
+                            >
+                              Courier Name -
+                              <div style="display: inline; font-weight: bolder;">Bluedart logistics</div>
+                              <br />
+                              Tracking number
+                              <div style="display: inline; font-weight: bolder;">#xxxxxxx</div>
+                            </div>
+
+                            <p
+                              style="
+                              text-decoration: underline;
+                              margin: 8px 0;
+                              font-family: Work Sans, sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 8px;
+            line-height: 145%;
+            /* or 12px */
+            
+            letter-spacing: 0.02em;
+            
+            /* Dark Gray */
+            
+            color: #828282;"
+                            >
+                              See all updates
+                            </p>
+                          </div>
+
+                          <div
+                            class="mobile-content"
+                            style="display: block; background: #ffffff;
+                          padding: 8px 0;"
+                          >
+                            <div
+                              style="
+                            /* Lightest Gray */
+                            margin: 12px;
+                            
+                            background: #F6F6F6;
+                            border-radius: 4px;
+                            padding: 8px 12px;
+                            
+            /* Small */
+            
+            font-family: Work Sans, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 10px;
+            line-height: 145%;
+            /* or 15px */
+            
+            letter-spacing: 0.02em;
+            
+            /* Darkest Gray */
+            
+            color: #4F4F4F;"
+                            >
+                              Note: Expected delivery date is delayed. We will keep you updated!
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -424,7 +514,9 @@
     <div class="footer">
       <div *ngIf="links.footerLinks.length > 0" class="mobile-footer-links">
         <div *ngIf="links.websiteUrl" class="mobile-footer-url">
-          Go to &nbsp;<a href="#">{{ links.websiteUrl }}</a>
+          Go to&nbsp;<a class="mobile-footer-url" style="padding: 0; text-decoration: underline;" href="#">{{
+            links.websiteUrl
+          }}</a>
         </div>
         <div *ngFor="let link of links.footerLinks" class="footer-link">
           {{ link.name }}

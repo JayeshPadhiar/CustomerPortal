@@ -1,5 +1,5 @@
 <div class="expander-component">
-  <h3 class="component-name">Customize the experience</h3>
+  <h3 class="component-name" style="margin-top: 20px;">Customize the experience</h3>
 
   <mat-accordion class="accordion">
     <mat-expansion-panel
@@ -11,28 +11,16 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon
-            class="exp-icon"
-            *ngIf="!stylePanel.expanded"
-            svgIcon="sycp"
-          ></mat-icon>
-          <mat-icon
-            class="exp-icon"
-            *ngIf="stylePanel.expanded"
-            svgIcon="sycp-open"
-          ></mat-icon>
+          <img class="exp-icon" src="../../../../assets/img/sycp.svg" />
+          <!-- <img *ngIf="stylePanel.expanded" class="exp-icon" src="../../../../assets/img/sycp-open.svg" /> -->
+          <!--mat-icon class="exp-icon" *ngIf="!stylePanel.expanded" svgIcon="sycp"></mat-icon>
+          <mat-icon class="exp-icon" *ngIf="stylePanel.expanded" svgIcon="sycp-open"></mat-icon-->
           <div class="exp-title">Style Your Customer Portal</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon class="indicator-icon" *ngIf="!stylePanel.expanded"
-              >keyboard_arrow_right</mat-icon
-            >
-            <mat-icon
-              class="indicator-icon-selected"
-              *ngIf="stylePanel.expanded"
-              >keyboard_arrow_down</mat-icon
-            >
+            <mat-icon class="indicator-icon" *ngIf="!stylePanel.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="stylePanel.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -44,37 +32,16 @@
               <p class="description">
                 Add a PNG, JPG or GIF. Your image may scale upto 154px X 24px
               </p>
-              <div
-                #logoInputDiv
-                *ngIf="appStyle.brandLogoUrl === originalAppStyle.brandLogoUrl"
-              >
+              <div #logoInputDiv *ngIf="appStyle.brandLogoUrl === originalAppStyle.brandLogoUrl">
                 <button type="button" mat-button (click)="logoInput.click()">
                   Upload logo
                 </button>
-                <input
-                  
-                  hidden
-                  (input)="selectIcon('brandLogoUrl', $event, 154, 24)"
-                  #logoInput
-                  type="file"
-                />
+                <input hidden (input)="selectIcon('brandLogoUrl', $event, 154, 24)" #logoInput type="file" />
               </div>
 
-              <div
-                *ngIf="
-                  !(appStyle.brandLogoUrl === originalAppStyle.brandLogoUrl)
-                "
-                class="logo-picker-div"
-              >
-                <div
-                  class="logo-picker-image"
-                  [style.background-color]="appStyle.backgroundColor"
-                >
-                  <img
-                    class="logo-picker-image"
-                    [src]="appStyle.brandLogoUrl"
-                    alt="ACME"
-                  />
+              <div *ngIf="!(appStyle.brandLogoUrl === originalAppStyle.brandLogoUrl)" class="logo-picker-div">
+                <div class="logo-picker-image" [style.background-color]="appStyle.backgroundColor">
+                  <img class="logo-picker-image" [src]="appStyle.brandLogoUrl" alt="ACME" />
                 </div>
 
                 <div>
@@ -93,10 +60,7 @@
 
               <div class="preview-container">
                 <div class="preview-div">
-                  <div
-                    class="preview-div-header"
-                    [style.background-color]="appStyle.backgroundColor"
-                  >
+                  <div class="preview-div-header" [style.background-color]="appStyle.backgroundColor">
                     <div
                       style="
                         width: 100%;
@@ -106,11 +70,7 @@
                         justify-content: center;
                       "
                     >
-                      <img
-                        class="image"
-                        [src]="appStyle.brandLogoUrl"
-                        alt="ACME"
-                      />
+                      <img class="image" [src]="appStyle.brandLogoUrl" alt="ACME" />
                     </div>
                   </div>
 
@@ -129,27 +89,12 @@
                 <button type="button" mat-button (click)="faviconInput.click()">
                   Upload Favicon
                 </button>
-                <input
-                  hidden
-                  (change)="selectIcon('faviconUrl', $event, 16, 16)"
-                  #faviconInput
-                  type="file"
-                />
+                <input hidden (change)="selectIcon('faviconUrl', $event, 16, 16)" #faviconInput type="file" />
               </div>
 
-              <div
-                *ngIf="!(appStyle.faviconUrl === originalAppStyle.faviconUrl)"
-                class="logo-picker-div"
-              >
-                <div
-                  class="logo-picker-image"
-                  [style.background-color]="appStyle.backgroundColor"
-                >
-                  <img
-                    class="logo-picker-image"
-                    [src]="appStyle.faviconUrl"
-                    alt="ACME"
-                  />
+              <div *ngIf="!(appStyle.faviconUrl === originalAppStyle.faviconUrl)" class="logo-picker-div">
+                <div class="logo-picker-image" [style.background-color]="appStyle.backgroundColor">
+                  <img class="logo-picker-image" [src]="appStyle.faviconUrl" alt="ACME" />
                 </div>
 
                 <div>
@@ -166,7 +111,23 @@
                 </div>
               </div>
 
-              <div>
+              <div class="preview-container">
+                <img style="width: 200px;" src="../../../../assets/img/faviconpreview.png" alt="" />
+                <img
+                  *ngIf="appStyle.faviconUrl"
+                  class="image"
+                  style="height: 16px; width: 16px; left: 74px; top:22px; margin: 2px"
+                  [src]="appStyle.faviconUrl"
+                />
+                <img
+                  *ngIf="!appStyle.faviconUrl"
+                  class="image"
+                  style="height: 16px; width: 16px; left: 74px; top:22px; margin: 2px"
+                  src="../../../../assets/img/e-logo.png"
+                />
+              </div>
+
+              <!--div>
                 <div class="preview-container">
                   <div
                     class="preview-div"
@@ -183,17 +144,12 @@
                         <span class="dot" style="background: #5ac05a"></span>
                       </div>
                       <div class="tab-div">
-                        <img
-                          class="image"
-                          style="margin: 2px"
-                          [src]="appStyle.faviconUrl"
-                          alt="ACME"
-                        />
+                        <img class="image" style="margin: 2px" [src]="appStyle.faviconUrl" />
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div-->
             </div>
 
             <div>
@@ -221,10 +177,7 @@
 
               <div class="preview-container">
                 <div class="preview-div">
-                  <div
-                    class="preview-div-header"
-                    [style.background-color]="appStyle.backgroundColor"
-                  >
+                  <div class="preview-div-header" [style.background-color]="appStyle.backgroundColor">
                     <div
                       style="
                         width: 100%;
@@ -234,11 +187,7 @@
                         justify-content: center;
                       "
                     >
-                      <img
-                        class="image"
-                        [src]="appStyle.brandLogoUrl"
-                        alt="ACME"
-                      />
+                      <img class="image" [src]="appStyle.brandLogoUrl" alt="ACME" />
                     </div>
                   </div>
                   <div class="preview-div-body"></div>
@@ -269,13 +218,12 @@
 
               <div
                 style="
-                  width: 202px;
+                  width: 360px;
                   height: 102px;
-                  background: #e5e5e5;
+                  background: #f7f7f7;
                   border-radius: 4px;
                   display: flex;
                   align-items: center;
-                  justify-content: center;
                   margin-top: 16px;
                 "
               >
@@ -283,6 +231,8 @@
                   type="button"
                   [style.background-color]="appStyle.actionColor"
                   style="
+                      pointer-events: none;
+
                     font-family: Work Sans;
                     font-style: normal;
                     font-weight: 600;
@@ -303,15 +253,45 @@
                     position: absolute;
                     width: 138px;
                     height: 51px;
-                    margin: 0;
-
-                    /* Accent */
-
-                    background: #2ddbd1;
-                    box-shadow: 0px 4px 8px rgba(45, 219, 209, 0.18),
-                      0px 0px 2px rgba(45, 219, 209, 0.12),
-                      0px 0px 1px rgba(0, 0, 0, 0.04);
+                    margin: 27px 20px 24px 32px;
                     border-radius: 8px;
+                  "
+                  mat-flat-button
+                >
+                  BUTTON
+                </button>
+
+                <button
+                  type="button"
+                  [style.color]="appStyle.actionColor"
+                  style="
+
+                      pointer-events: none;
+
+                    font-family: Work Sans;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 19px;
+                    /* identical to box height */
+
+                    letter-spacing: 0.03em;
+                    text-transform: uppercase;
+
+                    background-color: #ffffff;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 16px 72px;
+
+                    position: absolute;
+                    width: 138px;
+                    height: 51px;
+                    margin: 27px 32px 24px 190px;
+                    border-radius: 8px;
+                    border: 2px solid #ECECEC;
+
                   "
                   mat-flat-button
                 >
@@ -320,26 +300,15 @@
               </div>
             </div>
 
-            <div
-              *ngIf="isChanged(styleFormGroup)"
-              class="save-cancel-container"
-            >
+            <div *ngIf="isChanged(styleFormGroup)" class="save-cancel-container">
               <button class="save-button" type="submit" mat-button>Save</button>
               <button type="button" (click)="cancelStyle()" mat-button>
                 Cancel
               </button>
             </div>
 
-            <div
-              *ngIf="!isChanged(styleFormGroup)"
-              class="save-cancel-container"
-            >
-              <button
-                type="button"
-                (click)="expansions.styleExp = false"
-                class="save-button"
-                mat-button
-              >
+            <div *ngIf="!isChanged(styleFormGroup)" class="save-cancel-container">
+              <button type="button" (click)="expansions.styleExp = false" class="save-button" mat-button>
                 Close
               </button>
             </div>
@@ -353,35 +322,23 @@
 
     <mat-expansion-panel
       (opened)="expansions.domainExp = true"
-      (closed)="expansions.domainExp = false"
+      (closed)="cancelDomain()"
       [expanded]="expansions.domainExp"
       hideToggle
       #domainPanel
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon
-            class="exp-icon"
-            *ngIf="!domainPanel.expanded"
-            svgIcon="sytpd"
-          ></mat-icon>
-          <mat-icon
-            class="exp-icon"
-            *ngIf="domainPanel.expanded"
-            svgIcon="sytpd-open"
-          ></mat-icon>
+          <img class="exp-icon" src="../../../../assets/img/sytpd.svg" />
+          <!-- <img *ngIf="domainPanel.expanded"k class="exp-icon" src="../../../../assets/img/sytpd-open.svg" /> -->
+          <!-- <mat-icon class="exp-icon" *ngIf="!domainPanel.expanded" svgIcon="sytpd"></mat-icon>
+          <mat-icon class="exp-icon" *ngIf="domainPanel.expanded" svgIcon="sytpd-open"></mat-icon> -->
           <div class="exp-title">Setup your tracking page domain</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon class="indicator-icon" *ngIf="!domainPanel.expanded"
-              >keyboard_arrow_right</mat-icon
-            >
-            <mat-icon
-              class="indicator-icon-selected"
-              *ngIf="domainPanel.expanded"
-              >keyboard_arrow_down</mat-icon
-            >
+            <mat-icon class="indicator-icon" *ngIf="!domainPanel.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="domainPanel.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -394,8 +351,9 @@
               class="tooltipicon"
               inline="true"
               style="margin-top: 1px; margin-left: 8px; height: 14px; width: 14px;"
-              matTooltip="Rather than registering a new domain name, you can create a subdomain using the domain you already own"
+              matTooltip="You are required to create a subdomain using the domain you already own."
               matTooltipPosition="after"
+              matTooltipClass="tooltip-style"
             >
             </mat-icon>
           </h4>
@@ -414,24 +372,19 @@
               color: #808080;
             "
           >
-            By default, customers will be directed to https://acme.eshopbox.com
-            when accessing <br />
-            the customer portal. To change, add a domain.
+            By default, customers will be directed to https://acme.eshopbox.com when accessing the customer portal. To
+            change, add a domain.
             <a>Learn More</a>
           </p>
-          <button class="save-button" (click)="addDomain()" mat-button>
+          <button class="save-button" style="margin-top: 12px !important" (click)="addDomain()" mat-button>
             + Add domain
           </button>
         </div>
 
         <div #domainDiv *ngIf="trackingPageDomain.value">
-          <form
-            novalidate
-            [formGroup]="domainFormGroup"
-            (ngSubmit)="saveDomain()"
-          >
+          <form novalidate [formGroup]="domainFormGroup" (ngSubmit)="saveDomain()">
             <div style="align-items: center; display: flex">
-              <mat-icon
+              <!-- <mat-icon
                 style="
                   margin-right: 8px;
                   width: 18px;
@@ -439,33 +392,31 @@
                   display: inline-block;
                 "
                 svgIcon="globeicon"
-              ></mat-icon>
-              <div class="domain-url-text">
-                {{ trackingPageDomain.value }}
-              </div>
+              ></mat-icon> -->
+              <img
+                src="../../../../assets/img/globeicon.svg"
+                style="
+              margin-right: 8px;
+              width: 18px;
+              height: 18px;
+              display: inline-block;
+            "
+                alt=""
+              />
+              <div class="domain-url-text">https://{{ trackingPageDomain.value }}</div>
 
-              <div
-                *ngIf="poeSettings['trackingDomainStatus'] === 'Connected'"
-                class="connected-indicator"
-              >
-                <mat-icon
-                  class="connected-indicator-icon"
-                  svgIcon="connected"
-                ></mat-icon>
+              <div *ngIf="poeSettings['trackingDomainStatus'] === 'Connected'" class="connected-indicator">
+                <!-- <mat-icon class="connected-indicator-icon" svgIcon="connected"></mat-icon> -->
+                <img style="margin-right: 4px;" src="../../../../assets/img/connected.svg" />
                 Connected
               </div>
-              <div
-                *ngIf="poeSettings['trackingDomainStatus'] === 'Pending'"
-                class="pending-indicator"
-              >
-                <mat-icon
-                  class="connected-indicator-icon"
-                  svgIcon="pending"
-                ></mat-icon
-                >Pending
+              <div *ngIf="poeSettings['trackingDomainStatus'] === 'Pending'" class="pending-indicator">
+                <!-- <mat-icon class="connected-indicator-icon" svgIcon="pending"></mat-icon>Pending -->
+                <img style="margin-right: 4px;" src="../../../../assets/img/pending.svg" />
+                Pending
               </div>
 
-              <mat-icon
+              <!-- <mat-icon
                 (click)="trackingPageDomain.value = ''"
                 style="
                   margin-left: 12px;
@@ -474,50 +425,66 @@
                   display: inline-block;
                 "
                 svgIcon="trashicon"
-              ></mat-icon>
+              ></mat-icon> -->
+              <img
+                (click)="trackingPageDomain.value = ''"
+                src="../../../../assets/img/trashicon.svg"
+                style="
+              margin-left: 12px;
+              width: 18px;
+              height: 16px;
+              display: inline-block;
+            "
+              />
             </div>
 
             <div class="tracking-page-info">
               <div class="tracking-page-info-text">
-                Visit the admin console of your domain registrar panel (the
-                website you purchased <br />
-                your domain from) and create a CNAME Record with the details
-                below.
+                Visit the admin console of your domain registrar panel (the website you purchased your domain from) and
+                create one <b style="font-weight: bold;">A Record</b> with the details below.
               </div>
               <br />
 
-              <table style="width: 60%; table-layout: auto">
-                <tr>
-                  <th class="table-headers">Type</th>
-                  <th class="table-headers">Name</th>
-                  <th class="table-headers">Value</th>
+              <table style="table-layout: auto">
+                <tr style="height: 20px;">
+                  <th style="padding-right: 24px;" class="table-headers">Type</th>
+                  <th style="padding-right: 24px;" class="table-headers">Name</th>
+                  <th style="padding-right: 24px;" class="table-headers">Value</th>
                 </tr>
                 <tr>
-                  <td class="type">CNAME</td>
-                  <td class="name-value">acme.domainkey.eshopbox.com</td>
-                  <td class="name-value">{{ poeSettings["cnameValue"] }}</td>
+                  <td style="padding-right: 24px;" class="type">A</td>
+                  <td style="padding-right: 24px;" class="name-value">
+                    {{ trackingPageDomain.value }}
+                    <img
+                      (click)="copyMessage(trackingPageDomain.value)"
+                      src="../../../../assets/img/copy-button.svg"
+                      style="vertical-align: middle; margin: 0; margin-left: 3px; margin-bottom: 2px; width: 12px;
+                    height: 12px;"
+                      alt=""
+                    />
+                  </td>
+
+                  <td style="padding-right: 24px;" class="type">
+                    34.93.175.31
+                    <img
+                      (click)="copyMessage('34.93.175.31')"
+                      src="../../../../assets/img/copy-button.svg"
+                      style="vertical-align: middle; margin: 0; margin-left: 3px; margin-bottom: 2px; width: 12px;
+                  height: 12px;"
+                      alt=""
+                    />
+                  </td>
                 </tr>
               </table>
             </div>
 
-            <div
-              *ngIf="isChanged(domainFormGroup)"
-              class="save-cancel-container"
-            >
+            <div *ngIf="isChanged(domainFormGroup)" class="save-cancel-container">
               <button class="save-button" type="submit" mat-button>Save</button>
               <button (click)="cancelDomain()" type="button" mat-button>Cancel</button>
             </div>
 
-            <div
-              *ngIf="!isChanged(domainFormGroup)"
-              class="save-cancel-container"
-            >
-              <button
-                type="button"
-                (click)="expansions.domainExp = false"
-                class="save-button"
-                mat-button
-              >
+            <div *ngIf="!isChanged(domainFormGroup)" class="save-cancel-container">
+              <button type="button" (click)="expansions.domainExp = false" class="save-button" mat-button>
                 Close
               </button>
             </div>
@@ -530,35 +497,23 @@
 
     <mat-expansion-panel
       (opened)="expansions.linksExp = true"
-      (closed)="expansions.linksExp = false"
+      (closed)="cancelLinks()"
       [expanded]="expansions.linksExp"
       #linksPanel
       hideToggle
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="grltyc"
-            *ngIf="!linksPanel.expanded"
-          ></mat-icon>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="grltyc-open"
-            *ngIf="linksPanel.expanded"
-          ></mat-icon>
+          <img class="exp-icon" src="../../../../assets/img/grltyc.svg" />
+          <!-- <img *ngIf="linksPanel.expanded" class="exp-icon" src="../../../../assets/img/grltyc-open.svg" /> -->
+          <!-- <mat-icon class="exp-icon" svgIcon="grltyc" *ngIf="!linksPanel.expanded"></mat-icon>
+          <mat-icon class="exp-icon" svgIcon="grltyc-open" *ngIf="linksPanel.expanded"></mat-icon> -->
           <div class="exp-title">Give relavant links to your customers</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon class="indicator-icon" *ngIf="!linksPanel.expanded"
-              >keyboard_arrow_right</mat-icon
-            >
-            <mat-icon
-              class="indicator-icon-selected"
-              *ngIf="linksPanel.expanded"
-              >keyboard_arrow_down</mat-icon
-            >
+            <mat-icon class="indicator-icon" *ngIf="!linksPanel.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="linksPanel.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -579,9 +534,7 @@
                   formControlName="websiteUrl"
                   (input)="changeLink('websiteUrl', $event.target.value)"
                 />
-                <mat-error *ngIf="websiteUrl.invalid">{{
-                  validateError(websiteUrl)
-                }}</mat-error>
+                <mat-error *ngIf="websiteUrl.invalid">{{ validateError(websiteUrl) }}</mat-error>
               </mat-form-field>
             </div>
 
@@ -622,9 +575,10 @@
                     overflow: hidden;
                   "
                 >
-                  <p class="link-text" *ngIf="links.websiteUrl" style="margin-top: 50px; margin-left: 10px;">
-                    Go to&nbsp;<a href="#"> {{ links.websiteUrl }}</a>
-                  </p>
+                  <div class="link-text" *ngIf="links.websiteUrl" style="margin-top: 50px; margin-left: 10px;">
+                    Go to&nbsp;
+                    <div style="display: inline; text-decoration: underline;">{{ links.websiteUrl }}</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -638,12 +592,13 @@
               <mat-label class="label">
                 Support URL
                 <mat-icon
-                style="margin-bottom: 1px; height: 12px; width: 12px;"
+                  style="margin-bottom: 1px; height: 12px; width: 12px;"
                   svgIcon="infoicon"
                   class="tooltipicon"
                   inline="true"
                   matTooltip="Include the Help page or FAQ page of your website"
                   matTooltipPosition="after"
+                  matTooltipClass="tooltip-style"
                 >
                 </mat-icon>
               </mat-label>
@@ -655,9 +610,7 @@
                   placeholder="acme.com/help"
                   (input)="changeLink('supportUrl', $event.target.value)"
                 />
-                <mat-error *ngIf="supportUrl.invalid">{{
-                  validateError(supportUrl)
-                }}</mat-error>
+                <mat-error *ngIf="supportUrl.invalid">{{ validateError(supportUrl) }}</mat-error>
               </mat-form-field>
             </div>
 
@@ -665,44 +618,32 @@
               <table style="max-width: 390px">
                 <tr>
                   <td style="height: fit-content">
-                    <div
-                      class="form-container"
-                      style="width: 180px; margin: 0 43px 0 0"
-                    >
+                    <div class="form-container" style="width: 180px; margin: 0 43px 0 0">
                       <mat-label class="label"> Support email </mat-label>
                       <mat-form-field floatLabel="never">
                         <input
-                          (input)="
-                            changeLink('supportEmail', $event.target.value)
-                          "
+                          (input)="changeLink('supportEmail', $event.target.value)"
                           formControlName="supportEmail"
                           matInput
+                          placeholder="help@acme.com"
                         />
-                        <mat-error *ngIf="supportEmail.invalid">{{
-                          validateError(supportEmail)
-                        }}</mat-error>
+                        <mat-error *ngIf="supportEmail.invalid">{{ validateError(supportEmail) }}</mat-error>
                       </mat-form-field>
                     </div>
                   </td>
                   <td>
-                    <div
-                      class="form-container"
-                      style="width: 180px; margin: 0 0 0"
-                    >
+                    <div class="form-container" style="width: 180px; margin: 0 0 0">
                       <mat-label class="label">
                         Support phone number
                       </mat-label>
                       <mat-form-field floatLabel="never">
                         <input
-                          (input)="
-                            changeLink('supportPhone', $event.target.value)
-                          "
+                          (input)="changeLink('supportPhone', $event.target.value)"
                           formControlName="supportPhone"
                           matInput
+                          placeholder="9876543210"
                         />
-                        <mat-error *ngIf="supportPhone.invalid">{{
-                          validateError(supportPhone)
-                        }}</mat-error>
+                        <mat-error *ngIf="supportPhone.invalid">{{ validateError(supportPhone) }}</mat-error>
                       </mat-form-field>
                     </div>
                   </td>
@@ -710,10 +651,7 @@
               </table>
             </div>
 
-            <div
-              class="preview-container"
-              [style.background-color]="appStyle.backgroundColor"
-            >
+            <div class="preview-container" [style.background-color]="appStyle.backgroundColor">
               <div
                 class="preview-div-body"
                 style="
@@ -757,69 +695,53 @@
                   inline="true"
                   matTooltip="Include your Terms page, Shipping policy, Return policy, Privacy page and more"
                   matTooltipPosition="after"
+                  matTooltipClass="tooltip-style"
                 >
                 </mat-icon>
               </h4>
               <div style="width: 70%">
                 <p class="lh-16-fs-12">
-                  Allow customers to access important links of your website
-                  <br />
-                  through the footer section
+                  Allow customers to access important links of your website through the footer section
                 </p>
               </div>
 
-              <table
-                formArrayName="footerLinks"
-                style="width: 450px"
-                class="table-container"
-              >
+              <table formArrayName="footerLinks" style="width: 450px" class="table-container">
                 <tbody>
-                  <tr
-                    *ngFor="
-                      let footer of getFooterLinks.controls;
-                      let i = index
-                    "
-                    [formGroupName]="i"
-                  >
+                  <tr *ngFor="let footer of getFooterLinks.controls; let i = index" [formGroupName]="i">
                     <td>
-                      <div
-                        class="form-container"
-                        style="width: 180px; margin: 0 43px 0 0"
-                      >
+                      <div class="form-container" style="width: 180px; margin: 0 43px 10px 0">
                         <mat-form-field floatLabel="never" style="margin: 0">
                           <input
                             formControlName="name"
-                            (input)="
-                              links.footerLinks[i].name = $event.target.value
-                            "
+                            (input)="links.footerLinks[i].name = $event.target.value"
                             matInput
                             placeholder="Link name"
                           />
+                          <mat-error *ngIf="footerLinks.controls[i].get('name').hasError('required')"
+                            >This field should not be empty
+                          </mat-error>
                         </mat-form-field>
                       </div>
                     </td>
                     <td>
-                      <div
-                        class="form-container"
-                        style="width: 180px; margin: 0 16px 0 0"
-                      >
+                      <div class="form-container" style="width: 180px; margin: 0 16px 10px 0">
                         <mat-form-field floatLabel="never" style="margin: 0">
                           <input
                             formControlName="url"
-                            (input)="
-                              links.footerLinks[i]['url'] = $event.target.value
-                            "
+                            (input)="links.footerLinks[i]['url'] = $event.target.value"
                             matInput
-                            placeholder="https://"
+                            placeholder="acme.com/return"
                           />
+                          <mat-error *ngIf="footerLinks.controls[i].get('url').invalid"
+                            >{{ validateError(footerLinks.controls[i].get('url')) }}
+                          </mat-error>
                         </mat-form-field>
                       </div>
                     </td>
-                    <td style="margin: 3px" align="center" valign="center">
-                      <mat-icon
-                        (click)="removeFooter(i)"
-                        svgIcon="deletebin"
-                      ></mat-icon>
+                    <td style="margin: 0; vertical-align: middle;">
+                      <!-- <mat-icon (click)="removeFooter(i)" svgIcon="deletebin"></mat-icon> -->
+
+                      <img (click)="removeFooter(i)" src="../../../../assets/img/deletebin.svg" alt="" />
                     </td>
                   </tr>
                   <tr>
@@ -833,31 +755,20 @@
                     >
                       + Add links
                     </button>
-                    <p class="max-links" style="margin-bottom: 0">
+                    <p class="max-links" style="margin-top: 8px; margin-bottom: 0">
                       Max. 3 links
                     </p>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div
-              *ngIf="isChanged(linksFormGroup)"
-              class="save-cancel-container"
-            >
+            <div *ngIf="isChanged(linksFormGroup)" class="save-cancel-container">
               <button class="save-button" type="submit" mat-button>Save</button>
               <button (click)="cancelLinks()" type="button" mat-button>Cancel</button>
             </div>
 
-            <div
-              *ngIf="!isChanged(linksFormGroup)"
-              class="save-cancel-container"
-            >
-              <button
-                type="button"
-                (click)="expansions.linksExp = false"
-                class="save-button"
-                mat-button
-              >
+            <div *ngIf="!isChanged(linksFormGroup)" class="save-cancel-container">
+              <button type="button" (click)="expansions.linksExp = false" class="save-button" mat-button>
                 Close
               </button>
             </div>

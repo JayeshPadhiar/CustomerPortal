@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppStyle, Links } from '../c-portal/cportal.model';
-import { CustomerPortalBackendService } from '../customer-portal-backend.service';
+import { CustomerPortalBackendService } from '../../../shared/services/customer-portal-backend.service';
 
 @Component({
   selector: 'app-mobile-dialog',
@@ -9,8 +9,6 @@ import { CustomerPortalBackendService } from '../customer-portal-backend.service
   styleUrls: ['./mobile-dialog.component.css']
 })
 export class MobileDialogComponent implements OnInit {
-
-  
   appStyle: AppStyle;
   links: Links;
 
@@ -18,19 +16,24 @@ export class MobileDialogComponent implements OnInit {
 
   productListView: boolean = false;
 
-  constructor(private backendService: CustomerPortalBackendService) { }
+  constructor(
+    public dialogRef: MatDialogRef<MobileDialogComponent>,
+    private backendService: CustomerPortalBackendService
+  ) {}
 
   ngOnInit(): void {
-
-    this.backendService.appStyle$.asObservable().subscribe((style) => {
+    this.backendService.appStyle$.asObservable().subscribe(style => {
       this.appStyle = Object.assign({}, style);
     });
-    
-    this.backendService.links$.asObservable().subscribe((links) => {
+
+    this.backendService.links$.asObservable().subscribe(links => {
       this.links = Object.assign({}, links);
     });
 
-    this.backendService.notif$.subscribe(result => this.notif = result)
+    this.backendService.notif$.subscribe(result => (this.notif = result));
   }
 
+  close(): void {
+    this.dialogRef.close();
+  }
 }

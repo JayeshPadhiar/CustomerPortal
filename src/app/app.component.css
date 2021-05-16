@@ -1,6 +1,4 @@
-::ng-deep.mobile-div
-  .mat-button-toggle-appearance-standard
-  .mat-button-toggle-label-content {
+::ng-deep.mobile-div .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
   line-height: 35px;
 }
 
@@ -26,6 +24,8 @@ h3 {
 }
 
 h3.component-name {
+  margin: 20px 0;
+
   font-family: Lato;
   font-style: normal;
   font-weight: normal;
@@ -103,7 +103,7 @@ h4.lh-22 {
   margin: 0;
 }
 
-p.link-text {
+.link-text {
   font-family: 'Work Sans' sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -181,16 +181,15 @@ p.fs-12-lh-14 {
 
 .fs-13-lh-12 {
   font-family: Lato;
-font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 12px;
-/* identical to box height, or 92% */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 12px;
+  /* identical to box height, or 92% */
 
-letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
 
-color: #999999;
-
+  color: #999999;
 }
 
 p.lh-14 {
@@ -287,13 +286,13 @@ p.max-reasons {
 p.notif-text {
   /* 14 px */
 
-  font-family: "Work Sans" sans-serif;
+  font-family: 'Work Sans' sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 160%;
 
-  max-width: 80%;
+  margin: 0 !important;
   /* or 22px */
 
   text-align: center;
@@ -325,6 +324,48 @@ tr.notif-table:first-child {
 }
 tr.notif-table:last-child {
   border: none;
+}
+
+tr.filter-table ::ng-deep .mat-select-placeholder {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.5px;
+  color: #999999;
+}
+
+tr.filter-table ::ng-deep .mat-select-value {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.5px;
+  color: #343434;
+}
+
+tr.filter-table ::ng-deep .mat-form-field-flex {
+  padding-left: 0 !important;
+}
+
+tr.filter-table ::ng-deep .mat-form-field-infix {
+  padding: 0;
+  padding-bottom: 8px !important;
+}
+
+tr.filter-table ::ng-deep .mat-form-field-appearance-fill .mat-select-arrow-wrapper {
+  transform: none;
+}
+
+.filter-table-class ::ng-deep .mat-select-panel {
+  min-width: 160px !important;
+  width: 160px !important;
+}
+
+::ng-deep .mat-select-panel {
+  left: 0;
 }
 
 .label {
@@ -359,7 +400,7 @@ h5 {
   margin: 10px 0 0 10px;
   width: 99%;
   height: 90%;
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
@@ -378,23 +419,25 @@ h5 {
 }
 
 p.note {
-  font-family: "Work Sans" sans-serif;
+  font-family: 'Work Sans' sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 160%;
 
-  max-width: 60%;
+  max-width: 255px;
   max-height: fit-content;
   height: fit-content;
   width: max-content;
 
   padding: 0 20px;
+
+  padding: 10px 12px;
   /* or 22px */
 
   text-align: center;
 
-  font-family: Work Sans;
+  font-family: 'Work Sans' sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
@@ -448,11 +491,17 @@ button {
 }
 
 button.save-button {
+  font-family: Lato;
+  font-weight: 200; /* added for font-weight issue no 6*/
   color: #f30e0f;
-  background: #fef0f1;
+  background: #fef0f1 !important;
   border: 1px solid #f30e0f;
   box-sizing: border-box;
   border-radius: 4px;
+}
+
+button.save-button ::ng-deep .mat-button-focus-overlay {
+  display: none;
 }
 
 button.add-button {
@@ -488,36 +537,89 @@ div.expander-component {
   stroke-width: 0.9;
 }
 
+.accordion .app-store ::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.accordion .mat-expansion-panel:hover {
+  color: #fa5c5d;
+  fill: #fa5c5d;
+  stroke: #fa5c5d;
+  stroke-width: 0.9;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border: 1px solid rgba(250, 92, 93, 0.7);
+  box-sizing: border-box;
+  box-shadow: 2px 4px 7px rgba(237, 32, 40, 0.09);
+  border-radius: 6px;
+}
+.accordion .mat-expansion-panel:hover .exp-icon {
+  filter: invert(42%) sepia(54%) saturate(1129%) hue-rotate(318deg) brightness(106%) contrast(96%);
+}
+
 .accordion .mat-expansion-panel:focus-within {
   color: #fa5c5d;
   fill: #fa5c5d;
   stroke: #fa5c5d;
   stroke-width: 0.9;
-
   background: #ffffff;
   border: 1px solid rgba(250, 92, 93, 0.7);
   box-sizing: border-box;
   box-shadow: 2px 4px 7px rgba(237, 32, 40, 0.09);
   border-radius: 6px;
 }
+.accordion .mat-expansion-panel:focus-within .exp-icon {
+  filter: invert(42%) sepia(54%) saturate(1129%) hue-rotate(318deg) brightness(106%) contrast(96%);
+}
+
+.accordion .mat-expanded {
+  color: #fa5c5d;
+  fill: #fa5c5d;
+  stroke: #fa5c5d;
+  stroke-width: 0.9;
+  background: #ffffff;
+  border: 1px solid rgba(250, 92, 93, 0.7);
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+.accordion .mat-expanded .exp-icon {
+  filter: invert(42%) sepia(54%) saturate(1129%) hue-rotate(318deg) brightness(106%) contrast(96%);
+}
 
 .accordion .mat-expansion-panel-header {
-  height: 83px;
+  height: 83px !important;
   box-sizing: border-box;
   padding-left: 0;
 }
 
+.accordion .mat-expansion-panel-header:hover {
+  background-color: #ffffff !important;
+}
+
 :host ::ng-deep.mat-expansion-panel-body {
-  padding: 0 24px 30px;
+  padding: 0 38px 30px 86px;
 }
 
 :host ::ng-deep .inner-exp .mat-expansion-panel-header {
-  height: 49px;
+  max-height: 49px !important;
+  box-sizing: border-box;
+  padding-right: 0 !important;
+}
+
+:host ::ng-deep .inner-exp .mat-expansion-panel-header.indicator {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  float: right;
 }
 
 :host ::ng-deep .inner-exp .mat-expansion-panel-body {
   overflow: auto;
   padding: 0 24px 26px;
+}
+
+.accordion .mat-error {
+  margin-top: 8px;
 }
 
 .mat-icon {
@@ -539,6 +641,19 @@ div.expander-component {
   margin: 0;
 }
 
+.eyecon {
+  width: 10px;
+  height: 10px;
+  fill: #343434;
+  stroke: #343434;
+  stroke-width: 0;
+
+  height: 13px !important;
+  width: 13px !important;
+
+  margin: 0;
+}
+
 .tooltipicon {
   height: 14px;
   width: 14px;
@@ -548,19 +663,45 @@ div.expander-component {
   background-color: white;
 }
 
+::ng-deep .tooltip-style {
+  background: #333333;
+  border-radius: 2px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height, or 150% */
+
+  letter-spacing: 0.5px;
+
+  /* Neutral/1 */
+
+  color: #ffffff;
+}
+
 .exp-icon {
   margin: 23px 26px;
   height: 34px;
   width: 34px;
+  filter: inherit;
 }
 
 .indicator-icon {
   height: fit-content;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  float: right;
 }
 
 .indicator-icon-selected {
   height: fit-content;
   color: #fa5c5d;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  float: right;
 }
 
 .accordion .mat-expansion-panel-header-title,
@@ -570,10 +711,13 @@ div.expander-component {
   color: inherit;
   font-family: Lato;
   font-style: normal;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 16px !important;
+  line-height: 24px !important;
   letter-spacing: 1px;
-  font-size: large;
+}
+
+.accordion .mat-expanded .mat-expansion-panel-header {
+  border: none;
 }
 
 .accordion .mat-expansion-indicator {
@@ -581,8 +725,7 @@ div.expander-component {
 }
 
 div.accordion-content {
-  margin: 0 auto;
-  width: 80%;
+  margin: 0;
   color: black;
   overflow: auto;
 }
@@ -600,6 +743,7 @@ div.accordion-content {
   letter-spacing: 1px;
   color: #999999;
   margin-top: 2px;
+  margin-bottom: 14px; /*added margin botton as per issue 1 */
 }
 
 /*
@@ -624,9 +768,10 @@ div.accordion-content {
 
 .accordion .mat-expansion-panel-header-description {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   align-items: center;
   margin-left: 5px;
+  color: inherit;
 }
 
 .accordion .mat-expansion-panel-header-description .indicator {
@@ -634,7 +779,6 @@ div.accordion-content {
   display: flex;
   align-items: center;
   float: right;
-  right: 0;
 }
 
 .accordion-content .logo-picker-div {
@@ -665,10 +809,23 @@ div.accordion-content {
 
 .accordion-content .mat-radio-button {
   margin: 0px 10px;
+  width: fit-content;
 }
 
 .accordion-content .mat-form-field {
   width: 100%;
+}
+
+::ng-deep .accordion .mat-select {
+  width: 160px;
+}
+
+::ng-deep .accordion .mat-select .mat-form-field-appearance-fill .mat-form-field-infix {
+  padding: 0 !important;
+}
+
+::ng-deep .accordion .accordion-content .mat-form-field-appearance-fill .mat-form-field-flex {
+  background: #ffffff;
 }
 
 .accordion-content .connected-indicator {
@@ -680,6 +837,15 @@ div.accordion-content {
   padding: 6px 12px;
   background: #e5f9ed;
   border-radius: 13px;
+
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  /* identical to box height, or 100% */
+
+  letter-spacing: 1px;
 }
 
 .accordion-content .connected-indicator-icon {
@@ -699,6 +865,15 @@ div.accordion-content {
   padding: 6px 12px;
   background: #fdeaea;
   border-radius: 13px;
+
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  /* identical to box height, or 100% */
+
+  letter-spacing: 1px;
 }
 
 .accordion-content .pending-indicator-icon {
@@ -708,6 +883,7 @@ div.accordion-content {
 }
 
 .accordion-content .tracking-page-info {
+  width: 514px;
   background: #ffffff;
   border: 1px solid #e7e7e7;
   box-sizing: border-box;
@@ -733,6 +909,7 @@ div.accordion-content {
   font-weight: normal;
   font-size: 10px;
   line-height: 12px;
+  margin-bottom: 8px;
   /* identical to box height, or 120% */
 
   letter-spacing: 0.5px;
@@ -787,6 +964,12 @@ div.accordion-content {
   display: table-cell;
 }
 
+.accordion-content .table-container .trash {
+  width: 18px;
+  height: 16px;
+  display: table-cell;
+}
+
 td {
   vertical-align: middle;
 }
@@ -817,14 +1000,14 @@ td {
   padding: 0 5px;
 }
 
-input[type="color"] {
+input[type='color'] {
   -webkit-appearance: none;
   border: none;
 }
-input[type="color"]::-webkit-color-swatch-wrapper {
+input[type='color']::-webkit-color-swatch-wrapper {
   padding: 0;
 }
-input[type="color"]::-webkit-color-swatch {
+input[type='color']::-webkit-color-swatch {
   width: 25px;
   height: 25px;
   border: transparent;
@@ -884,7 +1067,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .preview-container .preview-div-notif {
   max-height: fit-content;
-  width: 522px;
+  width: 100%;
   background-color: black;
   word-wrap: break-word;
   bottom: top;
@@ -926,6 +1109,12 @@ input[type="color"]::-webkit-color-swatch {
   display: inline;
 }
 
+.preview-container .email-div {
+  width: 124px;
+  height: 82px;
+  background-image: url('../../assets/img/emailpre.png');
+}
+
 .form-container {
   margin-right: 43px;
   margin-bottom: 20px;
@@ -958,7 +1147,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 15px;
   width: 15px;
   left: 3px;
@@ -980,7 +1169,7 @@ input:checked + .slider:before {
 }
 
 .slider:after {
-  content: "OFF";
+  content: 'OFF';
   color: white;
   display: block;
   position: absolute;
@@ -992,7 +1181,7 @@ input:checked + .slider:before {
 }
 
 input:checked + .slider:after {
-  content: "ON";
+  content: 'ON';
   left: 35%;
 }
 
@@ -1019,44 +1208,65 @@ input:checked + .slider:after {
   top: calc(50% - 10px);
 }
 
-:host ::ng-deep .mat-checkbox {
+:host ::ng-deep .accordion .mat-checkbox {
   align-items: center;
   justify-content: center;
 }
 
-:host ::ng-deep .mat-checkbox .mat-checkbox-frame {
+:host ::ng-deep .accordion .mat-checkbox .mat-checkbox-frame {
+  color: #fa5c5d !important;
+  stroke: #fa5c5d !important;
+  fill: #fa5c5d !important;
   background: #ffffff;
-  border: 1px solid #fa5c5d;
+  border: 1px solid #fa5c5d !important;
   box-sizing: border-box;
   border-radius: 4px;
+}
+
+:host
+  ::ng-deep
+  .accordion
+  .mat-checkbox:not(.mat-checkbox-disabled).mat-accent
+  .mat-checkbox-ripple
+  .mat-ripple-element {
+  background-color: #fa5c5d !important;
 }
 
 ::ng-deep.mat-checkbox-layout .mat-checkbox-label {
   vertical-align: middle;
 }
 
-:host ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+:host ::ng-deep .accordion .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
 .mat-checkbox-checked.mat-accent .mat-checkbox-background {
   margin-top: 1px;
   margin-left: 1px;
   width: 18px;
   height: 18px;
   background: #ffffff;
-  border: 1px solid #fa5c5d;
+  border: 1px solid #fa5c5d !important;
   box-sizing: border-box;
   border-radius: 4px;
 }
 
-::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+::ng-deep .accordion .mat-checkbox-checked.mat-accent .mat-checkbox-background,
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
   background: #ffffff;
-  border: 1px solid #fa5c5d;
+  border: 1px solid #fa5c5d !important;
   box-sizing: border-box;
   border-radius: 4px;
 }
 
-::ng-deep .mat-checkbox-checkmark-path {
+::ng-deep .accordion .mat-checkbox-checked.mat-accent .mat-checkbox-background::after,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background::after {
+  color: transparent !important;
+}
+
+::ng-deep .accordion .mat-checkbox-checkmark-path {
   stroke: #fa5c5d !important;
+}
+
+::ng-deep .accordion .mat-input-element {
+  color: #343434;
 }
 
 ::ng-deep .mat-form-field-label {
@@ -1066,10 +1276,10 @@ input:checked + .slider:after {
 
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
-  color: #343434 !important;
+  color: #999999 !important;
 }
 
-::ng-deep .mat-form-field-placeholder {
+::ng-deep .mat-form-field-placeholde:focus {
   color: #999999 !important;
 }
 
@@ -1079,7 +1289,7 @@ input:checked + .slider:after {
 
 ::ng-deep.mat-form-field-underline {
   /*change color of underline*/
-  background-color: #C8C8C8 !important;
+  background-color: #c8c8c8 !important;
 }
 
 ::ng-deep.mat-form-field-ripple {
@@ -1089,4 +1299,128 @@ input:checked + .slider:after {
 
 ::ng-deep.mat-form-field-infix {
   border: none;
+}
+
+.top-tabs {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.top-tabs ul {
+  display: flex;
+  flex-flow: row wrap;
+  width: fit-content;
+  min-height: 35px;
+  padding: 24px;
+  align-items: center;
+}
+.top-tabs ul li a {
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 1px;
+  color: #808080;
+  border: 1px solid #e7e7e7;
+  padding: 8px 12px;
+  position: relative;
+}
+.top-tabs ul li:first-of-type a {
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  margin-right: -1px;
+}
+.top-tabs ul li:last-of-type a {
+  border-radius: 0 4px 4px 0;
+}
+.top-tabs ul li a.active {
+  background-color: #ffffff;
+  color: #fa5c5d;
+  border-color: #fa5c5d;
+}
+.top-tabs ul li:first-of-type a.active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background: #fa5c5d;
+  z-index: 1;
+}
+
+.mobile-dialog {
+  min-width: auto;
+  max-width: 90%;
+
+  min-height: fit-content;
+  max-height: 90%;
+  width: max-content;
+  height: max-content;
+  overflow: auto;
+}
+
+.notif-modal {
+  width: 100%;
+  height: 90%;
+}
+
+.add-domain-dialog {
+  width: 40%;
+}
+
+.confirm-dialog {
+  width: 40%;
+}
+
+.mobile-dialog .mat-dialog-container {
+  background-color: white;
+  display: block;
+  padding: 11px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  outline: 0;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: fit-content;
+  width: fit-content;
+  height: fit-content;
+
+  overflow: auto;
+}
+
+.notif-modal .mat-dialog-container {
+  background-color: #f5f5f5;
+  display: block;
+  padding: 24px 24px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: auto;
+  overflow-y: hidden;
+  outline: 0;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  max-height: inherit;
+}
+
+.add-domain-dialog .mat-dialog-container {
+  background-color: white;
+  display: block;
+  padding: 24px 24px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: auto;
+  overflow-y: hidden;
+  outline: 0;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  max-height: inherit;
+}
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background::after,
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background::after {
+  display: none;
 }

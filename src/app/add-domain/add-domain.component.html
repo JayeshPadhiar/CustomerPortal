@@ -1,15 +1,26 @@
-<h2 mat-dialog-title style="width: 100%">
-  <mat-icon mat-dialog-close style="float: right">close</mat-icon>
+<h2
+  mat-dialog-title
+  style="font-family: Lato;
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 19px;
+letter-spacing: 1px;
+
+color: #333333;
+width: 100%; text-align: left; margin-bottom: 18px;"
+>
+  <mat-icon (click)="close()" mat-dialog-close style=" color: #808080; float: right; cursor: pointer;">close</mat-icon>
   Add Domain
 </h2>
 <mat-divider></mat-divider>
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content style="text-align: left;" class="mat-typography">
   <div>
-    <div class="form-container" style="margin-top: 14px;">
+    <div class="form-container" style="margin-top: 14px; justify-content: flex-start;">
       <mat-form-field style="width: 80%" floatLabel="never">
-        <input [(ngModel)]="domain" matInput value="https://"/>
+        <input [(ngModel)]="domain" matInput value="https://" />
       </mat-form-field>
-      <div>
+      <div style="display: block;">
         <p
           style="
           margin: 0;
@@ -17,22 +28,26 @@
             font-style: normal;
             font-weight: normal;
             font-size: 12px;
-            line-height: 14px;
+            line-height: 17px;
             display: flex;
             align-items: center;
             letter-spacing: 0.5px;
             color: #808080;
           "
         >
-          For example: https:/track.acme.com
+          For example: https://track.acme.com
         </p>
       </div>
     </div>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions style="bottom: 0">
+<mat-dialog-actions style="bottom: 0; margin: 16px 0 0 0; padding: 0; min-height: unset;">
   <button
-    style="color: #e96a60; border: 1px solid #e96a60; border-color: #e96a60"
+    style="color: #e96a60;
+    background: #FEF0F1;
+    border: 1px solid #F30E0F;
+    box-sizing: border-box;
+    border-radius: 4px;"
     mat-button
     mat-dialog-close
     (click)="save()"

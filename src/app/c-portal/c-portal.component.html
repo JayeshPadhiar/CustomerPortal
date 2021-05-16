@@ -1,11 +1,15 @@
-<div class="c-portal" *ngIf="poeFetched">
+<div class="c-portal" *ngIf="poeFetched" [ngClass]="checkin() ? 'fullwidth' : ''">
   <div class="portal-div">
-    <h2 style="margin-bottom: 8px">Configure your Customer Portal</h2>
-    <h4 style="margin: 0; margin-bottom: 12px">
+    <div style="background-color: #f6f4f4; width: 100%;">
+      <h2 class="configure-cp" style="padding: 24px 0 8px; background-color: #f6f4f4;">
+        Configure your Customer Portal
+      </h2>
+    </div>
+    <h4 style="margin: 0 0 12px;">
       Delight your customers with Amazon-like post purchase experience.
     </h4>
-    <a class="learn-more" href="#"
-      ><mat-icon
+    <a class="learn-more" style="width: fit-content;" href="#">
+      <!--mat-icon
         style="
           width: 13px;
           height: 11.44px;
@@ -14,7 +18,20 @@
           margin: 0 6px 2px 0;
         "
         svgIcon="learnmore"
-      ></mat-icon>
+      ></mat-icon-->
+
+      <img
+        style="
+      width: 13px;
+      height: 11.44px;
+      left: 284px;
+      top: 108px;
+      margin: 0 6px 0 0;
+    "
+        src="../../../../assets/img/learnmore.svg"
+        alt=""
+      />
+
       Learn More</a
     >
 
@@ -28,11 +45,35 @@
   </div>
 
   <div class="mobile-div">
-    <mat-button-toggle-group>
+    <!-- <mat-button-toggle-group>
       <mat-button-toggle checked="true">Mobile</mat-button-toggle>
       <mat-button-toggle (click)="openDialog()">Desktop</mat-button-toggle>
-    </mat-button-toggle-group>
-    <div>
+    </mat-button-toggle-group> -->
+
+    <div class="top-tabs">
+      <ul>
+        <li>
+          <a [class.active]="mobileView"> Mobile</a>
+        </li>
+        <li (click)="openDialog()">
+          <a [class.active]="!mobileView"> Desktop </a>
+        </li>
+        <li>
+          <mat-icon
+            svgIcon="infoicon"
+            class="tooltipicon"
+            inline="true"
+            style="margin-top: 1px; margin-left: 8px; height: 15px; width: 15px;"
+            matTooltip="Preview your Customer portal appearance on Mobile or Desktop"
+            matTooltipPosition="above"
+            matTooltipClass="tooltip-style"
+          >
+          </mat-icon>
+        </li>
+      </ul>
+    </div>
+
+    <div appMobileScrollParallax>
       <app-mobile></app-mobile>
     </div>
   </div>

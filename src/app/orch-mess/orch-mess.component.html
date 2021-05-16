@@ -3,56 +3,41 @@
   <mat-accordion class="accordion">
     <mat-expansion-panel
       (opened)="expansions.defineChannel = true"
-      (closed)="expansions.defineChannel = false"
+      (closed)="cancel(channelFormGroup, 'defineChannel')"
       [expanded]="expansions.defineChannel"
       hideToggle
       #defineChannel
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="dyccwc"
-            *ngIf="!defineChannel.expanded"
-          ></mat-icon>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="dyccwc-open"
-            *ngIf="defineChannel.expanded"
-          ></mat-icon>
+          <img class="exp-icon" src="../../../../assets/img/dyccwc.svg" />
+          <!-- <img *ngIf="defineChannel.expanded" class="exp-icon" src="../../../../assets/img/dyccwc-open.svg" /> -->
+          <!-- <mat-icon class="exp-icon" svgIcon="dyccwc" *ngIf="!defineChannel.expanded"></mat-icon>
+          <mat-icon class="exp-icon" svgIcon="dyccwc-open" *ngIf="defineChannel.expanded"></mat-icon> -->
           <div class="exp-title">
             Define your communication channel with customers
           </div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon class="indicator-icon" *ngIf="!defineChannel.expanded"
-              >keyboard_arrow_right</mat-icon
-            >
-            <mat-icon
-              class="indicator-icon-selected"
-              *ngIf="defineChannel.expanded"
-              >keyboard_arrow_down</mat-icon
-            >
+            <mat-icon class="indicator-icon" *ngIf="!defineChannel.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="defineChannel.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="accordion-content">
-        <form
-          novalidate
-          [formGroup]="channelFormGroup"
-          (ngSubmit)="saveChannel()"
-        >
+        <form novalidate [formGroup]="channelFormGroup" (ngSubmit)="saveChannel()">
           <div>
             <h4 class="lh-17">
               Email Sender Name
               <mat-icon
                 svgIcon="infoicon"
-                style="margin-left: 6px"
+                style="margin-left: 6px; height: 14px; width: 14px;"
                 class="tooltipicon"
                 inline="true"
-                matTooltip="Use a sender name which is easily recognisable by your customers"
+                matTooltip="Use a sender name which is easily recognizable by your customers"
                 matTooltipPosition="after"
+                matTooltipClass="tooltip-style"
               >
               </mat-icon>
             </h4>
@@ -83,11 +68,7 @@
                   justify-content: center;
                 "
               >
-                <img
-                  src="../../assets/img/emailpre.png"
-                  style="width: 124px; height: px"
-                  alt="ACME"
-                />
+                <img src="../../assets/img/emailpre.png" style="width: 124px;" alt="ACME" />
               </div>
             </div>
 
@@ -96,10 +77,11 @@
               <mat-icon
                 svgIcon="infoicon"
                 class="tooltipicon"
-                style="margin-left: 6px"
+                style="margin-left: 6px; height: 14px; width: 14px;"
                 inline="true"
                 matTooltip="Use an email address which is setup to receive incoming emails"
                 matTooltipPosition="after"
+                matTooltipClass="tooltip-style"
               >
               </mat-icon>
             </h4>
@@ -204,37 +186,19 @@
                   color: #808080;
                 "
               >
-                Want to customize the sender code? &nbsp;<a
-                  style="display: inline"
-                  >Learn More</a
-                >
+                Want to customize the sender code? &nbsp;<a style="display: inline">Learn More</a>
               </div>
             </div>
 
-            <div
-              class="save-cancel-container"
-              *ngIf="isChanged(channelFormGroup)"
-            >
+            <div class="save-cancel-container" *ngIf="isChanged(channelFormGroup)">
               <button class="save-button" type="submit" mat-button>Save</button>
-              <button
-                mat-button
-                type="button"
-                (click)="cancel(channelFormGroup, 'defineChannel')"
-              >
+              <button mat-button type="button" (click)="cancel(channelFormGroup, 'defineChannel')">
                 Cancel
               </button>
             </div>
 
-            <div
-              *ngIf="!isChanged(channelFormGroup)"
-              class="save-cancel-container"
-            >
-              <button
-                type="button"
-                (click)="expansions.defineChannel = false"
-                class="save-button"
-                mat-button
-              >
+            <div *ngIf="!isChanged(channelFormGroup)" class="save-cancel-container">
+              <button type="button" (click)="expansions.defineChannel = false" class="save-button" mat-button>
                 Close
               </button>
             </div>
@@ -254,28 +218,16 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="mycn"
-            *ngIf="!custNotifs.expanded"
-          ></mat-icon>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="mycn-open"
-            *ngIf="custNotifs.expanded"
-          ></mat-icon>
+          <img class="exp-icon" src="../../../../assets/img/mycn.svg" />
+          <!-- <img *ngIf="custNotifs.expanded" class="exp-icon" src="../../../../assets/img/mycn-open.svg" /> -->
+          <!-- <mat-icon class="exp-icon" svgIcon="mycn" *ngIf="!custNotifs.expanded"></mat-icon>
+          <mat-icon class="exp-icon" svgIcon="mycn-open" *ngIf="custNotifs.expanded"></mat-icon> -->
           <div class="exp-title">Manage your customer notifications</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon class="indicator-icon" *ngIf="!custNotifs.expanded"
-              >keyboard_arrow_right</mat-icon
-            >
-            <mat-icon
-              class="indicator-icon-selected"
-              *ngIf="custNotifs.expanded"
-              >keyboard_arrow_down</mat-icon
-            >
+            <mat-icon class="indicator-icon" *ngIf="!custNotifs.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="custNotifs.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -285,60 +237,50 @@
             You can choose to send notifications to customers via Email and SMS
           </p>
           <mat-accordion class="accordion" class="inner-exp">
-            <mat-expansion-panel hideToggle #orders>
-              <mat-expansion-panel-header style="height: 49px">
+            <mat-expansion-panel [expanded]="true" hideToggle #orders>
+              <mat-expansion-panel-header style="height: 49px !important">
                 <mat-panel-title>Orders</mat-panel-title>
                 <mat-panel-description>
                   <div class="indicator">
-                    <mat-icon
-                      style="height: fit-content; margin-right: 0"
-                      *ngIf="!orders.expanded"
+                    <mat-icon style="height: fit-content; margin-right: 0" *ngIf="!orders.expanded"
                       >keyboard_arrow_right</mat-icon
+                    >
+                    <mat-icon style="height: fit-content; margin-right: 0" *ngIf="orders.expanded"
+                      >keyboard_arrow_down</mat-icon
                     >
                   </div>
                 </mat-panel-description>
               </mat-expansion-panel-header>
 
               <div class="accordion-content" style="width: 100%">
-                <table
-                  class="table-container"
-                  style="border-collapse: collapse; width: 100%"
-                >
+                <table class="table-container" style="border-collapse: collapse; width: 100%">
                   <tbody>
-                    <tr
-                      class="notif-table"
-                      *ngFor="
-                        let notif of getResourceArray('shipment');
-                        let i = index
-                      "
-                    >
+                    <tr class="notif-table" *ngFor="let notif of getResourceArray('shipment'); let i = index">
                       <td>
                         <div>
                           <h4 style="margin: 16px 0" class="lh-17">
-                            {{ notif["description"] }}
+                            {{ notif['description'] }}
                           </h4>
                         </div>
                       </td>
 
-                      <td
-                        align="right"
-                        style="width: fit-content; height: fit-content"
-                      >
+                      <td align="right" style="width: fit-content; height: fit-content">
                         <div style="display: flex; align-items: center">
-                          <mat-icon
+                          <mat-icon class="eyecon" (click)="showDialog()" svgIcon="eyecon"></mat-icon>
+
+                          <!--img
+                            src="../../../../assets/img/eyecon.svg"
+                            style="stroke-width: 1; stroke: #343434 !important; fill: #343434 !important;"
                             class="eyecon"
                             (click)="showDialog()"
-                            svgIcon="eyecon"
-                          ></mat-icon>
+                          /-->
                         </div>
                       </td>
 
                       <td align="right" style="width: 85px; height: 17px">
                         <mat-checkbox
                           #emailChkBox
-                          [checked]="
-                            notif['isEmailEnabled'] == '1' ? true : false
-                          "
+                          [checked]="notif['isEmailEnabled'] == '1' ? true : false"
                           (change)="
                             recordChanges(
                               notif['resource'],
@@ -357,9 +299,7 @@
                       <td align="right" style="width: 85px; height: 17px">
                         <mat-checkbox
                           #smsChkBox
-                          [checked]="
-                            notif['isSmsEnabled'] == '1' ? true : false
-                          "
+                          [checked]="notif['isSmsEnabled'] == '1' ? true : false"
                           (change)="
                             recordChanges(
                               notif['resource'],
@@ -382,57 +322,47 @@
 
             <mat-expansion-panel hideToggle #returns>
               <mat-expansion-panel-header style="height: 49px">
-                <mat-panel-title>Returns</mat-panel-title>
+                <mat-panel-title>Return & Refund</mat-panel-title>
                 <mat-panel-description>
                   <div class="indicator">
-                    <mat-icon
-                      style="height: fit-content; margin-right: 0"
-                      *ngIf="!returns.expanded"
+                    <mat-icon style="height: fit-content; margin-right: 0" *ngIf="!returns.expanded"
                       >keyboard_arrow_right</mat-icon
+                    >
+                    <mat-icon style="height: fit-content; margin-right: 0" *ngIf="returns.expanded"
+                      >keyboard_arrow_down</mat-icon
                     >
                   </div>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="accordion-content" style="width: 100%">
-                <table
-                  class="table-container"
-                  style="border-collapse: collapse; width: 100%"
-                >
+                <table class="table-container" style="border-collapse: collapse; width: 100%">
                   <tbody>
-                    <tr
-                      class="notif-table"
-                      *ngFor="
-                        let notif of getResourceArray('returnshipment');
-                        let i = index
-                      "
-                    >
+                    <tr class="notif-table" *ngFor="let notif of getResourceArray('returnshipment'); let i = index">
                       <td>
                         <div>
                           <h4 style="margin: 16px 0" class="lh-17">
-                            {{ notif["description"] }}
+                            {{ notif['description'] }}
                           </h4>
                         </div>
                       </td>
 
-                      <td
-                        align="right"
-                        style="width: fit-content; height: fit-content"
-                      >
+                      <td align="right" style="width: fit-content; height: fit-content">
                         <div style="display: flex; align-items: center">
-                          <mat-icon
+                          <mat-icon class="eyecon" (click)="showDialog()" svgIcon="eyecon"></mat-icon>
+
+                          <!--img
+                            src="../../../../assets/img/eyecon.svg"
+                            style="stroke: #343434 !important; fill: #343434 !important;"
                             class="eyecon"
                             (click)="showDialog()"
-                            svgIcon="eyecon"
-                          ></mat-icon>
+                          /-->
                         </div>
                       </td>
 
                       <td align="right" style="width: 85px; height: 17px">
                         <mat-checkbox
                           #emailChkBox
-                          [checked]="
-                            notif['isEmailEnabled'] == '1' ? true : false
-                          "
+                          [checked]="notif['isEmailEnabled'] == '1' ? true : false"
                           (change)="
                             recordChanges(
                               notif['resource'],
@@ -451,9 +381,7 @@
                       <td align="right" style="width: 85px; height: 17px">
                         <mat-checkbox
                           #smsChkBox
-                          [checked]="
-                            notif['isSmsEnabled'] == '1' ? true : false
-                          "
+                          [checked]="notif['isSmsEnabled'] == '1' ? true : false"
                           (change)="
                             recordChanges(
                               notif['resource'],
@@ -476,54 +404,46 @@
 
             <mat-expansion-panel hideToggle #refunds>
               <mat-expansion-panel-header style="height: 49px">
-                <mat-panel-title>Refunds</mat-panel-title>
+                <mat-panel-title>Return & Exchange</mat-panel-title>
                 <mat-panel-description>
                   <div class="indicator">
-                    <mat-icon
-                      style="height: fit-content; margin-right: 0px"
-                      *ngIf="!refunds.expanded"
+                    <mat-icon style="height: fit-content; margin-right: 0px" *ngIf="!refunds.expanded"
                       >keyboard_arrow_right</mat-icon
+                    >
+                    <mat-icon style="height: fit-content; margin-right: 0px" *ngIf="refunds.expanded"
+                      >keyboard_arrow_down</mat-icon
                     >
                   </div>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="accordion-content" style="width: 100%">
-                <table
-                  class="table-container"
-                  style="border-collapse: collapse; width: 100%"
-                >
+                <table class="table-container" style="border-collapse: collapse; width: 100%">
                   <tbody>
-                    <tr
-                      class="notif-table"
-                      *ngFor="let notif of getResourceArray('refund')"
-                    >
+                    <tr class="notif-table" *ngFor="let notif of getResourceArray('refund')">
                       <td>
                         <div>
                           <h4 style="margin: 16px 0" class="lh-17">
-                            {{ notif["description"] }}
+                            {{ notif['description'] }}
                           </h4>
                         </div>
                       </td>
 
-                      <td
-                        align="right"
-                        style="width: fit-content; height: fit-content"
-                      >
+                      <td align="right" style="width: fit-content; height: fit-content">
                         <div style="display: flex; align-items: center">
-                          <mat-icon
+                          <mat-icon class="eyecon" (click)="showDialog()" svgIcon="eyecon"></mat-icon>
+                          <!--img
+                            src="../../../../assets/img/eyecon.svg"
+                            style="stroke: #343434 !important; fill: #343434 !important;"
                             class="eyecon"
                             (click)="showDialog()"
-                            svgIcon="eyecon"
-                          ></mat-icon>
+                          /-->
                         </div>
                       </td>
 
                       <td align="right" style="width: 85px; height: 17px">
                         <mat-checkbox
                           #emailChkBox
-                          [checked]="
-                            notif['isEmailEnabled'] == '1' ? true : false
-                          "
+                          [checked]="notif['isEmailEnabled'] == '1' ? true : false"
                           (change)="
                             recordChanges(
                               notif['resource'],
@@ -542,9 +462,7 @@
                       <td align="right" style="width: 85px; height: 17px">
                         <mat-checkbox
                           #smsChkBox
-                          [checked]="
-                            notif['isSmsEnabled'] == '1' ? true : false
-                          "
+                          [checked]="notif['isSmsEnabled'] == '1' ? true : false"
                           (change)="
                             recordChanges(
                               notif['resource'],
@@ -567,25 +485,12 @@
           </mat-accordion>
 
           <div class="save-cancel-container" *ngIf="changes.length">
-            <button
-              (click)="saveNotifications()"
-              class="save-button"
-              mat-button
-            >
-              Save
-            </button>
-            <button (click)="cancelNotifs()" type="button" mat-button>
-              Cancel
-            </button>
+            <button (click)="saveNotifications()" class="save-button" mat-button>Save</button>
+            <button (click)="cancelNotifs()" type="button" mat-button>Cancel</button>
           </div>
 
           <div *ngIf="!changes.length" class="save-cancel-container">
-            <button
-              type="button"
-              (click)="expansions.custNotifs = false"
-              class="save-button"
-              mat-button
-            >
+            <button type="button" (click)="expansions.custNotifs = false" class="save-button" mat-button>
               Close
             </button>
           </div>

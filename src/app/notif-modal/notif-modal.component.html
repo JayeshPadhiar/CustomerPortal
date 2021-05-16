@@ -8,16 +8,26 @@
 >
   <h2 style="margin: auto 0" mat-dialog-title>Preview</h2>
 
-  <mat-button-toggle-group #emailSms [value]="toggle" (change)="toggleView($event)">
+  <!--mat-button-toggle-group #emailSms [value]="toggle" (change)="toggleView($event)">
     <mat-button-toggle [value]="true">Email</mat-button-toggle>
     <mat-button-toggle [value]="false">SMS</mat-button-toggle>
-  </mat-button-toggle-group>
+  </mat-button-toggle-group-->
 
-  <mat-icon [mat-dialog-close]="true">close</mat-icon>
+  <div class="top-tabs">
+    <ul>
+      <li>
+        <a [class.active]="toggle" (click)="toggleView(true)"> Email </a>
+      </li>
+      <li (click)="toggleView(false)">
+        <a [class.active]="!toggle"> SMS </a>
+      </li>
+    </ul>
+  </div>
+
+  <mat-icon style="cursor: pointer;" (click)="close()" mat-dialog-close>close</mat-icon>
 </div>
 <mat-dialog-content class="mat-typography">
   <div class="notif-modal-preview">
-
     <div *ngIf="toggle" class="email-div">
       <div>
         <img class="logo" width="50px" height="15px" [src]="data.logosrc" />
@@ -29,10 +39,9 @@
         <div>
           <p class="email">
             Hello, <br /><br />
-            A new recall consignment is created to remove the sellable inventory
-            from Eshopbox fulfillment center. You'll be notified once Eshopbox
-            starts processing the consignment. The recall consignment is
-            expected to be ready for handover by Saturday 18 Sep 2021.
+            A new recall consignment is created to remove the sellable inventory from Eshopbox fulfillment center.
+            You'll be notified once Eshopbox starts processing the consignment. The recall consignment is expected to be
+            ready for handover by Saturday 18 Sep 2021.
           </p>
         </div>
       </div>
@@ -68,19 +77,14 @@
           </div>
           <div class="sms">
             <p>
-              A new recall consignment is created to remove the sellable
-              inventory from Eshopbox fulfillment center. You'll be notified
-              once Eshopbox starts processing the consignment. The recall
-              consignment is expected to be ready for handover by Saturday 18
-              Sep 2021.
+              A new recall consignment is created to remove the sellable inventory from Eshopbox fulfillment center.
+              You'll be notified once Eshopbox starts processing the consignment. The recall consignment is expected to
+              be ready for handover by Saturday 18 Sep 2021.
             </p>
-            
           </div>
         </div>
-        
       </div>
     </div>
-
   </div>
 </mat-dialog-content>
 <!--mat-dialog-actions style="bottom: 0" align="end">

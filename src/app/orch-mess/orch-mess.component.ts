@@ -1,35 +1,24 @@
 import { Inject } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { NotifData } from './orch-mess.model';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
 
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
-import {
-  ReactiveFormsModule,
-  FormsModule,
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import { NotifModalComponent } from './../notif-modal/notif-modal.component';
 
 import { Notification } from './orch-mess.model';
-import { CustomerPortalBackendService } from '../customer-portal-backend.service';
+import { CustomerPortalBackendService } from '../../../shared/services/customer-portal-backend.service';
 import { AppStyle } from '../c-portal/cportal.model';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material';
 //import { settings } from 'cluster';
 
 @Component({
   selector: 'app-orch-mess',
   templateUrl: './orch-mess.component.html',
-  styleUrls: ['./orch-mess.component.css', '../app.component.css'],
+  styleUrls: ['./orch-mess.component.css', '../../customer-portal.component.css']
 })
 export class OrchMessComponent implements OnInit {
   poeFetched: boolean = false;
@@ -45,7 +34,7 @@ export class OrchMessComponent implements OnInit {
       email_preview_body: '',
       sms_preview_body: '',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'shipment',
@@ -53,7 +42,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the order is packed',
       emailTemplateId: '13771168',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'shipment',
@@ -61,7 +50,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the order is shipped',
       emailTemplateId: '13753633',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'shipment',
@@ -69,7 +58,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the courier partner is out for delivery',
       emailTemplateId: '13793417',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'shipment',
@@ -77,7 +66,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the order is delivered',
       emailTemplateId: '13793893',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'shipment',
@@ -85,7 +74,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the courier partner fails to deliver the order',
       emailTemplateId: '13794667',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'shipment',
@@ -93,16 +82,15 @@ export class OrchMessComponent implements OnInit {
       description: 'When the order is cancelled by the customer',
       emailTemplateId: '13793730',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'shipment',
       eventSubType: 'rto',
-      description:
-        'When the order is cancelled due to multiple failed delivery attempts',
+      description: 'When the order is cancelled due to multiple failed delivery attempts',
       emailTemplateId: '********',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'shipment',
@@ -110,7 +98,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the order is cancelled due to fulfilment issue',
       emailTemplateId: '*********',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'returnshipment',
@@ -118,7 +106,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When customer places a return shipment',
       emailTemplateId: '13972558',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'returnshipment',
@@ -126,7 +114,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the return request is approved',
       emailTemplateId: '**********',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'returnshipment',
@@ -134,7 +122,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the courier partner is out for pickup',
       emailTemplateId: '14033752',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'returnshipment',
@@ -142,7 +130,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the return item is picked up',
       emailTemplateId: '14033882',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'returnshipment',
@@ -150,7 +138,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the courier partner fails to pickup the item',
       emailTemplateId: '*********',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'returnshipment',
@@ -158,7 +146,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the return item has failed the quality check',
       emailTemplateId: '**********',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'returnshipment',
@@ -166,16 +154,15 @@ export class OrchMessComponent implements OnInit {
       description: 'When the return request is cancelled by the customer',
       emailTemplateId: '14033906',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'returnshipment',
       eventSubType: 'multiple_failed_pickup',
-      description:
-        'When the return is cancelled due to multiple failed pickup attempts',
+      description: 'When the return is cancelled due to multiple failed pickup attempts',
       emailTemplateId: '**********',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'refund',
@@ -183,7 +170,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the request for refund is approved',
       emailTemplateId: '14033825',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'refund',
@@ -191,7 +178,7 @@ export class OrchMessComponent implements OnInit {
       description: 'When the refund is initiated',
       emailTemplateId: '14033828',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
+      isSmsEnabled: '1'
     },
     {
       resource: 'refund',
@@ -199,8 +186,8 @@ export class OrchMessComponent implements OnInit {
       description: 'When the request for refund is rejected',
       emailTemplateId: '20244211',
       isEmailEnabled: '1',
-      isSmsEnabled: '1',
-    },
+      isSmsEnabled: '1'
+    }
   ];
 
   notifications = [];
@@ -208,7 +195,7 @@ export class OrchMessComponent implements OnInit {
   getResourceArray(type: string) {
     let resourceArray = [];
 
-    this.notifications.forEach((notifObject) => {
+    this.notifications.forEach(notifObject => {
       if (notifObject['resource'] === type) {
         resourceArray.push(notifObject);
       }
@@ -221,7 +208,7 @@ export class OrchMessComponent implements OnInit {
 
   expansions = {
     defineChannel: false,
-    custNotifs: false,
+    custNotifs: false
   };
 
   channelFormGroup: FormGroup;
@@ -234,7 +221,7 @@ export class OrchMessComponent implements OnInit {
   ngOnInit(): void {
     this.initialize();
 
-    this.backendService.poeFetched.subscribe((fetched) => {
+    this.backendService.poeFetched.subscribe(fetched => {
       this.poeFetched = fetched;
     });
 
@@ -242,7 +229,7 @@ export class OrchMessComponent implements OnInit {
       this.initialize();
     } else {
       this.backendService.getPoeSettings().subscribe({
-        next: (data) => {
+        next: data => {
           if (data['channelId'] === '0') {
             console.log('channelID not available. Workspace Settings');
           } else {
@@ -252,9 +239,9 @@ export class OrchMessComponent implements OnInit {
 
           this.initialize();
         },
-        error: (error) => {
+        error: error => {
           console.error('There was an error!\n', error);
-        },
+        }
       });
     }
 
@@ -265,25 +252,21 @@ export class OrchMessComponent implements OnInit {
     if (this.poeSettings['channelId'] === '0') {
       console.log('Yes');
 
-      this.httpClient
-        .get<object>(
-          'https://montecarlo.auperator.co/customer-portal/api/v1/poe-notifications'
-        )
-        .subscribe({
-          next: (data) => {
-            if (data['channelId'] === '0') {
-              console.log('channelID not available. Workspace Settings');
-              console.log('Latest Notifications : ', data);
-              this.parseLatestNotifications(data['notificationOptions']);
-            } else {
-              console.log('channelId available. Default Channel Settings');
-              console.log('Latest Notifications : ', data);
-            }
-          },
-          error: (error) => {
-            console.error('There was an error!\n', error);
-          },
-        });
+      this.httpClient.get<object>('customer-portal/api/v1/poe-notifications').subscribe({
+        next: data => {
+          if (data['channelId'] === '0') {
+            console.log('channelID not available. Workspace Settings');
+            console.log('Latest Notifications : ', data);
+            this.parseLatestNotifications(data['notificationOptions']);
+          } else {
+            console.log('channelId available. Default Channel Settings');
+            console.log('Latest Notifications : ', data);
+          }
+        },
+        error: error => {
+          console.error('There was an error!\n', error);
+        }
+      });
     } else {
       console.log('No');
     }
@@ -292,14 +275,11 @@ export class OrchMessComponent implements OnInit {
   parseLatestNotifications = (newNotifsArray: Array<object>) => {
     this.notifications = [];
 
-    this.defaultNotifications.forEach((notif) => {
+    this.defaultNotifications.forEach(notif => {
       let pushed = false;
 
-      newNotifsArray.forEach((newNotif) => {
-        if (
-          notif['resource'] == newNotif['resource'] &&
-          notif['eventSubType'] == newNotif['eventSubType']
-        ) {
+      newNotifsArray.forEach(newNotif => {
+        if (notif['resource'] == newNotif['resource'] && notif['eventSubType'] == newNotif['eventSubType']) {
           console.log('got a same value');
           notif = { ...notif, ...newNotif };
           this.notifications.push(notif);
@@ -316,12 +296,8 @@ export class OrchMessComponent implements OnInit {
   };
 
   initialize() {
-    this.backendService
-      .getAppStyle()
-      .subscribe((style) => (this.appStyle = style));
-    this.backendService.poeSettings
-      .asObservable()
-      .subscribe((settings) => (this.poeSettings = settings));
+    this.backendService.getAppStyle().subscribe(style => (this.appStyle = style));
+    this.backendService.poeSettings.asObservable().subscribe(settings => (this.poeSettings = settings));
 
     this.createFormControls();
     this.createFormGroups();
@@ -339,7 +315,7 @@ export class OrchMessComponent implements OnInit {
   createFormGroups = () => {
     this.channelFormGroup = new FormGroup({
       senderName: this.senderName,
-      senderEmail: this.senderEmail,
+      senderEmail: this.senderEmail
     });
   };
 
@@ -366,10 +342,18 @@ export class OrchMessComponent implements OnInit {
   }
 
   saveChannel = () => {
-    this.expansions.defineChannel = this.backendService.saveForm(
-      this.channelFormGroup
-    );
+    this.expansions.defineChannel = this.backendService.saveForm(this.channelFormGroup);
   };
+
+  dirty(form: FormGroup) {
+    if (form.dirty) {
+      console.log('Form was changed');
+      return true;
+    } else {
+      console.log('Form was not changed');
+      return false;
+    }
+  }
 
   cancel(form: FormGroup, exp) {
     if (this.checkIfDirty(form)) {
@@ -383,10 +367,10 @@ export class OrchMessComponent implements OnInit {
   confirmDiscard(form: FormGroup, exp) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       panelClass: 'confirm-dialog',
-      data: {},
+      data: {}
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       console.log(result);
 
       if (result) {
@@ -401,7 +385,7 @@ export class OrchMessComponent implements OnInit {
   resetForm(form: FormGroup) {
     form.reset({
       senderEmail: this.poeSettings['senderEmail'],
-      senderName: this.poeSettings['senderName'],
+      senderName: this.poeSettings['senderName']
     });
   }
 
@@ -414,7 +398,7 @@ export class OrchMessComponent implements OnInit {
   showDialog() {
     this.dialog.open(NotifModalComponent, {
       panelClass: 'notif-modal',
-      data: { logosrc: this.appStyle['brandLogoUrl'] },
+      data: { logosrc: this.appStyle['brandLogoUrl'] }
     });
   }
 
@@ -422,20 +406,16 @@ export class OrchMessComponent implements OnInit {
     let changesMade = false;
 
     for (var i in this.changes) {
-      if (
-        this.changes[i]['resource'] == resource &&
-        this.changes[i]['eventSubType'] == eventSubType
-      ) {
+      if (this.changes[i]['resource'] == resource && this.changes[i]['eventSubType'] == eventSubType) {
         this.changes[i] = {
           ...this.changes[i],
           ...{
             resource: resource,
             eventSubType: eventSubType,
             isEmailEnabled: email ? '1' : '0',
-            isSmsEnabled: sms ? '1' : '0',
-          },
+            isSmsEnabled: sms ? '1' : '0'
+          }
         };
-
         changesMade = true;
       }
     }
@@ -446,7 +426,7 @@ export class OrchMessComponent implements OnInit {
         resource: resource,
         eventSubType: eventSubType,
         isEmailEnabled: email ? '1' : '0',
-        isSmsEnabled: sms ? '1' : '0',
+        isSmsEnabled: sms ? '1' : '0'
       });
     }
     console.log(this.changes);
@@ -454,7 +434,7 @@ export class OrchMessComponent implements OnInit {
 
   saveNotifications() {
     let postData: object = {
-      notificationOptions: this.changes,
+      notificationOptions: this.changes
     };
 
     if (this.poeSettings['channelId'] === '0') {
@@ -468,11 +448,8 @@ export class OrchMessComponent implements OnInit {
     console.log(JSON.stringify(postData));
 
     this.httpClient
-      .post(
-        'https://montecarlo.auperator.co/customer-portal/api/v1/poe-notifications',
-        JSON.stringify(postData)
-      )
-      .subscribe((newNotifdata) => {
+      .post('customer-portal/api/v1/poe-notifications', JSON.stringify(postData))
+      .subscribe(newNotifdata => {
         console.log('new Notif Data = ', newNotifdata);
 
         this.parseLatestNotifications(newNotifdata['notificationOptions']);
@@ -484,10 +461,10 @@ export class OrchMessComponent implements OnInit {
   cancelNotifs() {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       panelClass: 'confirm-dialog',
-      data: {},
+      data: {}
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       console.log(result);
 
       if (result) {

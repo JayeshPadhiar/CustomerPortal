@@ -25,32 +25,30 @@
 }
 
 div.mobile-container {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   max-width: 360px;
   max-height: 670px;
 
-  width: 100%;
-  height: 60%;
+  width: 360px;
+  height: 670px;
 
-
-  margin: 0 20px 50px;
+  margin: 0 0 50px;
   overflow: auto;
   border: 3px solid #e7e7e7;
   box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.1);
-
 }
 
 .mobile-container .header {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   overflow: hidden;
   top: 0;
   width: 100%;
-  height: 104px;
+  height: 80px;
   background-color: inherit;
 }
 
 .mobile-container .xtitle {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -60,7 +58,7 @@ div.mobile-container {
 
 .mobile-container .pre-title {
   width: 263px;
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
@@ -75,19 +73,17 @@ div.mobile-container {
 }
 
 .mobile-container .body {
-  font-family: "Work Sans", sans-serif;
-
-  overflow: auto;
+  font-family: 'Work Sans', sans-serif;
+  overflow: hidden;
   border-radius: 10px;
   width: 100%;
-  height: max-content;
   height: max-content;
   background-color: #fefefe;
 }
 
 .body .note {
   width: 100%;
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
@@ -106,7 +102,7 @@ div.mobile-container {
 }
 
 .mobile-notif {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -143,11 +139,11 @@ div.mobile-container {
 .mobile-container .arrow {
   margin-left: auto;
   margin-right: 10px;
-  color: #BDBDBD;
+  color: #bdbdbd;
 }
 
 .mobile-container .footer {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
 
   align-items: center;
   justify-content: center;
@@ -156,7 +152,7 @@ div.mobile-container {
 }
 
 .mobile-footer-links {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
 
   display: flex;
   flex-wrap: wrap;
@@ -165,36 +161,46 @@ div.mobile-container {
 }
 
 .footer-link {
-  font-family: "Work Sans", sans-serif;
-
-  margin: 20px;
+  margin: 12px 20px;
+  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 20px;
   color: #828282;
 }
 
 .mobile-footer-url {
-  font-family: "Work Sans", sans-serif;
-
   bottom: 0;
   padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 20px;
   color: #828282;
 }
 
 .mobile-stepper {
   border-radius: 10px;
+  width: 100% !important;
+  position: inherit;
+}
+
+::ng-deep .mat-stepper-vertical > div {
+  position: inherit;
+  left: unset;
+  top: unset;
+
+  transform: none;
 }
 
 .mobile-stepper-title {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
 
   font-style: normal;
   font-weight: normal;
@@ -205,7 +211,7 @@ div.mobile-container {
 
 .mobile-stepper-title-desc {
   display: block;
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
@@ -226,7 +232,7 @@ div.mobile-container {
 }
 
 .mobile-content {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   margin-left: 7px;
@@ -234,20 +240,30 @@ div.mobile-container {
   line-height: 145%;
   letter-spacing: 0.02em;
   color: #828282;
+
+  background-color: #ffffff;
 }
 
 .mobile-button {
   justify-items: center;
   justify-self: center;
   justify-content: center;
-  color: #ffffff;
-  margin: auto;
-  width: 80%;
-  background-color: #2ddbd1;
-  background: #2ddbd1;
-  box-shadow: 0px 4px 8px rgba(45, 219, 209, 0.18),
-    0px 0px 2px rgba(45, 219, 209, 0.12), 0px 0px 1px rgba(0, 0, 0, 0.04);
-  border-radius: 8px;
+  background-color: #ffffff;
+  color: #2ddbd1;
+
+  /* Pre Title */
+
+  font-family: 'Work Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+  /* identical to box height */
+
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  /* Accent */
 }
 
 img {

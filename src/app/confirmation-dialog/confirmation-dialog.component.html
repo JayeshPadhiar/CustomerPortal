@@ -1,5 +1,5 @@
-<h2 mat-dialog-title style="width: 100%">
-  <mat-icon mat-dialog-close style="float: right">close</mat-icon>
+<h2 mat-dialog-title style="width: 100%; text-align: left;">
+  <mat-icon (click)="cancel()" mat-dialog-close style="float: right; cursor: pointer;">close</mat-icon>
   Unsaved Changes
 </h2>
 <mat-divider></mat-divider>
@@ -22,7 +22,7 @@
     </p>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="end" style="bottom: 0; margin: 0 0 0 0; padding: 0; min-height: unset;">
   <button
     (click)="cancel()"
     style="

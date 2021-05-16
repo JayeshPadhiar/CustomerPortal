@@ -1,8 +1,31 @@
 div.c-portal {
-  margin: auto;
-  width: 80%;
-  padding: 20px;
+  margin-left: 256px;
+  padding: 0 24px 24px;
+  background: #f6f4f4;
   justify-content: space-between;
+
+  /* min-width: 1080px; */
+}
+
+.configure-cp {
+  margin-bottom: 14px 0 8px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  width: 100%;
+  /* identical to box height, or 133% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+
+  color: #333333;
+}
+
+div.fullwidth {
+  margin-left: 100px;
 }
 
 div.portal-div {
@@ -13,11 +36,12 @@ div.portal-div {
 div.mobile-div {
   width: fit-content;
   height: 80%;
+  min-width: fit-content;
   position: fixed;
   display: inline-block;
   margin: 0;
-  margin-left: 24px;
-  margin-top: 118px;
+  margin-left: 20px;
+  margin-top: 110px;
   margin-right: 40px;
 
   padding: 0;
@@ -28,6 +52,8 @@ div.mobile-div {
   -ms-overflow-style: none; /* Internet Explorer 11 */
 }
 
+/* 
+
 .mobile-div .mat-button-toggle-group {
   background-color: transparent;
   border-radius: 4px;
@@ -37,23 +63,38 @@ div.mobile-div {
   height: 38px;
   margin-bottom: 14px;
   margin-top: 14px;
+  width: fit-content;
 
   font-family: Lato;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  /* identical to box height */
 
   letter-spacing: 1px;
+}
+
+::ng-deep.mobile-div .mat-button-toggle-group .mat-button-toggle:hover {
+  border: none;
+}
+
+::ng-deep .mat-button-toggle-checked .mat-button-toggle-button {
+  color: #fa5c5d !important;
+
+}
+
+
+::ng-deep .mat-button-toggle-checked .mat-button-toggle-button:first-of-type {
+  color: #fa5c5d !important;
+
 }
 
 .mobile-div .mat-button-toggle-group .mat-button-toggle:first-of-type {
   border-radius: 4px 0px 0px 4px;
   min-height: 35px;
   height: 36px;
-  background-color: #ffffff;
-  border: 1px solid #fa5c5d;
+  background-color: #ffffff !important;
+  border: 1px solid #fa5c5d !important;
   color: #fa5c5d;
 
   font-family: Lato;
@@ -61,7 +102,6 @@ div.mobile-div {
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  /* identical to box height */
 
   letter-spacing: 1px;
 }
@@ -77,17 +117,23 @@ div.mobile-div {
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  /* identical to box height */
 
   letter-spacing: 1px;
 
   color: #808080;
 }
 
+.mobile-div .mat-button-toggle-group .mat-button-toggle:last-of-type:hover {
+  border: #fa5c5d !important;
+}
+
+
+
+
 .mobile-div .mat-button-toggle-group .mat-button-toggle:active {
   background: #ffffff;
-  border: 1px solid #fa5c5d;
-  color: #fa5c5d;
+  border: 1px solid #fa5c5d !important;
+  color: #fa5c5d !important;
   box-sizing: border-box;
   flex: none;
   order: 0;
@@ -100,76 +146,71 @@ div.mobile-div {
 }
 
 .mobile-div .mat-button-toggle-checked:first-of-type {
-  border: 1px solid #fa5c5d;
-  color: #fa5c5d;
+  border: 1px solid #fa5c5d !important;
+  color: #fa5c5d !important;
   background-color: #ffffff;
 }
 
-::ng-deep.mobile-div
-  .mat-button-toggle-appearance-standard
-  .mat-button-toggle-label-content {
+::ng-deep.mobile-div .mat-button-toggle-checked.mat-toggle-button {
+  border: 1px solid none !important;
+}
+
+::ng-deep.mat-button-toggle-checked .mat-button-toggle-label-content:after {
+  border: solid transparent !important;
+}
+
+::ng-deep.mobile-div .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
   line-height: 35px;
+} */
+
+.top-tabs {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.top-tabs ul {
+  display: flex;
+  flex-flow: row wrap;
+  width: fit-content;
+  min-height: 35px;
+  padding: 24px;
+  align-items: center;
+}
+.top-tabs ul li a {
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 1px;
+  color: #808080;
+  border: 1px solid #e7e7e7;
+  padding: 8px 12px;
+  position: relative;
+}
+.top-tabs ul li:first-of-type a {
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  margin-right: -1px;
+}
+.top-tabs ul li:last-of-type a {
+  border-radius: 0 4px 4px 0;
+}
+.top-tabs ul li a.active {
+  background-color: #ffffff;
+  color: #fa5c5d;
+  border-color: #fa5c5d;
+}
+.top-tabs ul li:first-of-type a.active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background: #fa5c5d;
+  z-index: 1;
 }
 
 ::-webkit-scrollbar {
   width: 0px; /* Remove scrollbar space */
   background: transparent; /* Optional: just make scrollbar invisible */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

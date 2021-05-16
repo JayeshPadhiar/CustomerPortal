@@ -2,92 +2,99 @@
   <h3 class="component-name">Manage the unexpected</h3>
   <mat-accordion class="accordion">
     <mat-expansion-panel
-      (opened)="expansions.displayNotice = true"
-      (closed)="expansions.displayNotice = false"
+      (opened)="expansions.displayNotice = true; notif['exp'] = true"
+      (closed)="cancel('displayNotice', notice); notif['exp'] = false"
       [expanded]="expansions.displayNotice"
       hideToggle
       #displayNotice
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="danoycp"
-            *ngIf="!displayNotice.expanded"
-          ></mat-icon>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="danoycp-open"
+          <img class="exp-icon" src="../../../../assets/img/danoycp.svg" />
+          <!-- <img
             *ngIf="displayNotice.expanded"
-          ></mat-icon>
+            class="exp-icon"
+            style="stroke: #fa5c5d; fill: #fa5c5d;"
+            src="../../../../assets/img/danoycp-open.svg"
+          /> -->
+
+          <!-- <mat-icon class="exp-icon" svgIcon="danoycp" *ngIf="!displayNotice.expanded"></mat-icon>
+          <mat-icon class="exp-icon" svgIcon="danoycp-open" *ngIf="displayNotice.expanded"></mat-icon> -->
           <div class="exp-title">Display a notice on your customer portal</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon class="indicator-icon" *ngIf="!displayNotice.expanded"
-              >keyboard_arrow_right</mat-icon
-            >
-            <mat-icon
-              class="indicator-icon-selected"
-              *ngIf="displayNotice.expanded"
-              >keyboard_arrow_down</mat-icon
-            >
+            <mat-icon class="indicator-icon" *ngIf="!displayNotice.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="displayNotice.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
       <div class="accordion-content">
         <div>
-          <form (ngSubmit)="submitNotice()" [formGroup]="notice">
+          <form (ngSubmit)="submit(notice, 'displayNotice')" [formGroup]="notice">
             <h4 class="fs-16-lh-24">
-              Notify your customers with important updates when they access
-              <br />
-              the portal
+              Notify your customers with important updates when they access the portal
             </h4>
 
             <label class="switch">
               <input
                 type="checkbox"
-                (change)="toggle(togBtn.checked)"
+                (change)="toggleNotice(togBtn.checked)"
                 #togBtn
                 id="togBtn"
-                [checked]="notif['message'] != ''"
+                [checked]="notif['showmessage']"
               />
               <div class="slider round"></div>
             </label>
 
-            <div *ngIf="notif['show']">
+            <div *ngIf="notif['showmessage']">
               <h4 class="fs-16-lh-16" style="margin: 24px 0 8px">Message</h4>
 
-              <div class="form-container" style="max-width: 542px">
+              <div class="form-container" style="max-width: 542px; width: 100%;">
                 <mat-form-field floatLabel="never" style="margin-top: 10px">
                   <input
                     (input)="notif['message'] = notifInput.value"
                     formControlName="noticeMessage"
                     #notifInput
                     matInput
-                    placeholder="Your messase will be"
+                    placeholder="Your messase will be displayed here"
                   />
-                  <mat-hint class="fs-13-lh-12" align="end">{{notifInput.value?.length || 0}}/200</mat-hint>
+                  <mat-hint style="margin-top: 10px;" class="fs-13-lh-12" align="end"
+                    >{{ notifInput.value?.length || 0 }}/200</mat-hint
+                  >
                 </mat-form-field>
               </div>
 
               <div
                 class="preview-container"
-                style="margin: 0; max-width: 522px; width: 522px;  padding: 10px 10px 0;"
+                style="margin: 0; max-width: 522px; height: 56px; width: 92%;  padding: 10px 10px 0;"
               >
-                <div
-                  style="height: 100%; width: 100%;"
-                  [style.background-color]="appStyle.backgroundColor"
-                >
-                  <div
-                    class="preview-div-notif"
-                    [style.background-color]="appStyle.noticeBackgroundColor"
-                  >
-                    <p class="notif-text" style="margin: 6px">
+                <div style="height: 100%; width: 100%;" [style.background-color]="appStyle.backgroundColor">
+                  <div class="preview-div-notif" [style.background-color]="notif.noticeBackgroundColor">
+                    <p
+                      *ngIf="notif['message']"
+                      class="notif-text"
+                      style="margin: 6px; line-height: 20px; font-size: 10px;"
+                    >
                       {{ notif.message }}
                     </p>
+
+                    <p
+                      *ngIf="!notif['message']"
+                      class="notif-text"
+                      style="margin: 6px;  line-height: 20px; font-size: 10px;"
+                    >
+                      Your message will be displayed here
+                    </p>
                   </div>
+
+                  <img
+                    class="image"
+                    style="margin-left: 20px; margin-top: 14px; width: 100px;"
+                    [src]="appStyle.brandLogoUrl"
+                    alt="ACME"
+                  />
                 </div>
               </div>
 
@@ -100,31 +107,22 @@
                 <input
                   class="color-picker"
                   type="color"
-                  [value]="appStyle.noticeBackgroundColor"
-                  (input)="
-                    changeNotifColor(
-                      $event.target.value,
-                      'noticeBackgroundColor'
-                    )
-                  "
+                  formControlName="noticeBackgroundColor"
+                  [value]="notif.noticeBackgroundColor"
+                  (input)="changeNotifColor($event.target.value, 'noticeBackgroundColor')"
                 />
                 <input
                   style="width: 90px"
-                  [value]="appStyle.noticeBackgroundColor"
-                  (input)="
-                    changeNotifColor(
-                      $event.target.value,
-                      'noticeBackgroundColor'
-                    )
-                  "
                   formControlName="noticeBackgroundColor"
+                  [value]="notif.noticeBackgroundColor"
+                  (input)="changeNotifColor($event.target.value, 'noticeBackgroundColor')"
                   type="text"
                 />
               </div>
             </div>
             <div *ngIf="isChanged(notice)" class="save-cancel-container">
               <button class="save-button" mat-button>Save</button>
-              <button (click)="cancel('displayNotice')" type="button" mat-button>Cancel</button>
+              <button (click)="cancel('displayNotice', notice)" type="button" mat-button>Cancel</button>
             </div>
 
             <div *ngIf="!isChanged(notice)" class="save-cancel-container">
@@ -137,52 +135,41 @@
       </div>
     </mat-expansion-panel>
 
-    <!--pre>{{ notice.value | json }}</pre-->
+    <!-- <pre>{{ notif | json }}</pre>
+    <pre>{{ notice.value | json }}</pre> -->
 
     <mat-expansion-panel
       (opened)="expansions.showMessage = true"
-      (closed)="expansions.showMessage = false"
+      (closed)="cancel('showMessage', delay)"
       [expanded]="expansions.showMessage"
       hideToggle
       #showMessage
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="scam"
-            *ngIf="!showMessage.expanded"
-          ></mat-icon>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="scam-open"
-            *ngIf="showMessage.expanded"
-          ></mat-icon>
+          <img class="exp-icon" src="../../../../assets/img/scam.svg" />
+          <!-- <img *ngIf="showMessage.expanded" class="exp-icon" src="../../../../assets/img/scam-open.png" /> -->
+
+          <!-- <mat-icon class="exp-icon" svgIcon="scam" *ngIf="!showMessage.expanded"></mat-icon>
+          <mat-icon class="exp-icon" svgIcon="scam-open" *ngIf="showMessage.expanded"></mat-icon> -->
           <div class="exp-title">
-            Show customers a message when there is a delay in delivery or a
-            pickup
+            Show customers a message when there is a delay in delivery or a pickup
           </div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon class="indicator-icon" *ngIf="!showMessage.expanded"
-              >keyboard_arrow_right</mat-icon
-            >
-            <mat-icon
-              class="indicator-icon-selected"
-              *ngIf="showMessage.expanded"
-              >keyboard_arrow_down</mat-icon
-            >
+            <mat-icon class="indicator-icon" *ngIf="!showMessage.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="showMessage.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
       <div class="accordion-content">
         <div>
-          <form (ngSubmit)="save()" [formGroup]="message">
+          <form (ngSubmit)="submit(delay, 'showMessage')" [formGroup]="delay">
             <label class="switch">
               <input
-              (change)="notif['showdelay'] = togBtn2.checked"
+                (change)="toggleDelay(togBtn2.checked)"
                 #togBtn2
                 [checked]="notif['showdelay']"
                 type="checkbox"
@@ -192,21 +179,28 @@
             </label>
 
             <div *ngIf="notif['showdelay']">
-              <h4 class="fs-16-lh-19" style="margin: 20px 0 8px">Message</h4>
+              <h4 class="fs-16-lh-19" style="margin: 20px 0 14px">Delay in delivery message</h4>
 
-              <div class="form-container" style="width: 537px">
-                <mat-form-field
-                  style="width: 100%"
-                  floatLabel="never"
-                  style="margin-top: 10px; width: 100%"
-                >
-                  <input #delayInput (input)="notif['delaymessage'] = delayInput.value" formControlName="message" matInput value="Your messase will be" />
+              <div class="form-container" style="max-width: 536px; width: 100%;">
+                <mat-form-field style="width: 100%" floatLabel="never" style="width: 100%">
+                  <input
+                    #delayInput
+                    (input)="notif['delayedDeliveryMessage'] = delayInput.value"
+                    formControlName="delayedDeliveryMessage"
+                    placeholder="Your messase will be displayed here"
+                    matInput
+                  />
+                  <mat-hint style="margin-top: 10px;" class="fs-13-lh-12" align="end"
+                    >{{ delayInput.value?.length || 0 }}/200</mat-hint
+                  >
                 </mat-form-field>
               </div>
 
               <div
                 style="
-                  width: 536px;
+                margin-top: 35px;
+                  max-width: 536px;
+                  width: 98%;
                   height: 71px;
                   background: #ebebeb;
                   border: 1px solid #ebebeb;
@@ -215,63 +209,129 @@
                 "
               >
                 <div class="note">
-                  <p class="note">
-                    {{message.value['message']}}
+                  <p
+                    *ngIf="delay.value['delayedDeliveryMessage']"
+                    class="note"
+                    style="font-family: 'Work Sans' sans-serif;
+                  font-style: normal;
+                  font-weight: normal;
+                  font-size: 10px;
+                  line-height: 145%;
+                  /* or 15px */
+                  
+                  letter-spacing: 0.02em;
+                  
+                  /* Darkest Gray */
+                  
+                  color: #4F4F4F;"
+                  >
+                    Note: {{ delay.value['delayedDeliveryMessage'] }}
+                  </p>
+
+                  <p
+                    *ngIf="!delay.value['delayedDeliveryMessage']"
+                    class="note"
+                    style="font-family: Work Sans;
+                  font-style: normal;
+                  font-weight: normal;
+                  font-size: 10px;
+                  padding: 10px;
+                  line-height: 145%;
+                  /* or 15px */
+                  
+                  letter-spacing: 0.02em;
+                  
+                  /* Darkest Gray */
+                  
+                  color: #4F4F4F;"
+                  >
+                    Note: Expected delivery date is delayed. We will keep you updated!
                   </p>
                 </div>
               </div>
 
-              <div *ngIf="isChanged(message)" class="save-cancel-container">
-                <button class="save-button" mat-button>Save</button>
-                <button (click)="cancel('showMessage')" type="button" mat-button>Cancel</button>
+              <h4 class="fs-16-lh-19" style="margin: 35px 0 14px">Delay in pickup message</h4>
+
+              <div class="form-container" style="max-width: 536px;  width: 100%;">
+                <mat-form-field style="width: 100%" floatLabel="never" style="width: 100%">
+                  <input
+                    #pickupDelayInput
+                    (input)="notif['delayedPickupMessage'] = pickupDelayInput.value"
+                    formControlName="delayedPickupMessage"
+                    placeholder="Your messase will be displayed here"
+                    matInput
+                  />
+                  <mat-hint style="margin-top: 10px;" class="fs-13-lh-12" align="end"
+                    >{{ pickupDelayInput.value?.length || 0 }}/200</mat-hint
+                  >
+                </mat-form-field>
+              </div>
+
+              <div
+                style="
+                margin-top: 35px;
+                  max-width: 536px;
+                  width: 98%;
+                  height: 71px;
+                  background: #ebebeb;
+                  border: 1px solid #ebebeb;
+                  box-sizing: border-box;
+                  border-radius: 6px;
+                "
+              >
+                <div class="note">
+                  <p *ngIf="delay.value['delayedPickupMessage']" class="note">
+                    {{ delay.value['delayedPickupMessage'] }}
+                  </p>
+
+                  <p *ngIf="!delay.value['delayedPickupMessage']" class="note">
+                    Note: Expected delivery date is delayed. We will keep you updated!
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div *ngIf="!isChanged(message)" class="save-cancel-container">
-              <button (click)="expansions.showMessage = false" type="button" class="save-button" mat-button>Close</button>
+            <div *ngIf="isChanged(delay)" class="save-cancel-container">
+              <button class="save-button" mat-button>Save</button>
+              <button (click)="cancel('showMessage', delay)" type="button" mat-button>Cancel</button>
+            </div>
+
+            <div *ngIf="!isChanged(delay)" class="save-cancel-container">
+              <button (click)="expansions.showMessage = false" type="button" class="save-button" mat-button>
+                Close
+              </button>
             </div>
           </form>
         </div>
       </div>
     </mat-expansion-panel>
-
-    <!--pre>{{ message.value | json }}</pre>
-    <pre>{{ notif| json }}</pre-->
-
+    <!--     
+    <pre>{{ delay.value | json }}</pre>
+    <pre>{{ notif | json }}</pre>
+     -->
   </mat-accordion>
 
   <div style="padding: 5px"></div>
 
   <h3 class="component-name">Connect your customer portal with Apps</h3>
   <mat-accordion class="accordion">
-    <mat-expansion-panel #appStore hideToggle>
+    <mat-expansion-panel #appStore hideToggle class="app-store">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="etas"
-            *ngIf="!appStore.expanded"
-          ></mat-icon>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="etas-open"
-            *ngIf="appStore.expanded"
-          ></mat-icon>
+          <img class="exp-icon" src="../../../../assets/img/etas.svg" />
+          <!-- <img *ngIf="appStore.expanded" class="exp-icon" src="../../../../assets/img/etas-open.svg" /> -->
+
+          <!-- <mat-icon class="exp-icon" svgIcon="etas" *ngIf="!appStore.expanded"></mat-icon>
+          <mat-icon class="exp-icon" svgIcon="etas-open" *ngIf="appStore.expanded"></mat-icon> -->
           <div class="exp-title">Explore the App Store -></div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon class="indicator-icon" *ngIf="!appStore.expanded"
-              >keyboard_arrow_right</mat-icon
-            >
-            <mat-icon class="indicator-icon-selected" *ngIf="appStore.expanded"
-              >keyboard_arrow_down</mat-icon
-            >
+            <mat-icon class="indicator-icon" *ngIf="!appStore.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="appStore.expanded">keyboard_arrow_right</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
-
-      <div class="accordion-content"></div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

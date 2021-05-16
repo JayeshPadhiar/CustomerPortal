@@ -1,0 +1,44 @@
+:host ::ng-deep .mat-checkbox {
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .mat-checkbox .mat-checkbox-frame {
+  background: #ffffff;
+  border: 1px solid #fa5c5d !important;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+::ng-deep.mat-checkbox-layout .mat-checkbox-label {
+  vertical-align: middle;
+}
+
+:host ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  margin-top: 1px;
+  margin-left: 1px;
+  width: 18px;
+  height: 18px;
+  background: #ffffff;
+  border: 1px solid #fa5c5d !important;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background: #ffffff;
+  border: 1px solid #fa5c5d !important;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+::ng-deep .mat-checkbox-checkmark-path {
+  stroke: #fa5c5d !important;
+}
+
+::ng-deep .mat-form-field-label {
+  /*change color of label*/
+  color: #999999 !important;
+}

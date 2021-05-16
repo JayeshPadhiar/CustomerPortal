@@ -8,9 +8,8 @@ describe('AddDomainComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddDomainComponent ]
-    })
-    .compileComponents();
+      declarations: [AddDomainComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -3,126 +3,78 @@
   <mat-accordion class="accordion">
     <mat-expansion-panel
       (opened)="expansions.cancelPolicy = true"
-      (closed)="expansions.cancelPolicy = false"
+      (closed)="cancel('cancelPolicy', cancellationPolicy)"
       [expanded]="expansions.cancelPolicy"
       hideToggle
       #cancelPolicyExp
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="mycp"
-            *ngIf="!cancelPolicyExp.expanded"
-          ></mat-icon>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="mycp-open"
-            *ngIf="cancelPolicyExp.expanded"
-          ></mat-icon>
+          <img class="exp-icon" src="../../../../assets/img/mycp.svg" />
+          <!-- <img *ngIf="cancelPolicyExp.expanded" class="exp-icon" src="../../../../assets/img/mycp-open.svg" /> -->
+          <!-- <mat-icon class="exp-icon" svgIcon="mycp" *ngIf="!cancelPolicyExp.expanded"></mat-icon>
+          <mat-icon class="exp-icon" svgIcon="mycp-open" *ngIf="cancelPolicyExp.expanded"></mat-icon> -->
           <div class="exp-title">Manage your cancellation policy</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon class="indicator" *ngIf="!cancelPolicyExp.expanded"
-              >keyboard_arrow_right</mat-icon
-            >
-            <mat-icon
-              class="indicator-icon-selected"
-              *ngIf="cancelPolicyExp.expanded"
-              >keyboard_arrow_down</mat-icon
-            >
+            <mat-icon class="indicator-icon" *ngIf="!cancelPolicyExp.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="cancelPolicyExp.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
       <div class="accordion-content">
         <div>
-          <form
-            (ngSubmit)="submitCancelPolicy()"
-            [formGroup]="cancellationPolicy"
-          >
+          <form (ngSubmit)="submitCancelPolicy()" [formGroup]="cancellationPolicy">
             <h4 class="fs-16-lh-24">
               Customers are able to cancel their order before its marked
               <br />"ready to ship"
             </h4>
 
             <label class="switch">
-              <input
-                formControlName="allowCancellation"
-                type="checkbox"
-                checked
-              />
+              <input formControlName="allowCancellation" type="checkbox" checked />
               <div class="slider round"></div>
             </label>
             <div *ngIf="cancellationPolicy.value['allowCancellation']">
               <h4 class="fs-16-lh-19">
                 Cancellation Reasons
-                <mat-icon
-                  svgIcon="infoicon"
-                  style="margin-bottom: 1px"
-                  class="tooltipicon"
-                  inline="true"
-                  matTooltip="Info"
-                  matTooltipPosition="after"
-                >
-                </mat-icon>
               </h4>
               <p class="lh-16-fs-12">
-                Customers can select one reason from the list when submitting a
-                cancellation request
+                Customers can select one reason from the list when submitting a cancellation request
               </p>
               <div>
-                <table
-                  class="table-container"
-                  formArrayName="cancellationReasons"
-                  style="max-width: 495px"
-                >
+                <table class="table-container" formArrayName="cancellationReasons" style="max-width: 495px">
                   <tbody>
                     <tr
                       *ngFor="
-                        let creason of getReasons(
-                          cancellationPolicy,
-                          'cancellationReasons'
-                        ).controls;
+                        let creason of getReasons(cancellationPolicy, 'cancellationReasons').controls;
                         let i = index
                       "
                     >
                       <td>
                         <div class="form-container">
-                          <mat-form-field
-                            floatLabel="never"
-                            style="margin: 0; color: #343434; padding: 0"
-                          >
-                            <input
-                              [formControlName]="i"
-                              matInput
-                              placeholder="Reason"
-                            />
+                          <mat-form-field floatLabel="never" style="margin: 0; color: #343434; padding: 0">
+                            <input [formControlName]="i" matInput placeholder="Enter reason" />
                           </mat-form-field>
                         </div>
                       </td>
 
-                      <td align="center" valign="center">
-                        <mat-icon
+                      <td valign="bottom" style="vertical-align: bottom;">
+                        <!-- <mat-icon
                           style="margin-left: 8px; height: 11px; width: 10px"
-                          (click)="
-                            deleteReason(
-                              cancellationPolicy,
-                              'cancellationReasons',
-                              i
-                            )
-                          "
+                          (click)="deleteReason(cancellationPolicy, 'cancellationReasons', i)"
                           svgIcon="deletebin"
-                        ></mat-icon>
+                        ></mat-icon> -->
+
+                        <img
+                          src="../../../../assets/img/deletebin.svg"
+                          style="margin-left: 8px; height: 11px; width: 10px"
+                          (click)="deleteReason(cancellationPolicy, 'cancellationReasons', i)"
+                        />
                       </td>
                     </tr>
-                    <tr
-                      *ngIf="
-                        getReasons(cancellationPolicy, 'cancellationReasons')
-                          .controls.length < 10
-                      "
-                    >
+                    <tr *ngIf="getReasons(cancellationPolicy, 'cancellationReasons').controls.length < 10">
                       <td>
                         <div
                           style="
@@ -132,12 +84,7 @@
                           "
                         >
                           <button
-                            (click)="
-                              addReason(
-                                cancellationPolicy,
-                                'cancellationReasons'
-                              )
-                            "
+                            (click)="addReason(cancellationPolicy, 'cancellationReasons')"
                             mat-flat-button
                             class="add-button"
                             type="button"
@@ -161,45 +108,31 @@
                 style="margin-top: 24px; display: flex; flex-direction: column"
                 formGroupName="cancellationRefundPolicy"
               >
-                <mat-checkbox
-                  formControlName="originalPaymentMode"
-                  checked="true"
-                >
-                  <p style="margin: auto 0">
+                <mat-checkbox formControlName="originalPaymentMode" checked="true">
+                  <p style="color:#666666;margin: auto 0 ;padding-left: 8px">
                     Customers get a refund to their original payment method
                   </p>
                 </mat-checkbox>
                 <mat-checkbox formControlName="bank">
-                  <p style="margin: auto 0">
+                  <p style="color:#666666;margin: auto 0 ; padding-left: 8px">
                     Customers get a refund in their desired bank account
                   </p>
                 </mat-checkbox>
                 <mat-checkbox formControlName="storeCredit">
-                  <p style="margin: auto 0">
+                  <p style="color:#666666;margin: auto 0 ; padding-left: 8px">
                     Customers get a refund as score credit
                   </p>
                 </mat-checkbox>
               </div>
             </div>
 
-            <div
-              *ngIf="isChanged(cancellationPolicy)"
-              class="save-cancel-container"
-            >
+            <div *ngIf="isChanged(cancellationPolicy)" class="save-cancel-container">
               <button class="save-button" mat-button>Save</button>
-              <button (click)="cancel('cancelPolicy')" type="button" mat-button>Cancel</button>
+              <button (click)="cancel('cancelPolicy', cancellationPolicy)" type="button" mat-button>Cancel</button>
             </div>
 
-            <div
-              *ngIf="!isChanged(cancellationPolicy)"
-              class="save-cancel-container"
-            >
-              <button
-                type="button"
-                (click)="expansions.cancelPolicy = false"
-                class="save-button"
-                mat-button
-              >
+            <div *ngIf="!isChanged(cancellationPolicy)" class="save-cancel-container">
+              <button type="button" (click)="expansions.cancelPolicy = false" class="save-button" mat-button>
                 Close
               </button>
             </div>
@@ -211,39 +144,28 @@
 
     <mat-expansion-panel
       (opened)="expansions.returnPolicy = true"
-      (closed)="expansions.returnPolicy = false"
+      (closed)="cancel('returnPolicy', returnPolicy)"
       [expanded]="expansions.returnPolicy"
       hideToggle
       #returnPolicyExp
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="myrp"
-            *ngIf="!returnPolicyExp.expanded"
-          ></mat-icon>
-          <mat-icon
-            class="exp-icon"
-            svgIcon="myrp-open"
-            *ngIf="returnPolicyExp.expanded"
-          ></mat-icon>
+          <img class="exp-icon" src="../../../../assets/img/myrp.svg" />
+          <!-- <img *ngIf="returnPolicyExp.expanded" class="exp-icon" src="../../../../assets/img/myrp-open.svg" /> -->
+
+          <!-- <mat-icon class="exp-icon" svgIcon="myrp" *ngIf="!returnPolicyExp.expanded"></mat-icon>
+          <mat-icon class="exp-icon" svgIcon="myrp-open" *ngIf="returnPolicyExp.expanded"></mat-icon> -->
           <div class="exp-title">Manage your return policy</div>
         </mat-panel-title>
         <mat-panel-description>
           <div class="indicator">
-            <mat-icon class="indicator-icon" *ngIf="!returnPolicyExp.expanded"
-              >keyboard_arrow_right</mat-icon
-            >
-            <mat-icon
-              class="indicator-icon-selected"
-              *ngIf="returnPolicyExp.expanded"
-              >keyboard_arrow_down</mat-icon
-            >
+            <mat-icon class="indicator-icon" *ngIf="!returnPolicyExp.expanded">keyboard_arrow_right</mat-icon>
+            <mat-icon class="indicator-icon-selected" *ngIf="returnPolicyExp.expanded">keyboard_arrow_down</mat-icon>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div class="accordion-content">
+      <div class="accordion-content" style="width: 100%;">
         <div>
           <form [formGroup]="returnPolicy" (ngSubmit)="submitReturnPolicy()">
             <h4 class="fs-16-lh-24">
@@ -258,8 +180,7 @@
 
             <div *ngIf="returnPolicy.value['allowReturns']">
               <h4 class="lh-16-fs-14">
-                Enter the number of days until when you want to allow returns on
-                your product
+                Enter the number of days until when you want to allow returns on your product
               </h4>
 
               <div style="display: table-row">
@@ -291,7 +212,6 @@
                     margin-right: 8px;
                     margin-bottom: 8px;
                   "
-                  value="5"
                 />
                 <p style="display: table-cell" class="fs-12-lh-14">
                   Days after order is delivered
@@ -299,11 +219,10 @@
               </div>
 
               <p class="lh-20-fs-12">
-                Your customers won't be able to place a return after this time
-                period.
+                Your customers won't be able to place a return after this time period.
               </p>
 
-              <!--h4 class="fs-16-lh-19" style="margin-bottom: 4px !important">
+              <h4 class="fs-16-lh-19" style="margin-bottom: 4px !important">
                 Exclude Certain Products
               </h4>
               <p class="fs-12-lh-14" style="color: #808080 !important">
@@ -311,57 +230,123 @@
               </p>
 
               <label class="switch">
-                <input (change)="(togBtn3)" #togBtn3 type="checkbox" />
+                <input
+                  [checked]="excludeConditions['exludeCertainProducts']"
+                  (change)="excludeConditions['exludeCertainProducts'] = togBtn3.checked; returnPolicy.markAsDirty()"
+                  #togBtn3
+                  type="checkbox"
+                />
                 <div class="slider round"></div>
               </label>
 
-              <div *ngIf="togBtn3.checked">
-                <p>
+              <div *ngIf="excludeConditions['exludeCertainProducts']">
+                <p
+                  class="fs-12-lh-14"
+                  style="margin-top: 24px; 
+                        color: #808088;
+                "
+                >
                   Product must match
-                  <mat-radio-group class="rad" aria-label="Select an option">
-                    <mat-radio-button value="1"
-                      >All Conditions</mat-radio-button
-                    >
-                    <mat-radio-button value="2">Any Condition</mat-radio-button>
+                  <mat-radio-group
+                    #conditionRadio
+                    (change)="
+                      excludeConditions['productFilterMatchingCriteria'] = $event.value; returnPolicy.markAsDirty()
+                    "
+                    [value]="excludeConditions['productFilterMatchingCriteria']"
+                    class="rad"
+                    style="width: fit-content;"
+                    aria-label="Select an option"
+                  >
+                    <mat-radio-button value="All">All Conditions</mat-radio-button>
+                    <mat-radio-button value="Any">Any Condition</mat-radio-button>
                   </mat-radio-group>
                 </p>
 
                 <div>
-                  <table class="table-container" style="width: 800px">
+                  <table class="table-container" style="max-width: 530px">
                     <tbody>
-                      <tr *ngFor="let excon of exconditions; let i = index">
-                        <td>
-                          <mat-form-field appearance="fill">
-                            <mat-label>Condition</mat-label>
-                            <mat-select [(ngModel)]="exconditions[i].option">
-                              <mat-option> </mat-option>
+                      <tr *ngFor="let condition of excludeConditions['filters']; let i = index" class="filter-table">
+                        <td style="width: 184px;">
+                          <mat-form-field appearance="fill" style="width: 160px; margin: 0 24px 0 0; padding: 0;">
+                            <mat-select
+                              (selectionChange)="condition['field'] = $event.value; returnPolicy.markAsDirty()"
+                              [value]="condition['field']"
+                              placeholder="Select Option"
+                              panelClass="filter-table-class"
+                            >
+                              <mat-option value="BRAND">Product Brand</mat-option>
+                              <mat-option value="DESCRIPTION">Product Description</mat-option>
+                              <mat-option value="VERTICAL">Product Vertical</mat-option>
+                              <mat-option value="SKU">Product SKU</mat-option>
+                              <mat-option value="EAN">Product EAN</mat-option>
+                              <mat-option value="ESIN">Product ESIN</mat-option>
+                              <mat-option value="MRP">Product MRP</mat-option>
+                              <mat-option value="TYPE">Product Type</mat-option>
+                              <mat-option value="DISCOUNT">Discount</mat-option>
+                              <mat-option value="SPRICE">Selling Price</mat-option>
                             </mat-select>
+                            <mat-error *ngIf="condition['field'] === ''">This field should not be empty</mat-error>
                           </mat-form-field>
                         </td>
 
-                        <td>
-                          <mat-form-field appearance="fill">
-                            <mat-label>Condition</mat-label>
-                            <mat-select [(ngModel)]="exconditions[i].condition">
-                              <mat-option> </mat-option>
+                        <td style="width: 184px;">
+                          <mat-form-field appearance="fill" style="width: 160px; margin: 0 24px 0 0;">
+                            <mat-select
+                              (selectionChange)="condition['conditions'] = $event.value; returnPolicy.markAsDirty()"
+                              [value]="condition['conditions']"
+                              placeholder="Condition"
+                              panelClass="filter-table-class"
+                            >
+                              <mat-option value="IS">Is equal to</mat-option>
+                              <mat-option value="ISNT">Is not equal to</mat-option>
+                              <mat-option value="GT">Is greater than</mat-option>
+                              <mat-option value="LT">Is less than</mat-option>
+                              <mat-option value="SW">Starts with</mat-option>
+                              <mat-option value="EW">Ends with</mat-option>
+                              <mat-option value="CONTAINS">Contains</mat-option>
+                              <mat-option value="NTCONTAINS">Does not contain</mat-option>
                             </mat-select>
+                            <mat-error *ngIf="condition['conditions'] === ''">This field should not be empty</mat-error>
                           </mat-form-field>
                         </td>
 
-                        <td>
-                          <mat-form-field appearance="fill">
-                            <mat-label>Condition</mat-label>
-                            <mat-select [(ngModel)]="exconditions[i].value">
-                              <mat-option> </mat-option>
-                            </mat-select>
-                          </mat-form-field>
+                        <td style="width: fit-content; width: 132px;">
+                          <div class="form-container" style="width: fit-content; margin: 0 !important;">
+                            <mat-form-field
+                              floatLabel="never"
+                              style="width: 120px; margin: 0 0 0 0; color: #343434; font-family: Lato;
+                            font-style: normal;
+                            font-weight: normal;
+                            font-size: 12px !important;
+                            line-height: 12px !important;
+                            letter-spacing: 0.5px;"
+                            >
+                              <input
+                                style="font-family: Lato;
+                              font-style: normal;
+                              font-weight: normal;
+                              font-size: 12px !important;
+                              line-height: 12px !important;
+                              letter-spacing: 0.5px;"
+                                (input)="condition['value'] = $event.target.value; returnPolicy.markAsDirty()"
+                                [value]="condition['value']"
+                                matInput
+                                placeholder="Value"
+                              />
+                              <mat-error *ngIf="condition['value'] === ''">This field should not be empty</mat-error>
+                            </mat-form-field>
+                          </div>
                         </td>
 
-                        <td>
-                          <mat-icon
-                            (click)="deleteRow(exconditions, i)"
-                            svgIcon="deletebin"
-                          ></mat-icon>
+                        <td valign="bottom" style="vertical-align: middle;">
+                          <!-- <mat-icon svgIcon="deletebin"></mat-icon>
+                          <img src="../../../../assets/img/deletebin.svg"> -->
+                          <img
+                            *ngIf="excludeConditions['filters'].length > 1"
+                            (click)="deleteCondition(i)"
+                            src="../../../../assets/img/deletebin.svg"
+                            style="height: 11px; width: 10px; vertical-align: bottom;"
+                          />
                         </td>
                       </tr>
                       <tr>
@@ -373,85 +358,50 @@
                               justify-content: space-between;
                             "
                           >
-                            <button
-                              (click)="addCondition()"
-                              mat-flat-button
-                              class="add-button"
-                            >
-                              + Add reason
+                            <button (click)="addCondition()" mat-flat-button class="add-button" type="button">
+                              + Add another condition
                             </button>
-                            <p class="max-reasons">Max. 10 reasons</p>
                           </div>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-              </div-->
+              </div>
 
               <div>
                 <h4 class="fs-16-lh-19">
                   Return reasons
-                  <mat-icon
-                    svgIcon="infoicon"
-                    class="tooltipicon"
-                    inline="true"
-                    matTooltip="Info"
-                    matTooltipPosition="after"
-                  >
-                  </mat-icon>
                 </h4>
                 <p class="lh-16-fs-12">
-                  Customers can select one reason from the list when submitting
-                  a return request
+                  Customers can select one reason from the list when submitting a return request
                 </p>
                 <div>
-                  <table
-                    formArrayName="returnReasons"
-                    class="table-container"
-                    style="max-width: 495px"
-                  >
+                  <table formArrayName="returnReasons" class="table-container" style="max-width: 495px">
                     <tbody>
-                      <tr
-                        *ngFor="
-                          let rreason of getReasons(
-                            returnPolicy,
-                            'returnReasons'
-                          ).controls;
-                          let i = index
-                        "
-                      >
+                      <tr *ngFor="let rreason of getReasons(returnPolicy, 'returnReasons').controls; let i = index">
                         <td>
                           <div class="form-container">
-                            <mat-form-field
-                              floatLabel="never"
-                              style="margin: 0; color: #343434"
-                            >
-                              <input
-                                [formControlName]="i"
-                                matInput
-                                placeholder="Reason"
-                              />
+                            <mat-form-field floatLabel="never" style="margin: 0; color: #343434">
+                              <input [formControlName]="i" matInput placeholder="Reason" />
                             </mat-form-field>
                           </div>
                         </td>
 
-                        <td align="center" valign="center">
-                          <mat-icon
+                        <td valign="bottom" style="vertical-align: bottom;">
+                          <!-- <mat-icon
                             style="margin-left: 8px; height: 11px; width: 10px"
-                            (click)="
-                              deleteReason(returnPolicy, 'returnReasons', i)
-                            "
+                            (click)="deleteReason(returnPolicy, 'returnReasons', i)"
                             svgIcon="deletebin"
-                          ></mat-icon>
+                          ></mat-icon> -->
+                          <img
+                            src="../../../../assets/img/deletebin.svg"
+                            style="margin-left: 8px; height: 11px; width: 10px"
+                            (click)="deleteReason(returnPolicy, 'returnReasons', i)"
+                          />
                         </td>
                       </tr>
-                      <tr
-                        *ngIf="
-                          getReasons(returnPolicy, 'returnReasons').controls
-                            .length < 10
-                        "
-                      >
+                      <tr *ngIf="getReasons(returnPolicy, 'returnReasons').controls.length < 10">
                         <td>
                           <div
                             style="
@@ -461,7 +411,7 @@
                             "
                           >
                             <button
-                            type="button"
+                              type="button"
                               (click)="addReason(returnPolicy, 'returnReasons')"
                               mat-flat-button
                               class="add-button"
@@ -496,10 +446,7 @@
                   >
                     <p class="fs-12-lh-12">Customers can receive a refund</p>
                   </mat-checkbox>
-                  <mat-checkbox
-                    formControlName="exchange"
-                    style="margin-bottom: 8px; vertical-align: middle"
-                  >
+                  <mat-checkbox formControlName="exchange" style="margin-bottom: 8px; vertical-align: middle">
                     <p class="fs-12-lh-12">Customers can make an exchange</p>
                   </mat-checkbox>
                 </div>
@@ -513,37 +460,23 @@
                     Allow refund against COD orders
                   </h4>
 
-                  <label
-                    formGroupName="returnAllowRefundOptions"
-                    class="switch"
-                  >
+                  <label formGroupName="returnAllowRefundOptions" class="switch">
                     <input formControlName="cod" type="checkbox" />
                     <div class="slider round"></div>
                   </label>
 
-                  <div
-                    *ngIf="
-                      returnPolicy.value['returnAllowRefundOptions']['cod']
-                    "
-                  >
-                    <div
-                      formGroupName="returnRefundPolicy"
-                      style="display: flex; flex-direction: column"
-                    >
+                  <div *ngIf="returnPolicy.value['returnAllowRefundOptions']['cod']">
+                    <div formGroupName="returnRefundPolicy" style="display: flex; flex-direction: column">
                       <mat-checkbox
                         formControlName="bank"
                         checked="true"
                         style="margin: 21px 0 8px; vertical-align: middle"
                       >
                         <p class="fs-12-lh-12">
-                          Customers can enter their bank account details to
-                          receive a refund
+                          Customers can enter their bank account details to receive a refund
                         </p>
                       </mat-checkbox>
-                      <mat-checkbox
-                        formControlName="storeCredit"
-                        style="margin-bottom: 0; vertical-align: middle"
-                      >
+                      <mat-checkbox formControlName="storeCredit" style="margin-bottom: 0; vertical-align: middle">
                         <p class="fs-12-lh-12">Customers get credit</p>
                       </mat-checkbox>
                     </div>
@@ -555,45 +488,28 @@
                     Allow refund against prepaid orders
                   </h4>
 
-                  <label
-                    formGroupName="returnAllowRefundOptions"
-                    class="switch"
-                  >
+                  <label formGroupName="returnAllowRefundOptions" class="switch">
                     <input formControlName="prepaid" type="checkbox" />
                     <div class="slider round"></div>
                   </label>
 
-                  <div
-                    *ngIf="
-                      returnPolicy.value['returnAllowRefundOptions']['prepaid']
-                    "
-                  >
-                    <div
-                      style="display: flex; flex-direction: column"
-                      formGroupName="returnRefundPolicy"
-                    >
+                  <div *ngIf="returnPolicy.value['returnAllowRefundOptions']['prepaid']">
+                    <div style="display: flex; flex-direction: column" formGroupName="returnRefundPolicy">
                       <mat-checkbox
                         formControlName="originalPaymentMode"
                         checked="true"
                         style="margin: 21px 0 8px; vertical-align: middle"
                       >
                         <p class="fs-12-lh-12">
-                          Customers get a refund to their original payment
-                          method
+                          Customers get a refund to their original payment method
                         </p>
                       </mat-checkbox>
-                      <mat-checkbox
-                        formControlName="bank"
-                        style="margin-bottom: 8px; vertical-align: middle"
-                      >
+                      <mat-checkbox formControlName="bank" style="margin-bottom: 8px; vertical-align: middle">
                         <p class="fs-12-lh-12">
                           Customers get a refund in their desired bank account
                         </p>
                       </mat-checkbox>
-                      <mat-checkbox
-                        formControlName="storeCredit"
-                        style="margin-bottom: 0px; vertical-align: middle"
-                      >
+                      <mat-checkbox formControlName="storeCredit" style="margin-bottom: 0px; vertical-align: middle">
                         <p class="fs-12-lh-12">Customers get store credit</p>
                       </mat-checkbox>
                     </div>
@@ -604,16 +520,11 @@
 
             <div *ngIf="isChanged(returnPolicy)" class="save-cancel-container">
               <button class="save-button" mat-button>Save</button>
-              <button (click)="cancel('returnPolicy')" type="button" mat-button>Cancel</button>
+              <button (click)="cancel('returnPolicy', returnPolicy)" type="button" mat-button>Cancel</button>
             </div>
 
             <div *ngIf="!isChanged(returnPolicy)" class="save-cancel-container">
-              <button
-                type="button"
-                (click)="expansions.returnPolicy = false"
-                class="save-button"
-                mat-button
-              >
+              <button type="button" (click)="expansions.returnPolicy = false" class="save-button" mat-button>
                 Close
               </button>
             </div>
@@ -622,6 +533,7 @@
       </div>
     </mat-expansion-panel>
 
-    <!--pre>{{ returnPolicy.value | json }}</pre-->
+    <!-- <pre>{{ excludeConditions | json }}</pre>
+    <pre>{{ defaultExcludeConditions | json }}</pre> -->
   </mat-accordion>
 </div>

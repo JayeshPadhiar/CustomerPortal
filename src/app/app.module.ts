@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { CustomerPortalRoutingModule } from './customer-portal-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+//import { BrowserModule } from '@angular/platform-browser';
+//import { HttpClientModule } from '@angular/common/http';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthService } from '../shared/services/auth.service';
+import { AlertService } from '../shared/services/alert.service';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -22,24 +24,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
-import { AppComponent } from './app.component';
-import { CPortalComponent } from './c-portal/c-portal.component';
-import { CustomizeExpComponent } from './customize-exp/customize-exp.component';
-import { OrchMessComponent } from './orch-mess/orch-mess.component';
-import { SetControlComponent } from './set-control/set-control.component';
-import { ManageUnexComponent } from './manage-unex/manage-unex.component';
-import { MobileComponent } from './mobile/mobile.component';
-import { MobileDialogComponent } from './mobile-dialog/mobile-dialog.component';
-import { AddDomainComponent } from './add-domain/add-domain.component';
-import { NotifModalComponent } from './notif-modal/notif-modal.component';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { MobileComponent } from '../customer-portal/components/mobile/mobile.component';
+import { CPortalComponent } from '../customer-portal/components/c-portal/c-portal.component';
+import { OrchMessComponent } from '../customer-portal/components/orch-mess/orch-mess.component';
+import { AddDomainComponent } from '../customer-portal/components/add-domain/add-domain.component';
+import { SetControlComponent } from '../customer-portal/components/set-control/set-control.component';
+import { ManageUnexComponent } from '../customer-portal/components/manage-unex/manage-unex.component';
+import { NotifModalComponent } from '../customer-portal/components/notif-modal/notif-modal.component';
+import { CustomizeExpComponent } from '../customer-portal/components/customize-exp/customize-exp.component';
+import { MobileDialogComponent } from '../customer-portal/components/mobile-dialog/mobile-dialog.component';
+import { CustomerPortalComponent } from '../customer-portal/customer-portal.component';
+import { ConfirmationDialogComponent } from '../customer-portal/components/confirmation-dialog/confirmation-dialog.component';
 
-import { CustomerPortalBackendService } from './customer-portal-backend.service';
-import { CPortalInterceptor } from './cportal.interceptor';
+// import { CustomerPortalBackendService } from '../shared/services/customer-portal-backend.service';
+// import { CPortalInterceptor } from './cportal.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    CustomerPortalComponent,
     CPortalComponent,
     CustomizeExpComponent,
     OrchMessComponent,
@@ -49,15 +51,16 @@ import { CPortalInterceptor } from './cportal.interceptor';
     MobileDialogComponent,
     AddDomainComponent,
     NotifModalComponent,
-    ConfirmationDialogComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     FormsModule,
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
+    CommonModule,
+    //BrowserModule,
+    CustomerPortalRoutingModule,
+    //HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
 
     MatIconModule,
     MatInputModule,
@@ -72,13 +75,10 @@ import { CPortalInterceptor } from './cportal.interceptor';
     MatExpansionModule,
     MatFormFieldModule,
     MatSlideToggleModule,
-    MatButtonToggleModule,
+    MatButtonToggleModule
   ],
-  providers: [CustomerPortalBackendService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: CPortalInterceptor,
-    multi: true
-  }],
-  bootstrap: [AppComponent],
+  providers: [AuthService],
+  //bootstrap: [CustomerPortalComponent],
+  entryComponents: [MobileDialogComponent, AddDomainComponent, NotifModalComponent, ConfirmationDialogComponent]
 })
-export class AppModule {}
+export class CustomerPortalModule {}

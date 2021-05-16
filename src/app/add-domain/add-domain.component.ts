@@ -7,17 +7,17 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./add-domain.component.css']
 })
 export class AddDomainComponent implements OnInit {
+  domain: String = 'https://';
 
-  domain: String = "https://";
-
-  constructor(
-    public dialogRef: MatDialogRef<AddDomainComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  constructor(public dialogRef: MatDialogRef<AddDomainComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit() {}
 
   save(): void {
     this.dialogRef.close(this.domain);
+  }
+
+  close(): void {
+    this.dialogRef.close();
   }
 }

@@ -1,7 +1,6 @@
-import { Component, OnInit,  Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-notif-modal',
@@ -9,18 +8,17 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
   styleUrls: ['./notif-modal.component.css']
 })
 export class NotifModalComponent implements OnInit {
-
   toggle: boolean = true;
 
-  constructor(
-    public dialogRef: MatDialogRef<NotifModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(public dialogRef: MatDialogRef<NotifModalComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  toggleView(change: boolean) {
+    this.toggle = change;
   }
 
-  toggleView(change: MatButtonToggleChange){
-    this.toggle = change.value;
+  close(): void {
+    this.dialogRef.close();
   }
-
 }

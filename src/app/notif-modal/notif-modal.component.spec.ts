@@ -8,9 +8,8 @@ describe('NotifModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NotifModalComponent ]
-    })
-    .compileComponents();
+      declarations: [NotifModalComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
