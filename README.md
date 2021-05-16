@@ -1,5 +1,7 @@
 # CustomerPortal
 
+## AnjularJS based freelance project designed for companies to provide a solution to the users to create and update profile settings.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.4.
 
 ## Development server
