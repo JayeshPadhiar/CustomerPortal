@@ -1,6 +1,38 @@
 # CustomerPortal
+AnjularJS based freelance project designed for companies to provide a solution to the users to create and update profile settings.
 
-## AnjularJS based freelance project designed for companies to provide a solution to the users to create and update profile settings.
+<br/>
+
+## Here is the preview
+
+
+### Home Page
+![Home Page](https://github.com/JayeshPadhiar/CustomerPortal/blob/master/images/home.png)
+---
+<br/>
+
+### Tracking Page Settings
+![Tracking Page Settings](https://github.com/JayeshPadhiar/CustomerPortal/blob/master/images/sytpd.png)
+---
+<br/>
+
+### Change Mobile Display Settings
+![Change Mobile Display Settings](https://github.com/JayeshPadhiar/CustomerPortal/blob/master/images/notif.png)
+---
+<br/>
+
+### Cancellation Settings Preview
+![Cancellation Settings Preview](https://github.com/JayeshPadhiar/CustomerPortal/blob/master/images/cancellation.png)
+---
+<br/>
+
+### Desktop Preview Modal
+![Desktop Preview Modal](https://github.com/JayeshPadhiar/CustomerPortal/blob/master/images/modal.png)
+---
+<br/>
+
+<br/>
+<br/>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.4.
 
