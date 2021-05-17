@@ -1,0 +1,8 @@
+,boxId,boxId_2,boxId_3,articleNumber,eshopboxSku,qty,UnitPrice,item_type
+,(Optional),(Optional),(Optional),(Mandatory),(Mandatory),(Mandatory),(Optional),(Optional)
+,,,,,,,,
+Detail,Box Number present on the outer master box,Box Number present on the secondary level master box,Box Number present on the tertiary level master box,,,,Type of item that you want to send,Unit Price of the item
+Data Type,Alphanumeric&Special Characters,Alphanumeric&Special Characters,Alphanumeric&Special Characters,Alphanumeric&Special Characters,Alphanumeric&Special Characters,Numeric,Alphanumeric&Special Characters,Numeric
+Sample Value,BOX123,BOX123_12,BOX123_12_123,201629-2-32,BBAPLAB12345_S,8,Fresh/Refurbish,999.27
+,,,,,,,,
+"NOTE: This is a template, use only headers from this sheet while uploading the sheet.",,,,,,,,

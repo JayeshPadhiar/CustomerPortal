@@ -1,6 +1,6 @@
 import { Input, Component, OnInit } from '@angular/core';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { CustomerPortalBackendService } from '../../../shared/services/customer-portal-backend.service';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 import { AppStyle, FooterLink, Links } from '../c-portal/cportal.model';
 
 @Component({

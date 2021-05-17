@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppStyle, Links } from '../c-portal/cportal.model';
-import { CustomerPortalBackendService } from '../../../shared/services/customer-portal-backend.service';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 
 @Component({
   selector: 'app-mobile-dialog',

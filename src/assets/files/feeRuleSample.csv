@@ -1,0 +1,12 @@
+1,,,,,,,,,,,,,,,
+2,,,,,,,,,,,,,,,
+3,,,,,,,,,,,,,,,
+4,,,,,,,,,,,,,,,
+5,,,,,,,,,,,,,,,
+Category( to which product belongs),Brand(to which product belongs),"Payment method(Mode by which payment is made)(Any, COD, Prepaid)","Shipping Zone(Zone from which order is placed)(Local, Regional, National, Metropolitan, Special Category Zone)",Product Selling Price( Selling Price of a single unit),Product Selling Price(Define Minimum value of PSP Range),Product Selling price(Define Maximum value of PSP Range),Weight Range(Define minimum value of Weight Range),Weight Range(Define maximum value of Weight Range),Fixed Value to be considered for the rule(Fee which is fixed for the rule and would not vary),"Fixed Value to be appilcable on(Per Order Item,Per Order Item,Per shipment)",Variable Value(Fee that will vary with different conditions),"Variable Value to be applicable on(per Shipment,Per order,Per order Item)",Per Additional Value(Change in Variable value added as per defined units),Percentage Value to be considered for the rule,"Then Condition Applicable on(Mandatory when two or more values are added)(Sum of All,Lower,Higher)"
+Kitchenware Disposables,rock.it,Prepaid,Local,kg,12,12,,25,15,Per Shipment,,,,,
+Home Services Cleaning,monte carlo,COD,Local,,,,,,30,Per Shipment,,,,,
+Home Decoratives Home d,cloak & decker,COD,Local,,12,,,,15,Per Shipment,,,,,
+Hobbies Science Kits,rock.it,Online,Local,kg,,13,25,50,30,Per Shipment,,,,,
+Beauty - Fragrance,cloak & decker,COD,Local,,,,22,,15,Per Shipment,,,,,
+Beauty - Fragrance,pera doce,Credit card,Local,,,,25,50,30,Per Shipment,,,,,

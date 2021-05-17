@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { NotifData } from './orch-mess.model';
@@ -9,16 +10,16 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, F
 import { NotifModalComponent } from './../notif-modal/notif-modal.component';
 
 import { Notification } from './orch-mess.model';
-import { CustomerPortalBackendService } from '../../../shared/services/customer-portal-backend.service';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
+
 import { AppStyle } from '../c-portal/cportal.model';
 import { HttpClient } from '@angular/common/http';
-import { MatDialog } from '@angular/material';
 //import { settings } from 'cluster';
 
 @Component({
   selector: 'app-orch-mess',
   templateUrl: './orch-mess.component.html',
-  styleUrls: ['./orch-mess.component.css', '../../customer-portal.component.css']
+  styleUrls: ['./orch-mess.component.css', '../app.component.css']
 })
 export class OrchMessComponent implements OnInit {
   poeFetched: boolean = false;

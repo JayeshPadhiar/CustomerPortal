@@ -1,17 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { CustomerPortalBackendService } from '../../../shared/services/customer-portal-backend.service';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 import { Reason, ExcludeCondition } from './set-control.model';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { HttpClient } from '@angular/common/http';
 import { filter } from 'rxjs/operators';
-import { AlertService } from 'src/app/shared/services';
+//import { AlertService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-set-control',
   templateUrl: './set-control.component.html',
-  styleUrls: ['./set-control.component.css', '../../customer-portal.component.css']
+  styleUrls: ['./set-control.component.css', '../app.component.css']
 })
 export class SetControlComponent implements OnInit {
   constructor(
@@ -19,7 +19,7 @@ export class SetControlComponent implements OnInit {
     private dialog: MatDialog,
     public fb: FormBuilder,
     public backendService: CustomerPortalBackendService,
-    private alertService: AlertService
+    //private alertService: AlertService
   ) {}
 
   creasons: Array<Reason> = [
@@ -234,7 +234,7 @@ export class SetControlComponent implements OnInit {
 
       this.expansions.returnPolicy = this.backendService.saveForm(this.returnPolicy);
     } else {
-      this.alertService.showError('The condition fields should not be empty');
+      //this.alertService.showError('The condition fields should not be empty');
     }
   }
 

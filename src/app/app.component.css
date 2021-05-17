@@ -1112,7 +1112,7 @@ input[type='color']::-webkit-color-swatch {
 .preview-container .email-div {
   width: 124px;
   height: 82px;
-  background-image: url('../../assets/img/emailpre.png');
+  background-image: url('../assets/img/emailpre.png');
 }
 
 .form-container {

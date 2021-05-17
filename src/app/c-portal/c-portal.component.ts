@@ -1,22 +1,22 @@
 import { MatDialog } from '@angular/material/dialog';
-import { MatDialogModule } from '@angular/material';
+//import { MatDialogModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { Component, OnInit } from '@angular/core';
 
 import { MobileDialogComponent } from '../mobile-dialog/mobile-dialog.component';
-import { CustomerPortalBackendService } from '../../../shared/services/customer-portal-backend.service';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 
 //import {temp} from '../../customer-portal.component.css'
 
 @Component({
   selector: 'app-c-portal',
   templateUrl: './c-portal.component.html',
-  styleUrls: ['./c-portal.component.css', '../../customer-portal.component.css']
+  styleUrls: ['./c-portal.component.css', '../app.component.css']
 })
 export class CPortalComponent implements OnInit {
   panelOpenState = false;
 
-  poeFetched: boolean;
+  poeFetched: boolean = true;
 
   mobileView: boolean = true;
 
@@ -48,6 +48,6 @@ export class CPortalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.backendService.poeFetched.asObservable().subscribe(fetched => (this.poeFetched = fetched));
+    //this.backendService.poeFetched.asObservable().subscribe(fetched => (this.poeFetched = fetched));
   }
 }

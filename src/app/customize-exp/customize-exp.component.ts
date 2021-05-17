@@ -4,8 +4,8 @@ import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { AppStyle, FooterLink, Links } from '../c-portal/cportal.model';
 import { AddDomainComponent } from '../add-domain/add-domain.component';
-import { CustomerPortalBackendService } from '../../../shared/services/customer-portal-backend.service';
-import { AlertService } from '../../../shared/services/alert.service';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
+import { AlertService } from '../shared/services/alert.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MobileComponent } from '../mobile/mobile.component';
 import { style } from '@angular/animations';
@@ -13,7 +13,7 @@ import { style } from '@angular/animations';
 @Component({
   selector: 'app-customize-exp',
   templateUrl: './customize-exp.component.html',
-  styleUrls: ['./customize-exp.component.css', '../../customer-portal.component.css']
+  styleUrls: ['./customize-exp.component.css', '../app.component.css']
 })
 export class CustomizeExpComponent implements OnInit {
   appStyle: AppStyle;
@@ -53,7 +53,7 @@ export class CustomizeExpComponent implements OnInit {
   supportPhone: FormControl;
   footerLinks: FormArray;
 
-  poeFetched: boolean;
+  poeFetched: boolean = true;
   poeSettings: object;
 
   constructor(
@@ -67,7 +67,7 @@ export class CustomizeExpComponent implements OnInit {
 
     //this.initialize();
 
-    this.backendService.poeFetched.subscribe(fetched => {
+    /*this.backendService.poeFetched.subscribe(fetched => {
       this.poeFetched = fetched;
     });
 
@@ -93,7 +93,7 @@ export class CustomizeExpComponent implements OnInit {
       });
     }
 
-    console.log('val ' + this.backendService.poeFetched.value);
+    console.log('val ' + this.backendService.poeFetched.value);*/
   }
 
   //get required data from the CustomerPortalBackendService and assign it to the forms and previews

@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AppStyle } from '../c-portal/cportal.model';
-import { CustomerPortalBackendService } from '../../../shared/services/customer-portal-backend.service';
+import { CustomerPortalBackendService } from '../customer-portal-backend.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-manage-unex',
   templateUrl: './manage-unex.component.html',
-  styleUrls: ['./manage-unex.component.css', '../../customer-portal.component.css']
+  styleUrls: ['./manage-unex.component.css', '../app.component.css']
 })
 export class ManageUnexComponent implements OnInit {
   appStyle: AppStyle;

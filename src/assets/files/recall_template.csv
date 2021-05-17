@@ -1,0 +1,8 @@
+,Article Number*,EshopboxSku*,qty*
+,(One of the above is mandatory),,(Mandatory)
+,,,
+Detail,Variant level Client code,Variant level Eshopbox code,qty to recall
+Data Type,Alphanumeric&Special Characters,Alphanumeric&Special Characters,Numeric
+Sample Value,201629-2-32,BBAPLAB12345_S,8
+,,,
+"NOTE: This is a template, use only headers from this sheet while uploading the sheet.",,,

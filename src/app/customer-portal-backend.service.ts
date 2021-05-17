@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { env } from 'process';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AppStyle, Links, FooterLink } from '../../customer-portal/components/c-portal/cportal.model';
+import { AppStyle, Links, FooterLink } from './c-portal/cportal.model';
 
-import { AlertService } from './alert.service';
-import { AuthService } from './auth.service';
+//import { AlertService } from './alert.service';
+//import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,7 @@ export class CustomerPortalBackendService {
   };
 
   poeSettings: BehaviorSubject<object> = new BehaviorSubject(this.defaultPoeSettings);
-  poeFetched: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  poeFetched: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
   appStyle$: BehaviorSubject<AppStyle> = new BehaviorSubject({
     brandLogoUrl: this.poeSettings.value['brandLogoUrl'],
@@ -155,7 +155,7 @@ export class CustomerPortalBackendService {
       return false;
     } else if (form.dirty && !form.valid) {
       console.log(form.controls);
-      this.alertService.showError('Enter valid values');
+      //this.alertService.showError('Enter valid values');
       //alert('Enter valid values');
       return true;
     } else {
@@ -203,8 +203,8 @@ export class CustomerPortalBackendService {
     return eqData;
   };
 
-  constructor(private httpClient: HttpClient, private authService: AuthService, private alertService: AlertService) {
-    this.AuthorizationToken = this.authService.getAuthToken();
+  constructor(private httpClient: HttpClient){//, private authService: AuthService, private alertService: AlertService) {
+    /*this.AuthorizationToken = this.authService.getAuthToken();
     if (this.AuthorizationToken === undefined || this.AuthorizationToken == null) {
       //this.errorHandlingService.logoutOnError('Session timed out');
     }
@@ -236,6 +236,6 @@ export class CustomerPortalBackendService {
       error: error => {
         console.error('There was an error!\n', error);
       }
-    });
+    });*/
   }
 }

@@ -5,10 +5,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-customer-portal',
-  templateUrl: './customer-portal.component.html',
-  styleUrls: ['./customer-portal.component.css']
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class CustomerPortalComponent {
+export class AppComponent {
   title = 'customer-portal';
 
   constructor(private matIconRegistry: MatIconRegistry, private domSanitzer: DomSanitizer) {

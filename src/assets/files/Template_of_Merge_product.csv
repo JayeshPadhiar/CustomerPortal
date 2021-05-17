@@ -1,0 +1,16 @@
+;---------------------Sample Value---------------------------,
+;Merge From,Merge To
+;ABC12,2
+;,
+;,
+;---------------------------------Notes--------------------------------------,
+";The required header row fields are:Merge From, Merge To",
+;,
+;,
+;Merge From: Enter the SKU that you want to merge into any product. You can only enter draft product.,
+;Merge To: Enter the SKU in which you want to merge the product. You can enter draft or active product.,
+;,
+;---------------------------------Template--------------------------------------,
+;,
+;(enter draft product),(enter draft or active product)
+Merge From,Merge To
